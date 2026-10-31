@@ -40,3 +40,16 @@
 @keyframes fall{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(65px);opacity:0}}
 @media(prefers-reduced-motion:reduce){.science-motion *{animation:none!important;transition:none!important}}
 @media(max-width:720px){.science-motion{margin-left:12px;margin-right:12px}.motion-stage{height:165px}}
+
+
+/* Universal animated visual layer for every lab using the shared stylesheet. */
+main.lab .hero{position:relative;isolation:isolate;overflow:hidden}
+main.lab .hero>*{position:relative;z-index:1}
+main.lab .hero::after{content:"";position:absolute;z-index:0;right:7%;top:50%;width:clamp(125px,18vw,205px);height:clamp(125px,18vw,205px);border:1px solid #baf5e966;border-radius:50%;transform:translateY(-50%) rotate(24deg);box-shadow:0 0 0 19px #baf5e90b,0 0 0 39px #baf5e90a,0 0 42px #42d6c222;animation:lab-orbit-turn 18s linear infinite}
+main.lab .hero::before{content:"";position:absolute;z-index:0;right:calc(7% + clamp(62px,9vw,102px) - 5px);top:50%;width:10px;height:10px;border-radius:50%;background:#baf5e9;box-shadow:0 0 16px #baf5e9;transform:translateY(-50%);animation:lab-orbit-dot 18s linear infinite}
+main.lab .panel{transition:box-shadow .25s ease,border-color .25s ease}
+main.lab .panel:focus-within{border-color:#75bdb5;box-shadow:0 8px 26px #0e766c12}
+@keyframes lab-orbit-turn{from{transform:translateY(-50%) rotate(24deg)}to{transform:translateY(-50%) rotate(384deg)}}
+@keyframes lab-orbit-dot{from{transform:translateY(-50%) rotate(0deg) translateX(clamp(62px,9vw,102px))}to{transform:translateY(-50%) rotate(360deg) translateX(clamp(62px,9vw,102px))}}
+@media(max-width:720px){main.lab .hero::after{right:-35px;opacity:.55}main.lab .hero::before{right:calc(-35px + clamp(62px,9vw,102px) - 5px);opacity:.55}}
+@media(prefers-reduced-motion:reduce){main.lab .hero::before,main.lab .hero::after{animation:none!important}}
