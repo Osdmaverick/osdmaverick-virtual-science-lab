@@ -3,7 +3,7 @@ const toggle=document.querySelector('.menu-toggle');const nav=document.querySele
 /* Accessible, lightweight science animations shared by every lab page. */
 (()=>{
   const main=document.querySelector('main');
-  if(!main || document.querySelector('.science-motion')) return;
+  if(!main || !main.classList.contains('lab') || document.querySelector('.science-motion')) return;
   const pageText=(document.querySelector('main')?.innerText||document.title).toLowerCase();
   const label=document.querySelector('.tag, .hero .tag, main .hero > div')?.textContent||'SCIENCE';
   const isPhysics=/physics|motion|force|wave|sound|light|circuit|energy|magnet|gravity|pressure|heat|optics|electric|momentum|projectile|velocity|work|fluid|rotation|relativity|nuclear|particle/.test(pageText);
