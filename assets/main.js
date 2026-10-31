@@ -29,9 +29,32 @@ const toggle=document.querySelector('.menu-toggle');const nav=document.querySele
   const footer=document.querySelector('footer');
   if(footer) main.parentNode.insertBefore(section,footer); else main.appendChild(section);
   const toggle=section.querySelector('.motion-toggle');
+  const motionPreference=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const syncMotionPreference=()=>{
+    if(motionPreference.matches){
+      section.classList.add('motion-paused');
+      toggle.disabled=true;
+      toggle.textContent='Animation off (reduced motion)';
+      toggle.setAttribute('aria-pressed','true');
+      toggle.setAttribute('aria-label','Animation disabled because reduced motion is enabled in system settings');
+    }else{
+      section.classList.remove('motion-paused');
+      toggle.disabled=false;
+      toggle.textContent='Pause animation';
+      toggle.setAttribute('aria-pressed','false');
+      toggle.removeAttribute('aria-label');
+    }
+  };
   toggle.addEventListener('click',()=>{
+    if(motionPreference.matches) return;
     const paused=section.classList.toggle('motion-paused');
     toggle.textContent=paused?'Play animation':'Pause animation';
     toggle.setAttribute('aria-pressed',String(paused));
   });
+  syncMotionPreference();
+  if(typeof motionPreference.addEventListener==='function'){
+    motionPreference.addEventListener('change',syncMotionPreference);
+  }else if(typeof motionPreference.addListener==='function'){
+    motionPreference.addListener(syncMotionPreference);
+  }
 })();
