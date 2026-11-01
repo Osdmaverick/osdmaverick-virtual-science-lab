@@ -53,3 +53,5 @@ main.lab .panel:focus-within{border-color:#75bdb5;box-shadow:0 8px 26px #0e766c1
 @keyframes lab-orbit-dot{from{transform:translateY(-50%) rotate(0deg) translateX(clamp(62px,9vw,102px))}to{transform:translateY(-50%) rotate(360deg) translateX(clamp(62px,9vw,102px))}}
 @media(max-width:720px){main.lab .hero::after{right:-35px;opacity:.55}main.lab .hero::before{right:calc(-35px + clamp(62px,9vw,102px) - 5px);opacity:.55}}
 @media(prefers-reduced-motion:reduce){main.lab .hero::before,main.lab .hero::after{animation:none!important}}
+/* Reduced-motion users should not receive smooth-scrolling effects. */
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
