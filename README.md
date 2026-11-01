@@ -8,8 +8,12 @@ An interactive, browser-based science learning platform for learners across mult
 
 - `index.html` — project homepage and navigation.
 - `human-body-systems.html` — Grade 7 Human Body Systems virtual lab.
-- `assets/styles.css` — responsive site styling.
-- `assets/main.js` — accessible mobile navigation.
+- `assets/styles.css` — responsive site styling and reduced-motion-aware animation motifs.
+- `assets/main.js` — accessible mobile navigation and shared science visualisations for physics, chemistry, biology and Earth systems.
+
+## Shared science animations
+
+Lab pages use a lightweight shared visual layer with subject-aware schematic animations and a keyboard-operable pause control. Animations respect the visitor's reduced-motion preference. Visuals are illustrative and not to scale; the experiment instructions, measured values and scientific models on each page remain authoritative.
 
 ## Run locally
 
