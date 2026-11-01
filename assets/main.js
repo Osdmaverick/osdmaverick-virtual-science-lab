@@ -27,7 +27,7 @@ const toggle=document.querySelector('.menu-toggle');const nav=document.querySele
   section.setAttribute('aria-labelledby','science-motion-title');
   section.innerHTML='<div class="motion-heading"><div><p class="motion-kicker">VISUALISE THE CONCEPT · '+label.replace(/[<>&"]/g,'')+'</p><h2 id="science-motion-title">'+config.title+'</h2></div><button type="button" class="motion-toggle" aria-pressed="false">Pause animation</button></div><div class="motion-stage motion-'+kind+'">'+config.shape+'</div><p class="motion-caption">'+config.copy+'</p><p class="motion-note">Schematic animation · Not to scale · Supports, but does not replace, the experiment model</p>';
   const footer=document.querySelector('footer');
-  if(footer) main.parentNode.insertBefore(section,footer); else main.appendChild(section);
+  if(footer && footer.parentNode===main.parentNode) main.parentNode.insertBefore(section,footer); else main.appendChild(section);
   const toggle=section.querySelector('.motion-toggle');
   const motionPreference=window.matchMedia('(prefers-reduced-motion: reduce)');
   const syncMotionPreference=()=>{
