@@ -38,3 +38,13 @@ Initial Phase 2 QA for the Grade 4–12 Virtual Science Lab. The grade directory
 ## Next QA step
 
 Continue with an automated all-page link and asset audit, then run focused functional checks for representative calculations and validation boundaries before starting advanced simulation work.
+
+## Browser QA automation added — 2026-11-02
+
+A Playwright-based browser smoke test and a second GitHub Actions job were added after the initial representative source checks.
+
+- `scripts/browser-qa.mjs` is designed to open every directory-linked lab page in Chromium, check for uncaught page errors and missing shared animation controls/assets, and test mobile overflow on a representative subset.
+- It also checks reduced-motion behaviour once per grade and keyboard focus plus Enter-key pause behaviour.
+- `.github/workflows/qa.yml` now runs the static checker first and then installs Chromium/Playwright to run the browser checks.
+
+**Execution status:** The scripts and workflow were fetched back from GitHub and passed JavaScript syntax checks. A completed GitHub Actions run was not exposed by the available repository connection at the time of this report update. Therefore, the Playwright browser checks are implemented but are not claimed as executed or passed. Real browser results should be reviewed in the repository's Actions tab after the workflow completes.
