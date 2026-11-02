@@ -134,13 +134,16 @@ try {
     { href: "grade4-physics-motion-speed.html", checks: [{ a: "60", b: "12", expected: "Average speed 5.00 m/s" }] },
     { href: "grade5-chemistry-mixtures-solutions.html", checks: [{ a: "10", b: "0.5", expected: "Concentration 20.00 g/L" }] },
     { href: "grade6-chemistry-acids.html", checks: [{ a: "3", b: "10", expected: "Solution A Acidic" }] },
+    { href: "grade6-biology-cells.html", checks: [{ a: "5", b: "3", expected: "Comparison More plant features" }] },
     { href: "grade7-chemistry-moles-concentration.html", checks: [{ a: "0.5", b: "1", expected: "Molar concentration: 0.500 mol/L" }] },
     { href: "grade7-biology-dna-genetics.html", checks: [{ a: "100", b: "50", expected: "Trait probability: 50%" }] },
     { href: "grade8-biology-enzymes.html", checks: [{ a: "37", b: "8", expected: "Relative enzyme activity: 80.0%" }] },
+    { href: "grade8-chemistry-reactions-conservation-mass.html", checks: [{ a: "12", b: "8", expected: "Product mass 20.0 g" }] },
     { href: "grade9-chemistry-stoichiometry.html", checks: [{ a: "2", b: "2", expected: "Simplified 1:1 comparison: Amounts are equal" }] },
     { href: "grade9-physics-momentum-collisions.html", checks: [{ a: "2", b: "4", c: "3", d: "0", expected: "Final shared velocity 1.60 m/s" }] },
     { href: "grade10-physics-projectile-motion.html", checks: [{ a: "20", b: "45", expected: "Horizontal range 40.77 m" }] },
     { href: "grade10-chemistry-stoichiometry.html", checks: [{ a: "2", b: "3", expected: "Limiting reactant in 1:1 model: A" }] },
+    { href: "grade11-physics-mechanical-waves.html", checks: [{ a: "4", b: "2", expected: "Wave speed 8.000 m/s" }] },
     { href: "grade11-chemistry-buffers.html", checks: [{ a: "4.76", b: "1", expected: "Estimated pH 4.760" }] },
     { href: "grade11-biology-enzyme-kinetics.html", checks: [{ a: "5", b: "2", expected: "Reaction rate: 71.43 units" }] },
     { href: "grade12-chemistry-electrochemistry-nernst.html", checks: [{ a: "1.1", b: "1", expected: "Cell potential: 1.1000 V" }] },
@@ -155,7 +158,7 @@ try {
       if (check.c !== undefined) await page.locator("#c").fill(check.c);
       if (check.d !== undefined) await page.locator("#d").fill(check.d);
       await page.locator("#run").click();
-      const metrics = (await page.locator("#metrics").innerText()).replace(/\\s+/g, " ");
+      const metrics = (await page.locator("#metrics").innerText()).replace(/\s+/g, " ");
       if (!metrics.includes(check.expected)) {
         failures.push(`${test.href}: expected result "${check.expected}", received "${metrics}"`);
       }
