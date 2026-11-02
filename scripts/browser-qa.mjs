@@ -1,0 +1,116 @@
+#!/usr/bin/env node
+/**
+ * Real-browser smoke tests for the Grade 4–12 Virtual Science Lab.
+ * Requires Playwright and a local static server:
+ *   node scripts/browser-qa.mjs http://127.0.0.1:4173
+ */
+import fs from "node:fs";
+import path from "node:path";
+import process from "node:process";
+import { chromium } from "playwright";
+
+const root = process.cwd();
+const baseUrl = (process.argv[2] || "http://127.0.0.1:4173").replace(/\/$/, "");
+const directory = fs.readFileSync(path.join(root, "grade-levels.html"), "utf8");
+const pages = [...new Set([...directory.matchAll(/href=["']([^"'#?]+\.html)["']/gi)]
+  .map((match) => match[1])
+  .filter((href) => /^grade\d+[-\w]*\.html$/i.test(href)))];
+const failures = [];
+const checked = { pages: 0, mobile: 0, reducedMotion: 0, keyboard: 0 };
+const sampleByGrade = new Map();
+
+for (const href of pages) {
+  const grade = Number(href.match(/^grade(\d+)/i)?.[1]);
+  if (grade && !sampleByGrade.has(grade)) sampleByGrade.set(grade, href);
+}
+
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+
+try {
+  for (const href of pages) {
+    const errors = [];
+    const onPageError = (error) => errors.push(error.message);
+    page.on("pageerror", onPageError);
+    const response = await page.goto(`${baseUrl}/${encodeURI(href)}`, {
+      waitUntil: "domcontentloaded",
+      timeout: 30000,
+    });
+    await page.locator("main.lab").waitFor({ state: "attached", timeout: 10000 });
+    await page.locator(".science-motion").waitFor({ state: "attached", timeout: 10000 });
+    const state = await page.evaluate(() => ({
+      title: document.title,
+      hasMotionToggle: Boolean(document.querySelector(".motion-toggle")),
+      sharedCss: [...document.styleSheets].some((sheet) => sheet.href?.includes("assets/styles.css")),
+      sharedJs: [...document.scripts].some((script) => script.src.includes("assets/main.js")),
+      viewportWidth: window.innerWidth,
+      documentWidth: document.documentElement.scrollWidth,
+    }));
+    if (!response?.ok()) failures.push(`${href}: HTTP ${response?.status() ?? "no response"}`);
+    if (!state.hasMotionToggle || !state.sharedCss || !state.sharedJs) {
+      failures.push(`${href}: shared animation/assets/control missing`);
+    }
+    if (errors.length) failures.push(`${href}: uncaught browser error: ${errors.join(" | ")}`);
+    checked.pages += 1;
+    page.off("pageerror", onPageError);
+  }
+
+  const mobileSamples = [...pages.filter((href) => /grade\d+/i.test(href))]
+    .filter((href, index) => index % Math.max(1, Math.floor(pages.length / 27)) === 0)
+    .slice(0, 27);
+  for (const href of mobileSamples) {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(`${baseUrl}/${encodeURI(href)}`, { waitUntil: "domcontentloaded" });
+    const width = await page.evaluate(() => ({
+      viewport: document.documentElement.clientWidth,
+      content: document.documentElement.scrollWidth,
+    }));
+    if (width.content > width.viewport + 1) {
+      failures.push(`${href}: horizontal overflow at 390px (${width.content}px > ${width.viewport}px)`);
+    }
+    checked.mobile += 1;
+  }
+
+  for (const [grade, href] of sampleByGrade) {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto(`${baseUrl}/${encodeURI(href)}`, { waitUntil: "domcontentloaded" });
+    const reduced = await page.locator(".motion-toggle").evaluate((button) => ({
+      disabled: button.disabled,
+      pressed: button.getAttribute("aria-pressed"),
+      text: button.textContent,
+      paused: button.closest(".science-motion")?.classList.contains("motion-paused"),
+    }));
+    if (!reduced.disabled || reduced.pressed !== "true" || !reduced.paused) {
+      failures.push(`Grade ${grade} reduced-motion preference was not respected`);
+    }
+    checked.reducedMotion += 1;
+  }
+
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  const keyboardPage = sampleByGrade.values().next().value;
+  if (keyboardPage) {
+    await page.goto(`${baseUrl}/${encodeURI(keyboardPage)}`, { waitUntil: "domcontentloaded" });
+    const button = page.locator(".motion-toggle");
+    await button.focus();
+    const focus = await button.evaluate((element) => ({
+      active: document.activeElement === element,
+      outlineStyle: getComputedStyle(element).outlineStyle,
+      outlineWidth: getComputedStyle(element).outlineWidth,
+    }));
+    if (!focus.active || focus.outlineStyle === "none" || focus.outlineWidth === "0px") {
+      failures.push("Animation control has no visible keyboard focus indicator");
+    }
+    await page.keyboard.press("Enter");
+    if (await button.getAttribute("aria-pressed") !== "true") {
+      failures.push("Keyboard Enter did not pause the animation or update aria-pressed");
+    }
+    checked.keyboard += 1;
+  }
+} catch (error) {
+  failures.push(`Browser QA runner error: ${error.stack || error.message}`);
+} finally {
+  await browser.close();
+}
+
+console.log(JSON.stringify({ checked, failures }, null, 2));
+if (failures.length) process.exitCode = 1;
