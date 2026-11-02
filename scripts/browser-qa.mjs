@@ -149,8 +149,6 @@ try {
     { href: "grade11-biology-enzyme-kinetics.html", checks: [{ a: "5", b: "2", expected: "Reaction rate: 71.43 units" }] },
     { href: "grade12-chemistry-electrochemistry-nernst.html", checks: [{ a: "1.1", b: "1", expected: "Cell potential: 1.1000 V" }] },
     { href: "grade12-biology-neurobiology.html", checks: [{ a: "1", b: "50", expected: "Signal travel time: 20.000 ms" }] },
-  ];
-
     { href: "grade10-physics-circular-motion.html", checks: [{ a: "12", b: "4", expected: "Centripetal acceleration 36.00 m/s²" }] },
     { href: "grade11-physics-circular-gravitation.html", checks: [{ a: "2", b: "5", expected: "Centripetal acceleration 0.800 m/s²" }] },
     { href: "grade12-physics-orbital-mechanics.html", checks: [{ a: "3.986e14", b: "7000000", expected: "Orbital speed 7.546 km/s" }] },
@@ -159,6 +157,7 @@ try {
     { href: "grade12-biology-advanced-immunology.html", checks: [{ a: "10", b: "5", expected: "Secondary response index 50.00" }] },
     { href: "grade10-biology-genetics.html", checks: [{ a: "50", b: "40", expected: "Expected trait count 20.0" }] },
     { href: "grade11-biology-cell-signalling.html", checks: [{ a: "2", b: "1", expected: "Receptor occupancy 66.67%" }] },
+  ];
 
   for (const test of functionalCases) {
     await page.goto(`${baseUrl}/${encodeURI(test.href)}`, { waitUntil: "domcontentloaded" });
