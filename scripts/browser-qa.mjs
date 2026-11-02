@@ -143,6 +143,7 @@ try {
     { href: "grade9-physics-momentum-collisions.html", checks: [{ a: "2", b: "4", c: "3", d: "0", expected: "Final shared velocity 1.60 m/s" }] },
     { href: "grade10-physics-projectile-motion.html", checks: [{ a: "20", b: "45", expected: "Horizontal range 40.77 m" }] },
     { href: "grade10-chemistry-stoichiometry.html", checks: [{ a: "2", b: "3", expected: "Limiting reactant in 1:1 model: A" }] },
+    { href: "grade10-chemistry-thermochemistry.html", checks: [{ a: "100", b: "5", expected: "Heat change in solution 2.09 kJ" }, { a: "100", b: "-5", expected: "Heat change in solution -2.09 kJ" }], invalid: { a: "", b: "5", expectedError: "Enter a positive solution mass and a valid temperature change." } },
     { href: "grade11-physics-mechanical-waves.html", checks: [{ a: "4", b: "2", expected: "Wave speed 8.000 m/s" }] },
     { href: "grade11-chemistry-buffers.html", checks: [{ a: "4.76", b: "1", expected: "Estimated pH 4.760" }] },
     { href: "grade11-biology-enzyme-kinetics.html", checks: [{ a: "5", b: "2", expected: "Reaction rate: 71.43 units" }] },
