@@ -98,5 +98,6 @@ The Playwright suite now includes eight further calculator cases across Grades 1
 - Grade 11 Biology: fractional receptor occupancy using L/(Kd + L).
 
 The expected values were checked against each page's displayed equation and stated assumptions. These are source/formula-derived assertions, not evidence of browser execution or a full scientific validation.
+Three of the new cases also include invalid-input boundary assertions: non-positive orbital gravitational parameter, electron count above the selected shell capacity, and a non-positive receptor dissociation constant.
 
 **Execution status remains pending:** the expanded tests are committed, but the repository connection has not returned a completed GitHub Actions run. No Playwright pass is claimed.
