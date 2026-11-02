@@ -101,3 +101,9 @@ The expected values were checked against each page's displayed equation and stat
 Three of the new cases also include invalid-input boundary assertions: non-positive orbital gravitational parameter, electron count above the selected shell capacity, and a non-positive receptor dissociation constant.
 
 **Execution status remains pending:** the expanded tests are committed, but the repository connection has not returned a completed GitHub Actions run. No Playwright pass is claimed.
+
+## Grade 11 cell-signalling terminology correction — 2026-11-02
+
+The receptor-occupancy model calculates fractional occupancy as L/(Kd + L), where Kd is the ligand–receptor dissociation constant. The Grade 11 Biology input had been labelled “receptor affinity”, which is not equivalent to Kd (affinity is inversely related to Kd). The input label now explicitly identifies the dissociation constant, and the browser functional suite checks that terminology alongside the existing 66.67% occupancy and invalid-Kd boundary assertions.
+
+**Execution status remains pending:** this is a source-level terminology correction and a committed browser assertion; it has not been confirmed in a completed Chromium/Playwright run.
