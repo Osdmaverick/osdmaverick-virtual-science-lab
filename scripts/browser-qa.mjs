@@ -106,6 +106,55 @@ try {
     }
     checked.keyboard += 1;
   }
+
+  // Exercise representative calculator outputs and input-validation boundaries.
+  const functionalCases = [
+    {
+      href: "grade4-physics-electric-circuits.html",
+      checks: [{ a: "6", b: "3", expected: "Current2.00 A" }],
+      invalid: { a: "6", b: "0", expectedError: "Resistance must be greater than zero." },
+    },
+    {
+      href: "grade8-physics-electricity-circuits.html",
+      checks: [{ a: "9", b: "3", expected: "Current3.000 A" }],
+    },
+    {
+      href: "grade12-physics-ac-circuits.html",
+      checks: [{ a: "30", b: "40", expected: "Impedance50.000 Ω" }],
+    },
+    {
+      href: "grade12-chemistry-acid-base-titration.html",
+      checks: [{ a: "0.1", b: "25", expected: "Equivalence base volume: 25.00 mL" }],
+    },
+    {
+      href: "grade10-biology-biomolecules.html",
+      checks: [{ a: "37", b: "8", expected: "Relative enzyme activity: 80.0%" }],
+      invalid: { a: "", b: "8", expectedError: "Enter a valid temperature above absolute zero" },
+    },
+  ];
+
+  for (const test of functionalCases) {
+    await page.goto(`${baseUrl}/${encodeURI(test.href)}`, { waitUntil: "domcontentloaded" });
+    for (const check of test.checks) {
+      await page.locator("#a").fill(check.a);
+      await page.locator("#b").fill(check.b);
+      await page.locator("#run").click();
+      const metrics = (await page.locator("#metrics").innerText()).replace(/\\s+/g, " ");
+      if (!metrics.includes(check.expected)) {
+        failures.push(`${test.href}: expected result "${check.expected}", received "${metrics}"`);
+      }
+    }
+    if (test.invalid) {
+      await page.locator("#a").fill(test.invalid.a);
+      await page.locator("#b").fill(test.invalid.b);
+      await page.locator("#run").click();
+      const error = await page.locator("#error").innerText();
+      if (!error.includes(test.invalid.expectedError)) {
+        failures.push(`${test.href}: expected validation message "${test.invalid.expectedError}", received "${error}"`);
+      }
+    }
+    checked.functional = (checked.functional || 0) + 1;
+  }
 } catch (error) {
   failures.push(`Browser QA runner error: ${error.stack || error.message}`);
 } finally {
