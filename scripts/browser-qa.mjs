@@ -111,16 +111,16 @@ try {
   const functionalCases = [
     {
       href: "grade4-physics-electric-circuits.html",
-      checks: [{ a: "6", b: "3", expected: "Current2.00 A" }],
+      checks: [{ a: "6", b: "3", expected: "Current 2.00 A" }],
       invalid: { a: "6", b: "0", expectedError: "Resistance must be greater than zero." },
     },
     {
       href: "grade8-physics-electricity-circuits.html",
-      checks: [{ a: "9", b: "3", expected: "Current3.000 A" }],
+      checks: [{ a: "9", b: "3", expected: "Current 3.000 A" }],
     },
     {
       href: "grade12-physics-ac-circuits.html",
-      checks: [{ a: "30", b: "40", expected: "Impedance50.000 Ω" }],
+      checks: [{ a: "30", b: "40", expected: "Impedance: 50.000 Ω" }],
     },
     {
       href: "grade12-chemistry-acid-base-titration.html",
