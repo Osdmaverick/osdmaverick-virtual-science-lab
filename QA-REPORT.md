@@ -63,3 +63,11 @@ A representative Playwright functional suite was added to `scripts/browser-qa.mj
 The Grade 10 enzyme lab previously converted an empty temperature input to 0 °C and calculated an activity value. It now rejects empty/non-finite temperatures and temperatures at or below absolute zero, and rejects empty/non-finite or out-of-range suitability values.
 
 **Execution status:** The updated browser runner and Grade 10 inline script passed JavaScript syntax compilation after being fetched from GitHub. These new Playwright functional checks are committed but have not yet been confirmed running in GitHub Actions; no browser execution or pass is claimed. The calculator models have only received this focused representative review, not an exhaustive scientific validation of all 268 labs.
+
+## Expanded representative calculator coverage — 2026-11-02
+
+The Playwright functional suite now includes additional representative checks across Grades 4–12 and all three subjects. In addition to the original five, it exercises average speed, solution concentration, pH classification, molar concentration, an illustrative genetics input model, enzyme activity, simplified stoichiometry, inelastic-collision momentum, projectile range, buffer pH, Michaelis–Menten rate, the Nernst equation, and nerve-signal travel time.
+
+The tests assert displayed outputs from the pages' stated assumptions; they are not a substitute for a full curriculum/scientific review. The Grade 9 stoichiometry page explicitly labels its ratio comparison as a simplified 1:1 model and warns that equal mole amounts do not establish an atom-balanced equation.
+
+**Execution status remains pending:** the expanded Playwright suite has been committed but a completed GitHub Actions run has not been returned by the repository connection. No browser-test pass is claimed.
