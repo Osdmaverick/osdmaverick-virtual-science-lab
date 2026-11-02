@@ -21,3 +21,29 @@ jobs:
           node-version: 20
       - name: Check every directory-linked lab page
         run: node scripts/qa-smoke-check.mjs
+
+  browser-smoke-check:
+    needs: static-smoke-check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install --with-deps chromium
+      - name: Start local static server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/science-lab-http.log 2>&1 &
+          for attempt in {1..20}; do
+            if curl --silent --fail http://127.0.0.1:4173/grade-levels.html > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/science-lab-http.log
+          exit 1
+      - name: Run browser QA across all labs
+        run: node scripts/browser-qa.mjs http://127.0.0.1:4173
