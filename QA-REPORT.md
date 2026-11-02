@@ -77,3 +77,9 @@ The tests assert displayed outputs from the pages' stated assumptions; they are 
 A review of the Playwright runner found that its metrics-text normalizer was matching a literal backslash sequence rather than whitespace. This could cause valid calculator results to fail assertions when labels and values are separated by line breaks in the rendered metrics. The normalizer now collapses actual whitespace before matching expected output. Three additional representative functional cases were added: Grade 6 Biology cell-feature comparison, Grade 8 Chemistry closed-system mass conservation, and Grade 11 Physics wave speed. These checks validate the pages' documented simplified models; they do not establish experimental fidelity or replace scientific curriculum review.
 
 **Execution status remains pending:** the runner has been corrected in source, but no completed Chromium/Playwright run has yet been confirmed.
+
+## Grade 10 thermochemistry unit correction — 2026-11-02
+
+A scientific unit error was confirmed in `grade10-chemistry-thermochemistry.html`: the page used a specific heat capacity of 4.18 J/(g·°C) with mass in grams, calculated heat in joules, but labelled the unconverted value as kJ. The calculation now divides by 1,000 before displaying kJ. The result is labelled as heat change in the solution so the sign is meaningful: positive values indicate heat absorbed and negative values indicate heat released. Input validation now requires a positive finite mass and a finite temperature change, while retaining valid negative temperature changes for exothermic cases. The browser suite now includes positive and negative heat-change checks plus blank-mass rejection.
+
+**Execution status:** source changes are committed, but browser execution is still unconfirmed; expected outputs have been derived from q = mcΔT and the stated water-like specific heat assumption.
