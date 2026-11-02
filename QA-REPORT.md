@@ -83,3 +83,20 @@ A review of the Playwright runner found that its metrics-text normalizer was mat
 A scientific unit error was confirmed in `grade10-chemistry-thermochemistry.html`: the page used a specific heat capacity of 4.18 J/(g·°C) with mass in grams, calculated heat in joules, but labelled the unconverted value as kJ. The calculation now divides by 1,000 before displaying kJ. The result is labelled as heat change in the solution so the sign is meaningful: positive values indicate heat absorbed and negative values indicate heat released. Input validation now requires a positive finite mass and a finite temperature change, while retaining valid negative temperature changes for exothermic cases. The browser suite now includes positive and negative heat-change checks plus blank-mass rejection.
 
 **Execution status:** source changes are committed, but browser execution is still unconfirmed; expected outputs have been derived from q = mcΔT and the stated water-like specific heat assumption.
+
+## Additional senior-grade functional coverage — 2026-11-02
+
+The Playwright suite now includes eight further calculator cases across Grades 10–12:
+
+- Grade 10 Physics: centripetal acceleration.
+- Grade 11 Physics: centripetal acceleration at a second grade level.
+- Grade 12 Physics: circular orbital speed from the gravitational parameter and orbital radius.
+- Grade 11 Chemistry: simplified principal-shell capacity (2n²).
+- Grade 12 Chemistry: theoretical product amount from a stated coefficient ratio.
+- Grade 12 Biology: illustrative secondary immune-response index.
+- Grade 10 Biology: expected trait count from an explicitly simplified probability model.
+- Grade 11 Biology: fractional receptor occupancy using L/(Kd + L).
+
+The expected values were checked against each page's displayed equation and stated assumptions. These are source/formula-derived assertions, not evidence of browser execution or a full scientific validation.
+
+**Execution status remains pending:** the expanded tests are committed, but the repository connection has not returned a completed GitHub Actions run. No Playwright pass is claimed.
