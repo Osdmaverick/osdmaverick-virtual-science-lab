@@ -152,6 +152,8 @@ try {
     for (const check of test.checks) {
       await page.locator("#a").fill(check.a);
       await page.locator("#b").fill(check.b);
+      if (check.c !== undefined) await page.locator("#c").fill(check.c);
+      if (check.d !== undefined) await page.locator("#d").fill(check.d);
       await page.locator("#run").click();
       const metrics = (await page.locator("#metrics").innerText()).replace(/\\s+/g, " ");
       if (!metrics.includes(check.expected)) {
