@@ -156,13 +156,13 @@ try {
     { href: "grade12-chemistry-advanced-stoichiometry.html", checks: [{ a: "2", b: "3", expected: "Theoretical product amount 6.000 mol" }] },
     { href: "grade12-biology-advanced-immunology.html", checks: [{ a: "10", b: "5", expected: "Secondary response index 50.00" }] },
     { href: "grade10-biology-genetics.html", checks: [{ a: "50", b: "40", expected: "Expected trait count 20.0" }] },
-    { href: "grade11-biology-cell-signalling.html", inputLabel: "Dissociation constant (K", checks: [{ a: "2", b: "1", expected: "Receptor occupancy 66.67%" }], invalid: { a: "2", b: "0", expectedError: "positive dissociation constant" } },
+    { href: "grade11-biology-cell-signalling.html", inputLabel: "Dissociation constant", checks: [{ a: "2", b: "1", expected: "Receptor occupancy 66.67%" }], invalid: { a: "2", b: "0", expectedError: "positive dissociation constant" } },
   ];
 
   for (const test of functionalCases) {
     await page.goto(`${baseUrl}/${encodeURI(test.href)}`, { waitUntil: "domcontentloaded" });
     if (test.inputLabel) {
-      const inputLabel = (await page.locator("label:has(#b)").innerText()).replace(/\\s+/g, " ").trim();
+      const inputLabel = (await page.locator("label:has(#b)").innerText()).replace(/\s+/g, " ").trim();
       if (!inputLabel.includes(test.inputLabel)) failures.push(`${test.href}: expected input label containing "${test.inputLabel}", received "${inputLabel}"`);
     }
     for (const check of test.checks) {
