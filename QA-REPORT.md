@@ -48,3 +48,18 @@ A Playwright-based browser smoke test and a second GitHub Actions job were added
 - `.github/workflows/qa.yml` now runs the static checker first and then installs Chromium/Playwright to run the browser checks.
 
 **Execution status:** The scripts and workflow were fetched back from GitHub and passed JavaScript syntax checks. A completed GitHub Actions run was not exposed by the available repository connection at the time of this report update. Therefore, the Playwright browser checks are implemented but are not claimed as executed or passed. Real browser results should be reviewed in the repository's Actions tab after the workflow completes.
+
+
+## Functional calculator QA added — 2026-11-02
+
+A representative Playwright functional suite was added to `scripts/browser-qa.mjs` for five labs:
+
+- Grade 4 Physics: Ohm's law current output and zero-resistance rejection.
+- Grade 8 Physics: current calculation.
+- Grade 12 Physics: series-circuit impedance calculation.
+- Grade 12 Chemistry: 1:1 strong acid–strong base equivalence-volume calculation using the displayed fixed 0.1 M base concentration.
+- Grade 10 Biology: enzyme-activity output and empty-temperature rejection.
+
+The Grade 10 enzyme lab previously converted an empty temperature input to 0 °C and calculated an activity value. It now rejects empty/non-finite temperatures and temperatures at or below absolute zero, and rejects empty/non-finite or out-of-range suitability values.
+
+**Execution status:** The updated browser runner and Grade 10 inline script passed JavaScript syntax compilation after being fetched from GitHub. These new Playwright functional checks are committed but have not yet been confirmed running in GitHub Actions; no browser execution or pass is claimed. The calculator models have only received this focused representative review, not an exhaustive scientific validation of all 268 labs.
