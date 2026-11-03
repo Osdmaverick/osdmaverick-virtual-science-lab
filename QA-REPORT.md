@@ -155,3 +155,9 @@ Two further refinements were made during the senior-grade review. The Grade 10 e
 The Grade 4 states-of-matter model previously assigned 0°C to the liquid category and 100°C to the gas category without identifying either phase boundary. It now labels these exact water-reference temperatures as the solid/liquid and liquid/gas boundaries (at standard atmospheric pressure). The Grade 4 dissolving-rate illustration previously allowed subzero water temperatures, which could make its linear illustrative rate factor negative. Its input is now bounded to 0–100°C for the stated liquid-water classroom model, while stirring rate remains non-negative. Playwright assertions cover both phase boundaries, a normal dissolving-rate example, and rejection of a subzero input.
 
 **Execution status remains pending:** source and test changes are committed; no completed browser execution has been confirmed.
+
+## Physics signed temperature-change labels — 2026-11-03
+
+The Grade 4 and Grade 5 water-heating calculators accept negative ΔT values to represent cooling and correctly calculate negative heat transfer, but their result labels called every value “Temperature rise”. Both outputs now say “Temperature change”, which is accurate for positive heating and negative cooling. Playwright assertions cover negative temperature changes on both pages.
+
+**Execution status remains pending:** source and test changes are committed; no completed browser run has been confirmed.
