@@ -110,7 +110,6 @@ try {
   // Exercise representative calculator outputs and input-validation boundaries.
   const functionalCases = [
     {
-    {
       href: "grade5-physics-electric-circuits.html",
       checks: [
         { a: "9", b: "3", selects: { c: "closed", d: "light" }, expected: "Energy output Light" },
@@ -119,11 +118,11 @@ try {
       ],
       invalid: { a: "9", b: "0", expectedError: "positive resistance" },
     },
+    {
       href: "grade4-physics-electric-circuits.html",
       checks: [{ a: "6", b: "3", expected: "Current 2.00 A" }],
       invalid: { a: "6", b: "0", expectedError: "Resistance must be greater than zero." },
     },
-    {
     { href: "grade6-physics-forces.html", checks: [{ a: "10", b: "2", expected: "Net force 10 N" }, { a: "0", b: "2", expected: "Force balance Balanced" }], invalid: { a: "10", b: "0", expectedError: "positive mass" } },
     { href: "grade7-physics-electromagnetism.html", checks: [{ a: "24", b: "8", c: "100", expected: "Magnetic field strength index 300.0 relative units" }], invalid: { a: "24", b: "8", c: "0", expectedError: "positive whole-number coil-turn count" } },
       href: "grade7-physics-thermal-expansion.html",
@@ -134,6 +133,7 @@ try {
       href: "grade8-physics-electricity-circuits.html",
       checks: [{ a: "9", b: "3", expected: "Current 3.000 A" }],
     },
+    { href: "grade8-physics-forces-friction.html", checks: [{ a: "20", b: "5", c: "3", expected: "Acceleration 5.00 m/s²" }, { a: "5", b: "5", c: "2", expected: "Acceleration 0.00 m/s²" }], invalid: { a: "20", b: "5", c: "0", expectedError: "positive object mass" } },
     {
       href: "grade12-physics-ac-circuits.html",
       checks: [{ a: "30", b: "40", expected: "Impedance: 50.000 Ω" }],
@@ -142,7 +142,6 @@ try {
       href: "grade12-chemistry-acid-base-titration.html",
       checks: [{ a: "0.1", b: "25", expected: "Equivalence base volume: 25.00 mL" }],
     },
-    {
     { href: "grade10-biology-cell-biology.html", checks: [{ a: "5", b: "5", expected: "Net diffusion direction No net diffusion" }], invalid: { a: "", b: "5", expectedError: "non-negative finite concentrations" } },
     { href: "grade10-biology-evolution.html", checks: [{ a: "50", b: "20", expected: "Illustrative next frequency 51.0%" }], invalid: { a: "", b: "20", expectedError: "starting trait frequency and selection advantage" } },
     { href: "grade10-biology-homeostasis.html", checks: [{ a: "-10", b: "50", expected: "Remaining deviation -5.0" }], invalid: { a: "", b: "50", expectedError: "finite signed glucose deviation" } },
