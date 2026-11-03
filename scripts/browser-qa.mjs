@@ -133,6 +133,7 @@ try {
     },
     { href: "grade4-physics-motion-speed.html", checks: [{ a: "60", b: "12", expected: "Average speed 5.00 m/s" }] },
     { href: "grade5-chemistry-mixtures-solutions.html", checks: [{ a: "10", b: "0.5", expected: "Concentration 20.00 g/L" }] },
+    { href: "grade5-chemistry-acids-bases-neutralisation.html", checks: [{ a: "3", b: "5", expected: "Solution B classification Acidic" }, { a: "3", b: "11", expected: "Solution B classification Alkaline" }] },
     { href: "grade6-chemistry-acids.html", checks: [{ a: "3", b: "10", expected: "Solution A Acidic" }] },
     { href: "grade6-biology-cells.html", checks: [{ a: "5", b: "3", expected: "Comparison More plant features" }] },
     { href: "grade7-chemistry-moles-concentration.html", checks: [{ a: "0.5", b: "1", expected: "Molar concentration: 0.500 mol/L" }] },
