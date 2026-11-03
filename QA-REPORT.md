@@ -297,3 +297,17 @@ Key updates committed:
 The official adopted TEKS state that Grade 7 and Grade 8 students should spend at least 40% of instructional time planning and safely conducting classroom, laboratory, and field investigations. The curriculum document now explicitly states that virtual simulations supplement rather than replace hands-on investigations and evidence-based student work.
 
 **Execution status:** no Chromium/Playwright run or successful CI result has been confirmed. The objective/scope review is broader than the previous sample, but detailed science-equation, accessibility, and interaction validation remain separate workstreams.
+
+## Grade 9 Physics/Chemistry and Grade 10 Biology QA — 2026-11-03
+
+Additional targeted model review and fixes:
+- Grade 9 Chemistry Atomic Structure title/objective corrected to match proton/neutron, atomic-number and mass-number inputs; the calculator does not provide electron configuration.
+- Grade 9 Periodic Trends now discloses that valence-electron count is supplied independently and is not derived from atomic number.
+- Grade 9 Reaction Kinetics now labels its temperature/catalyst multiplier an illustrative index rather than an empirical rate law.
+- Grade 9 Physics Kinematics clarifies average speed and interval-average acceleration, without claiming graph interpretation. Momentum/collisions now explicitly states its perfectly inelastic, one-dimensional assumption.
+- Grade 10 Biology Molecular Biology now validates whole-number base/codon counts and rejects a codon count requiring more bases than supplied. Human Physiology validates activity and heart-rate ranges and labels its multiplier illustrative. Plant Physiology validates finite 0–100% inputs and identifies its minimum-factor output as an index, not a measured rate.
+- Added three functional Playwright cases for these Grade 10 Biology calculators. The suite contains **70 functional cases**.
+
+The directory currently lists **110 high-school labs**: 40 Physics, 40 Chemistry, and 30 Biology pages. This corrects an earlier count of 90 that omitted the Grade 9 Physics and Chemistry collections. The high-school curriculum review remains sample-based, not a complete audit of all 110 pages.
+
+**Test execution:** source assertions and case-list structure have been checked. No completed Chromium/Playwright run or successful CI status is confirmed.
