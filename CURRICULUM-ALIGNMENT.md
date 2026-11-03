@@ -44,12 +44,12 @@ Official references:
 
 ## Audit inventory and next steps
 
-The navigation page contains 268 lab links:
+The navigation page currently contains 274 lab links: 
 - Grade 4–12 Physics: 90
 - Grade 4–12 Chemistry: 90
 - Grade 4–12 Biology: 88
 
-A complete page-by-page TEKS crosswalk has **not** yet been established. This document records the governing framework and the first verified correction; it must not be interpreted as certification that all 268 labs are aligned.
+A complete page-by-page TEKS crosswalk has **not** yet been established. This document records the governing framework and the first verified correction; it must not be interpreted as certification that all 274 labs are aligned.
 
 Next review sequence:
 1. Grade 4–5 elementary science expectations, including scientific practices and recurring themes.
