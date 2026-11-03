@@ -191,3 +191,9 @@ Three Grade 10 Physics pages were incomplete relative to their stated learning o
 The Grade 11 “Circular Motion and Gravitation” page previously calculated centripetal acceleration only, despite its learning objective and explanation also promising gravitational force. It now accepts central-body and orbiting-body masses and calculates gravitational field strength, gravitational force, required centripetal force, and the percentage difference between gravitational and required centripetal force. It uses G = 6.67430 × 10⁻¹¹ SI units and marks a match within 5% as close to the circular-orbit condition; the explanation states that this is not a full orbit propagator. The Playwright test now uses an Earth/satellite example and checks the field-strength and orbit-condition outputs, plus invalid-radius rejection.
 
 **Execution status remains pending:** source and tests are committed; no completed browser run has been confirmed.
+
+## Biology model precision corrections — 2026-11-03
+
+The Grade 4 and Grade 5 photosynthesis models selected a single limiting factor when both supplied resources were equal; the tie is now reported as “Both (equal)” rather than arbitrarily choosing one. The Grade 5 seed-germination model rounded an expected-value calculation to a whole seed, which obscured the statistical meaning (for example, 3 seeds at 50% gives an expected count of 1.5). It now displays one decimal place. Playwright assertions cover both equal-resource cases and the fractional expected germination count.
+
+**Execution status remains pending:** source changes and assertions are committed; no completed browser execution has been confirmed.
