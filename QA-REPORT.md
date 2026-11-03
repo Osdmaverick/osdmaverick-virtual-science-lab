@@ -203,3 +203,9 @@ The Grade 4 and Grade 5 photosynthesis models selected a single limiting factor 
 The Grade 6 seed-germination model rounded expected germinated seeds to a whole number. As with the Grade 5 model, an expected count is a statistical average and may be fractional (for example, 3 seeds at a 50% germination rate has an expected value of 1.5). The display now preserves one decimal place, with a Playwright assertion for that example.
 
 **Execution status remains pending:** source and assertion are committed; no completed browser run has been confirmed.
+
+## Grade 7 DNA base-pairing model completion — 2026-11-03
+
+The Grade 7 DNA/genetics page claimed to explore DNA base pairing, but its “DNA bases” input was only displayed and did not calculate complementary bases. It now accepts adenine and cytosine counts, calculates complementary thymine and guanine counts using A–T and C–G pairing, and reports the total base pairs represented. Trait probability remains a separate illustrative input; the page explicitly states that it is not inferred from the base counts. Playwright assertions check complementary bases and total base pairs.
+
+**Execution status remains pending:** the source and test assertions are committed; no completed browser execution has been confirmed.
