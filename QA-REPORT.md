@@ -249,3 +249,15 @@ Started a standards-based curriculum alignment review using current Texas Scienc
 Completed an initial Grade 6 sample review across Physics, Chemistry, and Biology using the adopted Grade 6 TEKS. Updated learning objectives to distinguish direct expectations from enrichment, corrected the Grade 6 motion page objective so it no longer claims to calculate acceleration, and clarified the difference between Newton's Third Law force pairs and the optional (F=ma) calculation. The Grade 6 force model now reports balanced/unbalanced status. Circuit model and force model updates passed targeted mock-DOM checks, including open/closed circuit outcomes and balanced/unbalanced force classification.
 
 **Execution status:** targeted mock-DOM checks passed; full browser/Playwright execution remains unconfirmed.
+
+## Grade 7–8 curriculum scope review — 2026-11-03
+
+An initial sample-based alignment review was completed against the adopted 2021 Texas Grade 7 and Grade 8 Science TEKS. The review identified several pages whose calculator focus exceeded or did not fully represent the grade-level expectation. The lab objectives and explanatory notes were updated to distinguish direct expectations from enrichment:
+
+- Grade 7: acceleration, momentum/impulse, mechanical-energy calculations, molarity, ionic/covalent bonding, detailed mitosis/meiosis, and DNA base-pairing/probability are now identified as extensions where appropriate. The Grade 7 motion and matter objectives now distinguish the actual standard from those advanced calculations.
+- Grade 8: the forces/friction model now accepts mass and calculates acceleration from net force using Newton's Second Law. The work equation is marked enrichment. The sound-wave page states that longitudinal sound and wave-speed calculation do not by themselves cover the transverse-wave/electromagnetic-spectrum requirement. Cell-organelle functions and genes-on-chromosomes expectations are now explicit in the sampled Biology pages.
+- Grade 8 Chemistry notes distinguish the mass-conservation principle from the current idealized model, which assigns product mass equal to reactant mass rather than simulating an actual reaction.
+
+The Playwright functional suite was repaired after inspection found three malformed object boundaries in its functional-case list. A new Grade 8 Physics functional case checks acceleration for a 15 N net force on a 3 kg object (5.00 m/s²), zero acceleration at zero net force, and rejection of zero mass. The suite now contains **67 functional page cases**.
+
+**Execution status:** these changes and test assertions are committed to main, but no completed Chromium/Playwright run or successful GitHub Actions result has been confirmed. The curriculum review covers selected pages only; it does not establish complete Grade 7–8 or Grade 4–12 alignment.
