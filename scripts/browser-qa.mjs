@@ -233,7 +233,7 @@ try {
       }
       for (const [id, value] of Object.entries(check.selects || {})) await page.locator("#" + id).selectOption(value);
       await page.locator("#run").click();
-      const metrics = (await page.locator("#metrics").innerText()).replace(/\s+/g, " ");
+      const metrics = (await page.locator("#metrics").innerText()).replace(/:\s*/g, " ").replace(/\s+/g, " ");
       if (!metrics.includes(check.expected)) {
         failures.push(`${test.href}: expected result "${check.expected}", received "${metrics}"`);
       }
