@@ -221,3 +221,7 @@ The Grade 10 cell-biology model previously labelled equal inside/outside concent
 The Grade 11 Cellular Respiration page stated that students would compare aerobic and anaerobic ATP yield, but accepted only one ATP-per-glucose value and always labelled the result aerobic. It now accepts separate aerobic and anaerobic yields and reports the total ATP amount in mol ATP for the supplied glucose amount in mol. The default teaching comparison uses 30 ATP/glucose aerobically and 2 ATP/glucose for fermentation, with an explanation that aerobic yield varies by cell and shuttle system. Playwright assertions cover both pathway outputs and reject a zero yield.
 
 **Execution status remains pending:** source and tests are committed; no completed browser execution has been confirmed.
+
+## Mock-DOM regression check — 2026-11-03
+
+A lightweight execution harness ran the updated inline scripts against mocked form elements and caught a const reassignment in the Grade 10 evolution, homeostasis and microbiology calculators after their validation changes. The result arrays are now mutable where reassigned. This is a source-level mock-DOM check only; it does not replace the full Playwright/browser suite.
