@@ -185,3 +185,9 @@ The Grade 10 “Electric Fields and Circuits” page previously calculated only 
 Three Grade 10 Physics pages were incomplete relative to their stated learning objectives. The gas-law page previously accepted pressure and volume only despite describing PV/T; it now accepts absolute temperature in kelvin and calculates the PV/T index for a fixed amount of ideal gas. The waves/optics page now includes incidence angle and refractive index, calculating reflection and refraction angles with Snell's law as well as wave speed/period. The work-energy-power page previously calculated work only; it now also accepts mass, speed and elapsed time to calculate kinetic energy and average power. The Newtonian dynamics calculator now rejects blank/non-finite net force and invalid mass, and checks the resulting acceleration. Playwright assertions cover representative outputs and invalid boundaries.
 
 **Execution status remains pending:** source and tests are committed; no completed browser run has been confirmed.
+
+## Grade 11 circular gravitation model completion — 2026-11-03
+
+The Grade 11 “Circular Motion and Gravitation” page previously calculated centripetal acceleration only, despite its learning objective and explanation also promising gravitational force. It now accepts central-body and orbiting-body masses and calculates gravitational field strength, gravitational force, required centripetal force, and the percentage difference between gravitational and required centripetal force. It uses G = 6.67430 × 10⁻¹¹ SI units and marks a match within 5% as close to the circular-orbit condition; the explanation states that this is not a full orbit propagator. The Playwright test now uses an Earth/satellite example and checks the field-strength and orbit-condition outputs, plus invalid-radius rejection.
+
+**Execution status remains pending:** source and tests are committed; no completed browser run has been confirmed.
