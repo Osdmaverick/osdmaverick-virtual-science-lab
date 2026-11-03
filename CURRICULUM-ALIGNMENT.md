@@ -86,3 +86,19 @@ The following review distinguished direct Grade 4 expectations from useful enric
 These scope notes prevent enrichment material from being misrepresented as a required Grade 4 science outcome. They do not replace the pending full page-by-page crosswalk.
 
 **Commits:** `e5b8f39f2054b49326e190a1a80044443fb45de2`, `7ad903ecf69cc3dd58e345aad82de8199547d5c4`, `d7c439ae01d804b8ee6cb9446ab4071f246216c4`, `d46c8e0a2ac61c6fcba487e8fb530d9fff16b4a3`.
+
+## Grade 5 Physics — initial TEKS alignment corrections
+
+The Grade 5 science expectations relevant to these labs include **5.7(A)** (equal and unequal forces and their effects on motion and energy transfer), **5.8(A)** (energy transformations in systems), **5.8(B)** (electrical energy transformations in complete circuits and circuit requirements), and **5.8(C)** (straight-line travel, reflection, refraction, and absorption of light). These expectations are documented in the adopted Grade 5 TEKS and reflected in TEA's assessed-curriculum comparison resources.
+
+Corrections:
+
+- **Series Circuits and Ohm's Law:** the main objective now targets complete circuits and energy transformations under **5.8(B)**. Ohm's law/current/power calculations are explicitly labelled enrichment.
+- **Energy Forms and Transfers:** the objective now targets energy transformation in a system under **5.8(A)**. Efficiency and useful/dissipated energy calculations are labelled enrichment.
+- **Reflection and Refraction of Light:** the objective now targets the full light behaviour expectation under **5.8(C)**. Quantitative angle/refractive-index calculations are labelled enrichment.
+- **Motion and Distance–Time Graphs:** the page now clarifies that the graph and average-speed calculations are mathematical enrichment; they do not, by themselves, meet **5.7(A)** without an explanation of how equal/unequal forces cause motion patterns.
+- **Balanced and Unbalanced Forces:** the objective now explicitly matches **5.7(A)**, including motion patterns and energy transfer.
+
+**Commits:** `c1d8b61bcbdda9a903f8d0f4442d4d5b23564582`, `62632af4ca5a05a0bf004cb5fed94ecbb17c56f9`, `2c9eed430548e5432089240a04dc02ab00146d6a`, `3ccdd77d61a4593b803863118612927d87a19261`, `99a242a858f80074293888111607152fb3859fdf`.
+
+**Additional official reference:** [TEA Grade 5 TEKS (adopted 2021; June 2024 PDF)](https://tea.texas.gov/laws-and-rules/state-board-education/teks/grade5-teks-062024-0.pdf).
