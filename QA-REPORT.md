@@ -173,3 +173,9 @@ The Grade 7 page was titled “Thermal Expansion and Heat” but its only calcul
 The Grade 6 Newton's-law calculator treated the applied force as the net force (explicitly neglecting friction and other forces), but labelled the input/output only “Applied force”. The input and result now say “Net force”, matching F = ma. The Grade 7 Electricity and Electromagnetism page calculated current and power but had no electromagnetism quantity. It now adds a coil-turn input and a clearly labelled relative solenoid-field index proportional to N × |I|, with fixed geometry/core assumptions and whole-number turn validation. Browser tests cover both changes and their invalid-input boundaries.
 
 **Execution status remains pending:** source changes and assertions are committed; no completed browser run has been confirmed.
+
+## Grade 10 Physics electric-field and induction model corrections — 2026-11-03
+
+The Grade 10 “Electric Fields and Circuits” page previously calculated only Ohm's-law current and power despite its electric-field curriculum title. It now adds plate separation and estimates the uniform parallel-plate field magnitude E = |ΔV|/d, explicitly neglecting edge effects. The Grade 10 induction model previously multiplied signed flux-change rate by turns while labelling the result an emf magnitude, and accepted zero/negative coil turns. It now requires a positive whole-number turn count and reports N × |dΦ/dt|, explaining that sign affects polarity while the displayed result is magnitude. Playwright assertions cover both models and invalid boundaries, including positive and negative flux-change rates.
+
+**Execution status remains pending:** source changes and test assertions are committed; no completed browser execution has been confirmed.
