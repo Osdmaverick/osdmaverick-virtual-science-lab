@@ -57,3 +57,17 @@ Next review sequence:
 3. High-school Biology, Chemistry, and Physics course expectations.
 4. Add an exact standards crosswalk for every lab, then add missing practice/assessment evidence.
 5. Recheck all mappings against the official TEKS Guide before describing the collection as fully aligned.
+
+### Grade 4 Physics — Floating and Sinking
+
+**Relevant expectation:** **4.6(A)**, which includes classifying and describing matter using observable physical properties such as relative density (the ability to sink or float in water).
+
+**Correction committed:** The learning objective now explicitly targets relative density and evidence-based float/sink prediction, with the Grade 4 expectation cited in the lab. The science explanation clarifies that the mass/volume threshold is an idealized model and that shape, trapped air, and surface effects can affect real objects.
+
+### Grade 4 Physics — Pushes, Pulls and Friction
+
+**Relevant expectation:** **4.7**, investigating patterns of forces including friction.
+
+**Correction committed:** The objective now foregrounds investigating friction as a force and its effect on motion. The explanation identifies the one-dimensional net-force subtraction as a simplified model and explains the sign of the result.
+
+**Commits:** `7f7d324d7f7a17e51e099b0624070fe6a2c468a5`, `08d1cfc952a72d9c958f0cfe36a091a7ed83cd40`.
