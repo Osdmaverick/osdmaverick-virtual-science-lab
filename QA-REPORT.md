@@ -119,3 +119,9 @@ A source review found that the second pH input is labelled “Solution B”, but
 The Grade 7 pH model accepts any pH value from 0 to 14 for either input, but its output labels called input A an “Acid solution” and input B a “Base solution”. That wording was misleading when a user entered alkaline pH for A or acidic pH for B. Both outputs now use neutral “Solution A/B classification” labels while retaining the same pH classification logic. The browser suite now covers an alkaline Solution A and acidic Solution B.
 
 **Execution status remains pending:** the source and browser assertions are committed, but no completed Playwright/GitHub Actions run has been confirmed.
+
+## Grade 8 elements/compounds model wording — 2026-11-03
+
+The Grade 8 particle model accepts counts of two atom types but has no input describing whether atoms are chemically bonded. Its previous output classified any mixture of two atom types as a “Compound particle model”, even though the explanatory text correctly noted that a compound requires chemical bonding. The output now reports only whether one or two atom types are represented; the explanation retains the condition that a compound requires chemically bonded atoms. Browser assertions cover both one-type and two-type compositions.
+
+**Execution status remains pending:** this correction and its source-level browser assertions are committed; no completed browser run has been confirmed.
