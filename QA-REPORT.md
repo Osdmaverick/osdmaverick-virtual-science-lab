@@ -330,7 +330,7 @@ Added six Grade 7–8 Earth and Space Science labs and linked them in `grade-lev
 
 Each new page includes a learning objective with TEKS references, prediction/conclusion fields, an interactive model, and explicit scope limitations. Static source checks confirmed all six pages contain the shared assets, a main lab container, learning objective, TEKS note, and syntactically valid inline JavaScript. All six navigation links were confirmed in the grade directory.
 
-The Playwright runner was extended to fill named input fields as well as the existing generic a/b/c/d controls, and six Earth/Space cases were added, including invalid-input checks for watershed volume, star temperature, and negative carbon flow. The suite now contains **76 functional page cases**.
+The Playwright runner was extended to fill named input fields as well as the existing generic a/b/c/d controls, and six Earth/Space cases were added, including invalid-input checks for watershed volume, star temperature, and negative carbon flow. The suite now contains **76 functional case entries across 74 distinct pages**.
 
 The directory's linked-lab inventory is now **274** (previously 268). Grade 7 and Grade 8 each have 33 labs, including three new Earth and Space Science labs.
 
@@ -350,7 +350,7 @@ The Grade 8 universe lab now includes a student-selected star life-cycle stage; 
 
 ### Earth and Space lab mock-DOM validation
 
-Executed the six new inline lab scripts against a lightweight mock DOM with representative valid inputs. All six produced the expected output metrics and explanations. Additional invalid-input checks confirmed rejection of zero watershed volume, zero star temperature, and negative carbon flow. The browser QA runner's JavaScript source also passed a syntax compilation check and now contains 76 functional cases.
+Executed the six new inline lab scripts against a lightweight mock DOM with representative valid inputs. All six produced the expected output metrics and explanations. Additional invalid-input checks confirmed rejection of zero watershed volume, zero star temperature, and negative carbon flow. The browser QA runner's JavaScript source also passed a syntax compilation check and now contains 76 functional case entries across 74 distinct pages.
 
 **Not a browser pass:** these checks do not validate actual Chromium rendering, responsive layout, keyboard navigation, accessibility-tree output, or real browser event behaviour. No CI status check has been reported for the latest commit.
 
