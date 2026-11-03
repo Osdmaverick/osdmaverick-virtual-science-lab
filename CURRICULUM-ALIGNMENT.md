@@ -182,3 +182,33 @@ Relevant adopted Grade 6 expectations include **6.8(B)** (energy transfers and t
 - **Work, Energy and Power:** objective now connects force/displacement to energy transfer under **6.8(A)–(B)**; work and power equations are labelled quantitative enrichment.
 
 **Commits:** `250ec1f241cdaac3d102ef10abe34c4a59daff26`, `ec62d14f7c52e412903d675c031a7e2df59f68ab`, `450d86f15c541b18cc4d3ae498d6f5ab75d1c974`, `76046d9c0315892bf360ad8902932938bde5f16a`, `bcf6b2bee4d1fa465dbc5dd42f54ee8451debfe1`.
+
+## Grade 7 — initial TEKS scope review
+
+The Grade 7 audit uses adopted 2021 middle-school Science TEKS, particularly **7.6(A)–(E)** (elements, compounds, physical/chemical changes, aqueous solutions and dissolution), **7.7(A)–(D)** (average speed, speed versus velocity, distance-time graphs, and balanced/unbalanced forces under Newton's First Law), **7.8(A)–(C)** (thermal transfer, equilibrium, and temperature/particle kinetic energy), **7.12(A)–(B)** (energy flow through trophic levels and cycling of matter), and **7.13(A)–(D)** (human systems, organization, reproduction, natural/artificial selection).
+
+- **Velocity and Acceleration:** the existing acceleration calculator is now labelled an extension. It does not replace the Grade 7 motion expectations for average speed, speed versus velocity, distance-time graphs, and Newton's First Law.
+- **Momentum and Impulse:** explicitly identified as enrichment, not a Grade 7 student expectation. The current page calculates momentum only; it does not calculate impulse.
+- **Mechanical Energy Conservation:** identified as an idealized extension rather than a direct Grade 7 expectation. The Grade 7 energy strand's stated focus is trophic energy flow and matter cycling.
+- **Moles and Solution Concentration:** the objective now foregrounds solute, solvent, concentration, and dilution in aqueous solutions under **7.6(D)**. Molarity (mol/L) is labelled an advanced quantitative extension.
+- **Ionic and Covalent Bonding:** electron-transfer/sharing models are identified as enrichment. Grade 7 **7.6(A)–(B)** focuses on distinguishing elements and compounds, atoms and molecules, symbols/formulas, and identifying atoms in formulas.
+- **Cell Division:** mitosis/meiosis is identified as enrichment; Grade 7's direct reproduction expectation is comparing sexual and asexual reproduction and their relationship to offspring diversity/population change under **7.13(C)**.
+- **DNA and Genetics:** the page now connects genes/DNA to inherited traits while labelling detailed base pairing and independent probability calculations as extensions beyond the Grade 7 focus in **7.13(C)–(D)**.
+- **Evolution and Natural Selection:** the topic is relevant to **7.13(D)**, but the page's one-generation index remains explicitly illustrative, not a population-genetics simulation.
+
+## Grade 8 — initial TEKS scope review
+
+The Grade 8 audit uses adopted 2021 middle-school Science TEKS, especially **8.6(A)–(E)** (classification of matter, atoms in reactions, water properties, acids/bases and pH, and conservation of mass in chemical reactions), **8.7(A)–(B)** (Newton's Second Law and the simultaneous operation of all three laws in systems), **8.8(A)–(B)** (amplitude, frequency and wavelength in transverse waves, including the electromagnetic spectrum and applications), **8.12(A)–(C)** (ecosystem disruptions, succession, biodiversity), and **8.13(A)–(C)** (organelle functions, genes on chromosomes, and adaptation/variation).
+
+- **Forces, Friction and Motion:** expanded the model to include object mass and calculate acceleration from net force using Newton's Second Law. The simplified model treats friction as opposite to the applied force; it is not a full free-body-diagram simulator.
+- **Work, Energy and Simple Machines:** the work = force × displacement calculation is now labelled enrichment. Grade 8's explicit force-and-motion expectation is Newton's Second Law and how all three laws act together in systems under **8.7**.
+- **Sound and Wave Properties:** clarified that sound is longitudinal and the current calculator's wave-speed output is enrichment. It is not sufficient by itself for **8.8(A)**, which explicitly requires amplitude, frequency and wavelength comparisons in transverse waves, including the electromagnetic spectrum.
+- **Solutions and Concentration:** the g/L concentration calculator is an applied extension; Grade 8's matter expectations focus on matter classification, atoms in reactions, water properties, acids/bases and conservation of mass.
+- **Chemical Reactions and Conservation of Mass:** aligned to **8.6(E)**, with an explicit limitation: the current closed-system model sets product mass equal to reactant mass to illustrate the principle; it does not simulate a balanced reaction or actual measured product yield.
+- **Atoms, Elements and Compounds:** the model now reports atom-type composition only. Two atom types do not establish a compound unless the atoms are chemically bonded; the page explains this limitation.
+- **Cell Structure:** the objective now lists the organelles and functions required by **8.13(A)**. Numeric ratings remain discussion prompts, not measures of organelle performance.
+- **Genetics and Inheritance:** the objective now foregrounds genes on chromosomes and inherited traits under **8.13(B)**. The probability input is labelled illustrative enrichment because no parental genotypes are supplied.
+
+**Audit boundary:** this is an initial sample-based review, not a completed standard-by-standard audit of all 60 Grade 7–8 labs. Labs outside the sampled pages still require review, including the Grade 7 taxonomy, human systems, ecosystems and thermal/solar-system topics, and Grade 8 climate, universe, ecosystem, cell-transport, photosynthesis and respiration topics.
+
+**Official standards sources:** [19 TAC §112.27 Grade 7 Science, adopted 2021](https://www.law.cornell.edu/regulations/texas/19-Tex-Admin-Code-SS-112-27); [19 TAC §112.28 Grade 8 Science, adopted 2021](https://www.law.cornell.edu/regulations/texas/19-Tex-Admin-Code-SS-112-28); [TEA Science TEKS adoption and implementation information](https://tea.texas.gov/curriculum-and-instruction/curriculum-standards/teks-review/science-teks-review).
