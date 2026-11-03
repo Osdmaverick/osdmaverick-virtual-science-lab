@@ -134,3 +134,17 @@ The current Grade 5 matter expectations relevant to this sample are in **5.6(A)�
 - **Separation Techniques:** filtration/evaporation is identified as an applied extension of **5.6(A)–(C)**, rather than a separate stated Grade 5 student expectation.
 
 **Commits:** `664c968d8d8ec97bf7c35da2658fa2ea1bd2a05b`, `5482d518f280981f8c2a8685b09dd14f29679d8e`, `84a8c215bd563565d39166cf04c5cae916846e9d`, `e809e658f55821ec04c3861315fdfef35ab75bd5`, `0cde39d6c9d432a1c17511ff2df87b5fa001ce56`.
+
+## Grade 6 Physics — initial TEKS alignment corrections
+
+The adopted Grade 6 TEKS describe force and motion through **6.7(A)–(C)**, including gravity/friction/magnetism/applied forces, net force and balanced/unbalanced forces, and Newton's Third Law force pairs. Energy standards include **6.8(B)** (energy conservation through transfers and transformations in systems such as circuits) and **6.8(C)** (energy transfer through transverse and longitudinal waves).
+
+- **Electric Circuits and Resistance:** objective now foregrounds energy transfer/transformation in circuits under **6.8(B)**; Ohm's law/current/power are marked quantitative enrichment.
+- **Forces and Newton's Laws:** objective now foregrounds net force, balanced/unbalanced classification and interaction force pairs under **6.7(A)–(C)**. The calculator now explicitly labels acceleration via (F=ma) as an extension and explains that Newton's Third Law pairs act on different objects. A balanced-force test was added.
+- **Gravity, Mass and Weight:** the page now identifies gravity as the Grade 6 force concept under **6.7(A)** and labels quantitative weight comparisons as an enrichment application.
+- **Heat Capacity and Temperature Change:** the page connects thermal energy transfer to **6.8(B)** while labelling the specific-heat equation as quantitative extension.
+- **Waves, Frequency and Wavelength:** the objective now foregrounds energy transfer through transverse and longitudinal waves under **6.8(C)**; wave-speed and period calculations are marked mathematical extension.
+
+**Commits:** `c7d4a85a38919d6bb6da0e1ee6696436937d3f68`, `0f65e875a5247409a621529d8fd6a9af8e0c2d82`, `b07d84cc75d22e990e8b333c7b87d4150abc631b`, `194d1a5a31da688ad35cbb32b0e6bb0815dbe10b`, `68be96de460ff8b3ba3eddbbde72406a93bdcb1d`, `0924895e4e9ce0bf5433d68da6d53a9d124d8923`.
+
+**Official reference:** [19 TAC §112.26 Grade 6 Science, adopted 2021](https://tea.texas.gov/about-tea/laws-and-rules/sboe-rules-tac/sboe-adopted/24-03-112-26.pdf).
