@@ -382,3 +382,9 @@ Added nine Earth and Space Science labs and linked them in the directory:
 The new pages use the shared stylesheet and JavaScript, include TEKS-referenced objectives, prediction/conclusion fields, interactive selectors, and scope notes in the activity text. The directory inventory is now **283 unique lab links** (previously 274). The static smoke-check expected inventory was updated from 274 to 283.
 
 The browser QA runner now has **85 functional case entries across 83 distinct pages**, including one case per new Grade 4–6 Earth/Space page. Full Chromium execution is still not confirmed.
+
+### Grade 4–6 Earth and Space mock-DOM validation
+
+All nine new Grade 4–6 Earth and Space inline scripts passed JavaScript syntax compilation and representative mock-DOM output checks. The Grade 6 Earth-systems page initially exposed an apostrophe syntax error; the message was corrected and the script then passed. Grade 4 water-cycle and resources objectives were tightened to explicitly cover the full 4.10(A)–(C) and 4.11(A)–(C) ranges. The browser runner now has **85 functional case entries across 83 distinct pages**; the static inventory check expects **283** linked labs.
+
+**Execution status:** these are source and mock-DOM checks, not a real Chromium/Playwright run. The prior push-triggered CI run failed its static checks because of the 268-vs-274 inventory constant and a Grade 4 simple-machines quote error; both issues have since been corrected, and the inventory constant is now 283. No successful current CI result has yet been confirmed.
