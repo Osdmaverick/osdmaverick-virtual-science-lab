@@ -217,3 +217,38 @@ The Grade 8 audit uses adopted 2021 middle-school Science TEKS, especially **8.6
 
 - **Grade 7 Balancing Chemical Equations:** the page is now identified as a Grade 8 bridge/enrichment. Its single-element atom-count check does not balance a complete chemical equation; Grade 8 introduces mass conservation in reactions under **8.6(E)**.
 - **Grade 8 Solutions and Concentration:** the g/L calculator is explicitly labelled applied enrichment, not a named Grade 8 matter expectation.
+
+## High-school course alignment — initial sample review
+
+**Important course-mapping rule:** Texas high-school Science TEKS are course-based, not separate Grade 9, Grade 10, Grade 11, and Grade 12 Physics/Chemistry/Biology standards. The directory's grade labels are the lab collection's learning sequence; they do not create different state standards by grade. The adopted courses are Biology under **19 TAC §112.42**, Chemistry under **§112.43**, and Physics under **§112.45**. Biology is recommended for Grades 9–11, Chemistry for Grades 10–12, and Physics for Grades 9–12. Each lab should be crosswalked to its course expectation, with the directory grade treated as sequencing metadata.
+
+### Biology course crosswalk
+
+The adopted Biology course is organized around biological structures/functions/processes, genetics, evolution, and environmental interdependence. Relevant expectations include **5(A)–(D)** biomolecules, cell types, homeostasis/cellular transport, viruses; **6(A)–(C)** cell cycle, differentiation, and cell-cycle disruption; **7(A)–(D)** DNA, gene expression/protein synthesis, DNA changes, and molecular technologies; **8(A)–(B)** meiosis and genetic crosses; **9(A)–(B)** evidence for common ancestry and fossil change; **10(A)–(D)** natural selection and other evolutionary mechanisms; **11(A)–(B)** photosynthesis, respiration, and enzymes; **12(A)–(B)** animal and plant systems; and **13(A)–(D)** ecological relationships, energy/matter cycles, and biodiversity.
+
+- **Grade 9 DNA and Protein Synthesis:** the DNA → RNA → protein modelling task is directly relevant to **7(A)–(B)**. Review still needs to check that the codon table, start/stop handling, and strand orientation are correct throughout the full page.
+- **Grade 10 Biological Molecules and Enzymes:** the page currently models temperature/pH effects on enzyme activity and is relevant to **11(B)**. Its broader title overstates the task: it does not compare carbohydrates, lipids, proteins, and nucleic acids under **5(A)**. The activity curve is now explicitly identified as an illustrative index rather than empirical kinetics.
+- **Grade 11 Cell Signalling and Receptors:** receptor occupancy using L/(Kd + L) is advanced enrichment, not a named Biology TEKS expectation. It is now described as an extension to cell processes/homeostasis.
+- **Grade 12 Advanced Immunology:** immune defense connects to **12(A)**, but the response × memory-factor output is only an illustrative index, not a measured immune-response model.
+
+### Chemistry course crosswalk
+
+The adopted Chemistry course includes **5(A)–(C)** periodic trends; **6(A)–(E)** atomic theory and structure; **7(A)–(D)** ionic/covalent/metallic bonding and molecular geometry; **8(A)–(D)** mole, molar mass, Avogadro's number, percent composition, and formulas; **9(A)–(D)** balanced equations, reaction types, stoichiometry, and limiting reactants; **10(A)–(C)** kinetic molecular theory and gas laws; **11(A)–(F)** solution chemistry, solubility, molarity, and dilution; **12(A)–(E)** acids/bases and pH; **13(A)–(D)** thermodynamics and calorimetry; and **14(A)–(C)** nuclear chemistry.
+
+- **Grade 9 Chemical Equations and Stoichiometry:** the current page compares supplied amounts using a simplified 1:1 ratio. It is now explicitly labelled preparatory only; it does not provide balanced-equation coefficients and therefore does not meet the full stoichiometry expectations in **9(C)–(D)**.
+- **Grade 10 Thermochemistry and Enthalpy:** q = mcΔT, with heat reported in kJ, is relevant to calorimetry and heat/specific-heat calculations under **13(B), 13(D)**. The page calculates heat change in the solution, not reaction enthalpy directly.
+- **Grade 11 Acid–Base Equilibria and Buffer Solutions:** the Henderson–Hasselbalch model is now labelled an advanced extension. The explicit course pH calculation expectation is **12(E)**, based on hydrogen-ion concentration.
+- **Grade 12 Electrochemistry and the Nernst Equation:** redox is within **9(B)**, but the Nernst equation is not explicitly named as a student expectation; the page is now labelled enrichment and its fixed 25°C, n = 2 assumptions remain visible.
+
+### Physics course crosswalk
+
+The adopted Physics course includes **5(A)–(H)** motion graphs, vectors, kinematics, projectile/circular motion, Newton's laws, and universal gravitation; **6(A)–(E)** electric force/fields, magnetism, charge conservation, circuits, and Ohm's law; **7(A)–(E)** work, power, mechanical/kinetic/potential energy, energy conservation, impulse, and momentum; **8(A)–(G)** wave motion, transverse/longitudinal waves, wave characteristics, wave behaviours, electromagnetic spectrum, spectra, and image formation; and **9(A)–(D)** quantum phenomena.
+
+- **Grade 9 Motion and Kinematics:** average speed and acceleration calculations map to **5(A), 5(C)**. The task should be interpreted with its stated constant-rate/simplified motion assumptions.
+- **Grade 10 Projectile Motion:** flight time and horizontal range map to **5(D)**. The page now states the ideal assumptions: no air resistance, constant g, and equal launch/landing heights.
+- **Grade 11 Circular Motion and Gravitation:** the centripetal/gravitational force comparison maps to **5(F), 5(H)**. The 5% match is a model check, not a full orbit propagator.
+- **Grade 12 AC Circuits and Impedance:** the series-RLC impedance equation is now explicitly labelled enrichment. Physics **6(D)–(E)** names series/parallel circuits and Ohm's-law quantities; AC impedance is not a separately stated student expectation.
+
+**Audit boundary:** these are targeted sample findings, not a full audit of the 90 high-school lab pages. Remaining work includes checking every course expectation against all relevant labs, reviewing the grade 9–12 sequence for duplicate/omitted standards, and validating the scientific equations, assumptions, units, and student evidence tasks beyond the sampled pages.
+
+**Official standards reference:** [TEA adopted 2020 High School Science TEKS PDF](https://tea.texas.gov/academics/curriculum-standards/teks-review/scienceteks-ch112-highschooladopted11-2020.pdf). See also the TEA's [Science TEKS adoption information](https://tea.texas.gov/curriculum-and-instruction/curriculum-standards/teks-review/science-teks-review).
