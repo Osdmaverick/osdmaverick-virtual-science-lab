@@ -176,7 +176,7 @@ try {
     { href: "grade12-chemistry-electrochemistry-nernst.html", checks: [{ a: "1.1", b: "1", expected: "Cell potential: 1.1000 V" }] },
     { href: "grade12-biology-neurobiology.html", checks: [{ a: "1", b: "50", expected: "Signal travel time: 20.000 ms" }] },
     { href: "grade10-physics-circular-motion.html", checks: [{ a: "12", b: "4", expected: "Centripetal acceleration 36.00 m/s²" }] },
-    { href: "grade11-physics-circular-gravitation.html", checks: [{ a: "2", b: "5", expected: "Centripetal acceleration 0.800 m/s²" }] },
+    { href: "grade11-physics-circular-gravitation.html", checks: [{ a: "7500", b: "7000000", c: "5.972e24", d: "1000", expected: "Gravitational field strength 8.135 m/s²" }, { a: "7500", b: "7000000", c: "5.972e24", d: "1000", expected: "Orbit condition Close to circular-orbit condition" }], invalid: { a: "7500", b: "0", c: "5.972e24", d: "1000", expectedError: "positive radius and both positive masses" } },
     { href: "grade12-physics-orbital-mechanics.html", checks: [{ a: "3.986e14", b: "7000000", expected: "Orbital speed 7.546 km/s" }], invalid: { a: "0", b: "7000000", expectedError: "Enter a positive gravitational parameter" } },
     { href: "grade11-chemistry-atomic-orbitals.html", checks: [{ a: "11", b: "3", expected: "Remaining capacity 7" }], invalid: { a: "19", b: "3", expectedError: "whole-number electron count from 0 to the shell capacity" } },
     { href: "grade10-chemistry-redox.html", checks: [{ a: "0.8", b: "0.3", expected: "Thermodynamic status Spontaneous" }, { a: "0.3", b: "0.3", expected: "Thermodynamic status At equilibrium" }, { a: "0.3", b: "0.8", expected: "Thermodynamic status Non-spontaneous" }] },
