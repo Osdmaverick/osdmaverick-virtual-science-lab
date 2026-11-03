@@ -311,3 +311,13 @@ Additional targeted model review and fixes:
 The directory currently lists **110 high-school labs**: 40 Physics, 40 Chemistry, and 30 Biology pages. This corrects an earlier count of 90 that omitted the Grade 9 Physics and Chemistry collections. The high-school curriculum review remains sample-based, not a complete audit of all 110 pages.
 
 **Test execution:** source assertions and case-list structure have been checked. No completed Chromium/Playwright run or successful CI status is confirmed.
+
+## Grade 11–12 scope and QA follow-up — 2026-11-03
+
+Additional high-school model descriptions were corrected:
+- Grade 11 Chemistry: electron shell capacity is no longer described as orbital/quantum-number modelling; ionic attraction is no longer described as lattice-energy/covalent-polarity calculation; the q = mcΔT page is correctly titled calorimetry/heat transfer; gas-law output is explicitly a relative T/P volume index.
+- Grade 11 Physics: DC circuits is correctly scoped to a single resistive circuit and Ohm's law, not Kirchhoff network analysis; the mechanical-wave page is correctly scoped to v = fλ, not interference.
+- Grade 12 Chemistry titration now states its fixed 0.10 M base and 1:1 assumption. Grade 12 induction reports emf magnitude only, not Lenz-law direction.
+- Fixed browser QA metric comparison to normalize the colon delimiter in displayed Label: value metrics before matching the expected text. This repairs a systematic assertion-format mismatch in the functional runner.
+
+The suite contains 70 functional cases. The runner source has been structurally reviewed, but no browser run is claimed.
