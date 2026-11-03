@@ -153,6 +153,7 @@ try {
     { href: "grade10-chemistry-stoichiometry.html", checks: [{ a: "2", b: "3", expected: "Limiting reactant in 1:1 model: A" }] },
     { href: "grade10-chemistry-thermochemistry.html", checks: [{ a: "100", b: "5", expected: "Heat change in solution 2.09 kJ" }, { a: "100", b: "-5", expected: "Heat change in solution -2.09 kJ" }], invalid: { a: "", b: "5", expectedError: "Enter a positive solution mass and a valid temperature change." } },
     { href: "grade11-physics-mechanical-waves.html", checks: [{ a: "4", b: "2", expected: "Wave speed 8.000 m/s" }] },
+    { href: "grade11-chemistry-bonding-lattice-energy.html", checks: [{ a: "2", b: "3", expected: "Relative attraction index 0.444" }], invalid: { a: "-2", b: "3", expectedError: "positive charge magnitude and a positive separation" } },
     { href: "grade11-chemistry-buffers.html", checks: [{ a: "4.76", b: "1", expected: "Estimated pH 4.760" }] },
     { href: "grade11-biology-enzyme-kinetics.html", checks: [{ a: "5", b: "2", expected: "Reaction rate: 71.43 units" }] },
     { href: "grade12-chemistry-electrochemistry-nernst.html", checks: [{ a: "1.1", b: "1", expected: "Cell potential: 1.1000 V" }] },
