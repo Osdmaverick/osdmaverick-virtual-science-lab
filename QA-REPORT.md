@@ -137,3 +137,9 @@ The Grade 10 Chemical Analysis page described calculating an unknown concentrati
 A focused review found four Grade 10 Chemistry calculators that accepted incomplete or physically invalid inputs: the VSEPR model had no checks on bonding/lone pairs; the pollutant-removal model accepted negative or blank concentration; the alkane formula checker accepted zero or fractional atom counts; and the cell-potential calculator converted blank inputs to zero. These now validate finite, integer, and non-negative/positive domains as appropriate. The VSEPR model is explicitly bounded to 2–6 electron domains and explains that electron-domain geometry is not always identical to molecular shape. The environmental model also clarifies that its removal fraction is illustrative rather than tied to a specific treatment process. The browser suite now includes normal-output and invalid-boundary assertions for all four.
 
 **Execution status remains pending:** code and assertions are committed, but no completed browser run has been confirmed.
+
+## Grade 11 lattice-attraction input and assumption clarification — 2026-11-03
+
+The Grade 11 lattice-attraction model calculates q²/r² from a single charge-magnitude input, which implicitly assumes two equal charge magnitudes. Its previous validation accepted a negative value even though the output called it a magnitude. The input now requires a positive charge magnitude, and the explanation states the equal-charge assumption explicitly. A Playwright case checks the q=2, r=3 relative index (0.444) and rejects a negative magnitude.
+
+**Execution status remains pending:** the source and browser assertions are committed, but no completed browser execution has been confirmed.
