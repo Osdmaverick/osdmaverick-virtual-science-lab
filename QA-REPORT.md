@@ -143,3 +143,9 @@ A focused review found four Grade 10 Chemistry calculators that accepted incompl
 The Grade 11 lattice-attraction model calculates q²/r² from a single charge-magnitude input, which implicitly assumes two equal charge magnitudes. Its previous validation accepted a negative value even though the output called it a magnitude. The input now requires a positive charge magnitude, and the explanation states the equal-charge assumption explicitly. A Playwright case checks the q=2, r=3 relative index (0.444) and rejects a negative magnitude.
 
 **Execution status remains pending:** the source and browser assertions are committed, but no completed browser execution has been confirmed.
+
+## Additional Chemistry precision corrections — 2026-11-03
+
+Two further refinements were made during the senior-grade review. The Grade 10 electrochemical cell page now distinguishes positive, zero, and negative standard cell potentials as spontaneous, at equilibrium, and non-spontaneous, respectively; zero potential is no longer grouped with negative values. The Grade 12 polymer page now reports average degree of polymerisation to two decimal places rather than rounding an average ratio to a whole number. The Grade 11 lattice-attraction explanation was also refined to state that the simplified q²/r² index represents oppositely charged ions with equal charge magnitudes. Browser assertions cover all three electrochemical sign cases and a non-integer polymerisation average.
+
+**Execution status remains pending:** these changes and assertions are committed; no completed browser run has been confirmed.
