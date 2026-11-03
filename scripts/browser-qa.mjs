@@ -208,6 +208,12 @@ try {
     { href: "grade10-biology-genetics.html", checks: [{ a: "50", b: "40", expected: "Expected trait count 20.0" }] },
     { href: "grade11-biology-cellular-respiration.html", checks: [{ a: "2", b: "30", c: "2", expected: "Aerobic ATP yield 60.0 mol ATP" }, { a: "2", b: "30", c: "2", expected: "Anaerobic ATP yield 4.0 mol ATP" }], invalid: { a: "2", b: "30", c: "0", expectedError: "positive aerobic and anaerobic ATP yields" } },
     { href: "grade11-biology-cell-signalling.html", inputLabel: "Dissociation constant", checks: [{ a: "2", b: "1", expected: "Receptor occupancy 66.67%" }], invalid: { a: "2", b: "0", expectedError: "positive dissociation constant" } },
+    { href: "grade7-earth-space-solar-system.html", checks: [{ selects: { planet: "Earth" }, expected: "Mean orbital distance: 1 AU" }] },
+    { href: "grade7-earth-space-plate-tectonics.html", checks: [{ selects: { boundary: "transform", evidence: "fossils" }, expected: "Plates slide horizontally past one another" }] },
+    { href: "grade7-earth-space-water-systems.html", checks: [{ inputs: { mass: "500", volume: "1000", removal: "40" }, expected: "After assumed treatment: 0.300 mg/L" }], invalid: { inputs: { mass: "500", volume: "0", removal: "40" }, expectedError: "positive runoff volume" } },
+    { href: "grade8-earth-space-universe.html", checks: [{ inputs: { temp: "5800", lum: "1" }, selects: { galaxy: "spiral", evidence: "cmb" }, expected: "Spectral class (approx.): G" }], invalid: { inputs: { temp: "0", lum: "1" }, expectedError: "positive temperature and luminosity" } },
+    { href: "grade8-earth-space-weather-climate.html", checks: [{ inputs: { sst: "29", moisture: "75" }, selects: { air: "rising", rotation: "organized" }, expected: "Warm ocean (about 26.5°C or higher): Yes" }] },
+    { href: "grade8-earth-space-carbon-cycle.html", checks: [{ inputs: { human: "10", natural: "1", land: "3", ocean: "2" }, expected: "Net atmospheric change: +6.00 GtC/year" }], invalid: { inputs: { human: "-1", natural: "1", land: "3", ocean: "2" }, expectedError: "non-negative carbon flows" } },
   ];
 
   for (const test of functionalCases) {
@@ -217,10 +223,14 @@ try {
       if (!inputLabel.includes(test.inputLabel)) failures.push(`${test.href}: expected input label containing "${test.inputLabel}", received "${inputLabel}"`);
     }
     for (const check of test.checks) {
-      await page.locator("#a").fill(check.a);
-      await page.locator("#b").fill(check.b);
-      if (check.c !== undefined) await page.locator("#c").fill(check.c);
-      if (check.d !== undefined) await page.locator("#d").fill(check.d);
+      if (check.inputs) {
+        for (const [id, value] of Object.entries(check.inputs)) await page.locator("#" + id).fill(value);
+      } else {
+        await page.locator("#a").fill(check.a);
+        await page.locator("#b").fill(check.b);
+        if (check.c !== undefined) await page.locator("#c").fill(check.c);
+        if (check.d !== undefined) await page.locator("#d").fill(check.d);
+      }
       for (const [id, value] of Object.entries(check.selects || {})) await page.locator("#" + id).selectOption(value);
       await page.locator("#run").click();
       const metrics = (await page.locator("#metrics").innerText()).replace(/\s+/g, " ");
@@ -229,10 +239,14 @@ try {
       }
     }
     if (test.invalid) {
-      await page.locator("#a").fill(test.invalid.a);
-      await page.locator("#b").fill(test.invalid.b);
-      if (test.invalid.c !== undefined) await page.locator("#c").fill(test.invalid.c);
-      if (test.invalid.d !== undefined) await page.locator("#d").fill(test.invalid.d);
+      if (test.invalid.inputs) {
+        for (const [id, value] of Object.entries(test.invalid.inputs)) await page.locator("#" + id).fill(value);
+      } else {
+        await page.locator("#a").fill(test.invalid.a);
+        await page.locator("#b").fill(test.invalid.b);
+        if (test.invalid.c !== undefined) await page.locator("#c").fill(test.invalid.c);
+        if (test.invalid.d !== undefined) await page.locator("#d").fill(test.invalid.d);
+      }
       for (const [id, value] of Object.entries(test.invalid.selects || {})) await page.locator("#" + id).selectOption(value);
       await page.locator("#run").click();
       const error = await page.locator("#error").innerText();
