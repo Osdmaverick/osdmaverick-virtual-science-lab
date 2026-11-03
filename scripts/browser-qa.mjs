@@ -162,6 +162,8 @@ try {
     { href: "grade11-physics-circular-gravitation.html", checks: [{ a: "2", b: "5", expected: "Centripetal acceleration 0.800 m/s²" }] },
     { href: "grade12-physics-orbital-mechanics.html", checks: [{ a: "3.986e14", b: "7000000", expected: "Orbital speed 7.546 km/s" }], invalid: { a: "0", b: "7000000", expectedError: "Enter a positive gravitational parameter" } },
     { href: "grade11-chemistry-atomic-orbitals.html", checks: [{ a: "11", b: "3", expected: "Remaining capacity 7" }], invalid: { a: "19", b: "3", expectedError: "whole-number electron count from 0 to the shell capacity" } },
+    { href: "grade10-chemistry-redox.html", checks: [{ a: "0.8", b: "0.3", expected: "Thermodynamic status Spontaneous" }, { a: "0.3", b: "0.3", expected: "Thermodynamic status At equilibrium" }, { a: "0.3", b: "0.8", expected: "Thermodynamic status Non-spontaneous" }] },
+    { href: "grade12-chemistry-polymer-chemistry.html", checks: [{ a: "2500", b: "1000", expected: "Average degree of polymerisation 2.50" }] },
     { href: "grade12-chemistry-advanced-stoichiometry.html", checks: [{ a: "2", b: "3", expected: "Theoretical product amount 6.000 mol" }] },
     { href: "grade12-biology-advanced-immunology.html", checks: [{ a: "10", b: "5", expected: "Secondary response index 50.00" }] },
     { href: "grade10-biology-genetics.html", checks: [{ a: "50", b: "40", expected: "Expected trait count 20.0" }] },
