@@ -115,6 +115,8 @@ try {
       invalid: { a: "6", b: "0", expectedError: "Resistance must be greater than zero." },
     },
     {
+    { href: "grade6-physics-forces.html", checks: [{ a: "10", b: "2", expected: "Net force 10 N" }], invalid: { a: "10", b: "0", expectedError: "positive mass" } },
+    { href: "grade7-physics-electromagnetism.html", checks: [{ a: "24", b: "8", c: "100", expected: "Magnetic field strength index 300.0 relative units" }], invalid: { a: "24", b: "8", c: "0", expectedError: "positive whole-number coil-turn count" } },
       href: "grade7-physics-thermal-expansion.html",
       checks: [{ a: "1", b: "50", c: "1", d: "0.000012", expected: "Linear expansion 0.600 mm" }, { a: "1", b: "-50", c: "1", d: "0.000012", expected: "Linear expansion -0.600 mm" }],
       invalid: { a: "1", b: "50", c: "1", d: "-0.000012", expectedError: "non-negative expansion coefficient" },
