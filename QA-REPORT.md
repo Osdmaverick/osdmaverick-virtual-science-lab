@@ -265,3 +265,14 @@ The Playwright functional suite was repaired after inspection found three malfor
 ### Grade 7–8 follow-up corrections — 2026-11-03
 
 The Grade 7 chemical-equation page now states that its single-element atom-count comparison is a Grade 8 bridge and does not balance a full equation. The Grade 8 g/L solutions calculator is explicitly marked enrichment rather than a named Grade 8 student expectation. The browser functional-case array was checked for balanced object/array delimiters after repair; this is a source-structure check, not a Chromium test.
+
+## High-school course TEKS sample review — 2026-11-03
+
+Started the high-school course crosswalk against adopted 2020 Biology, Chemistry and Physics TEKS. The review records that the repository's Grade 9–12 labels are a sequencing structure, while the state standards are organized by course (Biology §112.42, Chemistry §112.43, Physics §112.45), not separate grade-level Physics/Chemistry/Biology standards.
+
+Sampled findings and corrections:
+- **Biology:** Grade 9 DNA/protein synthesis maps to gene expression and protein synthesis; Grade 10 enzyme activity is relevant to the enzyme expectation but its broad biomolecules title overstates the actual task; Grade 11 receptor occupancy is advanced enrichment; Grade 12 immune-response multiplication is an illustrative index rather than a physiological model.
+- **Chemistry:** Grade 9's 1:1 amount comparison is now explicitly identified as preparatory, not complete stoichiometry; Grade 10 q = mcΔT is connected to calorimetry/heat calculations and is labelled solution heat rather than reaction enthalpy; Grade 11 Henderson–Hasselbalch and Grade 12 Nernst calculations are labelled advanced extensions beyond the explicitly named student expectations.
+- **Physics:** Grade 9 kinematics and Grade 10 projectile motion map to course motion expectations; projectile assumptions are now explicit. Grade 11 circular gravitation is connected to Newton's Second Law/universal gravitation. Grade 12 AC impedance is labelled extension beyond the explicitly named series/parallel and Ohm's-law expectations.
+
+**Execution status:** source updates and audit documentation are committed, but the sample review is not a complete course crosswalk. No completed Chromium/Playwright run or successful GitHub Actions result has been confirmed.
