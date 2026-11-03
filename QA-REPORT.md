@@ -225,3 +225,7 @@ The Grade 11 Cellular Respiration page stated that students would compare aerobi
 ## Mock-DOM regression check — 2026-11-03
 
 A lightweight execution harness ran the updated inline scripts against mocked form elements and caught a const reassignment in the Grade 10 evolution, homeostasis and microbiology calculators after their validation changes. The result arrays are now mutable where reassigned. This is a source-level mock-DOM check only; it does not replace the full Playwright/browser suite.
+
+## Cross-subject mock-DOM verification — 2026-11-03
+
+After the regression fix, 18 representative valid-input executions passed in a lightweight mock-DOM harness, and 15 invalid-input boundary executions produced their expected validation errors. A further 16 modified Chemistry/Physics pages passed inline JavaScript syntax compilation. These checks exercise calculator scripts with mocked form elements; they do not verify real browser rendering, keyboard interaction, responsive layout, or full Playwright execution.
