@@ -155,6 +155,8 @@ try {
     { href: "grade8-chemistry-reactions-conservation-mass.html", checks: [{ a: "12", b: "8", expected: "Product mass 20.0 g" }] },
     { href: "grade9-chemistry-stoichiometry.html", checks: [{ a: "2", b: "2", expected: "Simplified 1:1 comparison: Amounts are equal" }] },
     { href: "grade9-physics-momentum-collisions.html", checks: [{ a: "2", b: "4", c: "3", d: "0", expected: "Final shared velocity 1.60 m/s" }] },
+    { href: "grade10-physics-electric-fields.html", checks: [{ a: "24", b: "8", c: "0.02", expected: "Electric field strength 1200.0 V/m" }], invalid: { a: "24", b: "8", c: "0", expectedError: "positive resistance and plate separation" } },
+    { href: "grade10-physics-magnetic-induction.html", checks: [{ a: "200", b: "0.03", expected: "Induced emf magnitude 6.000 V" }, { a: "200", b: "-0.03", expected: "Induced emf magnitude 6.000 V" }], invalid: { a: "0", b: "0.03", expectedError: "positive whole-number coil-turn count" } },
     { href: "grade10-physics-projectile-motion.html", checks: [{ a: "20", b: "45", expected: "Horizontal range 40.77 m" }] },
     { href: "grade10-chemistry-analysis.html", checks: [{ a: "0.1", b: "25", c: "20", expected: "Unknown concentration (1:1) 0.12500 mol/L" }], invalid: { a: "0.1", b: "25", c: "0", expectedError: "positive finite concentration and both positive solution volumes" } },
     { href: "grade10-chemistry-bonding.html", checks: [{ a: "2", b: "2", expected: "Electron domains 4" }], invalid: { a: "0", b: "2", expectedError: "2–6 total electron domains" } },
