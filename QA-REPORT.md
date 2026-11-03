@@ -389,3 +389,16 @@ All nine new Grade 4–6 Earth and Space inline scripts passed JavaScript syntax
 
 **Execution status:** these are source and mock-DOM checks, not a real Chromium/Playwright run. The prior push-triggered CI run failed its static checks because of the 268-vs-274 inventory constant and a Grade 4 simple-machines quote error; both issues have since been corrected, and the inventory constant is now 283. No successful current CI result has yet been confirmed.
 The Grade 6 Earth-systems page now includes an interactive Earth-layer selector for crust, mantle, outer core, and inner core; the browser case selects the mantle in addition to the hydrosphere and metamorphic rock.
+
+## Successful full browser QA — 2026-11-03
+
+GitHub Actions run [41690207972](https://github.com/Osdmaverick/osdmaverick-virtual-science-lab/actions/runs/41690207972), commit `e953af6107fc9e9964e1b113db846795f2dd3501`, completed successfully.
+
+- Static smoke check: **passed** — 283/283 directory-linked pages exist and pass required structure and inline JavaScript syntax checks; shared JavaScript and CSS checks also passed.
+- Chromium browser smoke check: **passed** — 283 pages visited, 27 mobile-width samples checked, reduced-motion preference checked across 9 grades, and keyboard focus/Enter behavior checked.
+- Functional calculator suite: **passed** — all 85 functional case entries across 83 distinct pages passed, including valid outputs and invalid-input boundaries.
+- Browser result: `failures: []`.
+
+The final defect found in this cycle was a Grade 10 Biology enzyme calculator assigning to a `const` array after calculating activity. The result list is now mutable, and the functional case passes. The Grade 4 simple-machines quote error, stale 268/274 inventory constants, Grade 9 Biology legacy main classes, metric-label normalization, and mixed input/select test handling were also corrected before this successful run.
+
+**Scope note:** this verifies the current smoke and representative functional suite; it is not an exhaustive scientific validation of every calculator, nor a complete TEKS crosswalk of all 283 labs.
