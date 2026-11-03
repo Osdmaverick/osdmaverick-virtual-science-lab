@@ -243,3 +243,9 @@ After fixing the additional result-array declaration errors found during executi
 Started a standards-based curriculum alignment review using current Texas Science TEKS and TEA STAAR assessed-curriculum resources. Created `CURRICULUM-ALIGNMENT.md` to record exact standards, enrichment boundaries, and unresolved gaps. Verified and corrected the initial Grade 4 and Grade 5 Physics, Biology, and Chemistry samples. In particular, grade-level objectives are now separated from advanced calculator extensions, and the Grade 5 circuit lab now models open/closed paths and four possible energy outputs. The Playwright suite now contains 66 functional page cases. The current navigation inventory contains 268 linked science labs (including eight Grade 9 Biology pages whose filenames do not include the `biology` prefix).
 
 **Validation caveat:** source-level and mock-DOM checks are available for the recent circuit model, but a full Chromium run and successful GitHub Actions workflow have not been confirmed. The complete TEKS crosswalk for all labs remains in progress.
+
+## Curriculum alignment review: Grade 6 — 2026-11-03
+
+Completed an initial Grade 6 sample review across Physics, Chemistry, and Biology using the adopted Grade 6 TEKS. Updated learning objectives to distinguish direct expectations from enrichment, corrected the Grade 6 motion page objective so it no longer claims to calculate acceleration, and clarified the difference between Newton's Third Law force pairs and the optional (F=ma) calculation. The Grade 6 force model now reports balanced/unbalanced status. Circuit model and force model updates passed targeted mock-DOM checks, including open/closed circuit outcomes and balanced/unbalanced force classification.
+
+**Execution status:** targeted mock-DOM checks passed; full browser/Playwright execution remains unconfirmed.
