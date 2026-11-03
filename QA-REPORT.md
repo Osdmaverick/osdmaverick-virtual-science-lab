@@ -197,3 +197,9 @@ The Grade 11 “Circular Motion and Gravitation” page previously calculated ce
 The Grade 4 and Grade 5 photosynthesis models selected a single limiting factor when both supplied resources were equal; the tie is now reported as “Both (equal)” rather than arbitrarily choosing one. The Grade 5 seed-germination model rounded an expected-value calculation to a whole seed, which obscured the statistical meaning (for example, 3 seeds at 50% gives an expected count of 1.5). It now displays one decimal place. Playwright assertions cover both equal-resource cases and the fractional expected germination count.
 
 **Execution status remains pending:** source changes and assertions are committed; no completed browser execution has been confirmed.
+
+## Grade 6 germination expected-value precision — 2026-11-03
+
+The Grade 6 seed-germination model rounded expected germinated seeds to a whole number. As with the Grade 5 model, an expected count is a statistical average and may be fractional (for example, 3 seeds at a 50% germination rate has an expected value of 1.5). The display now preserves one decimal place, with a Playwright assertion for that example.
+
+**Execution status remains pending:** source and assertion are committed; no completed browser run has been confirmed.
