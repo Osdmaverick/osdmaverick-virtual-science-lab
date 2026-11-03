@@ -113,3 +113,9 @@ The receptor-occupancy model calculates fractional occupancy as L/(Kd + L), wher
 A source review found that the second pH input is labelled “Solution B”, but its result was labelled “Base classification”. Because the model accepts any pH from 0 to 14 for Solution B—including acidic and neutral values—the output label incorrectly implied that Solution B must be a base. The output is now labelled “Solution B classification”, and the Playwright functional suite includes both acidic and alkaline Solution B examples. This correction clarifies the model's output without changing its calculations.
 
 **Execution status remains pending:** the source and browser assertions are committed, but no completed Playwright/GitHub Actions run has been confirmed.
+
+## Grade 7 acid/base classification labels — 2026-11-03
+
+The Grade 7 pH model accepts any pH value from 0 to 14 for either input, but its output labels called input A an “Acid solution” and input B a “Base solution”. That wording was misleading when a user entered alkaline pH for A or acidic pH for B. Both outputs now use neutral “Solution A/B classification” labels while retaining the same pH classification logic. The browser suite now covers an alkaline Solution A and acidic Solution B.
+
+**Execution status remains pending:** the source and browser assertions are committed, but no completed Playwright/GitHub Actions run has been confirmed.
