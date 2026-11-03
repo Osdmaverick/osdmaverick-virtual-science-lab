@@ -375,3 +375,14 @@ The Grade 6 Earth-systems lab now has a separate interactive selector for the cr
 
 - **Atoms, Elements and Compounds:** the objective now makes clear that the calculator counts atom types but does not model chemical bonds; two atom types are a compound only when chemically bonded (TEKS 8.6(A)–(B)).
 - **Chemical Reactions and Conservation of Mass:** the objective now explicitly maps to TEKS 8.6(E) and states that product mass is assigned equal to reactant mass for an ideal closed-system illustration; the page does not balance equations or predict actual yield.
+
+### Grade 12 Chemistry enrichment boundaries
+
+The following advanced Chemistry pages now explicitly identify their scope beyond the named course expectations and state their simplifying assumptions:
+
+- **Green Chemistry / Atom Economy:** uses already coefficient-weighted molar masses; it does not balance an equation.
+- **Organic Synthesis:** estimates product amount from conversion while assuming ideal selectivity and a 1:1 product relationship; it does not model competing pathways or experimental percent yield.
+- **Polymer Chemistry:** estimates degree of polymerisation from one repeat-unit mass; it does not model chain-length distributions or polymer structure.
+- **Quantum Chemistry:** calculates a simplified molecular-orbital bond order from supplied electron counts; it does not construct orbitals or energy diagrams.
+- **Solubility Equilibria:** calculates Ksp = s² for a 1:1 salt in pure water; common-ion effects, non-1:1 salts, and activity corrections are excluded.
+- **Spectroscopic Analysis:** estimates concentration from a linear calibration through the origin; it does not fit a calibration curve or account for measurement uncertainty.
