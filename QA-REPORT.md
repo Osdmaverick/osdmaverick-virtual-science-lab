@@ -306,7 +306,7 @@ Additional targeted model review and fixes:
 - Grade 9 Reaction Kinetics now labels its temperature/catalyst multiplier an illustrative index rather than an empirical rate law.
 - Grade 9 Physics Kinematics clarifies average speed and interval-average acceleration, without claiming graph interpretation. Momentum/collisions now explicitly states its perfectly inelastic, one-dimensional assumption.
 - Grade 10 Biology Molecular Biology now validates whole-number base/codon counts and rejects a codon count requiring more bases than supplied. Human Physiology validates activity and heart-rate ranges and labels its multiplier illustrative. Plant Physiology validates finite 0–100% inputs and identifies its minimum-factor output as an index, not a measured rate.
-- Added three functional Playwright cases for these Grade 10 Biology calculators. The suite contains **70 functional cases**.
+- Added three functional Playwright cases for these Grade 10 Biology calculators. The suite contains **76 functional case entries across 74 distinct pages**.
 
 The directory currently lists **110 high-school labs**: 40 Physics, 40 Chemistry, and 30 Biology pages. This corrects an earlier count of 90 that omitted the Grade 9 Physics and Chemistry collections. The high-school curriculum review remains sample-based, not a complete audit of all 110 pages.
 
@@ -320,7 +320,7 @@ Additional high-school model descriptions were corrected:
 - Grade 12 Chemistry titration now states its fixed 0.10 M base and 1:1 assumption. Grade 12 induction reports emf magnitude only, not Lenz-law direction.
 - Fixed browser QA metric comparison to normalize the colon delimiter in displayed Label: value metrics before matching the expected text. This repairs a systematic assertion-format mismatch in the functional runner.
 
-The suite contains 70 functional cases. The runner source has been structurally reviewed, but no browser run is claimed.
+The suite now contains 76 functional case entries across 74 distinct pages. The runner source has been structurally reviewed, but no completed browser run is claimed.
 
 ## Earth and Space Science expansion — 2026-11-03
 
