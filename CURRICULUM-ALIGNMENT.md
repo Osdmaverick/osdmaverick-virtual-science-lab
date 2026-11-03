@@ -249,9 +249,9 @@ The adopted Physics course includes **5(A)–(H)** motion graphs, vectors, kinem
 - **Grade 11 Circular Motion and Gravitation:** the centripetal/gravitational force comparison maps to **5(F), 5(H)**. The 5% match is a model check, not a full orbit propagator.
 - **Grade 12 AC Circuits and Impedance:** the series-RLC impedance equation is now explicitly labelled enrichment. Physics **6(D)–(E)** names series/parallel circuits and Ohm's-law quantities; AC impedance is not a separately stated student expectation.
 
-**Audit boundary:** these are targeted sample findings, not a full audit of the 90 high-school lab pages. Remaining work includes checking every course expectation against all relevant labs, reviewing the grade 9–12 sequence for duplicate/omitted standards, and validating the scientific equations, assumptions, units, and student evidence tasks beyond the sampled pages.
+**Audit boundary:** these are targeted sample findings, not a full audit of the 110 high-school lab pages. Remaining work includes checking every course expectation against all relevant labs, reviewing the grade 9–12 sequence for duplicate/omitted standards, and validating the scientific equations, assumptions, units, and student evidence tasks beyond the sampled pages.
 
-**Official standards reference:** [TEA adopted 2020 High School Science TEKS PDF](https://tea.texas.gov/academics/curriculum-standards/teks-review/scienceteks-ch112-highschooladopted11-2020.pdf). See also the TEA's [Science TEKS adoption information](https://tea.texas.gov/curriculum-and-instruction/curriculum-standards/teks-review/science-teks-review).
+**Official standards reference:** use the TEA's [current 19 TAC Chapter 112 Science TEKS page](https://tea.texas.gov/about-tea/laws-and-rules/texas-administrative-code/19-tac-chapter-112), which lists the adopted high-school Biology (§112.42), Chemistry (§112.43), Integrated Physics and Chemistry (§112.44), and Physics (§112.45) course sections. The TEA's [Science TEKS Review page](https://tea2.tea.texas.gov/curriculum-and-instruction/curriculum-standards/teks-review/science-teks-review) confirms final approval of the high-school course standards on November 20, 2020. Use the current Chapter 112 sections as the controlling reference rather than relying solely on the older adoption attachment PDF.
 
 ### High-school sample follow-up: additional pages
 
@@ -286,3 +286,17 @@ The review has now examined the objectives and principal input/output models acr
 The adopted Grade 7 and Grade 8 TEKS require students, for at least **40% of instructional time**, to plan and safely conduct classroom, laboratory, and field investigations. These virtual labs should therefore supplement, not replace, hands-on investigations, repeated measurements, evidence collection, graphing, and student explanations. The official standards also require students to identify model limitations; the notes above make those limits explicit for the simplified calculators.
 
 **Official source:** [TEA, 19 TAC Chapter 112, Subchapter B (August 2024 update), Grade 7 §112.27 and Grade 8 §112.28](https://tea.texas.gov/laws-and-rules/sboe-rules-tac/sboe-tac-currently-effect/ch112b.pdf). The detailed expectations are listed in the official PDF: Grade 7 matter/motion/thermal/ecosystems/human systems/taxonomy; Grade 8 matter, Newton's Second Law, transverse waves, climate, ecosystem stability, organelles and inherited traits.
+
+
+### Grade 9 Physics/Chemistry and Grade 10 Biology follow-up — 2026-11-03
+
+- **Grade 9 Chemistry — Atomic Structure:** corrected the title and objective to proton/neutron counts, atomic number and mass number. The prior title promised electron configuration, which the calculator did not model.
+- **Grade 9 Chemistry — Periodic Trends:** clarified that valence-electron count is user-supplied and the calculator does not derive electron configurations or determine full periodic trends.
+- **Grade 9 Chemistry — Reaction Kinetics:** labelled its temperature × catalyst-factor output an illustrative index, not an experimentally determined rate law.
+- **Grade 9 Physics — Kinematics:** clarified that the calculator returns average speed and interval-average acceleration; it does not plot or interpret motion graphs.
+- **Grade 9 Physics — Momentum/Collisions:** clarified that the collision is one-dimensional and perfectly inelastic, with shared final velocity; elastic and two-dimensional collisions are not modelled.
+- **Grade 10 Biology — Molecular Biology:** added whole-number validation and a consistency check that three bases are needed for each complete codon. Clarified that it does not transcribe or translate a real sequence.
+- **Grade 10 Biology — Human Physiology:** added finite/range validation for activity level and resting heart rate; labelled the 8% multiplier illustrative, not a physiological prediction.
+- **Grade 10 Biology — Plant Physiology:** added finite 0–100% validation and labelled the minimum-factor output a teaching index rather than measured plant activity.
+
+The Grade 10 Biology changes have three new functional browser cases (valid output and invalid-input boundary checks). The functional suite now contains **70 cases**. Its source structure is verified; actual Chromium execution remains unconfirmed.
