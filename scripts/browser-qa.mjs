@@ -211,8 +211,8 @@ try {
     { href: "grade7-earth-space-solar-system.html", checks: [{ selects: { planet: "Earth" }, expected: "Mean orbital distance: 1 AU" }] },
     { href: "grade7-earth-space-plate-tectonics.html", checks: [{ selects: { boundary: "transform", evidence: "fossils" }, expected: "Plates slide horizontally past one another" }] },
     { href: "grade7-earth-space-water-systems.html", checks: [{ inputs: { mass: "500", volume: "1000", removal: "40" }, expected: "After assumed treatment: 0.300 mg/L" }], invalid: { inputs: { mass: "500", volume: "0", removal: "40" }, expectedError: "positive runoff volume" } },
-    { href: "grade8-earth-space-universe.html", checks: [{ inputs: { temp: "5800", lum: "1" }, selects: { galaxy: "spiral", evidence: "cmb" }, expected: "Spectral class (approx.): G" }], invalid: { inputs: { temp: "0", lum: "1" }, expectedError: "positive temperature and luminosity" } },
-    { href: "grade8-earth-space-weather-climate.html", checks: [{ inputs: { sst: "29", moisture: "75" }, selects: { air: "rising", rotation: "organized" }, expected: "Warm ocean (about 26.5°C or higher): Yes" }] },
+    { href: "grade8-earth-space-universe.html", checks: [{ inputs: { temp: "5800", lum: "1" }, selects: { stage: "main", galaxy: "spiral", evidence: "cmb" }, expected: "Spectral class (approx.): G" }], invalid: { inputs: { temp: "0", lum: "1" }, expectedError: "positive temperature and luminosity" } },
+    { href: "grade8-earth-space-weather-climate.html", checks: [{ inputs: { sst: "29", moisture: "75" }, selects: { air: "rising", rotation: "organized", pattern: "trade", current: "warm" }, expected: "Warm ocean (about 26.5°C or higher): Yes" }] },
     { href: "grade8-earth-space-carbon-cycle.html", checks: [{ inputs: { human: "10", natural: "1", land: "3", ocean: "2" }, expected: "Net atmospheric change: +6.00 GtC/year" }], invalid: { inputs: { human: "-1", natural: "1", land: "3", ocean: "2" }, expectedError: "non-negative carbon flows" } },
   ];
 
