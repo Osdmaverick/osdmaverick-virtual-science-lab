@@ -151,6 +151,7 @@ try {
     { href: "grade4-biology-photosynthesis-growth.html", checks: [{ a: "50", b: "50", expected: "Limiting factor Both (equal)" }] },
     { href: "grade5-biology-photosynthesis-factors.html", checks: [{ a: "50", b: "50", expected: "Limiting factor Both (equal)" }] },
     { href: "grade5-biology-reproduction-life-cycles.html", checks: [{ a: "3", b: "50", expected: "Expected germinated seeds 1.5" }] },
+    { href: "grade6-biology-reproduction.html", checks: [{ a: "3", b: "50", expected: "Expected germinated seeds 1.5" }] },
     { href: "grade6-biology-cells.html", checks: [{ a: "5", b: "3", expected: "Comparison More plant features" }] },
     { href: "grade7-chemistry-moles-concentration.html", checks: [{ a: "0.5", b: "1", expected: "Molar concentration: 0.500 mol/L" }] },
     { href: "grade7-biology-dna-genetics.html", checks: [{ a: "100", b: "50", expected: "Trait probability: 50%" }] },
