@@ -299,7 +299,7 @@ The adopted Grade 7 and Grade 8 TEKS require students, for at least **40% of ins
 - **Grade 10 Biology — Human Physiology:** added finite/range validation for activity level and resting heart rate; labelled the 8% multiplier illustrative, not a physiological prediction.
 - **Grade 10 Biology — Plant Physiology:** added finite 0–100% validation and labelled the minimum-factor output a teaching index rather than measured plant activity.
 
-The Grade 10 Biology changes have three new functional browser cases (valid output and invalid-input boundary checks). The functional suite now contains **85 case entries across 83 distinct pages**. Its source structure is verified; actual Chromium execution remains subject to the current GitHub Actions run.
+The Grade 10 Biology changes have three new functional browser cases (valid output and invalid-input boundary checks). The functional suite contains **85 case entries across 83 distinct pages**. The full Chromium run on commit `e953af6107fc9e9964e1b113db846795f2dd3501` passed all 85 cases; this is smoke/representative functional coverage, not exhaustive scientific validation.
 
 ### High-school scope follow-up: Grade 11–12 models
 
