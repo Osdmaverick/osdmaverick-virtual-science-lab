@@ -284,3 +284,16 @@ Additional page reviews found and clarified several scope gaps:
 - Grade 12 Physics wave-optics page was retitled to single-slit diffraction because its calculator does not model polarisation.
 - Grade 9 Chemistry pH is labelled classification-only; Grade 10 limiting-reactant comparison is labelled fixed 1:1; Grade 11 reaction-rate output is identified as an illustrative index; Grade 12 advanced stoichiometry is bounded to a single supplied coefficient ratio and one limiting reactant.
 - Grade 10 Biology homeostasis is labelled an illustrative correction index; Grade 11 gene-expression title/objective now match codon-count arithmetic rather than claiming transcription/translation; Grade 12 genomics is labelled a sequence-identity comparison rather than a bioinformatics alignment workflow.
+
+## Grade 7–8 expanded objective and model-scope review — 2026-11-03
+
+Expanded the review across the directory's **60 Grade 7–8 labs** by examining each subject page's learning objective and principal model inputs/outputs. This is not a claim that all scientific prose, equations, or interactions have received a complete audit.
+
+Key updates committed:
+- Biology: 14 Grade 7–8 pages received explicit TEKS scope/model-limit notes, covering organ systems, digestive absorption, trophic energy transfer, microorganisms, plant physiology, cell transport, population/resource indices, enzyme curves, feedback, photosynthesis, respiration and evolution.
+- Chemistry: sampled pages now distinguish Grade 7 pH, isotopes, organic formulas, periodic trends, reaction-rate indices and redox from the direct grade expectations; Grade 8 acid/base classification is linked to 8.6(D), while separation, group/period coordinates, pollution treatment, and combustion are labelled appropriately. The Grade 8 water-state page was retitled to **Water Phase Changes** because it does not model chemical change.
+- Physics: Grade 7 distance/displacement, friction and thermal transfer are connected to 7.7/7.8; Newton's Second Law, electrical current/power, vector components, expansion, and wave calculations are labelled enrichment or Grade 8 bridges. Grade 8 heat, light, magnetism, measurement, speed, and pressure pages now distinguish direct standards from review or extension content.
+
+The official adopted TEKS state that Grade 7 and Grade 8 students should spend at least 40% of instructional time planning and safely conducting classroom, laboratory, and field investigations. The curriculum document now explicitly states that virtual simulations supplement rather than replace hands-on investigations and evidence-based student work.
+
+**Execution status:** no Chromium/Playwright run or successful CI result has been confirmed. The objective/scope review is broader than the previous sample, but detailed science-equation, accessibility, and interaction validation remain separate workstreams.
