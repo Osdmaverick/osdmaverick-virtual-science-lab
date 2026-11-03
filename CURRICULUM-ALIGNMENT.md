@@ -122,3 +122,15 @@ Current Grade 5 expectations relevant to this sample include **5.12(A)** (organi
 **Commits:** `479c4bab27d77f676dca737b6309e19c4b62e6c7`, `5b2c287e5ec9ec100977634e871efa989651f7bb`, `f79376ff70a0d60dd34036f3ff72aa0ac7290621`, `acdf69b678d48cdf6aa140b23c231bc396a19c16`, `e10710ac94e784bf7ae948ba7ff109ad8c68a9cb`.
 
 **Additional official references:** [Grade 5 TEKS PDF](https://tea.texas.gov/laws-and-rules/state-board-education/teks/grade5-teks-062024-0.pdf); [STAAR Science resources](https://tea.texas.gov/data-reports/staar/staar-science-resources), including assessed curriculum updated August 2025.
+
+## Grade 5 Chemistry — initial TEKS scope review
+
+The current Grade 5 matter expectations relevant to this sample are in **5.6(A)–(D)**: physical properties including solubility and conductivity; mixtures; properties and conservation of matter in solutions; and particle models of matter too small to see.
+
+- **Mixtures and Solutions:** objective now targets comparison of properties before/after solution formation under **5.6(A)** and **5.6(C)**. The g/L concentration calculation is labelled quantitative extension; the student explanation should explicitly identify what is conserved.
+- **Acids, Bases and Neutralisation:** pH/neutralisation is labelled chemistry enrichment, not a direct Grade 5 science expectation.
+- **Atomic Models and Elements:** detailed protons/neutrons/electrons are labelled enrichment beyond **5.6(D)**, which asks students to illustrate that matter consists of particles too small to see.
+- **Physical and Chemical Reactions:** comparison of chemical reactions/new substances is labelled as enrichment/bridge content, not a direct Grade 5 expectation.
+- **Separation Techniques:** filtration/evaporation is identified as an applied extension of **5.6(A)–(C)**, rather than a separate stated Grade 5 student expectation.
+
+**Commits:** `664c968d8d8ec97bf7c35da2658fa2ea1bd2a05b`, `5482d518f280981f8c2a8685b09dd14f29679d8e`, `84a8c215bd563565d39166cf04c5cae916846e9d`, `e809e658f55821ec04c3861315fdfef35ab75bd5`, `0cde39d6c9d432a1c17511ff2df87b5fa001ce56`.
