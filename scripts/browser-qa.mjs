@@ -232,29 +232,23 @@ try {
       if (!inputLabel.includes(test.inputLabel)) failures.push(`${test.href}: expected input label containing "${test.inputLabel}", received "${inputLabel}"`);
     }
     for (const check of test.checks) {
-      if (check.inputs || check.selects) {
-        for (const [id, value] of Object.entries(check.inputs || {})) await page.locator("#" + id).fill(value);
-      } else {
-        await page.locator("#a").fill(check.a);
-        await page.locator("#b").fill(check.b);
-        if (check.c !== undefined) await page.locator("#c").fill(check.c);
-        if (check.d !== undefined) await page.locator("#d").fill(check.d);
+      for (const [id, value] of Object.entries(check.inputs || {})) await page.locator("#" + id).fill(value);
+      for (const id of ["a", "b", "c", "d", "e"]) {
+        if (check[id] !== undefined) await page.locator("#" + id).fill(check[id]);
       }
       for (const [id, value] of Object.entries(check.selects || {})) await page.locator("#" + id).selectOption(value);
       await page.locator("#run").click();
       const metrics = (await page.locator("#metrics").innerText()).replace(/:\s*/g, " ").replace(/\s+/g, " ");
-      if (!metrics.includes(check.expected)) {
-        failures.push(`${test.href}: expected result "${check.expected}", received "${metrics}"`);
+      const expected = check.expected.replace(/:\s*/g, " ");
+      if (!metrics.includes(expected)) {
+        const validationMessage = await page.locator("#error").innerText();
+        failures.push(`${test.href}: expected result "${expected}", received "${metrics}" (validation: "${validationMessage}")`);
       }
     }
     if (test.invalid) {
-      if (test.invalid.inputs || test.invalid.selects) {
-        for (const [id, value] of Object.entries(test.invalid.inputs || {})) await page.locator("#" + id).fill(value);
-      } else {
-        await page.locator("#a").fill(test.invalid.a);
-        await page.locator("#b").fill(test.invalid.b);
-        if (test.invalid.c !== undefined) await page.locator("#c").fill(test.invalid.c);
-        if (test.invalid.d !== undefined) await page.locator("#d").fill(test.invalid.d);
+      for (const [id, value] of Object.entries(test.invalid.inputs || {})) await page.locator("#" + id).fill(value);
+      for (const id of ["a", "b", "c", "d", "e"]) {
+        if (test.invalid[id] !== undefined) await page.locator("#" + id).fill(test.invalid[id]);
       }
       for (const [id, value] of Object.entries(test.invalid.selects || {})) await page.locator("#" + id).selectOption(value);
       await page.locator("#run").click();
