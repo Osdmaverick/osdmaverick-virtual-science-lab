@@ -237,3 +237,9 @@ The mock-DOM execution checks also exposed const reassignment in the Grade 10 ti
 ## Mock-DOM verification totals — 2026-11-03
 
 After fixing the additional result-array declaration errors found during execution, the cross-subject mock-DOM harness passed **34 valid-output checks** and **22 invalid-input checks** across the updated Chemistry, Physics and Biology calculators. These are targeted script executions with mocked DOM elements, not full browser tests. The expanded Playwright suite contains 65 functional page cases; its real Chromium execution remains unverified.
+
+## Curriculum alignment audit progress — 2026-11-03
+
+Started a standards-based curriculum alignment review using current Texas Science TEKS and TEA STAAR assessed-curriculum resources. Created `CURRICULUM-ALIGNMENT.md` to record exact standards, enrichment boundaries, and unresolved gaps. Verified and corrected the initial Grade 4 and Grade 5 Physics, Biology, and Chemistry samples. In particular, grade-level objectives are now separated from advanced calculator extensions, and the Grade 5 circuit lab now models open/closed paths and four possible energy outputs. The Playwright suite now contains 66 functional page cases. The current navigation inventory contains 260 linked science labs.
+
+**Validation caveat:** source-level and mock-DOM checks are available for the recent circuit model, but a full Chromium run and successful GitHub Actions workflow have not been confirmed. The complete TEKS crosswalk for all labs remains in progress.
