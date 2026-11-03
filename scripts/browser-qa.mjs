@@ -221,7 +221,7 @@ try {
     { href: "grade5-earth-space-earth-processes.html", checks: [{ selects: { process: "sediment" }, expected: "Selected process Sedimentary rock formation" }] },
     { href: "grade5-earth-space-resources.html", checks: [{ selects: { resource: "water", solution: "conserve" }, expected: "Resource Water" }] },
     { href: "grade6-earth-space-seasons-tides.html", checks: [{ selects: { season: "june", tide: "spring" }, expected: "Orbital position June solstice" }] },
-    { href: "grade6-earth-space-earth-systems.html", checks: [{ selects: { sphere: "hydrosphere", rock: "metamorphic" }, expected: "Selected sphere Hydrosphere" }] },
+    { href: "grade6-earth-space-earth-systems.html", checks: [{ selects: { sphere: "hydrosphere", layer: "mantle", rock: "metamorphic" }, expected: "Selected sphere Hydrosphere" }] },
     { href: "grade6-earth-space-resource-management.html", checks: [{ selects: { challenge: "water", strategy: "efficiency" }, expected: "Challenge Water pollution and scarcity" }] },
   ];
 
