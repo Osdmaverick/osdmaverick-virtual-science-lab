@@ -160,3 +160,15 @@ The Grade 6 matter strand includes **6.6(A)** (atomic structure and states of ma
 - **Chemical Reactions and Rates:** objective now targets evidence of new substance formation under **6.6(E)**; temperature/surface-area rate index is labelled enrichment.
 
 **Commits:** `0d5fc93ded3e9102e8dbb8019a7374f5b3ada749`, `8156ed41465186c4cb5469bfbd6cd614b9aee9fd`, `c74214bf10a02076c7e56714b441dd3c66a8881e`, `7302ef1872a259c3993158ee935d43f463eeb883`, `5ca53b4c5d99d3d0910b67e9d1a36fbd0a46abcd`.
+
+## Grade 6 Biology — initial TEKS scope review
+
+Relevant adopted Grade 6 expectations include **6.8(B)** (energy transfers and transformations in systems such as food webs and photosynthesis), **6.12(A)–(C)** (ecosystem dependence, organism relationships, and hierarchical organization), and **6.13(A), (C)** (cell theory/basic unit of life; population variation and survival).
+
+- **Cell Structure and Function:** objective now includes the cell as the basic unit of structure and function under **6.13(A)**; the feature-identification scores are clarified as learning checks rather than biological measurements.
+- **Ecosystems and Food Webs:** objective now connects energy flow with ecosystem interdependence under **6.8(B)** and **6.12(A)–(C)**; the page notes the two-level energy model is not a complete food web.
+- **Variation and Inheritance:** objective now foregrounds population variation and survival under **6.13(C)**. The simple trait-probability calculation is clearly identified as an illustrative extension, not a full inheritance or natural-selection model.
+- **Photosynthesis and Limiting Factors:** linked to energy transfer/transformation under **6.8(B)**; detailed photosynthesis chemistry and limiting-factor calculations are labelled enrichment.
+- **Respiration and Energy:** cellular respiration and quantitative energy-yield calculations are labelled enrichment connected to the broader energy-transfer concept, not a direct Grade 6 biochemical pathway expectation.
+
+**Commits:** `980264a0035610ca43b37431494aa3b5e24c3c4b`, `8452a949d335f8abc110310c3ef072541591a164`, `42ae0a53172d20985d0f3fd13b9b6e92ec04912e`, `5ca2d86922cb91e960ddd257d20f087490b2100f`, `0e013b9a68825e4de36241f170599f498133ab54`.
