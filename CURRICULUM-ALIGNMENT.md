@@ -370,3 +370,8 @@ The Grade 4 water-cycle page now includes an interactive choice among weathering
 
 **Elementary standards source and instructional-use note:** the Grade 4–5 crosswalk uses the adopted 2021 elementary Science TEKS in [TEA 19 TAC Chapter 112, Subchapter A (August 2024 update)](https://tea.texas.gov/laws-and-rules/sboe-rules-tac/sboe-tac-currently-effect/ch112a.pdf). The standards recommend integrating scientific and engineering practices through classroom and outdoor investigations for at least 50% of instructional time in Grades 4–5; Grade 6 requires students to plan and safely conduct investigations for at least 40% of instructional time. These virtual labs are supplements to, not substitutes for, physical observations, field work, repeated measurements, and evidence-based explanations.
 The Grade 6 Earth-systems lab now has a separate interactive selector for the crust, mantle, outer core, and inner core, so the 6.10(B) Earth-layer expectation is explicitly represented alongside sphere identification and rock-cycle processes.
+
+### Grade 8 Chemistry follow-up
+
+- **Atoms, Elements and Compounds:** the objective now makes clear that the calculator counts atom types but does not model chemical bonds; two atom types are a compound only when chemically bonded (TEKS 8.6(A)–(B)).
+- **Chemical Reactions and Conservation of Mass:** the objective now explicitly maps to TEKS 8.6(E) and states that product mass is assigned equal to reactant mass for an ideal closed-system illustration; the page does not balance equations or predict actual yield.
