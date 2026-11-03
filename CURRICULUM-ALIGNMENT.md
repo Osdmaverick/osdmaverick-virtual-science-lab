@@ -44,12 +44,12 @@ Official references:
 
 ## Audit inventory and next steps
 
-The navigation page currently contains 274 lab links: 
+The navigation page currently contains 283 lab links: 
 - Grade 4–12 Physics: 90
 - Grade 4–12 Chemistry: 90
 - Grade 4–12 Biology: 88
 
-A complete page-by-page TEKS crosswalk has **not** yet been established. This document records the governing framework and the first verified correction; it must not be interpreted as certification that all 274 labs are aligned.
+A complete page-by-page TEKS crosswalk has **not** yet been established. This document records the governing framework and the first verified correction; it must not be interpreted as certification that all 283 labs are aligned.
 
 Next review sequence:
 1. Grade 4–5 elementary science expectations, including scientific practices and recurring themes.
@@ -299,7 +299,7 @@ The adopted Grade 7 and Grade 8 TEKS require students, for at least **40% of ins
 - **Grade 10 Biology — Human Physiology:** added finite/range validation for activity level and resting heart rate; labelled the 8% multiplier illustrative, not a physiological prediction.
 - **Grade 10 Biology — Plant Physiology:** added finite 0–100% validation and labelled the minimum-factor output a teaching index rather than measured plant activity.
 
-The Grade 10 Biology changes have three new functional browser cases (valid output and invalid-input boundary checks). The functional suite now contains **76 case entries across 74 distinct pages**. Its source structure is verified; actual Chromium execution remains subject to the current GitHub Actions run.
+The Grade 10 Biology changes have three new functional browser cases (valid output and invalid-input boundary checks). The functional suite now contains **85 case entries across 83 distinct pages**. Its source structure is verified; actual Chromium execution remains subject to the current GitHub Actions run.
 
 ### High-school scope follow-up: Grade 11–12 models
 
