@@ -131,3 +131,9 @@ The Grade 8 particle model accepts counts of two atom types but has no input des
 The Grade 10 Chemical Analysis page described calculating an unknown concentration but previously accepted only the known concentration and known aliquot volume; it could report the moles in that aliquot but could not calculate the unknown concentration. A third input now captures the unknown solution's titre volume. Under an explicitly stated 1:1 equivalence assumption, the calculator uses c₁V₁ = c₂V₂ to return the unknown concentration and rejects missing, non-finite, or non-positive inputs. The Playwright suite now checks a 0.12500 mol/L example (0.1 mol/L × 25 mL ÷ 20 mL) and rejects a zero titre volume.
 
 **Execution status remains pending:** source-level verification and test assertions are committed; no completed Chromium/Playwright run has been confirmed.
+
+## Grade 10 Chemistry calculator validation — 2026-11-03
+
+A focused review found four Grade 10 Chemistry calculators that accepted incomplete or physically invalid inputs: the VSEPR model had no checks on bonding/lone pairs; the pollutant-removal model accepted negative or blank concentration; the alkane formula checker accepted zero or fractional atom counts; and the cell-potential calculator converted blank inputs to zero. These now validate finite, integer, and non-negative/positive domains as appropriate. The VSEPR model is explicitly bounded to 2–6 electron domains and explains that electron-domain geometry is not always identical to molecular shape. The environmental model also clarifies that its removal fraction is illustrative rather than tied to a specific treatment process. The browser suite now includes normal-output and invalid-boundary assertions for all four.
+
+**Execution status remains pending:** code and assertions are committed, but no completed browser run has been confirmed.
