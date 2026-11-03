@@ -353,3 +353,13 @@ The Grade 8 universe lab now includes a student-selected star life-cycle stage; 
 Executed the six new inline lab scripts against a lightweight mock DOM with representative valid inputs. All six produced the expected output metrics and explanations. Additional invalid-input checks confirmed rejection of zero watershed volume, zero star temperature, and negative carbon flow. The browser QA runner's JavaScript source also passed a syntax compilation check and now contains 76 functional cases.
 
 **Not a browser pass:** these checks do not validate actual Chromium rendering, responsive layout, keyboard navigation, accessibility-tree output, or real browser event behaviour. No CI status check has been reported for the latest commit.
+
+## CI findings and correction — 2026-11-03
+
+The push-triggered GitHub Actions run on commit `fa1a12e` exposed two static-check failures:
+1. The directory-linked lab inventory had grown to **274** pages, but the smoke-check constant still expected 268. The inventory assertion is now updated to 274.
+2. `grade4-physics-simple-machines.html` contained an apostrophe inside a single-quoted JavaScript message, causing a parse error. The message punctuation is corrected, and the calculator now rejects blank/non-finite/non-positive force inputs.
+
+The browser functional list currently contains **76 case entries across 74 distinct pages**. Two pages have separate case entries to exercise different calculations on the same page. The assertion normalizes the colon in displayed metric labels before matching.
+
+**CI status:** the failed run was a genuine static-smoke-check failure, so the browser job was skipped. The two identified source issues are fixed in later commits; the next push-triggered run must complete before the static and browser suites can be marked passed.
