@@ -360,7 +360,7 @@ The push-triggered GitHub Actions run on commit `fa1a12e` exposed two static-che
 1. The directory-linked lab inventory had grown to **274** pages, but the smoke-check constant still expected 268. The inventory assertion is now updated to 274.
 2. `grade4-physics-simple-machines.html` contained an apostrophe inside a single-quoted JavaScript message, causing a parse error. The message punctuation is corrected, and the calculator now rejects blank/non-finite/non-positive force inputs.
 
-The browser functional list currently contains **76 case entries across 74 distinct pages**. Two pages have separate case entries to exercise different calculations on the same page. The assertion normalizes the colon in displayed metric labels before matching.
+The browser functional list currently contains **85 case entries across 83 distinct pages**. Two pages have separate case entries to exercise different calculations on the same page. The assertion normalizes the colon in displayed metric labels before matching.
 
 **CI status:** the failed run was a genuine static-smoke-check failure, so the browser job was skipped. The two identified source issues are fixed in later commits; the next push-triggered run must complete before the static and browser suites can be marked passed.
 
@@ -370,7 +370,7 @@ The browser run passed its initial static gate but failed while visiting the Gra
 
 Corrected both pages to use `class="lab lab-wrap"`, preserving their local layout class while enabling shared lab behavior. Tightened the static smoke check to require the exact `lab` class token rather than a substring match, preventing this structural mismatch from passing static QA again.
 
-A prior browser attempt on commit `a127162` completed static checks but failed the browser step after 156 pages due to this legacy markup issue. The next run will verify the corrected pages and continue through all 274 pages.
+A prior browser attempt on commit `a127162` completed static checks but failed the browser step after 156 pages due to this legacy markup issue. The next run will verify the corrected pages and continue through all 283 pages.
 
 ## Grade 4–6 Earth and Space Science expansion — 2026-11-03
 
