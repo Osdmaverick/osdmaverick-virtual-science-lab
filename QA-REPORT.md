@@ -125,3 +125,9 @@ The Grade 7 pH model accepts any pH value from 0 to 14 for either input, but its
 The Grade 8 particle model accepts counts of two atom types but has no input describing whether atoms are chemically bonded. Its previous output classified any mixture of two atom types as a “Compound particle model”, even though the explanatory text correctly noted that a compound requires chemical bonding. The output now reports only whether one or two atom types are represented; the explanation retains the condition that a compound requires chemically bonded atoms. Browser assertions cover both one-type and two-type compositions.
 
 **Execution status remains pending:** this correction and its source-level browser assertions are committed; no completed browser run has been confirmed.
+
+## Grade 10 titration calculator completion — 2026-11-03
+
+The Grade 10 Chemical Analysis page described calculating an unknown concentration but previously accepted only the known concentration and known aliquot volume; it could report the moles in that aliquot but could not calculate the unknown concentration. A third input now captures the unknown solution's titre volume. Under an explicitly stated 1:1 equivalence assumption, the calculator uses c₁V₁ = c₂V₂ to return the unknown concentration and rejects missing, non-finite, or non-positive inputs. The Playwright suite now checks a 0.12500 mol/L example (0.1 mol/L × 25 mL ÷ 20 mL) and rejects a zero titre volume.
+
+**Execution status remains pending:** source-level verification and test assertions are committed; no completed Chromium/Playwright run has been confirmed.
