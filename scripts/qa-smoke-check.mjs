@@ -88,8 +88,9 @@ for (const href of uniqueLinks) {
   }
 
   const html = fs.readFileSync(absolutePath, "utf8");
-  if (!/<main\b[^>]*class=["'][^"']*\blab\b/i.test(html)) {
-    fail("lab main landmark", `${href} has no main.lab landmark`);
+  const mainClass = html.match(/<main\b[^>]*class=["']([^"']+)["']/i)?.[1]?.split(/\s+/) ?? [];
+  if (!mainClass.includes("lab")) {
+    fail("lab main landmark", `${href} must include the exact "lab" class token on main`);
   }
   if (!/name=["']viewport["']/i.test(html)) {
     fail("viewport metadata", `${href} has no viewport meta tag`);
