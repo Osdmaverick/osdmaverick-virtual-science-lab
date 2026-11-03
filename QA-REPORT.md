@@ -167,3 +167,9 @@ The Grade 4 and Grade 5 water-heating calculators accept negative ΔT values to 
 The Grade 7 page was titled “Thermal Expansion and Heat” but its only calculation was heat transfer, Q = mcΔT; no expansion quantity was calculated. The investigation now retains the water heat-transfer calculation and adds initial length and linear expansion coefficient inputs. It calculates ΔL = αL₀ΔT and final length, with an explicit constant-coefficient assumption and validation for positive mass/length and non-negative coefficient. Browser cases cover expansion and contraction for ±50°C and reject a negative coefficient.
 
 **Execution status remains pending:** the new model and assertions are committed, but no completed browser run has been confirmed.
+
+## Physics model alignment refinements — 2026-11-03
+
+The Grade 6 Newton's-law calculator treated the applied force as the net force (explicitly neglecting friction and other forces), but labelled the input/output only “Applied force”. The input and result now say “Net force”, matching F = ma. The Grade 7 Electricity and Electromagnetism page calculated current and power but had no electromagnetism quantity. It now adds a coil-turn input and a clearly labelled relative solenoid-field index proportional to N × |I|, with fixed geometry/core assumptions and whole-number turn validation. Browser tests cover both changes and their invalid-input boundaries.
+
+**Execution status remains pending:** source changes and assertions are committed; no completed browser run has been confirmed.
