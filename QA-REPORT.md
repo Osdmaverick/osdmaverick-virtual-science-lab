@@ -149,3 +149,9 @@ The Grade 11 lattice-attraction model calculates q²/r² from a single charge-ma
 Two further refinements were made during the senior-grade review. The Grade 10 electrochemical cell page now distinguishes positive, zero, and negative standard cell potentials as spontaneous, at equilibrium, and non-spontaneous, respectively; zero potential is no longer grouped with negative values. The Grade 12 polymer page now reports average degree of polymerisation to two decimal places rather than rounding an average ratio to a whole number. The Grade 11 lattice-attraction explanation was also refined to state that the simplified q²/r² index represents oppositely charged ions with equal charge magnitudes. Browser assertions cover all three electrochemical sign cases and a non-integer polymerisation average.
 
 **Execution status remains pending:** these changes and assertions are committed; no completed browser run has been confirmed.
+
+## Grade 4 Chemistry temperature-model boundaries — 2026-11-03
+
+The Grade 4 states-of-matter model previously assigned 0°C to the liquid category and 100°C to the gas category without identifying either phase boundary. It now labels these exact water-reference temperatures as the solid/liquid and liquid/gas boundaries (at standard atmospheric pressure). The Grade 4 dissolving-rate illustration previously allowed subzero water temperatures, which could make its linear illustrative rate factor negative. Its input is now bounded to 0–100°C for the stated liquid-water classroom model, while stirring rate remains non-negative. Playwright assertions cover both phase boundaries, a normal dissolving-rate example, and rejection of a subzero input.
+
+**Execution status remains pending:** source and test changes are committed; no completed browser execution has been confirmed.
