@@ -193,6 +193,7 @@ try {
     { href: "grade12-chemistry-advanced-stoichiometry.html", checks: [{ a: "2", b: "3", expected: "Theoretical product amount 6.000 mol" }] },
     { href: "grade12-biology-advanced-immunology.html", checks: [{ a: "10", b: "5", expected: "Secondary response index 50.00" }] },
     { href: "grade10-biology-genetics.html", checks: [{ a: "50", b: "40", expected: "Expected trait count 20.0" }] },
+    { href: "grade11-biology-cellular-respiration.html", checks: [{ a: "2", b: "30", c: "2", expected: "Aerobic ATP yield 60.0 mol ATP" }, { a: "2", b: "30", c: "2", expected: "Anaerobic ATP yield 4.0 mol ATP" }], invalid: { a: "2", b: "30", c: "0", expectedError: "positive aerobic and anaerobic ATP yields" } },
     { href: "grade11-biology-cell-signalling.html", inputLabel: "Dissociation constant", checks: [{ a: "2", b: "1", expected: "Receptor occupancy 66.67%" }], invalid: { a: "2", b: "0", expectedError: "positive dissociation constant" } },
   ];
 
