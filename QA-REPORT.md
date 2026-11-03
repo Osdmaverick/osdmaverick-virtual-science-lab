@@ -321,3 +321,17 @@ Additional high-school model descriptions were corrected:
 - Fixed browser QA metric comparison to normalize the colon delimiter in displayed Label: value metrics before matching the expected text. This repairs a systematic assertion-format mismatch in the functional runner.
 
 The suite contains 70 functional cases. The runner source has been structurally reviewed, but no browser run is claimed.
+
+## Earth and Space Science expansion — 2026-11-03
+
+Added six Grade 7–8 Earth and Space Science labs and linked them in `grade-levels.html`:
+- Grade 7: solar-system motion/gravity; plate tectonics and evidence of Earth's change; watershed and water-system impacts.
+- Grade 8: stars/galaxies/cosmological evidence; weather/ocean/atmospheric interactions; carbon cycling and climate influences.
+
+Each new page includes a learning objective with TEKS references, prediction/conclusion fields, an interactive model, and explicit scope limitations. Static source checks confirmed all six pages contain the shared assets, a main lab container, learning objective, TEKS note, and syntactically valid inline JavaScript. All six navigation links were confirmed in the grade directory.
+
+The Playwright runner was extended to fill named input fields as well as the existing generic a/b/c/d controls, and six Earth/Space cases were added, including invalid-input checks for watershed volume, star temperature, and negative carbon flow. The suite now contains **76 functional page cases**.
+
+The directory's linked-lab inventory is now **274** (previously 268). Grade 7 and Grade 8 each have 33 labs, including three new Earth and Space Science labs.
+
+**Important execution distinction:** inline JavaScript syntax and source structure were checked, but no actual Chromium/Playwright execution or successful GitHub Actions result has been confirmed. These new pages are not yet browser-rendering validated.
