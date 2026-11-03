@@ -132,6 +132,8 @@ try {
       invalid: { a: "", b: "8", expectedError: "Enter a valid temperature above absolute zero" },
     },
     { href: "grade4-physics-motion-speed.html", checks: [{ a: "60", b: "12", expected: "Average speed 5.00 m/s" }] },
+    { href: "grade4-chemistry-states-of-matter.html", checks: [{ a: "0", expected: "At melting/freezing point (solid/liquid boundary)" }, { a: "100", expected: "At boiling point (liquid/gas boundary)" }] },
+    { href: "grade4-chemistry-dissolving-solubility.html", checks: [{ a: "25", b: "30", expected: "Relative dissolving rate 2.25×" }], invalid: { a: "-1", b: "30", expectedError: "water temperature from 0 to 100 °C" } },
     { href: "grade5-chemistry-mixtures-solutions.html", checks: [{ a: "10", b: "0.5", expected: "Concentration 20.00 g/L" }] },
     { href: "grade5-chemistry-acids-bases-neutralisation.html", checks: [{ a: "3", b: "5", expected: "Solution B classification Acidic" }, { a: "3", b: "11", expected: "Solution B classification Alkaline" }] },
     { href: "grade7-chemistry-acids-bases.html", checks: [{ a: "10", b: "4", expected: "Solution A classification Alkaline" }, { a: "10", b: "4", expected: "Solution B classification Acidic" }] },
