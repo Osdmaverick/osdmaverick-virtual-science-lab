@@ -71,3 +71,18 @@ Next review sequence:
 **Correction committed:** The objective now foregrounds investigating friction as a force and its effect on motion. The explanation identifies the one-dimensional net-force subtraction as a simplified model and explains the sign of the result.
 
 **Commits:** `7f7d324d7f7a17e51e099b0624070fe6a2c468a5`, `08d1cfc952a72d9c958f0cfe36a091a7ed83cd40`.
+
+## Additional Grade 4 Physics scope clarifications
+
+The following review distinguished direct Grade 4 expectations from useful enrichment and cross-curricular material:
+
+- **Light and Shadows:** added a scope note identifying this as a bridge to Grade 5 Science **5.8(C)** (light travels in a straight line and can be reflected, refracted, or absorbed), rather than a Grade 4 mastery expectation.
+- **Work and Simple Machines:** labelled the lever investigation as enrichment connected to force/engineering concepts, not a direct Grade 4 science student expectation.
+- **Motion and Speed:** clarified that the quantitative average-speed calculation is a mathematical enrichment model, not a direct Grade 4 science content expectation.
+- **Measurement and Units:** identified this as cross-curricular measurement and unit-conversion practice that should also be mapped to Grade 4 mathematics expectations.
+- **Magnets and Magnetic Forces:** its stated concept fits Grade 4 Science **4.7**, which includes investigation of magnetic forces.
+- **Heat and Temperature:** the physical-property framing should be checked against Grade 4 Science **4.6(A)**; thermal-energy transfer and energy-system claims need a separate 4.8 alignment check.
+
+These scope notes prevent enrichment material from being misrepresented as a required Grade 4 science outcome. They do not replace the pending full page-by-page crosswalk.
+
+**Commits:** `e5b8f39f2054b49326e190a1a80044443fb45de2`, `7ad903ecf69cc3dd58e345aad82de8199547d5c4`, `d7c439ae01d804b8ee6cb9446ab4071f246216c4`, `d46c8e0a2ac61c6fcba487e8fb530d9fff16b4a3`.
