@@ -276,3 +276,11 @@ Sampled findings and corrections:
 - **Physics:** Grade 9 kinematics and Grade 10 projectile motion map to course motion expectations; projectile assumptions are now explicit. Grade 11 circular gravitation is connected to Newton's Second Law/universal gravitation. Grade 12 AC impedance is labelled extension beyond the explicitly named series/parallel and Ohm's-law expectations.
 
 **Execution status:** source updates and audit documentation are committed, but the sample review is not a complete course crosswalk. No completed Chromium/Playwright run or successful GitHub Actions result has been confirmed.
+
+### High-school sample follow-up corrections — 2026-11-03
+
+Additional page reviews found and clarified several scope gaps:
+- Grade 11 Physics vectors now describes a single-vector component calculation, not multi-vector resultant displacement.
+- Grade 12 Physics wave-optics page was retitled to single-slit diffraction because its calculator does not model polarisation.
+- Grade 9 Chemistry pH is labelled classification-only; Grade 10 limiting-reactant comparison is labelled fixed 1:1; Grade 11 reaction-rate output is identified as an illustrative index; Grade 12 advanced stoichiometry is bounded to a single supplied coefficient ratio and one limiting reactant.
+- Grade 10 Biology homeostasis is labelled an illustrative correction index; Grade 11 gene-expression title/objective now match codon-count arithmetic rather than claiming transcription/translation; Grade 12 genomics is labelled a sequence-identity comparison rather than a bioinformatics alignment workflow.
