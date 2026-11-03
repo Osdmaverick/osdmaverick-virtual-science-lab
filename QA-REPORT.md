@@ -209,3 +209,9 @@ The Grade 6 seed-germination model rounded expected germinated seeds to a whole 
 The Grade 7 DNA/genetics page claimed to explore DNA base pairing, but its “DNA bases” input was only displayed and did not calculate complementary bases. It now accepts adenine and cytosine counts, calculates complementary thymine and guanine counts using A–T and C–G pairing, and reports the total base pairs represented. Trait probability remains a separate illustrative input; the page explicitly states that it is not inferred from the base counts. Playwright assertions check complementary bases and total base pairs.
 
 **Execution status remains pending:** the source and test assertions are committed; no completed browser execution has been confirmed.
+
+## Grade 10 Biology diffusion and input validation — 2026-11-03
+
+The Grade 10 cell-biology model previously labelled equal inside/outside concentrations as “Out of cell”; it now reports “No net diffusion” and rejects blank or invalid concentration inputs. The evolution, homeostasis and microbiology models also converted blank numeric inputs to zero and accepted them as valid. They now require explicit finite inputs within their stated ranges. Playwright tests cover equal-concentration diffusion, representative model outputs, and blank-input rejection.
+
+**Execution status remains pending:** source and test changes are committed; no completed browser execution has been confirmed.
