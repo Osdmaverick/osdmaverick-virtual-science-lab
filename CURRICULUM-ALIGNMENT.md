@@ -330,3 +330,12 @@ The directory previously contained only Physics, Chemistry, and Biology labs for
 **Model limitations:** the solar-system page uses approximate planetary mean distances and orbital periods; the tectonics page presents common boundary outcomes and selected evidence examples; the watershed calculator is a pollutant mass/volume estimate rather than a water-quality compliance tool; the star page classifies spectral temperature bands and displays luminosity but does not draw a full Hertzsprung–Russell plot or infer stellar life stage; the weather page is a conceptual cyclone-ingredient model, not a forecast; and the carbon budget is a simplified source/sink balance, not a real-time global carbon inventory.
 
 The grade directory now includes 33 labs in Grade 7 and 33 in Grade 8. Total linked lab inventory increases from 268 to **274**. The three new labs per grade supplement rather than replace required classroom, laboratory, and field investigations.
+
+### High-school Biology scope follow-up: Grades 11–12
+
+- **Grade 11 Evolutionary Relationships:** the shared-trait × lineage-count output is now identified as an illustrative index, not a phylogenetic-tree inference.
+- **Grade 12 Developmental Biology:** retitled to Cell Division and Population Growth; the exponential doubling model assumes every cell divides each cycle and does not model differentiation, cell death, or cell-cycle regulation.
+- **Grade 12 Endocrine Regulation:** the feedback-strength calculation is identified as a one-step arithmetic illustration, not a named-hormone or time-dependent endocrine model.
+- **Grade 12 Climate Ecology:** temperature-change × sensitivity is identified as a suitability index, not a species-distribution prediction.
+- **Grade 12 Evolutionary Genomics:** the page now describes uncorrected p-distance only; it does not align sequences, correct multiple substitutions, or infer phylogeny.
+- **Grade 12 Research Methods:** retitled to Biological Data Summary: Mean and Range because it accepts precomputed summary statistics rather than raw data and does not evaluate experimental design.
