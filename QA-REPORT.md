@@ -408,3 +408,7 @@ The final defect found in this cycle was a Grade 10 Biology enzyme calculator as
 Clarified two model/objective gaps:
 - Atoms/Elements/Compounds now states that the atom-count model does not represent chemical bonds; two atom types alone do not establish a compound.
 - Conservation of Mass now identifies TEKS 8.6(E) and explains that product mass is set equal to reactant mass for an ideal closed-system illustration, not calculated from a balanced reaction.
+
+### Grade 12 Chemistry model-scope refinements — 2026-11-03
+
+Added enrichment labels and assumptions to six advanced pages: atom economy requires coefficient-weighted inputs; organic synthesis assumes ideal selectivity and 1:1 product formation; polymer DP uses one repeat-unit mass; molecular-orbital bond order uses supplied electron counts; Ksp is restricted to a 1:1 salt in pure water; spectroscopic concentration assumes a linear calibration through the origin. These were objective/documentation updates; the representative browser suite remains 85 functional cases across 83 distinct pages.
