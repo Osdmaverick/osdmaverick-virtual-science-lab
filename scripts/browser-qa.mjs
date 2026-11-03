@@ -155,6 +155,7 @@ try {
     { href: "grade6-biology-cells.html", checks: [{ a: "5", b: "3", expected: "Comparison More plant features" }] },
     { href: "grade7-chemistry-moles-concentration.html", checks: [{ a: "0.5", b: "1", expected: "Molar concentration: 0.500 mol/L" }] },
     { href: "grade7-biology-dna-genetics.html", checks: [{ a: "100", b: "50", expected: "Trait probability: 50%" }] },
+    { href: "grade7-biology-dna-genetics.html", checks: [{ a: "30", b: "20", c: "50", expected: "Complementary thymine bases (T) 30" }, { a: "30", b: "20", c: "50", expected: "Base pairs represented 50" }] },
     { href: "grade8-biology-enzymes.html", checks: [{ a: "37", b: "8", expected: "Relative enzyme activity: 80.0%" }] },
     { href: "grade8-chemistry-reactions-conservation-mass.html", checks: [{ a: "12", b: "8", expected: "Product mass 20.0 g" }] },
     { href: "grade9-chemistry-stoichiometry.html", checks: [{ a: "2", b: "2", expected: "Simplified 1:1 comparison: Amounts are equal" }] },
