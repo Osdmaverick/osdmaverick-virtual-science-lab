@@ -108,3 +108,17 @@ Corrections:
 The first TEKS alignment correction exposed a second issue: the Grade 5 circuit page had only voltage and resistance inputs, so it could not demonstrate the complete/open circuit requirement or let students explore the different energy transformations named in 5.8(B). The model now includes a circuit-path selector (complete/closed or broken/open) and an output selector (light, sound, motion, or thermal). An open path produces zero current and no load output; a closed path illustrates the selected transformation. Quantitative current and power remain clearly marked as enrichment. Playwright coverage now includes closed-light, open-path, closed-motion, and invalid-resistance cases; the inline script also passed a mock-DOM execution check.
 
 **Commits:** `656388a0d88d0871329c345355a0ad21fa022ddb`, `7e7b8473da046a9fdbad3895da511b8baf807144`.
+
+## Grade 5 Biology — initial TEKS alignment and scope review
+
+Current Grade 5 expectations relevant to this sample include **5.12(A)** (organisms interacting with biotic and abiotic factors in a healthy ecosystem), **5.12(B)** (predicting how ecosystem changes affect matter cycling and energy flow in a food web), and **5.13(A)** (analyzing structures and functions that help different species survive in the same environment). The official Grade 5 TEKS and STAAR assessed-curriculum references are linked below.
+
+- **Adaptations and Environmental Change:** objective now targets species structures/functions and biotic/abiotic interactions under **5.13(A)** and **5.12(A)**. The tolerance score is explicitly described as an illustrative index, not a biological measurement.
+- **Food Webs and Ecosystem Balance:** objective now targets predicting effects of ecosystem change on energy flow under **5.12(B)**. The page notes that the simplified energy-transfer calculation is only part of the expectation; students must explain a specific food-web change and its effects.
+- **Factors Affecting Photosynthesis:** detailed limiting-factor calculation is labelled enrichment. The page connects the concept to producers and energy flow but does not misrepresent it as the Grade 5 standard itself.
+- **Plant Transport Systems:** xylem/transpiration is labelled plant-biology enrichment, not a direct Grade 5 science student expectation.
+- **Respiration and Energy Release:** quantitative cellular respiration is labelled enrichment, not a direct Grade 5 science student expectation.
+
+**Commits:** `479c4bab27d77f676dca737b6309e19c4b62e6c7`, `5b2c287e5ec9ec100977634e871efa989651f7bb`, `f79376ff70a0d60dd34036f3ff72aa0ac7290621`, `acdf69b678d48cdf6aa140b23c231bc396a19c16`, `e10710ac94e784bf7ae948ba7ff109ad8c68a9cb`.
+
+**Additional official references:** [Grade 5 TEKS PDF](https://tea.texas.gov/laws-and-rules/state-board-education/teks/grade5-teks-062024-0.pdf); [STAAR Science resources](https://tea.texas.gov/data-reports/staar/staar-science-resources), including assessed curriculum updated August 2025.
