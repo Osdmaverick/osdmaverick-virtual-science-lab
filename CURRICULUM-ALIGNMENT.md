@@ -343,3 +343,23 @@ The grade directory now includes 33 labs in Grade 7 and 33 in Grade 8. Total lin
 ### Earth and Space lab refinement
 
 The Grade 8 universe activity now includes a student-selected star life-cycle stage alongside temperature, luminosity, galaxy type, and cosmological evidence. The selected stage is a conceptual classification; it is not inferred from stellar temperature/mass, and the page does not draw a full H–R plot. The weather/climate activity now includes explicit selectors for major atmospheric circulation patterns and warm/cold ocean currents, alongside sea-surface temperature, moisture, rising air, and rotation. It remains a conceptual model rather than a weather or cyclone forecast. The Grade 7 watershed activity directly targets 7.11(A); downstream/coastal links are context for 7.11(B), not a complete ocean-systems investigation.
+
+## Grade 4–6 Earth and Space Science coverage added
+
+Nine new elementary/middle-elementary labs now cover the Earth and Space strands across Grades 4–6:
+
+| Grade | Lab | TEKS focus |
+|---|---|---|
+| 4 | Seasons and Moon Patterns | 4.9(A)–(B): seasonal and lunar-appearance patterns |
+| 4 | Water Cycle and Weather | 4.10(A)–(C): water cycle, weathering/erosion/deposition, weather vs. climate |
+| 4 | Natural Resources | 4.11(A)–(C): renewable/nonrenewable resources, conservation, resource-bearing rock properties |
+| 5 | Earth's Rotation, Day and Night | 5.9: Earth's rotation, day/night, apparent solar movement and shadows |
+| 5 | Water, Sedimentary Rocks and Landforms | 5.10(A)–(C): Sun/ocean water cycle, sedimentary rocks/fossil fuels, wind/water/ice landforms |
+| 5 | Natural Resource Solutions | 5.11: conservation, recycling, and proper disposal solutions |
+| 6 | Sun–Earth–Moon Systems: Seasons and Tides | 6.9(A)–(B): seasons, daily tides, spring and neap tides |
+| 6 | Earth's Spheres, Structure and Rock Cycle | 6.10(A)–(C): Earth spheres, layers, and rock-cycle processes |
+| 6 | Resource Management and Sustainability | 6.11(A)–(B): resource management, conservation, efficiency and technology |
+
+These pages are introductory models, not replacements for observing the sky, collecting local weather data, examining rock/soil samples, or conducting outdoor investigations. The Moon/season and tide models are conceptual; the water/erosion page distinguishes weathering, erosion and deposition; resource pages use examples and decision prompts rather than measured life-cycle assessments.
+
+The directory now contains **283 unique lab links**. Grades 4, 5, and 6 each have 33 linked labs, including three Earth and Space Science labs.
