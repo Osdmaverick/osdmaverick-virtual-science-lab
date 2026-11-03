@@ -343,3 +343,7 @@ The directory's linked-lab inventory is now **274** (previously 268). Grade 7 an
 - Endocrine and climate-ecology pages identify their outputs as illustrative arithmetic indices, not physiological or species-distribution predictions.
 - Evolutionary-genomics page is explicitly scoped to uncorrected p-distance.
 - Research-methods page retitled to Biological Data Summary: Mean and Range because the calculator accepts precomputed summary values, not raw datasets.
+
+### Earth and Space lab refinement and test inputs
+
+The Grade 8 universe lab now includes a student-selected star life-cycle stage; QA selects the main-sequence stage. Its limitation is explicit: it does not infer the stage or render a complete H–R diagram. The weather/climate lab now exposes global atmospheric pattern and warm/cold ocean-current selectors, and the browser case sets both explicitly. The Grade 7 watershed lab is correctly bounded to direct watershed impacts under 7.11(A), with downstream/coastal connections treated as context for 7.11(B).
