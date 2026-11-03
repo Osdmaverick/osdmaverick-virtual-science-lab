@@ -223,8 +223,8 @@ try {
       if (!inputLabel.includes(test.inputLabel)) failures.push(`${test.href}: expected input label containing "${test.inputLabel}", received "${inputLabel}"`);
     }
     for (const check of test.checks) {
-      if (check.inputs) {
-        for (const [id, value] of Object.entries(check.inputs)) await page.locator("#" + id).fill(value);
+      if (check.inputs || check.selects) {
+        for (const [id, value] of Object.entries(check.inputs || {})) await page.locator("#" + id).fill(value);
       } else {
         await page.locator("#a").fill(check.a);
         await page.locator("#b").fill(check.b);
@@ -239,8 +239,8 @@ try {
       }
     }
     if (test.invalid) {
-      if (test.invalid.inputs) {
-        for (const [id, value] of Object.entries(test.invalid.inputs)) await page.locator("#" + id).fill(value);
+      if (test.invalid.inputs || test.invalid.selects) {
+        for (const [id, value] of Object.entries(test.invalid.inputs || {})) await page.locator("#" + id).fill(value);
       } else {
         await page.locator("#a").fill(test.invalid.a);
         await page.locator("#b").fill(test.invalid.b);
