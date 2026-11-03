@@ -252,3 +252,15 @@ The adopted Physics course includes **5(A)–(H)** motion graphs, vectors, kinem
 **Audit boundary:** these are targeted sample findings, not a full audit of the 90 high-school lab pages. Remaining work includes checking every course expectation against all relevant labs, reviewing the grade 9–12 sequence for duplicate/omitted standards, and validating the scientific equations, assumptions, units, and student evidence tasks beyond the sampled pages.
 
 **Official standards reference:** [TEA adopted 2020 High School Science TEKS PDF](https://tea.texas.gov/academics/curriculum-standards/teks-review/scienceteks-ch112-highschooladopted11-2020.pdf). See also the TEA's [Science TEKS adoption information](https://tea.texas.gov/curriculum-and-instruction/curriculum-standards/teks-review/science-teks-review).
+
+### High-school sample follow-up: additional pages
+
+- **Physics, Grade 11 Vectors:** the page now states that it resolves one vector into components; it does not add multiple vectors or calculate a multi-leg resultant displacement.
+- **Physics, Grade 12 Wave Optics:** the title and objective were corrected to single-slit diffraction. Polarisation is not modelled by its current calculator.
+- **Chemistry, Grade 9 Acids/Bases:** the page classifies supplied pH values; it does not calculate pH from hydrogen-ion concentration under **12(E)**.
+- **Chemistry, Grade 10 Stoichiometry:** the calculator uses a fixed 1:1 ratio. It is not a general limiting-reactant calculator for balanced equations with arbitrary coefficients.
+- **Chemistry, Grade 11 Reaction Rates:** the exponential rate index is now identified as illustrative, not an experimentally determined rate law. The explicit dissolution-factor investigation expectation is **11(C)**.
+- **Chemistry, Grade 12 Advanced Stoichiometry:** the coefficient-ratio product calculation supports part of **9(C)**, but assumes one limiting reactant and does not calculate percent yield or compare competing reactants.
+- **Biology, Grade 10 Homeostasis:** the correction percentage is now identified as a teaching index, not a physiological glucose/hormone simulation.
+- **Biology, Grade 11 Gene Expression:** the page title/objective now match its actual codon-count arithmetic; it does not transcribe DNA, identify codons, or translate amino acids, so it is not a complete **7(B)** model.
+- **Biology, Grade 12 Genomics:** the page is described as a simple sequence-identity percentage, not an alignment algorithm or bioinformatics workflow.
