@@ -131,6 +131,8 @@ try {
       checks: [{ a: "37", b: "8", expected: "Relative enzyme activity: 80.0%" }],
       invalid: { a: "", b: "8", expectedError: "Enter a valid temperature above absolute zero" },
     },
+    { href: "grade4-physics-heat-temperature.html", checks: [{ a: "2", b: "-5", expected: "Temperature change -5 °C" }] },
+    { href: "grade5-physics-heat-transfer.html", checks: [{ a: "1", b: "-5", expected: "Temperature change -5 °C" }] },
     { href: "grade4-physics-motion-speed.html", checks: [{ a: "60", b: "12", expected: "Average speed 5.00 m/s" }] },
     { href: "grade4-chemistry-states-of-matter.html", checks: [{ a: "0", expected: "At melting/freezing point (solid/liquid boundary)" }, { a: "100", expected: "At boiling point (liquid/gas boundary)" }] },
     { href: "grade4-chemistry-dissolving-solubility.html", checks: [{ a: "25", b: "30", expected: "Relative dissolving rate 2.25×" }], invalid: { a: "-1", b: "30", expectedError: "water temperature from 0 to 100 °C" } },
