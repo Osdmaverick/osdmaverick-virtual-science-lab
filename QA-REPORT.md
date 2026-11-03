@@ -215,3 +215,9 @@ The Grade 7 DNA/genetics page claimed to explore DNA base pairing, but its “DN
 The Grade 10 cell-biology model previously labelled equal inside/outside concentrations as “Out of cell”; it now reports “No net diffusion” and rejects blank or invalid concentration inputs. The evolution, homeostasis and microbiology models also converted blank numeric inputs to zero and accepted them as valid. They now require explicit finite inputs within their stated ranges. Playwright tests cover equal-concentration diffusion, representative model outputs, and blank-input rejection.
 
 **Execution status remains pending:** source and test changes are committed; no completed browser execution has been confirmed.
+
+## Grade 11 cellular respiration pathway comparison — 2026-11-03
+
+The Grade 11 Cellular Respiration page stated that students would compare aerobic and anaerobic ATP yield, but accepted only one ATP-per-glucose value and always labelled the result aerobic. It now accepts separate aerobic and anaerobic yields and reports the total ATP amount in mol ATP for the supplied glucose amount in mol. The default teaching comparison uses 30 ATP/glucose aerobically and 2 ATP/glucose for fermentation, with an explanation that aerobic yield varies by cell and shuttle system. Playwright assertions cover both pathway outputs and reject a zero yield.
+
+**Execution status remains pending:** source and tests are committed; no completed browser execution has been confirmed.
