@@ -115,6 +115,11 @@ try {
       invalid: { a: "6", b: "0", expectedError: "Resistance must be greater than zero." },
     },
     {
+      href: "grade7-physics-thermal-expansion.html",
+      checks: [{ a: "1", b: "50", c: "1", d: "0.000012", expected: "Linear expansion 0.600 mm" }, { a: "1", b: "-50", c: "1", d: "0.000012", expected: "Linear expansion -0.600 mm" }],
+      invalid: { a: "1", b: "50", c: "1", d: "-0.000012", expectedError: "non-negative expansion coefficient" },
+    },
+    {
       href: "grade8-physics-electricity-circuits.html",
       checks: [{ a: "9", b: "3", expected: "Current 3.000 A" }],
     },
