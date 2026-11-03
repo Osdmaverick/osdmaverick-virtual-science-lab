@@ -347,3 +347,9 @@ The directory's linked-lab inventory is now **274** (previously 268). Grade 7 an
 ### Earth and Space lab refinement and test inputs
 
 The Grade 8 universe lab now includes a student-selected star life-cycle stage; QA selects the main-sequence stage. Its limitation is explicit: it does not infer the stage or render a complete H–R diagram. The weather/climate lab now exposes global atmospheric pattern and warm/cold ocean-current selectors, and the browser case sets both explicitly. The Grade 7 watershed lab is correctly bounded to direct watershed impacts under 7.11(A), with downstream/coastal connections treated as context for 7.11(B).
+
+### Earth and Space lab mock-DOM validation
+
+Executed the six new inline lab scripts against a lightweight mock DOM with representative valid inputs. All six produced the expected output metrics and explanations. Additional invalid-input checks confirmed rejection of zero watershed volume, zero star temperature, and negative carbon flow. The browser QA runner's JavaScript source also passed a syntax compilation check and now contains 76 functional cases.
+
+**Not a browser pass:** these checks do not validate actual Chromium rendering, responsive layout, keyboard navigation, accessibility-tree output, or real browser event behaviour. No CI status check has been reported for the latest commit.
