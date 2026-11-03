@@ -233,3 +233,7 @@ After the regression fix, 18 representative valid-input executions passed in a l
 ## Additional mock-DOM regression fixes — 2026-11-03
 
 The mock-DOM execution checks also exposed const reassignment in the Grade 10 titration and environmental-chemistry calculators after recent feature/validation edits. Their result arrays now use mutable declarations. The corresponding calculator executions were rerun after correction.
+
+## Mock-DOM verification totals — 2026-11-03
+
+After fixing the additional result-array declaration errors found during execution, the cross-subject mock-DOM harness passed **34 valid-output checks** and **22 invalid-input checks** across the updated Chemistry, Physics and Biology calculators. These are targeted script executions with mocked DOM elements, not full browser tests. The expanded Playwright suite contains 65 functional page cases; its real Chromium execution remains unverified.
