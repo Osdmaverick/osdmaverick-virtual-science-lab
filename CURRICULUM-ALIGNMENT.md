@@ -339,3 +339,7 @@ The grade directory now includes 33 labs in Grade 7 and 33 in Grade 8. Total lin
 - **Grade 12 Climate Ecology:** temperature-change × sensitivity is identified as a suitability index, not a species-distribution prediction.
 - **Grade 12 Evolutionary Genomics:** the page now describes uncorrected p-distance only; it does not align sequences, correct multiple substitutions, or infer phylogeny.
 - **Grade 12 Research Methods:** retitled to Biological Data Summary: Mean and Range because it accepts precomputed summary statistics rather than raw data and does not evaluate experimental design.
+
+### Earth and Space lab refinement
+
+The Grade 8 universe activity now includes a student-selected star life-cycle stage alongside temperature, luminosity, galaxy type, and cosmological evidence. The selected stage is a conceptual classification; it is not inferred from stellar temperature/mass, and the page does not draw a full H–R plot. The weather/climate activity now includes explicit selectors for major atmospheric circulation patterns and warm/cold ocean currents, alongside sea-surface temperature, moisture, rising air, and rotation. It remains a conceptual model rather than a weather or cyclone forecast. The Grade 7 watershed activity directly targets 7.11(A); downstream/coastal links are context for 7.11(B), not a complete ocean-systems investigation.
