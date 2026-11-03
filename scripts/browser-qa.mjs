@@ -125,6 +125,7 @@ try {
     },
     { href: "grade6-physics-forces.html", checks: [{ a: "10", b: "2", expected: "Net force 10 N" }, { a: "0", b: "2", expected: "Force balance Balanced" }], invalid: { a: "10", b: "0", expectedError: "positive mass" } },
     { href: "grade7-physics-electromagnetism.html", checks: [{ a: "24", b: "8", c: "100", expected: "Magnetic field strength index 300.0 relative units" }], invalid: { a: "24", b: "8", c: "0", expectedError: "positive whole-number coil-turn count" } },
+    {
       href: "grade7-physics-thermal-expansion.html",
       checks: [{ a: "1", b: "50", c: "1", d: "0.000012", expected: "Linear expansion 0.600 mm" }, { a: "1", b: "-50", c: "1", d: "0.000012", expected: "Linear expansion -0.600 mm" }],
       invalid: { a: "1", b: "50", c: "1", d: "-0.000012", expectedError: "non-negative expansion coefficient" },
@@ -146,6 +147,7 @@ try {
     { href: "grade10-biology-evolution.html", checks: [{ a: "50", b: "20", expected: "Illustrative next frequency 51.0%" }], invalid: { a: "", b: "20", expectedError: "starting trait frequency and selection advantage" } },
     { href: "grade10-biology-homeostasis.html", checks: [{ a: "-10", b: "50", expected: "Remaining deviation -5.0" }], invalid: { a: "", b: "50", expectedError: "finite signed glucose deviation" } },
     { href: "grade10-biology-microbiology.html", checks: [{ a: "80", b: "50", expected: "Residual index 40.0%" }], invalid: { a: "", b: "50", expectedError: "exposure index and prevention coverage" } },
+    {
       href: "grade10-biology-biomolecules.html",
       checks: [{ a: "37", b: "8", expected: "Relative enzyme activity: 80.0%" }],
       invalid: { a: "", b: "8", expectedError: "Enter a valid temperature above absolute zero" },
