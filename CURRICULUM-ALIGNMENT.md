@@ -212,3 +212,8 @@ The Grade 8 audit uses adopted 2021 middle-school Science TEKS, especially **8.6
 **Audit boundary:** this is an initial sample-based review, not a completed standard-by-standard audit of all 60 Grade 7–8 labs. Labs outside the sampled pages still require review, including the Grade 7 taxonomy, human systems, ecosystems and thermal/solar-system topics, and Grade 8 climate, universe, ecosystem, cell-transport, photosynthesis and respiration topics.
 
 **Official standards sources:** [19 TAC §112.27 Grade 7 Science, adopted 2021](https://www.law.cornell.edu/regulations/texas/19-Tex-Admin-Code-SS-112-27); [19 TAC §112.28 Grade 8 Science, adopted 2021](https://www.law.cornell.edu/regulations/texas/19-Tex-Admin-Code-SS-112-28); [TEA Science TEKS adoption and implementation information](https://tea.texas.gov/curriculum-and-instruction/curriculum-standards/teks-review/science-teks-review).
+
+### Grade 7–8 follow-up scope notes
+
+- **Grade 7 Balancing Chemical Equations:** the page is now identified as a Grade 8 bridge/enrichment. Its single-element atom-count check does not balance a complete chemical equation; Grade 8 introduces mass conservation in reactions under **8.6(E)**.
+- **Grade 8 Solutions and Concentration:** the g/L calculator is explicitly labelled applied enrichment, not a named Grade 8 matter expectation.
