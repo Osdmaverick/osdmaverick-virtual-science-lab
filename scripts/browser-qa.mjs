@@ -134,6 +134,10 @@ try {
       checks: [{ a: "0.1", b: "25", expected: "Equivalence base volume: 25.00 mL" }],
     },
     {
+    { href: "grade10-biology-cell-biology.html", checks: [{ a: "5", b: "5", expected: "Net diffusion direction No net diffusion" }], invalid: { a: "", b: "5", expectedError: "non-negative finite concentrations" } },
+    { href: "grade10-biology-evolution.html", checks: [{ a: "50", b: "20", expected: "Illustrative next frequency 51.0%" }], invalid: { a: "", b: "20", expectedError: "starting trait frequency and selection advantage" } },
+    { href: "grade10-biology-homeostasis.html", checks: [{ a: "-10", b: "50", expected: "Remaining deviation -5.0" }], invalid: { a: "", b: "50", expectedError: "finite signed glucose deviation" } },
+    { href: "grade10-biology-microbiology.html", checks: [{ a: "80", b: "50", expected: "Residual index 40.0%" }], invalid: { a: "", b: "50", expectedError: "exposure index and prevention coverage" } },
       href: "grade10-biology-biomolecules.html",
       checks: [{ a: "37", b: "8", expected: "Relative enzyme activity: 80.0%" }],
       invalid: { a: "", b: "8", expectedError: "Enter a valid temperature above absolute zero" },
