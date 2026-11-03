@@ -145,6 +145,7 @@ try {
     { href: "grade9-chemistry-stoichiometry.html", checks: [{ a: "2", b: "2", expected: "Simplified 1:1 comparison: Amounts are equal" }] },
     { href: "grade9-physics-momentum-collisions.html", checks: [{ a: "2", b: "4", c: "3", d: "0", expected: "Final shared velocity 1.60 m/s" }] },
     { href: "grade10-physics-projectile-motion.html", checks: [{ a: "20", b: "45", expected: "Horizontal range 40.77 m" }] },
+    { href: "grade10-chemistry-analysis.html", checks: [{ a: "0.1", b: "25", c: "20", expected: "Unknown concentration (1:1) 0.12500 mol/L" }], invalid: { a: "0.1", b: "25", c: "0", expectedError: "positive finite concentration and both positive solution volumes" } },
     { href: "grade10-chemistry-stoichiometry.html", checks: [{ a: "2", b: "3", expected: "Limiting reactant in 1:1 model: A" }] },
     { href: "grade10-chemistry-thermochemistry.html", checks: [{ a: "100", b: "5", expected: "Heat change in solution 2.09 kJ" }, { a: "100", b: "-5", expected: "Heat change in solution -2.09 kJ" }], invalid: { a: "", b: "5", expectedError: "Enter a positive solution mass and a valid temperature change." } },
     { href: "grade11-physics-mechanical-waves.html", checks: [{ a: "4", b: "2", expected: "Wave speed 8.000 m/s" }] },
@@ -182,6 +183,8 @@ try {
     if (test.invalid) {
       await page.locator("#a").fill(test.invalid.a);
       await page.locator("#b").fill(test.invalid.b);
+      if (test.invalid.c !== undefined) await page.locator("#c").fill(test.invalid.c);
+      if (test.invalid.d !== undefined) await page.locator("#d").fill(test.invalid.d);
       await page.locator("#run").click();
       const error = await page.locator("#error").innerText();
       if (!error.includes(test.invalid.expectedError)) {
