@@ -110,6 +110,15 @@ try {
   // Exercise representative calculator outputs and input-validation boundaries.
   const functionalCases = [
     {
+    {
+      href: "grade5-physics-electric-circuits.html",
+      checks: [
+        { a: "9", b: "3", selects: { c: "closed", d: "light" }, expected: "Energy output Light" },
+        { a: "9", b: "3", selects: { c: "open", d: "light" }, expected: "Current (enrichment) 0.00 A" },
+        { a: "9", b: "3", selects: { c: "closed", d: "motion" }, expected: "Energy output Motion" },
+      ],
+      invalid: { a: "9", b: "0", expectedError: "positive resistance" },
+    },
       href: "grade4-physics-electric-circuits.html",
       checks: [{ a: "6", b: "3", expected: "Current 2.00 A" }],
       invalid: { a: "6", b: "0", expectedError: "Resistance must be greater than zero." },
@@ -208,6 +217,7 @@ try {
       await page.locator("#b").fill(check.b);
       if (check.c !== undefined) await page.locator("#c").fill(check.c);
       if (check.d !== undefined) await page.locator("#d").fill(check.d);
+      for (const [id, value] of Object.entries(check.selects || {})) await page.locator("#" + id).selectOption(value);
       await page.locator("#run").click();
       const metrics = (await page.locator("#metrics").innerText()).replace(/\s+/g, " ");
       if (!metrics.includes(check.expected)) {
@@ -219,6 +229,7 @@ try {
       await page.locator("#b").fill(test.invalid.b);
       if (test.invalid.c !== undefined) await page.locator("#c").fill(test.invalid.c);
       if (test.invalid.d !== undefined) await page.locator("#d").fill(test.invalid.d);
+      for (const [id, value] of Object.entries(test.invalid.selects || {})) await page.locator("#" + id).selectOption(value);
       await page.locator("#run").click();
       const error = await page.locator("#error").innerText();
       if (!error.includes(test.invalid.expectedError)) {
