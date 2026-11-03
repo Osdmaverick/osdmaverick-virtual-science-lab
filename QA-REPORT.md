@@ -179,3 +179,9 @@ The Grade 6 Newton's-law calculator treated the applied force as the net force (
 The Grade 10 “Electric Fields and Circuits” page previously calculated only Ohm's-law current and power despite its electric-field curriculum title. It now adds plate separation and estimates the uniform parallel-plate field magnitude E = |ΔV|/d, explicitly neglecting edge effects. The Grade 10 induction model previously multiplied signed flux-change rate by turns while labelling the result an emf magnitude, and accepted zero/negative coil turns. It now requires a positive whole-number turn count and reports N × |dΦ/dt|, explaining that sign affects polarity while the displayed result is magnitude. Playwright assertions cover both models and invalid boundaries, including positive and negative flux-change rates.
 
 **Execution status remains pending:** source changes and test assertions are committed; no completed browser execution has been confirmed.
+
+## Grade 10 Physics model completion and validation — 2026-11-03
+
+Three Grade 10 Physics pages were incomplete relative to their stated learning objectives. The gas-law page previously accepted pressure and volume only despite describing PV/T; it now accepts absolute temperature in kelvin and calculates the PV/T index for a fixed amount of ideal gas. The waves/optics page now includes incidence angle and refractive index, calculating reflection and refraction angles with Snell's law as well as wave speed/period. The work-energy-power page previously calculated work only; it now also accepts mass, speed and elapsed time to calculate kinetic energy and average power. The Newtonian dynamics calculator now rejects blank/non-finite net force and invalid mass, and checks the resulting acceleration. Playwright assertions cover representative outputs and invalid boundaries.
+
+**Execution status remains pending:** source and tests are committed; no completed browser run has been confirmed.
