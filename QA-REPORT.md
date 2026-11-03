@@ -261,3 +261,7 @@ An initial sample-based alignment review was completed against the adopted 2021 
 The Playwright functional suite was repaired after inspection found three malformed object boundaries in its functional-case list. A new Grade 8 Physics functional case checks acceleration for a 15 N net force on a 3 kg object (5.00 m/s²), zero acceleration at zero net force, and rejection of zero mass. The suite now contains **67 functional page cases**.
 
 **Execution status:** these changes and test assertions are committed to main, but no completed Chromium/Playwright run or successful GitHub Actions result has been confirmed. The curriculum review covers selected pages only; it does not establish complete Grade 7–8 or Grade 4–12 alignment.
+
+### Grade 7–8 follow-up corrections — 2026-11-03
+
+The Grade 7 chemical-equation page now states that its single-element atom-count comparison is a Grade 8 bridge and does not balance a full equation. The Grade 8 g/L solutions calculator is explicitly marked enrichment rather than a named Grade 8 student expectation. The browser functional-case array was checked for balanced object/array delimiters after repair; this is a source-structure check, not a Chromium test.
