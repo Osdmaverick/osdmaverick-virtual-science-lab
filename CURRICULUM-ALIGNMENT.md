@@ -363,3 +363,7 @@ Nine new elementary/middle-elementary labs now cover the Earth and Space strands
 These pages are introductory models, not replacements for observing the sky, collecting local weather data, examining rock/soil samples, or conducting outdoor investigations. The Moon/season and tide models are conceptual; the water/erosion page distinguishes weathering, erosion and deposition; resource pages use examples and decision prompts rather than measured life-cycle assessments.
 
 The directory now contains **283 unique lab links**. Grades 4, 5, and 6 each have 33 linked labs, including three Earth and Space Science labs.
+
+### Grade 4 coverage refinement
+
+The Grade 4 water-cycle page now includes an interactive choice among weathering, erosion, and deposition, so its objective explicitly covers all of **4.10(A)–(C)**. The Grade 4 resources page now includes a rock-resource setting selector (porous sedimentary rock, coal seam, mineral-rich rock) and explicitly covers **4.11(A)–(C)**.
