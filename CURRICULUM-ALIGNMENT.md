@@ -148,3 +148,15 @@ The adopted Grade 6 TEKS describe force and motion through **6.7(A)–(C)**, inc
 **Commits:** `c7d4a85a38919d6bb6da0e1ee6696436937d3f68`, `0f65e875a5247409a621529d8fd6a9af8e0c2d82`, `b07d84cc75d22e990e8b333c7b87d4150abc631b`, `194d1a5a31da688ad35cbb32b0e6bb0815dbe10b`, `68be96de460ff8b3ba3eddbbde72406a93bdcb1d`, `0924895e4e9ce0bf5433d68da6d53a9d124d8923`.
 
 **Official reference:** [19 TAC §112.26 Grade 6 Science, adopted 2021](https://tea.texas.gov/about-tea/laws-and-rules/sboe-rules-tac/sboe-adopted/24-03-112-26.pdf).
+
+## Grade 6 Chemistry — initial TEKS scope review
+
+The Grade 6 matter strand includes **6.6(A)** (atomic structure and states of matter), **6.6(B)** (distinguishing pure substances, homogeneous mixtures, and heterogeneous mixtures), **6.6(C)** (classifying elements by physical properties), **6.6(D)** (density relative to fluids), and **6.6(E)** (evidence of chemical change).
+
+- **Acids, Alkalis and pH:** pH classification is labelled chemistry enrichment; it is not listed as a standalone Grade 6 expectation.
+- **Atoms, Elements and Compounds:** the page distinguishes the broad atomic model connection to **6.6(A)** from ion/proton/electron detail as enrichment; it notes that compounds are developed in later grades.
+- **Mixtures and Separation:** objective now targets distinguishing mixtures under **6.6(B)**. Filtration is identified as an applied separation extension.
+- **Periodic Table and Element Groups:** objective now targets element classification by physical properties under **6.6(C)**; atomic-number/valence-electron patterns are supporting enrichment.
+- **Chemical Reactions and Rates:** objective now targets evidence of new substance formation under **6.6(E)**; temperature/surface-area rate index is labelled enrichment.
+
+**Commits:** `0d5fc93ded3e9102e8dbb8019a7374f5b3ada749`, `8156ed41465186c4cb5469bfbd6cd614b9aee9fd`, `c74214bf10a02076c7e56714b441dd3c66a8881e`, `7302ef1872a259c3993158ee935d43f463eeb883`, `5ca53b4c5d99d3d0910b67e9d1a36fbd0a46abcd`.
