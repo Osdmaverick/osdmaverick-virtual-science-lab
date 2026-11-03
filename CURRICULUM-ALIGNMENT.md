@@ -313,3 +313,20 @@ The Grade 10 Biology changes have three new functional browser cases (valid outp
 - **Grade 12 Physics — Electromagnetic Induction:** clarified that the output is induced-emf magnitude only, not polarity/direction under Lenz's law.
 
 The browser runner's metric-text assertion now normalizes the colon between a metric label and its value. The page metrics render as Label: value; without normalization, existing assertions authored as Label value would fail despite correct numerical output.
+
+## Grade 7–8 Earth and Space Science coverage added
+
+The directory previously contained only Physics, Chemistry, and Biology labs for Grades 7–8, leaving the Earth and Space strands without dedicated virtual investigations. Six new labs have been added and linked from the grade directory:
+
+| Grade | New lab | TEKS focus |
+|---|---|---|
+| 7 | Solar System: Orbits and Planet Properties | 7.9(A)–(B): solar-system objects, movements, and gravity |
+| 7 | Plate Tectonics and Changing Earth | 7.10(A)–(B): evidence of change, plate interactions, landforms, earthquakes, and volcanoes |
+| 7 | Watersheds and Human Impacts on Water | 7.11(A)–(B): human effects on groundwater, surface water, and ocean systems |
+| 8 | Stars, Galaxies and Evidence for the Universe | 8.9(A)–(C): star classification/life cycles, galaxy types, and evidence for the origin of the universe |
+| 8 | Weather, Ocean Systems and Climate | 8.10(A)–(C): solar/ocean/atmospheric interactions, circulation, and tropical cyclones |
+| 8 | Carbon Cycle and Climate Change | 8.11(A)–(C): natural and human climate influences and carbon cycling |
+
+**Model limitations:** the solar-system page uses approximate planetary mean distances and orbital periods; the tectonics page presents common boundary outcomes and selected evidence examples; the watershed calculator is a pollutant mass/volume estimate rather than a water-quality compliance tool; the star page classifies spectral temperature bands and displays luminosity but does not draw a full Hertzsprung–Russell plot or infer stellar life stage; the weather page is a conceptual cyclone-ingredient model, not a forecast; and the carbon budget is a simplified source/sink balance, not a real-time global carbon inventory.
+
+The grade directory now includes 33 labs in Grade 7 and 33 in Grade 8. Total linked lab inventory increases from 268 to **274**. The three new labs per grade supplement rather than replace required classroom, laboratory, and field investigations.
