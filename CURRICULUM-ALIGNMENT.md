@@ -102,3 +102,9 @@ Corrections:
 **Commits:** `c1d8b61bcbdda9a903f8d0f4442d4d5b23564582`, `62632af4ca5a05a0bf004cb5fed94ecbb17c56f9`, `2c9eed430548e5432089240a04dc02ab00146d6a`, `3ccdd77d61a4593b803863118612927d87a19261`, `99a242a858f80074293888111607152fb3859fdf`.
 
 **Additional official reference:** [TEA Grade 5 TEKS (adopted 2021; June 2024 PDF)](https://tea.texas.gov/laws-and-rules/state-board-education/teks/grade5-teks-062024-0.pdf).
+
+### Grade 5 circuit model made instructionally complete
+
+The first TEKS alignment correction exposed a second issue: the Grade 5 circuit page had only voltage and resistance inputs, so it could not demonstrate the complete/open circuit requirement or let students explore the different energy transformations named in 5.8(B). The model now includes a circuit-path selector (complete/closed or broken/open) and an output selector (light, sound, motion, or thermal). An open path produces zero current and no load output; a closed path illustrates the selected transformation. Quantitative current and power remain clearly marked as enrichment. Playwright coverage now includes closed-light, open-path, closed-motion, and invalid-resistance cases; the inline script also passed a mock-DOM execution check.
+
+**Commits:** `656388a0d88d0871329c345355a0ad21fa022ddb`, `7e7b8473da046a9fdbad3895da511b8baf807144`.
