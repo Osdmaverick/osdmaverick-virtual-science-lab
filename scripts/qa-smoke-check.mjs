@@ -9,7 +9,7 @@ import vm from "node:vm";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const expectedLabPages = 268;
+const expectedLabPages = 274;
 const failures = [];
 const report = (label, detail = "") => {
   console.log(`${failures.length ? "" : ""}[${detail ? "INFO" : "CHECK"}] ${label}${detail ? `: ${detail}` : ""}`);
