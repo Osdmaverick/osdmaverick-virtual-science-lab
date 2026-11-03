@@ -335,3 +335,11 @@ The Playwright runner was extended to fill named input fields as well as the exi
 The directory's linked-lab inventory is now **274** (previously 268). Grade 7 and Grade 8 each have 33 labs, including three new Earth and Space Science labs.
 
 **Important execution distinction:** inline JavaScript syntax and source structure were checked, but no actual Chromium/Playwright execution or successful GitHub Actions result has been confirmed. These new pages are not yet browser-rendering validated.
+
+### Additional Grade 11–12 Biology scope corrections — 2026-11-03
+
+- Evolutionary-tree page now discloses that its shared-trait × lineage-count score is not a phylogenetic tree.
+- Developmental-biology page retitled to Cell Division and Population Growth and states its idealized doubling assumptions.
+- Endocrine and climate-ecology pages identify their outputs as illustrative arithmetic indices, not physiological or species-distribution predictions.
+- Evolutionary-genomics page is explicitly scoped to uncorrected p-distance.
+- Research-methods page retitled to Biological Data Summary: Mean and Range because the calculator accepts precomputed summary values, not raw datasets.
