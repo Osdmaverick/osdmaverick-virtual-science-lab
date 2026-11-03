@@ -371,3 +371,14 @@ The browser run passed its initial static gate but failed while visiting the Gra
 Corrected both pages to use `class="lab lab-wrap"`, preserving their local layout class while enabling shared lab behavior. Tightened the static smoke check to require the exact `lab` class token rather than a substring match, preventing this structural mismatch from passing static QA again.
 
 A prior browser attempt on commit `a127162` completed static checks but failed the browser step after 156 pages due to this legacy markup issue. The next run will verify the corrected pages and continue through all 274 pages.
+
+## Grade 4–6 Earth and Space Science expansion — 2026-11-03
+
+Added nine Earth and Space Science labs and linked them in the directory:
+- Grade 4: seasons/Moon patterns; water cycle/weather and surface processes; natural resources and conservation.
+- Grade 5: Earth's rotation/day-night/shadows; water cycle, sedimentary rocks and landforms; natural-resource solutions.
+- Grade 6: seasons/tides; Earth spheres/structure/rock cycle; resource management.
+
+The new pages use the shared stylesheet and JavaScript, include TEKS-referenced objectives, prediction/conclusion fields, interactive selectors, and scope notes in the activity text. The directory inventory is now **283 unique lab links** (previously 274). The static smoke-check expected inventory was updated from 274 to 283.
+
+The browser QA runner now has **85 functional case entries across 83 distinct pages**, including one case per new Grade 4–6 Earth/Space page. Full Chromium execution is still not confirmed.
