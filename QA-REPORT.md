@@ -229,3 +229,7 @@ A lightweight execution harness ran the updated inline scripts against mocked fo
 ## Cross-subject mock-DOM verification — 2026-11-03
 
 After the regression fix, 18 representative valid-input executions passed in a lightweight mock-DOM harness, and 15 invalid-input boundary executions produced their expected validation errors. A further 16 modified Chemistry/Physics pages passed inline JavaScript syntax compilation. These checks exercise calculator scripts with mocked form elements; they do not verify real browser rendering, keyboard interaction, responsive layout, or full Playwright execution.
+
+## Additional mock-DOM regression fixes — 2026-11-03
+
+The mock-DOM execution checks also exposed const reassignment in the Grade 10 titration and environmental-chemistry calculators after recent feature/validation edits. Their result arrays now use mutable declarations. The corresponding calculator executions were rerun after correction.
