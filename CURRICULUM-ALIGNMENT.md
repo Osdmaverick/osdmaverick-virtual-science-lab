@@ -300,3 +300,16 @@ The adopted Grade 7 and Grade 8 TEKS require students, for at least **40% of ins
 - **Grade 10 Biology — Plant Physiology:** added finite 0–100% validation and labelled the minimum-factor output a teaching index rather than measured plant activity.
 
 The Grade 10 Biology changes have three new functional browser cases (valid output and invalid-input boundary checks). The functional suite now contains **70 cases**. Its source structure is verified; actual Chromium execution remains unconfirmed.
+
+### High-school scope follow-up: Grade 11–12 models
+
+- **Grade 11 Chemistry — Electron Shell Capacity:** the page is now titled and described as a 2n² principal-shell capacity exercise; it does not calculate orbital filling, subshells, quantum numbers, or full electron configurations.
+- **Grade 11 Chemistry — Ionic Attraction:** corrected the page title/objective because its q²/r² index does not calculate lattice energy or covalent bond polarity.
+- **Grade 11 Chemistry — Calorimetry:** retitled the q = mcΔT page to Calorimetry and Heat Transfer. It uses a fixed specific heat capacity of 4.18 J/(g·°C) and does not calculate reaction enthalpy.
+- **Grade 11 Chemistry — Gas Laws:** clarified that the output is a relative volume index proportional to T/P for a fixed amount of gas, not a complete initial/final combined-gas-law solver.
+- **Grade 11 Physics — DC Circuits:** retitled the Ohm's-law single-resistor calculator; it does not solve Kirchhoff multi-loop networks.
+- **Grade 11 Physics — Mechanical Waves:** retitled the v = fλ calculator; it does not simulate superposition or interference.
+- **Grade 12 Chemistry — Titration:** documented the fixed 0.10 M base and 1:1 stoichiometric assumption; polyprotic/non-1:1 systems and titration curves are outside the model.
+- **Grade 12 Physics — Electromagnetic Induction:** clarified that the output is induced-emf magnitude only, not polarity/direction under Lenz's law.
+
+The browser runner's metric-text assertion now normalizes the colon between a metric label and its value. The page metrics render as Label: value; without normalization, existing assertions authored as Label value would fail despite correct numerical output.
