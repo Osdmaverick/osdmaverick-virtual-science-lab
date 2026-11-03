@@ -402,3 +402,9 @@ GitHub Actions run [41690207972](https://github.com/Osdmaverick/osdmaverick-virt
 The final defect found in this cycle was a Grade 10 Biology enzyme calculator assigning to a `const` array after calculating activity. The result list is now mutable, and the functional case passes. The Grade 4 simple-machines quote error, stale 268/274 inventory constants, Grade 9 Biology legacy main classes, metric-label normalization, and mixed input/select test handling were also corrected before this successful run.
 
 **Scope note:** this verifies the current smoke and representative functional suite; it is not an exhaustive scientific validation of every calculator, nor a complete TEKS crosswalk of all 283 labs.
+
+### Grade 8 Chemistry follow-up — 2026-11-03
+
+Clarified two model/objective gaps:
+- Atoms/Elements/Compounds now states that the atom-count model does not represent chemical bonds; two atom types alone do not establish a compound.
+- Conservation of Mass now identifies TEKS 8.6(E) and explains that product mass is set equal to reactant mass for an ideal closed-system illustration, not calculated from a balanced reaction.
