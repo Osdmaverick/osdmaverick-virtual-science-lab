@@ -172,3 +172,13 @@ Relevant adopted Grade 6 expectations include **6.8(B)** (energy transfers and t
 - **Respiration and Energy:** cellular respiration and quantitative energy-yield calculations are labelled enrichment connected to the broader energy-transfer concept, not a direct Grade 6 biochemical pathway expectation.
 
 **Commits:** `980264a0035610ca43b37431494aa3b5e24c3c4b`, `8452a949d335f8abc110310c3ef072541591a164`, `42ae0a53172d20985d0f3fd13b9b6e92ec04912e`, `5ca2d86922cb91e960ddd257d20f087490b2100f`, `0e013b9a68825e4de36241f170599f498133ab54`.
+
+### Additional Grade 6 Physics scope review
+
+- **Magnetism and Electromagnets:** connected to magnetic forces under **6.7(A)**; the coil-turn/current solenoid calculation is labelled enrichment.
+- **Measurement and SI Units:** objective now targets density relative to fluids under **6.6(D)**.
+- **Pressure in Solids and Liquids:** pressure calculation is labelled an applied extension of force concepts under **6.7(A)–(B)**, not a separate Grade 6 student expectation.
+- **Speed and Acceleration:** corrected the objective to match the actual average-speed calculation. The page now explicitly says it does not calculate acceleration because no velocity-change input is supplied; average speed is a mathematical extension, not a direct Grade 6 student expectation.
+- **Work, Energy and Power:** objective now connects force/displacement to energy transfer under **6.8(A)–(B)**; work and power equations are labelled quantitative enrichment.
+
+**Commits:** `250ec1f241cdaac3d102ef10abe34c4a59daff26`, `ec62d14f7c52e412903d675c031a7e2df59f68ab`, `450d86f15c541b18cc4d3ae498d6f5ab75d1c974`, `76046d9c0315892bf360ad8902932938bde5f16a`, `bcf6b2bee4d1fa465dbc5dd42f54ee8451debfe1`.
