@@ -161,3 +161,9 @@ The Grade 4 states-of-matter model previously assigned 0°C to the liquid catego
 The Grade 4 and Grade 5 water-heating calculators accept negative ΔT values to represent cooling and correctly calculate negative heat transfer, but their result labels called every value “Temperature rise”. Both outputs now say “Temperature change”, which is accurate for positive heating and negative cooling. Playwright assertions cover negative temperature changes on both pages.
 
 **Execution status remains pending:** source and test changes are committed; no completed browser run has been confirmed.
+
+## Grade 7 thermal-expansion model completion — 2026-11-03
+
+The Grade 7 page was titled “Thermal Expansion and Heat” but its only calculation was heat transfer, Q = mcΔT; no expansion quantity was calculated. The investigation now retains the water heat-transfer calculation and adds initial length and linear expansion coefficient inputs. It calculates ΔL = αL₀ΔT and final length, with an explicit constant-coefficient assumption and validation for positive mass/length and non-negative coefficient. Browser cases cover expansion and contraction for ±50°C and reject a negative coefficient.
+
+**Execution status remains pending:** the new model and assertions are committed, but no completed browser run has been confirmed.
