@@ -223,6 +223,12 @@ try {
     { href: "grade6-earth-space-seasons-tides.html", checks: [{ selects: { season: "june", tide: "spring" }, expected: "Orbital position June solstice" }] },
     { href: "grade6-earth-space-earth-systems.html", checks: [{ selects: { sphere: "hydrosphere", layer: "mantle", rock: "metamorphic" }, expected: "Selected sphere Hydrosphere" }] },
     { href: "grade6-earth-space-resource-management.html", checks: [{ selects: { challenge: "water", strategy: "efficiency" }, expected: "Challenge Water pollution and scarcity" }] },
+    { href: "grade8-chemistry-acids-bases-indicators.html", checks: [{ a: "6.5", expected: "Universal indicator Yellow-green" }] },
+    { href: "grade7-physics-friction.html", checks: [{ a: "10", b: "10", expected: "Direction Balanced", expectedExplanation: "remains at rest or continues at constant velocity" }] },
+    { href: "grade11-biology-immune-response.html", checks: [{ a: "10", b: "5", expected: "Secondary response index 50.0", expectedExplanation: "5.00 memory multiplier" }] },
+    { href: "grade10-physics-kinematics.html", checks: [{ a: "10", b: "1", expected: "Final velocity after 10 s 20.00 m/s" }] },
+    { href: "grade10-physics-momentum-collisions.html", checks: [{ a: "2", b: "5", expected: "Momentum A 10.00 kg·m/s" }] },
+    { href: "grade12-biology-gene-technology.html", checks: [{ a: "1000", b: "2", expected: "DNA fragments 3" }] },
   ];
 
   for (const test of functionalCases) {
@@ -243,6 +249,12 @@ try {
       if (!metrics.includes(expected)) {
         const validationMessage = await page.locator("#error").innerText();
         failures.push(`${test.href}: expected result "${expected}", received "${metrics}" (validation: "${validationMessage}")`);
+      }
+      if (check.expectedExplanation) {
+        const explanation = (await page.locator("#explain").innerText()).replace(/\s+/g, " ");
+        if (!explanation.includes(check.expectedExplanation)) {
+          failures.push(test.href + ': expected explanation containing "' + check.expectedExplanation + '", received "' + explanation + '"');
+        }
       }
     }
     if (test.invalid) {
