@@ -124,3 +124,12 @@ main.lab .panel:focus-within{border-color:#75bdb5;box-shadow:0 8px 26px #0e766c1
 @media(max-width:900px){.home-hero{padding:72px 7%;min-height:520px}.featured-grid{grid-template-columns:1fr 1fr}.teacher-section{gap:35px}}
 @media(max-width:680px){.site-header{position:relative}.home-hero{grid-template-columns:1fr;text-align:left;padding:62px 7% 48px}.home-hero .hero-art{height:190px;transform:scale(.72);margin-top:12px}.hero-proof{justify-content:flex-start;gap:18px}.quick-search{margin:-14px 5% 0;padding:16px;align-items:flex-start;flex-direction:column}.quick-search .button{width:100%;text-align:center}.featured-grid{grid-template-columns:1fr}.feature-tile{grid-template-columns:52px 1fr;padding:18px}.tile-icon{width:50px;height:50px;font-size:1.6rem}.learning-section,.teacher-section{grid-template-columns:1fr;gap:28px}.site-footer{flex-direction:column;text-align:center}.home-section{padding-top:60px}}
 @media(prefers-reduced-motion:reduce){.subject-card{transition:none!important}}
+
+
+/* Student notebook entry point, available from every virtual investigation. */
+.notebook-prompt{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:16px 0;padding:15px 18px;border:1px solid #b9ddd7;border-radius:12px;background:#edf8f5;color:#173c43}
+.notebook-prompt>span{display:grid;gap:3px}
+.notebook-prompt small{color:#557078;font-size:.86rem}
+.notebook-prompt>a{flex-shrink:0;color:#087d73;font-weight:800;text-decoration:none}
+.notebook-prompt>a:hover{text-decoration:underline}
+@media(max-width:600px){.notebook-prompt{align-items:flex-start;flex-direction:column}.notebook-prompt>a{padding-top:3px}}
