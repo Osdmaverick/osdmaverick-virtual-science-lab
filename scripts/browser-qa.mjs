@@ -332,6 +332,7 @@ try {
   });
   await page.locator("#student-name").fill("QA Student");
   await page.locator("#import-button").click();
+  await page.waitForFunction(() => document.querySelector("#import-status")?.textContent?.includes("imported." ) || document.querySelector("#import-status")?.textContent?.startsWith("Import failed:"), null, { timeout: 5000 });
   if (!(await page.locator("#submission-list").innerText()).includes("QA Forces Investigation")) {
     failures.push("Teacher dashboard did not import the student report backup");
   }
@@ -350,6 +351,14 @@ try {
     failures.push("Teacher dashboard did not persist assessment scores and feedback");
   }
   checked.teacherDashboard = 1;
+
+  // Verify the account page explains setup safely when project credentials are absent.
+  await page.goto(`${baseUrl}/auth.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#auth-status")?.textContent?.includes("Authentication is not connected yet"), null, { timeout: 5000 });
+  if (!(await page.locator("#auth-status").innerText()).includes("Phase 1 setup guide")) {
+    failures.push("Account page did not show safe Supabase setup guidance when unconfigured");
+  }
+  checked.authSetup = 1;
 
 } catch (error) {
   failures.push(`Browser QA runner error: ${error.stack || error.message}`);

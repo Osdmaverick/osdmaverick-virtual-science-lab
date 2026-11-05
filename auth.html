@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Sign in or register for the OSDMaverick Virtual Science Lab learning platform.">
+<meta name="theme-color" content="#071827">
+<title>Student and Teacher Sign In | OSDMaverick Virtual Science Lab</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.auth-wrap{max-width:760px;margin:48px auto 76px;padding:0 5%}.auth-card{padding:30px;border:1px solid #dce5eb;border-radius:18px;background:#fff;box-shadow:0 12px 34px #102b3d0c}.auth-intro{padding:28px;border-radius:16px;background:linear-gradient(120deg,#0b2739,#145064);color:#fff;margin-bottom:20px}.auth-intro p{color:#d4e7eb}.auth-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.auth-tabs button,.auth-card button{border:0;border-radius:9px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}.auth-tabs button{background:#e8f3f2;color:#0b514e}.auth-tabs button[aria-pressed=true],.auth-primary{background:#087d73!important;color:#fff!important}.auth-card label{display:block;margin:14px 0 6px;font-weight:700;color:#193447}.auth-card input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #c9d7df;border-radius:9px;font:inherit}.auth-card :focus-visible{outline:3px solid #0c9b8f;outline-offset:2px}.auth-card form button{margin-top:18px}.auth-status{min-height:1.5em;padding:10px 0;font-weight:650;color:#087d73}.auth-status[data-state=error]{color:#a23b2b}.account-panel{padding:18px;background:#f0f7f6;border-radius:12px}.account-panel p{margin:6px 0}.auth-footnote{font-size:.88rem;color:#637987;margin-top:18px}.auth-link{color:#087d73;font-weight:700}
+</style></head>
+<body>
+<header class="site-header"><a class="brand" href="index.html">OSDMAVERICK <span>VIRTUAL SCIENCE LAB</span></a><button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">☰</button><nav class="nav" id="primary-navigation" aria-label="Main navigation"><a href="index.html">Home</a><a href="grade-levels.html">Explore labs</a><a href="student-lab-notebook.html">Student notebook</a><a href="teacher-dashboard.html">Teacher dashboard</a></nav></header>
+<main class="auth-wrap">
+<section class="auth-intro"><p class="eyebrow">LEARNING PLATFORM ACCOUNT</p><h1>Welcome to your science lab</h1><p>Sign in to your student or teacher account. New public registrations are assigned the student role; teacher access is granted by a platform administrator.</p></section>
+<section class="auth-card">
+<div id="auth-forms">
+<div class="auth-tabs" aria-label="Account options"><button type="button" data-auth-view="signin-form" aria-pressed="true">Sign in</button><button type="button" data-auth-view="signup-form" aria-pressed="false">Create student account</button><button type="button" data-auth-view="reset-form" aria-pressed="false">Reset password</button></div>
+<form id="signin-form"><h2>Sign in</h2><label for="signin-email">Email address</label><input id="signin-email" type="email" autocomplete="email" required><label for="signin-password">Password</label><input id="signin-password" type="password" autocomplete="current-password" required><button class="auth-primary" id="signin-submit" type="submit">Sign in</button></form>
+<form id="signup-form" hidden><h2>Create a student account</h2><label for="signup-name">Full name</label><input id="signup-name" maxlength="120" autocomplete="name" required><label for="signup-email">Email address</label><input id="signup-email" type="email" autocomplete="email" required><label for="signup-password">Password (at least 8 characters)</label><input id="signup-password" type="password" minlength="8" autocomplete="new-password" required><button class="auth-primary" id="signup-submit" type="submit">Register</button></form>
+<form id="reset-form" hidden><h2>Reset your password</h2><label for="reset-email">Email address</label><input id="reset-email" type="email" autocomplete="email" required><button class="auth-primary" type="submit">Send reset link</button></form>\n<form id="password-update-form" hidden><h2>Choose a new password</h2><label for="new-password">New password (at least 8 characters)</label><input id="new-password" type="password" minlength="8" autocomplete="new-password" required><button class="auth-primary" type="submit">Update password</button></form>
+</div>
+<div id="signed-in-panel" class="account-panel" hidden><h2>Your account</h2><p><strong>Name:</strong> <span id="account-name"></span></p><p><strong>Email:</strong> <span id="account-email"></span></p><p><strong>Access:</strong> <span id="account-role"></span></p><button class="auth-primary" id="signout-button" type="button">Sign out</button></div>
+<p id="auth-status" class="auth-status" role="status" aria-live="polite"></p>
+<p class="auth-footnote">Your account details are managed by Supabase. Do not share your password. Student records will be connected to accounts in a later phase after the class and submission permissions are implemented.</p>
+</section>
+<p class="auth-footnote"><a class="auth-link" href="docs/PHASE-1-AUTH-FOUNDATION.md">Administrator setup guide</a></p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/auth.js"></script>
+<script src="assets/main.js"></script>
+</body></html>
