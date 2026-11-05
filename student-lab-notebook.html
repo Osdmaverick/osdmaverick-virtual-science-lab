@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Create, save and review your science investigation reports in your browser.">
+<meta name="theme-color" content="#071827">
+<title>My Lab Notebook | OSDMaverick Virtual Science Lab</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.notebook{max-width:1080px;margin:auto;padding:38px 6% 76px}.notebook-hero{padding:34px;border-radius:18px;background:linear-gradient(120deg,#0b2739,#145064);color:#fff}.notebook-hero p{color:#d4e7eb}.notebook-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:22px;margin-top:24px}.notebook-panel{padding:25px;border:1px solid #dce5eb;border-radius:16px;background:#fff;box-shadow:0 8px 28px #102b3d08}.notebook-panel h2{margin-top:0}.notebook label{display:block;margin:14px 0 6px;font-weight:700;color:#193447}.notebook input,.notebook select,.notebook textarea{box-sizing:border-box;width:100%;padding:12px 13px;border:1px solid #c9d7df;border-radius:9px;font:inherit;color:#152b3a;background:#fff}.notebook textarea{min-height:90px;resize:vertical}.notebook input:focus-visible,.notebook select:focus-visible,.notebook textarea:focus-visible{outline:3px solid #0c9b8f;outline-offset:2px}.notebook .field-hint{font-size:.82rem;color:#637987;margin:5px 0}.notebook-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.notebook button{border:0;border-radius:9px;padding:11px 16px;font:700 .92rem inherit;cursor:pointer}.notebook .save-button{background:#087d73;color:white}.notebook .secondary-button{background:#e8f3f2;color:#0b514e}.notebook .delete-button{background:#fff0ed;color:#a23b2b}.report-list{display:grid;gap:12px}.report-card{padding:15px;border:1px solid #dce5eb;border-radius:12px}.report-card h3{margin:0 0 5px;font-size:1.05rem}.report-card p{margin:3px 0;color:#607482;font-size:.87rem}.report-card .notebook-actions{margin-top:10px}.empty-state{padding:22px;text-align:center;background:#f3f7f8;border-radius:12px;color:#607482}.privacy-note{margin-top:20px;padding:14px 16px;background:#edf7f5;border-left:4px solid #087d73;border-radius:8px;color:#315b5a;font-size:.88rem}.notebook-status{min-height:1.4em;color:#087d73;font-weight:700;font-size:.9rem}.notebook-footer{margin-top:25px;color:#657986;font-size:.84rem}
+@media(max-width:760px){.notebook-grid{grid-template-columns:1fr}.notebook{padding:25px 5% 55px}.notebook-panel{padding:19px}}
+@media print{header,.notebook-hero,.saved-panel,.notebook-actions,.privacy-note,.notebook-footer{display:none!important}.notebook{padding:0}.notebook-panel{border:0;box-shadow:none}.notebook-grid{display:block}}
+</style>
+</head>
+<body>
+<header class="site-header"><a class="brand" href="index.html">OSDMAVERICK <span>VIRTUAL SCIENCE LAB</span></a><button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">☰</button><nav class="nav" id="primary-navigation" aria-label="Main navigation"><a href="index.html">Home</a><a href="grade-levels.html">Explore labs</a><a href="student-lab-notebook.html" aria-current="page">My lab notebook</a></nav></header>
+<main class="notebook">
+<a href="index.html">← Back to home</a>
+<section class="notebook-hero"><p class="eyebrow">STUDENT WORKSPACE</p><h1>My lab notebook</h1><p>Record your predictions, observations and evidence. Save an investigation report, return to it later on this browser, or print a copy for class.</p></section>
+<div class="notebook-grid">
+<section class="notebook-panel"><h2 id="form-heading">New investigation report</h2>
+<form id="report-form">
+<input type="hidden" id="report-id">
+<label for="report-title">Investigation title</label><input id="report-title" maxlength="120" required placeholder="e.g. How does force affect motion?">
+<div class="notebook-grid" style="grid-template-columns:1fr 1fr;gap:12px;margin:0"><div><label for="report-grade">Grade</label><select id="report-grade"><option value="">Select grade</option><option value="Grade 4">Grade 4</option><option value="Grade 5">Grade 5</option><option value="Grade 6">Grade 6</option><option value="Grade 7">Grade 7</option><option value="Grade 8">Grade 8</option><option value="Grade 9">Grade 9</option><option value="Grade 10">Grade 10</option><option value="Grade 11">Grade 11</option><option value="Grade 12">Grade 12</option></select></div><div><label for="report-subject">Subject</label><select id="report-subject"><option value="">Select subject</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>Earth &amp; Space Science</option></select></div></div>
+<label for="report-question">Question or objective</label><textarea id="report-question" maxlength="1500" placeholder="What are you trying to find out?"></textarea>
+<label for="report-prediction">My prediction</label><textarea id="report-prediction" maxlength="2000" placeholder="What do you think will happen, and why?"></textarea>
+<label for="report-method">Method and variables</label><textarea id="report-method" maxlength="2500" placeholder="What did you change, measure or keep the same?"></textarea>
+<label for="report-observations">Observations and results</label><textarea id="report-observations" maxlength="3000" placeholder="Record measurements, patterns and what happened."></textarea>
+<label for="report-evidence">Evidence and data</label><textarea id="report-evidence" maxlength="3000" placeholder="Include values, comparisons or examples that support your findings."></textarea>
+<label for="report-conclusion">Conclusion</label><textarea id="report-conclusion" maxlength="2500" placeholder="What did you learn? Does the evidence support your prediction?"></textarea>
+<p id="form-status" class="notebook-status" role="status" aria-live="polite"></p>
+<div class="notebook-actions"><button class="save-button" type="submit">Save report</button><button class="secondary-button" type="button" id="print-report">Print report</button><button class="secondary-button" type="button" id="clear-form">Clear form</button></div>
+</form></section>
+<aside class="notebook-panel saved-panel"><h2>Saved reports</h2><p class="field-hint">Reports saved in this browser appear here.</p><label for="report-filter">Find a report</label><input id="report-filter" type="search" placeholder="Search titles or subjects">
+<div id="report-list" class="report-list" aria-live="polite"><div class="empty-state">No reports saved yet. Complete the form and select Save report.</div></div>
+<div class="notebook-actions"><button class="secondary-button" type="button" id="export-reports">Export all reports</button></div>
+</aside></div>
+<p class="privacy-note"><strong>Your work stays on this device.</strong> Reports are stored in this browser using local storage. They are not uploaded to a school account or cloud server, and may not appear on another device or browser. Export a backup if you need to keep or transfer your work. Avoid entering sensitive personal information.</p>
+<p class="notebook-footer">Tip: Use the same browser and device to return to your saved reports. You can print an individual report or export all reports as a backup file.</p>
+</main>
+<script>
+(()=> {
+ const key='osdmaverick-lab-notebook-v1';
+ const $=id=>document.getElementById(id);
+ const fields=['title','grade','subject','question','prediction','method','observations','evidence','conclusion'];
+ let reports=[];
+ try{const stored=JSON.parse(localStorage.getItem(key)||'[]');reports=Array.isArray(stored)?stored.filter(r=>r&&typeof r==='object'&&typeof r.id==='string'):[]}catch(_){reports=[]}
+ const value=id=>$(id).value.trim();
+ const announce=message=>{$('form-status').textContent=message};
+ const persist=()=>{try{localStorage.setItem(key,JSON.stringify(reports));return true}catch(_){announce('Could not save. Browser storage may be full or unavailable. Export your work or free storage and try again.');return false}};
+ const reset=()=>{$('report-form').reset();$('report-id').value='';$('form-heading').textContent='New investigation report';announce('Form cleared.');};
+ const escapeHtml=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const render=()=>{
+  const q=value('report-filter').toLowerCase();
+  const shown=reports.filter(r=>[r.title,r.subject,r.grade].join(' ').toLowerCase().includes(q));
+  $('report-list').innerHTML=shown.length?shown.sort((a,b)=>b.updatedAt-a.updatedAt).map(r=>'<article class="report-card"><h3>'+escapeHtml(r.title)+'</h3><p>'+escapeHtml([r.grade,r.subject].filter(Boolean).join(' · ')||'Uncategorised')+'</p><p>Updated '+new Date(r.updatedAt).toLocaleString()+'</p><div class="notebook-actions"><button type="button" class="secondary-button" data-edit="'+escapeHtml(r.id)+'">Open / edit</button><button type="button" class="delete-button" data-delete="'+escapeHtml(r.id)+'">Delete</button></div></article>').join(''):'<div class="empty-state">'+(reports.length?'No reports match that search.':'No reports saved yet. Complete the form and select Save report.')+'</div>';
+ };
+ $('report-form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const title=value('report-title');if(!title){announce('Add an investigation title before saving.');return}
+  const id=$('report-id').value||('lab-'+Date.now()+'-'+Math.random().toString(36).slice(2,8));
+  const previous=reports.find(r=>r.id===id);
+  const report={id,updatedAt:Date.now(),createdAt:previous?.createdAt||Date.now()};
+  fields.forEach(f=>report[f]=value('report-'+f));
+  const index=reports.findIndex(r=>r.id===id);if(index>=0)reports[index]=report;else reports.push(report);
+  if(persist()){render();$('report-id').value=id;$('form-heading').textContent='Edit investigation report';announce('Report saved in this browser.');}
+ });
+ $('report-list').addEventListener('click',e=>{
+  const edit=e.target.closest('[data-edit]'),del=e.target.closest('[data-delete]');
+  if(edit){const r=reports.find(x=>x.id===edit.dataset.edit);if(!r)return;fields.forEach(f=>$('report-'+f).value=r[f]||'');$('report-id').value=r.id;$('form-heading').textContent='Edit investigation report';announce('Report opened. Save changes when finished.');$('report-title').focus();}
+  if(del){const r=reports.find(x=>x.id===del.dataset.delete);if(!r||!confirm('Delete the report "'+r.title+'"? This cannot be undone.'))return;reports=reports.filter(x=>x.id!==r.id);if(persist()){render();if($('report-id').value===r.id)reset();announce('Report deleted.');}}
+ });
+ $('report-filter').addEventListener('input',render);
+ $('clear-form').addEventListener('click',reset);
+ $('print-report').addEventListener('click',()=>window.print());
+ $('export-reports').addEventListener('click',()=>{
+  if(!reports.length){announce('There are no saved reports to export.');return}
+  const blob=new Blob([JSON.stringify({application:'OSDMaverick Virtual Science Lab',exportedAt:new Date().toISOString(),reports},null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='osdmaverick-lab-reports.json';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);announce('Report backup exported.');
+ });
+ render();
+})();
+</script>
+</body></html>
