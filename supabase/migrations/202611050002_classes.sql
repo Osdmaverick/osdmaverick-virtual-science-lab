@@ -1,3 +1,5 @@
+create extension if not exists pgcrypto with schema extensions;
+
 -- OSDMaverick Virtual Science Lab — Phase 2 class management
 -- Requires Phase 1 profiles migration.
 -- Join codes are stored separately so enrolled students cannot read/share them
