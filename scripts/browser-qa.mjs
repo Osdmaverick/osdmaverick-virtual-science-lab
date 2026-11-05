@@ -271,6 +271,86 @@ try {
     }
     checked.functional = (checked.functional || 0) + 1;
   }
+
+  // Verify the student notebook saves, restores, filters, edits and deletes reports.
+  await page.goto(`${baseUrl}/student-lab-notebook.html`, { waitUntil: "domcontentloaded" });
+  await page.evaluate(() => localStorage.clear());
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.locator("#report-title").fill("Browser QA investigation");
+  await page.locator("#report-grade").selectOption("Grade 7");
+  await page.locator("#report-subject").selectOption("Physics");
+  await page.locator("#report-prediction").fill("Acceleration increases with net force.");
+  await page.locator("#report-observations").fill("The measured acceleration increased.");
+  await page.locator("#report-conclusion").fill("The results support the prediction.");
+  await page.locator("#report-form button[type='submit']").click();
+  if (!(await page.locator("#report-list").innerText()).includes("Browser QA investigation")) {
+    failures.push("Student notebook did not display a newly saved report");
+  }
+  await page.reload({ waitUntil: "domcontentloaded" });
+  if (!(await page.locator("#report-list").innerText()).includes("Browser QA investigation")) {
+    failures.push("Student notebook did not restore a report after reload");
+  }
+  await page.locator("#report-filter").fill("Physics");
+  if (!(await page.locator("#report-list").innerText()).includes("Browser QA investigation")) {
+    failures.push("Student notebook report filter did not find the saved report");
+  }
+  await page.locator("[data-edit]").click();
+  await page.locator("#report-conclusion").fill("Edited conclusion saved by browser QA.");
+  await page.locator("#report-form button[type='submit']").click();
+  page.once("dialog", dialog => dialog.accept());
+  await page.locator("[data-delete]").click();
+  if (await page.locator("#report-list").innerText().then(text => text.includes("Browser QA investigation"))) {
+    failures.push("Student notebook did not delete a report");
+  }
+  const notebookState = await page.evaluate(() => localStorage.getItem("osdmaverick-lab-notebook-v1"));
+  if (notebookState !== "[]") failures.push("Student notebook did not persist the empty report list after deletion");
+  checked.notebook = 1;
+
+
+  // Verify the teacher workflow imports a student backup and saves rubric feedback.
+  await page.goto(`${baseUrl}/teacher-dashboard.html`, { waitUntil: "domcontentloaded" });
+  await page.evaluate(() => localStorage.clear());
+  const backup = {
+    application: "OSDMaverick Virtual Science Lab",
+    reports: [{
+      id: "qa-student-report-001",
+      title: "QA Forces Investigation",
+      grade: "Grade 7",
+      subject: "Physics",
+      question: "How does force affect acceleration?",
+      prediction: "More force increases acceleration.",
+      method: "Change force while holding mass constant.",
+      observations: "Acceleration increased as force increased.",
+      evidence: "At double force, acceleration doubled.",
+      conclusion: "The results support the prediction."
+    }]
+  };
+  await page.locator("#import-file").setInputFiles({
+    name: "student-report-backup.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(JSON.stringify(backup))
+  });
+  await page.locator("#student-name").fill("QA Student");
+  await page.locator("#import-button").click();
+  if (!(await page.locator("#submission-list").innerText()).includes("QA Forces Investigation")) {
+    failures.push("Teacher dashboard did not import the student report backup");
+  }
+  await page.locator("[data-open]").click();
+  await page.locator("#score-question").selectOption("3");
+  await page.locator("#score-method").selectOption("4");
+  await page.locator("#score-evidence").selectOption("3");
+  await page.locator("#score-conclusion").selectOption("4");
+  await page.locator("#teacher-feedback").fill("Clear investigation. Explain how the evidence supports the conclusion.");
+  await page.locator("#assessment-form button[type='submit']").click();
+  if (!(await page.locator("#submission-list").innerText()).includes("14/16")) {
+    failures.push("Teacher dashboard did not save and display the rubric total");
+  }
+  const gradebookState = await page.evaluate(() => JSON.parse(localStorage.getItem("osdmaverick-teacher-gradebook-v1") || "[]"));
+  if (gradebookState.length !== 1 || gradebookState[0].assessment?.feedback !== "Clear investigation. Explain how the evidence supports the conclusion.") {
+    failures.push("Teacher dashboard did not persist assessment scores and feedback");
+  }
+  checked.teacherDashboard = 1;
+
 } catch (error) {
   failures.push(`Browser QA runner error: ${error.stack || error.message}`);
 } finally {
