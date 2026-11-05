@@ -13,16 +13,8 @@ create table if not exists public.assignments (
   status text not null default 'draft' check (status in ('draft', 'published', 'archived')),
   published_at timestamptz,
   created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now(),
-  constraint assignments_teacher_matches_class
-    foreign key (class_id, teacher_id)
-    references public.classes(id, teacher_id)
-    on delete cascade
+  updated_at timestamptz not null default now()
 );
-
--- The composite FK above requires a matching unique key on classes.
-create unique index if not exists classes_id_teacher_id_uidx
-  on public.classes(id, teacher_id);
 
 create table if not exists public.assignment_submissions (
   id uuid primary key default gen_random_uuid(),
@@ -147,9 +139,9 @@ grant update (title, description, instructions, due_at, points_possible, status,
 grant delete on public.assignments to authenticated;
 
 grant select on public.assignment_submissions to authenticated;
-grant insert (assignment_id, student_id, response, status, submitted_at)
+grant insert (assignment_id, student_id, response, status)
   on public.assignment_submissions to authenticated;
-grant update (response, status, submitted_at)
+grant update (response, status)
   on public.assignment_submissions to authenticated;
 grant update (score, teacher_feedback, graded_at, graded_by)
   on public.assignment_submissions to authenticated;
