@@ -19,7 +19,7 @@
   }
 
   const client = window.supabase.createClient(config.url, config.publishableKey);
-  const forms = ['signin-form', 'signup-form', 'reset-form'];
+  const forms = ['signin-form', 'signup-form', 'reset-form', 'password-update-form'];
   const showForm = (id) => {
     forms.forEach(formId => { $(formId).hidden = formId !== id; });
     document.querySelectorAll('[data-auth-view]').forEach(button => {
@@ -87,7 +87,7 @@
     setStatus('If an account exists for that email, a password-reset link has been sent.');
   });
 
-  $('signout-button').addEventListener('click', async () => {
+  $('password-update-form').addEventListener('submit', async event => {\n    event.preventDefault();\n    const password = $('new-password').value;\n    if (password.length < 8) return setStatus('Use a password with at least 8 characters.', true);\n    const { error } = await client.auth.updateUser({ password });\n    if (error) return setStatus(error.message, true);\n    $('new-password').value = '';\n    setStatus('Your password has been updated.');\n    const { data } = await client.auth.getSession();\n    await renderSession(data.session);\n  });\n\n  $('signout-button').addEventListener('click', async () => {
     const { error } = await client.auth.signOut();
     if (error) return setStatus(error.message, true);
     await renderSession(null);
