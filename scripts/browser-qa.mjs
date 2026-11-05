@@ -271,6 +271,41 @@ try {
     }
     checked.functional = (checked.functional || 0) + 1;
   }
+
+  // Verify the student notebook saves, restores, filters, edits and deletes reports.
+  await page.goto(`${baseUrl}/student-lab-notebook.html`, { waitUntil: "domcontentloaded" });
+  await page.evaluate(() => localStorage.clear());
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.locator("#report-title").fill("Browser QA investigation");
+  await page.locator("#report-grade").selectOption("Grade 7");
+  await page.locator("#report-subject").selectOption("Physics");
+  await page.locator("#report-prediction").fill("Acceleration increases with net force.");
+  await page.locator("#report-observations").fill("The measured acceleration increased.");
+  await page.locator("#report-conclusion").fill("The results support the prediction.");
+  await page.locator("#report-form button[type='submit']").click();
+  if (!(await page.locator("#report-list").innerText()).includes("Browser QA investigation")) {
+    failures.push("Student notebook did not display a newly saved report");
+  }
+  await page.reload({ waitUntil: "domcontentloaded" });
+  if (!(await page.locator("#report-list").innerText()).includes("Browser QA investigation")) {
+    failures.push("Student notebook did not restore a report after reload");
+  }
+  await page.locator("#report-filter").fill("Physics");
+  if (!(await page.locator("#report-list").innerText()).includes("Browser QA investigation")) {
+    failures.push("Student notebook report filter did not find the saved report");
+  }
+  await page.locator("[data-edit]").click();
+  await page.locator("#report-conclusion").fill("Edited conclusion saved by browser QA.");
+  await page.locator("#report-form button[type='submit']").click();
+  await page.locator("[data-delete]").click();
+  page.once("dialog", dialog => dialog.accept());
+  if (await page.locator("#report-list").innerText().then(text => text.includes("Browser QA investigation"))) {
+    failures.push("Student notebook did not delete a report");
+  }
+  const notebookState = await page.evaluate(() => localStorage.getItem("osdmaverick-lab-notebook-v1"));
+  if (notebookState !== "[]") failures.push("Student notebook did not persist the empty report list after deletion");
+  checked.notebook = 1;
+
 } catch (error) {
   failures.push(`Browser QA runner error: ${error.stack || error.message}`);
 } finally {
