@@ -360,6 +360,14 @@ try {
   }
   checked.authSetup = 1;
 
+  // Verify class management presents safe setup guidance before Supabase is configured.
+  await page.goto(`${baseUrl}/classes.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#classes-status")?.textContent?.includes("Class management is not connected yet"), null, { timeout: 5000 });
+  if (!(await page.locator("#classes-status").innerText()).includes("Phase 2 administrator guides")) {
+    failures.push("Class management did not show safe backend setup guidance when unconfigured");
+  }
+  checked.classManagementSetup = 1;
+
 } catch (error) {
   failures.push(`Browser QA runner error: ${error.stack || error.message}`);
 } finally {

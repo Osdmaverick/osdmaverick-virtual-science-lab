@@ -121,6 +121,47 @@ for (const href of uniqueLinks) {
   });
 }
 
+// Validate the new authentication and class-management entry points without
+// requiring live Supabase credentials or a remote project.
+for (const relativePath of ["assets/auth.js", "assets/classes.js"]) {
+  try {
+    new vm.Script(read(relativePath), { filename: relativePath });
+    report(`JavaScript syntax: ${relativePath}`);
+  } catch (error) {
+    fail(`JavaScript syntax: ${relativePath}`, error.message);
+  }
+}
+
+for (const relativePath of ["auth.html", "classes.html"]) {
+  try {
+    const html = read(relativePath);
+    if (!/name=["']viewport["']/i.test(html)) fail("viewport metadata", relativePath);
+    if (!/href=["']assets\/styles\.css["']/i.test(html)) fail("shared stylesheet reference", relativePath);
+    const ids = [...html.matchAll(/\sid=["']([^"']+)["']/gi)].map(match => match[1]);
+    const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
+    if (duplicates.length) fail("duplicate HTML IDs", `${relativePath}: ${[...new Set(duplicates)].join(", ")}`);
+    report(`account/class page structure: ${relativePath}`);
+  } catch (error) {
+    fail("account/class page existence", error.message);
+  }
+}
+
+try {
+  const classSql = read("supabase/migrations/202611050002_classes.sql");
+  for (const required of [
+    "enable row level security",
+    "current_user_is_teacher",
+    "join_class",
+    "class_invite_codes",
+    "grant execute on function public.join_class(text) to authenticated"
+  ]) {
+    if (!classSql.toLowerCase().includes(required)) fail("class migration security feature", `missing ${required}`);
+  }
+  report("class migration security markers");
+} catch (error) {
+  fail("class migration existence", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
