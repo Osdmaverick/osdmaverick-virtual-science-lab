@@ -19,9 +19,6 @@
   }
 
   const client = window.supabase.createClient(config.url, config.publishableKey);
-  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-  }[ch]));
   const show = (id, visible) => { $(id).hidden = !visible; };
 
   async function loadClasses(user, role) {
