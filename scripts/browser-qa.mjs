@@ -368,6 +368,15 @@ try {
   }
   checked.classManagementSetup = 1;
 
+
+  // Verify the assignments workspace explains backend setup safely when unconfigured.
+  await page.goto(`${baseUrl}/assignments.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#assignment-status")?.textContent?.includes("Assignments are not connected yet"), null, { timeout: 5000 });
+  if (!(await page.locator("#assignment-status").innerText()).includes("three database migrations")) {
+    failures.push("Assignments page did not show safe Supabase setup guidance when unconfigured");
+  }
+  checked.assignmentsSetup = 1;
+
 } catch (error) {
   failures.push(`Browser QA runner error: ${error.stack || error.message}`);
 } finally {

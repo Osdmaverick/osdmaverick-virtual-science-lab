@@ -123,7 +123,7 @@ for (const href of uniqueLinks) {
 
 // Validate the new authentication and class-management entry points without
 // requiring live Supabase credentials or a remote project.
-for (const relativePath of ["assets/auth.js", "assets/classes.js"]) {
+for (const relativePath of ["assets/auth.js", "assets/classes.js", "assets/assignments.js"]) {
   try {
     new vm.Script(read(relativePath), { filename: relativePath });
     report(`JavaScript syntax: ${relativePath}`);
@@ -132,7 +132,7 @@ for (const relativePath of ["assets/auth.js", "assets/classes.js"]) {
   }
 }
 
-for (const relativePath of ["auth.html", "classes.html"]) {
+for (const relativePath of ["auth.html", "classes.html", "assignments.html"]) {
   try {
     const html = read(relativePath);
     if (!/name=["']viewport["']/i.test(html)) fail("viewport metadata", relativePath);
@@ -160,6 +160,28 @@ try {
   report("class migration security markers");
 } catch (error) {
   fail("class migration existence", error.message);
+}
+
+try {
+  const assignmentSql = read("supabase/migrations/202611050003_assignments.sql");
+  for (const required of [
+    "enable row level security",
+    "create table if not exists public.assignments",
+    "create table if not exists public.assignment_submissions",
+    "enrolled students read published assignments",
+    "students update ungraded work",
+    "class teachers grade submissions",
+    "grant update (score, teacher_feedback, graded_at, graded_by)",
+    "grant update (response, status)"
+  ]) {
+    if (!assignmentSql.toLowerCase().includes(required)) {
+      fail("assignment migration security feature", `missing ${required}`);
+    }
+  }
+  for (const required of ["assignments.html", "assets/assignments.js"]) read(required);
+  report("assignment migration security markers and workspace files");
+} catch (error) {
+  fail("assignment migration existence", error.message);
 }
 
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;

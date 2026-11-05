@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Create science assignments, collect student work and provide feedback in the OSDMaverick Virtual Science Lab.">
+<meta name="theme-color" content="#071827"><title>Assignments | OSDMaverick Virtual Science Lab</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.assignments-wrap{max-width:1120px;margin:40px auto 72px;padding:0 5%}.assignments-hero{padding:30px;border-radius:18px;background:linear-gradient(120deg,#0b2739,#145064);color:#fff}.assignments-hero p{color:#d4e7eb}.assignment-panel{margin-top:22px;padding:24px;border:1px solid #dce5eb;border-radius:15px;background:#fff;box-shadow:0 8px 28px #102b3d08}.assignment-panel h2{margin-top:0}.assignment-panel label{display:block;margin:12px 0 6px;font-weight:700}.assignment-panel input,.assignment-panel select,.assignment-panel textarea{box-sizing:border-box;width:100%;padding:11px 12px;border:1px solid #c9d7df;border-radius:9px;font:inherit}.assignment-panel textarea{min-height:100px;resize:vertical}.assignment-panel :focus-visible{outline:3px solid #0c9b8f;outline-offset:2px}.assignment-panel button{border:0;border-radius:9px;padding:10px 14px;background:#087d73;color:#fff;font:inherit;font-weight:700;cursor:pointer}.assignment-panel button.secondary{background:#e8f3f2;color:#0b514e}.assignment-panel button.danger{background:#fff0ed;color:#a23b2b}.assignment-panel button:disabled{opacity:.55;cursor:wait}.assignment-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.assignment-toolbar button{margin:0}.assignment-status{min-height:1.5em;color:#087d73;font-weight:650}.assignment-status[data-state=error]{color:#a23b2b}.assignment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px}.assignment-card{padding:18px;border:1px solid #dce5eb;border-radius:12px;background:#fbfcfd;min-width:0}.assignment-card h3{margin:0 0 6px}.assignment-card p{white-space:pre-wrap;overflow-wrap:anywhere}.assignment-meta{color:#617786;font-size:.88rem}.assignment-tag{display:inline-block;padding:4px 8px;border-radius:20px;background:#edf3f5;color:#34515f;font-size:.78rem;font-weight:700}.assignment-card form{margin-top:12px}.assignment-card textarea{min-height:115px}.assignment-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.submission-review{padding:13px;margin-top:12px;border:1px solid #dce5eb;border-radius:10px;background:#fff}.submission-review label{margin:8px 0 4px}.submission-review textarea{min-height:70px}.submission-review .response-text{padding:10px;background:#f3f7f8;border-radius:8px;white-space:pre-wrap;overflow-wrap:anywhere}.assignment-empty{padding:22px;border-radius:12px;background:#f3f7f8;color:#607482;text-align:center}.assignment-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.assignment-note{font-size:.87rem;color:#617786}.assignment-due{font-weight:700;color:#365867}
+@media(max-width:700px){.assignment-form-grid{grid-template-columns:1fr}.assignment-panel{padding:18px}}
+</style></head>
+<body>
+<header class="site-header"><a class="brand" href="index.html">OSDMAVERICK <span>VIRTUAL SCIENCE LAB</span></a><button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">☰</button><nav class="nav" id="primary-navigation" aria-label="Main navigation"><a href="index.html">Home</a><a href="grade-levels.html">Explore labs</a><a href="student-lab-notebook.html">Student notebook</a><a href="teacher-dashboard.html">Teacher dashboard</a><a href="classes.html">My classes</a><a href="auth.html">Account</a></nav></header>
+<main class="assignments-wrap">
+<a href="classes.html">← Back to classes</a>
+<section class="assignments-hero"><p class="eyebrow">PHASE 3 · LEARNING ACTIVITIES</p><h1>Assignments and submissions</h1><p>Teachers create and publish class work. Students complete assignments and receive feedback from their teacher.</p></section>
+<section class="assignment-panel">
+<div class="assignment-toolbar"><p id="assignment-account">Checking account…</p><button class="secondary" id="assignment-signout" type="button">Sign out</button></div>
+<p id="assignment-status" class="assignment-status" role="status" aria-live="polite"></p>
+<div id="assignment-login-prompt" hidden><p>Sign in to view or manage assignments.</p><a href="auth.html">Go to account sign in</a></div>
+<div id="assignment-content" hidden>
+<section id="teacher-assignment-create" hidden>
+<h2>Create an assignment</h2>
+<form id="assignment-create-form">
+<label for="assignment-class">Class</label><select id="assignment-class" required><option value="">Choose a class</option></select>
+<label for="assignment-title">Assignment title</label><input id="assignment-title" maxlength="160" minlength="3" required placeholder="e.g. Investigating photosynthesis">
+<label for="assignment-description">Short description</label><textarea id="assignment-description" maxlength="2000" rows="2" placeholder="Briefly describe the learning goal"></textarea>
+<label for="assignment-instructions">Instructions for students</label><textarea id="assignment-instructions" maxlength="12000" rows="5" placeholder="Explain the task, steps, and what students should submit." required></textarea>
+<div class="assignment-form-grid"><div><label for="assignment-due">Due date and time (optional)</label><input id="assignment-due" type="datetime-local"></div><div><label for="assignment-points">Points available</label><input id="assignment-points" type="number" min="1" max="1000" value="100" required></div></div>
+<div class="assignment-actions"><button id="assignment-save-draft" type="submit" name="intent" value="draft">Save as draft</button><button id="assignment-publish" class="secondary" type="submit" name="intent" value="published">Publish assignment</button><button id="assignment-cancel-edit" class="secondary" type="button" hidden>Cancel edit</button></div>
+</form>
+</section>
+<section class="assignment-panel"><h2 id="assignment-list-heading">Your assignments</h2><div id="assignment-list" class="assignment-grid"><p class="assignment-empty">Loading assignments…</p></div></section>
+</div>
+</section>
+<p class="assignment-note">Assignments and submissions are stored in Supabase. Apply the Phase 1, Phase 2 and Phase 3 database migrations in order. See the <a href="docs/PHASE-3-ASSIGNMENTS.md">Phase 3 administrator guide</a>.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="assets/supabase-config.js"></script><script src="assets/assignments.js"></script><script src="assets/main.js"></script>
+</body></html>
