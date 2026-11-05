@@ -27,6 +27,10 @@ Do not apply Phase 3 before Phase 1 and Phase 2.
 
 Student browser permissions do not include score, feedback, grader identity or grading timestamps. Teachers receive separate column-level update permission for grading fields. Students cannot change a submission after it has been graded.
 
+## Teacher and student workspace
+
+Open `assignments.html` after signing in. Teachers can create assignments, save drafts, publish, edit, archive and delete them, then review submissions and save scores and feedback. Students see published assignments for their enrolled classes, save draft responses, submit work and read teacher feedback. Graded work is locked from further student editing.
+
 ## Verification boundary
 
 Automated repository checks can validate file structure and SQL security markers, but they do not execute PostgreSQL policies. Live verification requires the owner-created Supabase project and the migrations applied in order.
