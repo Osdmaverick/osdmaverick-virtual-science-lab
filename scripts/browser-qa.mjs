@@ -332,6 +332,7 @@ try {
   });
   await page.locator("#student-name").fill("QA Student");
   await page.locator("#import-button").click();
+  await page.waitForFunction(() => document.querySelector("#import-status")?.textContent?.includes("imported." ) || document.querySelector("#import-status")?.textContent?.startsWith("Import failed:"), null, { timeout: 5000 });
   if (!(await page.locator("#submission-list").innerText()).includes("QA Forces Investigation")) {
     failures.push("Teacher dashboard did not import the student report backup");
   }
