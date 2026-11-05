@@ -297,8 +297,8 @@ try {
   await page.locator("[data-edit]").click();
   await page.locator("#report-conclusion").fill("Edited conclusion saved by browser QA.");
   await page.locator("#report-form button[type='submit']").click();
-  await page.locator("[data-delete]").click();
   page.once("dialog", dialog => dialog.accept());
+  await page.locator("[data-delete]").click();
   if (await page.locator("#report-list").innerText().then(text => text.includes("Browser QA investigation"))) {
     failures.push("Student notebook did not delete a report");
   }
