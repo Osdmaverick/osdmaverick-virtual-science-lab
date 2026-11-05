@@ -21,6 +21,7 @@
   const client = window.supabase.createClient(config.url, config.publishableKey);
   let currentUser = null;
   let currentRole = null;
+  let editingAssignmentId = null;
   let classMap = new Map();
   const show = (id, visible) => { $(id).hidden = !visible; };
   const make = (tag, className, text) => {
@@ -202,6 +203,25 @@
         ' · ' + assignment.points_possible + ' points'));
       if (currentRole === 'teacher') {
         const actions = make('div', 'assignment-actions');
+        addButton(actions, 'Edit', 'secondary', () => {
+          editingAssignmentId = assignment.id;
+          $('assignment-class').value = assignment.class_id;
+          $('assignment-class').disabled = true;
+          $('assignment-title').value = assignment.title;
+          $('assignment-description').value = assignment.description || '';
+          $('assignment-instructions').value = assignment.instructions || '';
+          $('assignment-points').value = String(assignment.points_possible);
+          if (assignment.due_at) {
+            const localDate = new Date(new Date(assignment.due_at).getTime() - new Date(assignment.due_at).getTimezoneOffset() * 60000);
+            $('assignment-due').value = localDate.toISOString().slice(0,16);
+          } else $('assignment-due').value = '';
+          $('assignment-cancel-edit').hidden = false;
+          $('assignment-save-draft').textContent = 'Save changes';
+          $('assignment-publish').textContent = 'Save and publish';
+          $('assignment-list').scrollIntoView({behavior:'smooth',block:'start'});
+          $('assignment-title').focus();
+          setStatus('Editing “' + assignment.title + '”.');
+        });
         if (assignment.status === 'draft') {
           addButton(actions, 'Publish', '', async () => {
             const {error: updateError} = await client.from('assignments').update({
@@ -292,13 +312,36 @@
       status: intent,
       published_at: intent === 'published' ? new Date().toISOString() : null
     };
-    const {error} = await client.from('assignments').insert(payload);
+    const result = editingAssignmentId
+      ? await client.from('assignments').update({
+          title: payload.title, description: payload.description, instructions: payload.instructions,
+          due_at: payload.due_at, points_possible: payload.points_possible, status: payload.status,
+          published_at: intent === 'published' ? (new Date().toISOString()) : null
+        }).eq('id', editingAssignmentId)
+      : await client.from('assignments').insert(payload);
     buttons.forEach(button => button.disabled = false);
-    if (error) return setStatus('Assignment could not be created: ' + error.message, true);
+    if (result.error) return setStatus('Assignment could not be saved: ' + result.error.message, true);
+    const wasEditing = Boolean(editingAssignmentId);
+    editingAssignmentId = null;
     $('assignment-create-form').reset();
+    $('assignment-class').disabled = false;
     $('assignment-points').value = '100';
-    setStatus(intent === 'published' ? 'Assignment created and published.' : 'Assignment saved as a draft.');
+    $('assignment-cancel-edit').hidden = true;
+    $('assignment-save-draft').textContent = 'Save as draft';
+    $('assignment-publish').textContent = 'Publish assignment';
+    setStatus(wasEditing ? 'Assignment updated.' : (intent === 'published' ? 'Assignment created and published.' : 'Assignment saved as a draft.'));
     await loadAssignments();
+  });
+
+  $('assignment-cancel-edit').addEventListener('click', () => {
+    editingAssignmentId = null;
+    $('assignment-create-form').reset();
+    $('assignment-class').disabled = false;
+    $('assignment-points').value = '100';
+    $('assignment-cancel-edit').hidden = true;
+    $('assignment-save-draft').textContent = 'Save as draft';
+    $('assignment-publish').textContent = 'Publish assignment';
+    setStatus('Assignment editing cancelled.');
   });
 
   $('assignment-signout').addEventListener('click', async () => {
