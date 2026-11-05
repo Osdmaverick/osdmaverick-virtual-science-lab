@@ -107,7 +107,14 @@
     setStatus('You have signed out.');
   });
 
-  client.auth.onAuthStateChange((_event, session) => {
+  client.auth.onAuthStateChange((event, session) => {
+    if (event === 'PASSWORD_RECOVERY') {
+      $('auth-forms').hidden = false;
+      $('signed-in-panel').hidden = true;
+      showForm('password-update-form');
+      setStatus('Choose a new password for your account.');
+      return;
+    }
     renderSession(session);
   });
   client.auth.getSession().then(({ data, error }) => {
