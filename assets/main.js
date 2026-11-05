@@ -88,3 +88,16 @@ const toggle=document.querySelector('.menu-toggle');const nav=document.querySele
   field.addEventListener('input',filter);
   field.addEventListener('search',filter);
 })();
+
+
+/* Give learners a consistent route from every investigation to their report workspace. */
+(()=>{
+  const main=document.querySelector('main.lab');
+  if(!main||main.querySelector('.notebook-prompt')) return;
+  const hero=main.querySelector('.hero');
+  if(!hero) return;
+  const prompt=document.createElement('aside');
+  prompt.className='notebook-prompt';
+  prompt.innerHTML='<span><strong>Ready to record your results?</strong><small>Save your prediction, observations and conclusion in your lab notebook.</small></span><a href="student-lab-notebook.html">Open my lab notebook <span aria-hidden="true">→</span></a>';
+  hero.insertAdjacentElement('afterend',prompt);
+})();
