@@ -162,6 +162,27 @@ try {
   fail("class migration existence", error.message);
 }
 
+try {
+  const assignmentSql = read("supabase/migrations/202611050003_assignments.sql");
+  for (const required of [
+    "enable row level security",
+    "create table if not exists public.assignments",
+    "create table if not exists public.assignment_submissions",
+    "enrolled students read published assignments",
+    "students update ungraded work",
+    "class teachers grade submissions",
+    "grant update (score, teacher_feedback, graded_at, graded_by)",
+    "grant update (response, status)"
+  ]) {
+    if (!assignmentSql.toLowerCase().includes(required)) {
+      fail("assignment migration security feature", `missing ${required}`);
+    }
+  }
+  report("assignment migration security markers");
+} catch (error) {
+  fail("assignment migration existence", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
