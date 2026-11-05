@@ -27,7 +27,7 @@
 <label for="assignment-description">Short description</label><textarea id="assignment-description" maxlength="2000" rows="2" placeholder="Briefly describe the learning goal"></textarea>
 <label for="assignment-instructions">Instructions for students</label><textarea id="assignment-instructions" maxlength="12000" rows="5" placeholder="Explain the task, steps, and what students should submit." required></textarea>
 <div class="assignment-form-grid"><div><label for="assignment-due">Due date and time (optional)</label><input id="assignment-due" type="datetime-local"></div><div><label for="assignment-points">Points available</label><input id="assignment-points" type="number" min="1" max="1000" value="100" required></div></div>
-<div class="assignment-actions"><button id="assignment-save-draft" type="submit" name="intent" value="draft">Save as draft</button><button id="assignment-publish" class="secondary" type="submit" name="intent" value="published">Publish assignment</button></div>
+<div class="assignment-actions"><button id="assignment-save-draft" type="submit" name="intent" value="draft">Save as draft</button><button id="assignment-publish" class="secondary" type="submit" name="intent" value="published">Publish assignment</button><button id="assignment-cancel-edit" class="secondary" type="button" hidden>Cancel edit</button></div>
 </form>
 </section>
 <section class="assignment-panel"><h2 id="assignment-list-heading">Your assignments</h2><div id="assignment-list" class="assignment-grid"><p class="assignment-empty">Loading assignments…</p></div></section>
