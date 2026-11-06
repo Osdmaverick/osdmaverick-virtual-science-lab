@@ -306,7 +306,8 @@ try {
     "students read published class quizzes",
     "teachers manage quiz answer keys",
     "create or replace function public.submit_class_quiz",
-    "validate_class_quiz_publish",\n    "public.class_quiz_attempts",
+    "validate_class_quiz_publish",
+    "public.class_quiz_attempts",
     "security definer",
     "public.is_class_student(v_class)",
     "revoke all on function public.submit_class_quiz(uuid,jsonb) from public,anon"
