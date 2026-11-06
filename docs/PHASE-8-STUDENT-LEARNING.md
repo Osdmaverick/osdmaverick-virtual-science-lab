@@ -13,7 +13,7 @@
 Apply migrations 1–8 in order. Phase 8 adds `public.student_content_progress` and a composite class/content foreign key.
 - A student can record progress only for published lesson, practical or resource items in a class they have joined.
 - Students cannot alter their student ID, class ID or content item ID after inserting a progress row.
-- Teachers can read progress only in classes they own.
+- Teachers can read progress only in classes they own. The existing Learning Progress dashboard now includes completion totals and recent lesson/practical activity for teachers and students.
 - Anonymous access is revoked; authenticated grants are restricted to required columns.
 - Row Level Security is the access-control boundary.
 
