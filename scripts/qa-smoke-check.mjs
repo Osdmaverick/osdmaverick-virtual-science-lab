@@ -184,6 +184,34 @@ try {
   fail("assignment migration existence", error.message);
 }
 
+// Validate Phase 4 cloud sync client and database access controls.
+try {
+  new vm.Script(read("assets/cloud-sync.js"), { filename: "assets/cloud-sync.js" });
+  const syncSql = read("supabase/migrations/202611060001_lab_notebook_sync.sql").toLowerCase();
+  for (const required of [
+    "create table if not exists public.lab_reports",
+    "create table if not exists public.lab_report_assessments",
+    "enable row level security",
+    "students manage own class reports",
+    "class teachers read student reports",
+    "class teachers manage report assessments",
+    "students read own report assessments",
+    "public.is_class_student(class_id)",
+    "public.is_class_teacher(r.class_id)"
+  ]) {
+    if (!syncSql.includes(required)) fail("cloud sync migration security feature", `missing ${required}`);
+  }
+  for (const relativePath of ["student-lab-notebook.html", "teacher-dashboard.html"]) {
+    const html = read(relativePath);
+    if (!html.includes('src="assets/cloud-sync.js"')) fail("cloud sync page integration", relativePath);
+    if (!html.includes('src="assets/supabase-config.js"')) fail("cloud sync config integration", relativePath);
+  }
+  read("docs/PHASE-4-CLOUD-SYNC.md");
+  report("Phase 4 cloud sync syntax, migration security and page integration");
+} catch (error) {
+  fail("Phase 4 cloud sync validation", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
