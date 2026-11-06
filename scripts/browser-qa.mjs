@@ -414,6 +414,14 @@ try {
   if (await page.locator("#learning-workspace").isVisible()) failures.push("Student learning workspace exposed content without backend configuration");
   checked.studentLearningSetup = 1;
 
+  // Class quiz builder must explain setup safely before Supabase is configured.
+  await page.goto(`${baseUrl}/class-quizzes.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#cq-status")?.textContent?.includes("Class quizzes are not connected yet"), null, { timeout: 5000 });
+  if (!(await page.locator("#cq-status").innerText()).includes("migrations 1–9")) {
+    failures.push("Class quiz page did not show safe Supabase setup guidance when unconfigured");
+  }
+  checked.classQuizzesSetup = 1;
+
   // Progress analytics must fail safely when Supabase is not configured.
   await page.goto(`${baseUrl}/progress.html`, { waitUntil: "domcontentloaded" });
   await page.waitForFunction(() => document.querySelector("#progress-status")?.textContent?.includes("Supabase is not configured"), null, { timeout: 5000 });

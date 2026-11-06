@@ -294,6 +294,37 @@ try {
   fail("Phase 8 student learning validation", error.message);
 }
 
+// Validate Phase 9 teacher-built class quizzes and server-side marking.
+try {
+  new vm.Script(read("assets/class-quizzes.js"), { filename: "assets/class-quizzes.js" });
+  const quizSql = read("supabase/migrations/202611060005_class_quiz_builder.sql").toLowerCase();
+  for (const required of [
+    "create table if not exists public.class_quizzes",
+    "create table if not exists public.class_quiz_questions",
+    "create table if not exists public.class_quiz_answer_keys",
+    "create table if not exists public.class_quiz_attempts",
+    "students read published class quizzes",
+    "teachers manage quiz answer keys",
+    "create or replace function public.submit_class_quiz",
+    "validate_class_quiz_publish",
+    "public.class_quiz_attempts",
+    "security definer",
+    "public.is_class_student(v_class)",
+    "revoke all on function public.submit_class_quiz(uuid,jsonb) from public,anon"
+  ]) {
+    if (!quizSql.includes(required)) fail("class quiz security feature", "missing " + required);
+  }
+  const quizHtml = read("class-quizzes.html");
+  for (const required of ['id="cq-form"','id="cq-bank"','id="cq-take-form"','id="cq-submit"','src="assets/class-quizzes.js"']) {
+    if (!quizHtml.includes(required)) fail("class quiz builder integration", "missing " + required);
+  }
+  if (!read("assets/progress.js").includes("class_quiz_attempts")) fail("class quiz analytics integration", "progress dashboard does not read secure class quiz attempts");
+  read("docs/PHASE-9-CLASS-QUIZZES.md");
+  report("Phase 9 quiz builder syntax, server marking and RLS integration");
+} catch (error) {
+  fail("Phase 9 class quiz validation", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
