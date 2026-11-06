@@ -60,7 +60,7 @@
 
   function resetForm() {
     editingId = null;
-    $("content-form").reset();
+    $("content-form").reset();\n    $("content-class").disabled = false;
     $("content-form-heading").textContent = "Create teaching content";
     $("content-cancel-edit").hidden = true;
     updateTypeFields();
@@ -72,7 +72,7 @@
     const url = $("content-url").value.trim();
     if (url && !/^https?:\/\//i.test(url)) throw new Error("Resource links must begin with https:// or http://.");
     if (type === "practical" && !lines($("content-procedure").value).length) throw new Error("Add at least one practical procedure step.");
-    if (type === "question" && (options.length < 2 || options.length > 6)) throw new Error("Add between two and six answer options.");
+    if (type === "question" && (options.length < 2 || options.length > 6)) throw new Error("Add between two and six answer options.");\n    if (type === "question" && Number($("content-correct").value) > options.length) throw new Error("Choose a correct option that exists in your answer list.");\n    if (type === "question" && $("content-body").value.trim().length > 3000) throw new Error("Question prompts must be 3,000 characters or fewer.");
     return {
       class_id: $("content-class").value,
       teacher_id: user.id,
@@ -170,7 +170,7 @@
 
   function beginEdit(item) {
     editingId = item.id;
-    $("content-class").value = item.class_id;
+    $("content-class").value = item.class_id;\n    $("content-class").disabled = true;
     $("content-type").value = item.content_type;
     $("content-grade").value = String(item.grade_level);
     $("content-subject").value = item.subject;
