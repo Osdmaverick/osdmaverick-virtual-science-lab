@@ -118,6 +118,34 @@ drop trigger if exists class_quizzes_set_updated_at on public.class_quizzes;
 create trigger class_quizzes_set_updated_at before update on public.class_quizzes
 for each row execute function public.set_class_quiz_updated_at();
 
+create or replace function public.validate_class_quiz_publish()
+returns trigger language plpgsql set search_path=public
+as $
+declare
+  v_questions integer;
+  v_valid_keys integer;
+begin
+  if new.status='published' then
+    select count(*) into v_questions
+      from public.class_quiz_questions q where q.quiz_id=new.id;
+    select count(*) into v_valid_keys
+      from public.class_quiz_questions q
+      join public.class_quiz_answer_keys k on k.question_id=q.id
+      where q.quiz_id=new.id
+        and k.correct_option between 1 and cardinality(q.options);
+    if v_questions=0 or v_valid_keys<>v_questions then
+      raise exception 'A quiz needs at least one question and a valid answer key for every question before publishing.';
+    end if;
+  end if;
+  return new;
+end;
+$;
+
+drop trigger if exists class_quizzes_validate_publish on public.class_quizzes;
+create trigger class_quizzes_validate_publish
+before insert or update of status on public.class_quizzes
+for each row execute function public.validate_class_quiz_publish();
+
 create or replace function public.submit_class_quiz(p_quiz_id uuid,p_answers jsonb)
 returns table(attempt_id uuid,score integer,total integer,percentage integer)
 language plpgsql security definer set search_path=public
