@@ -123,7 +123,7 @@ for (const href of uniqueLinks) {
 
 // Validate the new authentication and class-management entry points without
 // requiring live Supabase credentials or a remote project.
-for (const relativePath of ["assets/auth.js", "assets/classes.js", "assets/assignments.js"]) {
+for (const relativePath of ["assets/auth.js", "assets/classes.js", "assets/assignments.js", "assets/content-studio.js"]) {
   try {
     new vm.Script(read(relativePath), { filename: relativePath });
     report(`JavaScript syntax: ${relativePath}`);
@@ -240,6 +240,32 @@ try {
   report("Phase 6 progress analytics syntax and workspace integration");
 } catch (error) {
   fail("Phase 6 progress analytics validation", error.message);
+}
+
+// Validate Phase 7 teacher content management and class-scoped access controls.
+try {
+  new vm.Script(read("assets/content-studio.js"), { filename: "assets/content-studio.js" });
+  const contentSql = read("supabase/migrations/202611060003_teacher_content.sql").toLowerCase();
+  for (const required of [
+    "create table if not exists public.teacher_content_items",
+    "enable row level security",
+    "teachers manage content in their classes",
+    "students read published learning content",
+    "public.is_class_teacher(class_id)",
+    "public.is_class_student(class_id)",
+    "content_type in ('lesson','practical','resource','question')",
+    "revoke all on public.teacher_content_items from anon, authenticated"
+  ]) {
+    if (!contentSql.includes(required)) fail("content migration security feature", "missing " + required);
+  }
+  const contentHtml = read("content-studio.html");
+  for (const required of ['id="content-form"','id="content-class"','id="content-type"','id="content-list"','src="assets/content-studio.js"']) {
+    if (!contentHtml.includes(required)) fail("content studio integration", "missing " + required);
+  }
+  read("docs/PHASE-7-CONTENT-MANAGEMENT.md");
+  report("Phase 7 content studio syntax, migration security and page integration");
+} catch (error) {
+  fail("Phase 7 content management validation", error.message);
 }
 
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;

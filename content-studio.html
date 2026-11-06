@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Create and organise science lessons, practical activities, learning resources and question-bank items for your classes.">
+<meta name="theme-color" content="#071827"><title>Teaching Content | OSDMaverick Virtual Science Lab</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.content-wrap{max-width:1120px;margin:40px auto 72px;padding:0 5%}.content-hero{padding:30px;border-radius:18px;background:linear-gradient(120deg,#0b2739,#145064);color:#fff}.content-hero p{color:#d4e7eb}.content-panel{margin-top:22px;padding:24px;border:1px solid #dce5eb;border-radius:15px;background:#fff;box-shadow:0 8px 28px #102b3d08}.content-panel h2{margin-top:0}.content-panel label{display:block;margin:12px 0 6px;font-weight:700}.content-panel input,.content-panel select,.content-panel textarea{box-sizing:border-box;width:100%;padding:11px 12px;border:1px solid #c9d7df;border-radius:9px;font:inherit}.content-panel textarea{min-height:105px;resize:vertical}.content-panel :focus-visible{outline:3px solid #0c9b8f;outline-offset:2px}.content-panel button{border:0;border-radius:9px;padding:10px 14px;background:#087d73;color:#fff;font:inherit;font-weight:700;cursor:pointer}.content-panel button.secondary{background:#e8f3f2;color:#0b514e}.content-panel button.danger{background:#fff0ed;color:#a23b2b}.content-panel button:disabled{opacity:.55;cursor:wait}.content-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.content-toolbar button{margin:0}.content-status{min-height:1.5em;color:#087d73;font-weight:650}.content-status[data-state=error]{color:#a23b2b}.content-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px}.content-card{padding:18px;border:1px solid #dce5eb;border-radius:12px;background:#fbfcfd;min-width:0}.content-card h3{margin:8px 0}.content-card p{white-space:pre-wrap;overflow-wrap:anywhere}.content-meta{color:#617786;font-size:.88rem}.content-tag{display:inline-block;padding:4px 8px;border-radius:20px;background:#edf3f5;color:#34515f;font-size:.78rem;font-weight:700}.content-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.content-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.content-help{font-size:.88rem;color:#617786}.content-field[hidden],[hidden]{display:none!important}.content-empty{padding:22px;border-radius:12px;background:#f3f7f8;color:#607482;text-align:center}.content-link{overflow-wrap:anywhere}
+@media(max-width:700px){.content-form-grid{grid-template-columns:1fr}.content-panel{padding:18px}}
+</style></head>
+<body>
+<header class="site-header"><a class="brand" href="index.html">OSDMAVERICK <span>VIRTUAL SCIENCE LAB</span></a><button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">☰</button><nav class="nav" id="primary-navigation" aria-label="Main navigation"><a href="index.html">Home</a><a href="grade-levels.html">Explore labs</a><a href="classes.html">My classes</a><a href="assignments.html">Assignments</a><a href="teacher-dashboard.html">Teacher dashboard</a><a href="progress.html">Learning progress</a><a href="auth.html">Account</a></nav></header>
+<main class="content-wrap">
+<a href="teacher-dashboard.html">← Back to teacher dashboard</a>
+<section class="content-hero"><p class="eyebrow">PHASE 7 · TEACHING CONTENT</p><h1>Science content studio</h1><p>Build class-ready lessons, guided practicals and learning resources. Keep drafts private until you publish them to enrolled students. Reusable question-bank items remain teacher-only.</p></section>
+<section class="content-panel">
+<div class="content-toolbar"><p id="content-account">Checking account…</p><button class="secondary" id="content-signout" type="button">Sign out</button></div>
+<p id="content-status" class="content-status" role="status" aria-live="polite"></p>
+<div id="content-login-prompt" hidden><p>Sign in with a teacher account to create and manage learning content.</p><a href="auth.html">Go to account sign in</a></div>
+<div id="content-workspace" hidden>
+<section id="content-create-panel" class="content-panel" hidden>
+<h2 id="content-form-heading">Create teaching content</h2>
+<form id="content-form">
+<div class="content-form-grid">
+<div><label for="content-class">Class</label><select id="content-class" required><option value="">Choose a class</option></select></div>
+<div><label for="content-type">Content type</label><select id="content-type" required><option value="lesson">Lesson</option><option value="practical">Practical activity</option><option value="resource">Learning resource</option><option value="question">Question-bank item (teacher only)</option></select></div>
+<div><label for="content-grade">Grade</label><select id="content-grade" required><option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option><option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select></div>
+<div><label for="content-subject">Subject</label><select id="content-subject" required><option>Physics</option><option>Chemistry</option><option>Biology</option><option>Earth &amp; Space</option></select></div>
+</div>
+<label for="content-title">Title</label><input id="content-title" maxlength="180" minlength="3" required placeholder="e.g. Investigating the water cycle">
+<div class="content-form-grid"><div><label for="content-topic">Topic</label><input id="content-topic" maxlength="160" required placeholder="e.g. Water cycle"></div><div><label for="content-summary">Short summary</label><input id="content-summary" maxlength="2000" placeholder="What will learners understand or do?"></div></div>
+<div class="content-field" id="field-body"><label for="content-body" id="content-body-label">Lesson content</label><textarea id="content-body" maxlength="30000" placeholder="Write the explanation, teaching notes or question prompt."></textarea></div>
+<div class="content-field" id="field-objectives"><label for="content-objectives">Learning objectives (one per line)</label><textarea id="content-objectives" placeholder="Identify the key stages&#10;Explain the process"></textarea></div>
+<div class="content-field" id="field-materials" hidden><label for="content-materials">Materials (one per line)</label><textarea id="content-materials" placeholder="Clear container&#10;Water&#10;Plastic wrap"></textarea></div>
+<div class="content-field" id="field-procedure" hidden><label for="content-procedure">Procedure steps (one per line)</label><textarea id="content-procedure" placeholder="Set up the equipment&#10;Record observations"></textarea></div>
+<div class="content-field" id="field-safety" hidden><label for="content-safety">Safety notes</label><textarea id="content-safety" maxlength="5000" placeholder="Identify hazards, precautions and supervision needs."></textarea></div>
+<div class="content-field" id="field-url" hidden><label for="content-url">Resource URL (https://)</label><input id="content-url" type="url" maxlength="2048" placeholder="https://example.org/resource"></div>
+<div class="content-field" id="field-options" hidden><label for="content-options">Answer options (one per line; 2–6 options)</label><textarea id="content-options" placeholder="Option A&#10;Option B&#10;Option C&#10;Option D"></textarea><label for="content-correct">Correct option</label><select id="content-correct"><option value="1">Option 1</option><option value="2">Option 2</option><option value="3">Option 3</option><option value="4">Option 4</option><option value="5">Option 5</option><option value="6">Option 6</option></select><label for="content-explanation">Answer explanation</label><textarea id="content-explanation" maxlength="5000" placeholder="Explain why the answer is correct."></textarea></div>
+<div class="content-actions"><button id="content-save-draft" type="submit" name="intent" value="draft">Save draft</button><button id="content-publish" class="secondary" type="submit" name="intent" value="published">Publish</button><button id="content-cancel-edit" class="secondary" type="button" hidden>Cancel edit</button></div>
+<p class="content-help">Publishing makes lessons, practicals and resources visible to enrolled students in this class. Question-bank items remain visible only to teachers.</p>
+</form></section>
+<section class="content-panel"><div class="content-toolbar"><h2 id="content-list-heading">Your teaching content</h2><label for="content-filter">Class filter</label><select id="content-filter"><option value="">All your classes</option></select></div><div id="content-list" class="content-grid"><p class="content-empty">Loading content…</p></div></section>
+</div></section>
+<p class="content-help">Content is stored in Supabase and protected by class membership policies. Apply migrations 1–7 in order and configure <code>assets/supabase-config.js</code>. See the <a href="docs/PHASE-7-CONTENT-MANAGEMENT.md">Phase 7 administrator guide</a>.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="assets/supabase-config.js"></script><script src="assets/content-studio.js"></script><script src="assets/main.js"></script>
+</body></html>
