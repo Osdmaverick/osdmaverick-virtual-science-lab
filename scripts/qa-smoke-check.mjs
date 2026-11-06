@@ -229,6 +229,19 @@ try {
   fail("Phase 5 quiz validation", error.message);
 }
 
+
+try {
+  new vm.Script(read("assets/progress.js"), { filename: "assets/progress.js" });
+  const progressHtml = read("progress.html");
+  for (const required of ['id="progress-content"','id="progress-metrics"','id="class-filter"','id="activity-list"','src="assets/progress.js"']) {
+    if (!progressHtml.includes(required)) fail("progress analytics workspace", "missing " + required);
+  }
+  read("docs/PHASE-6-PROGRESS-ANALYTICS.md");
+  report("Phase 6 progress analytics syntax and workspace integration");
+} catch (error) {
+  fail("Phase 6 progress analytics validation", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
