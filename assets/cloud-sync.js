@@ -116,16 +116,49 @@
 
   async function restoreStudentReports(classId) {
     if (!classId) return status(ui.message, "Choose a class first.", true);
-    const result = await client.from("lab_reports").select("payload").eq("class_id", classId).eq("student_id", user.id);
+    const result = await client.from("lab_reports")
+      .select("payload,lab_report_assessments(scores,feedback,assessed_at)")
+      .eq("class_id", classId).eq("student_id", user.id);
     if (result.error) return status(ui.message, "Restore failed: " + result.error.message, true);
     const current = readJson(notebookKey);
     const merged = new Map(current.map(item => [String(item.id), item]));
+    const feedbackItems = [];
     (result.data || []).forEach(row => {
       if (row.payload?.id) merged.set(String(row.payload.id), row.payload);
+      const relation = row.lab_report_assessments;
+      const assessment = Array.isArray(relation) ? relation[0] : relation;
+      if (assessment) feedbackItems.push({ report: row.payload?.title || "Lab report", scores: assessment.scores || {}, feedback: assessment.feedback || "", assessedAt: assessment.assessed_at });
     });
     try {
       localStorage.setItem(notebookKey, JSON.stringify([...merged.values()]));
-      status(ui.message, (result.data || []).length + " cloud report(s) restored. Reload the page to refresh the notebook list.");
+      const feedbackBox = document.createElement("div");
+      feedbackBox.className = "empty-state";
+      const heading = document.createElement("strong");
+      heading.textContent = "Teacher feedback";
+      feedbackBox.append(heading);
+      if (!feedbackItems.length) {
+        const note = document.createElement("p");
+        note.textContent = "No teacher feedback has been published to your reports yet.";
+        feedbackBox.append(note);
+      } else {
+        feedbackItems.forEach(item => {
+          const section = document.createElement("section");
+          const title = document.createElement("h3");
+          title.textContent = item.report;
+          const feedback = document.createElement("p");
+          feedback.textContent = item.feedback || "Your teacher saved rubric scores without written feedback.";
+          const scoreLine = document.createElement("p");
+          const total = ["question", "method", "evidence", "conclusion"].reduce((sum, key) => sum + Number(item.scores[key] || 0), 0);
+          scoreLine.textContent = "Rubric score: " + total + "/16";
+          section.append(title, scoreLine, feedback);
+          feedbackBox.append(section);
+        });
+      }
+      const priorFeedback = ui.panel.querySelector("[data-cloud-feedback]");
+      if (priorFeedback) priorFeedback.remove();
+      feedbackBox.dataset.cloudFeedback = "true";
+      ui.panel.append(feedbackBox);
+      status(ui.message, (result.data || []).length + " cloud report(s) restored; " + feedbackItems.length + " teacher assessment(s) available. Reload the page to refresh the notebook list.");
     } catch (_) {
       status(ui.message, "Could not restore reports because browser storage is full.", true);
     }
