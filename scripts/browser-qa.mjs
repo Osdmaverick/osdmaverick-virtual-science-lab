@@ -396,6 +396,15 @@ try {
   if (!(await page.locator("#attempt-history").innerText()).includes("Grade 7 Science Foundations")) failures.push("Quiz attempt history did not restore after reload");
   checked.quizEngine = 1;
 
+  // Content studio must fail safely and explain setup when Supabase is not configured.
+  await page.goto(`${baseUrl}/content-studio.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#content-status")?.textContent?.includes("Content studio is not connected yet"), null, { timeout: 5000 });
+  if (!(await page.locator("#content-status").innerText()).includes("migrations 1–7")) {
+    failures.push("Content studio did not show safe Supabase setup guidance when unconfigured");
+  }
+  if (await page.locator("#content-workspace").isVisible()) failures.push("Content studio exposed the workspace without backend configuration");
+  checked.contentStudioSetup = 1;
+
   // Progress analytics must fail safely when Supabase is not configured.
   await page.goto(`${baseUrl}/progress.html`, { waitUntil: "domcontentloaded" });
   await page.waitForFunction(() => document.querySelector("#progress-status")?.textContent?.includes("Supabase is not configured"), null, { timeout: 5000 });
