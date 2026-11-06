@@ -40,4 +40,7 @@
  $('export-gradebook').addEventListener('click',()=>{if(!entries.length){$('import-status').textContent='No submissions to export.';return}const cols=['student','title','grade','subject','questionScore','methodScore','evidenceScore','conclusionScore','totalOutOf16','percentage','feedback','assessedAt'];const cell=v=>'"'+String(v??'').replace(/"/g,'""')+'"';const rows=entries.map(e=>[e.student,e.report.title,e.report.grade,e.report.subject,...scoreIds.map(k=>e.assessment?.scores?.[k]??''),e.assessment?score(e):'',e.assessment?Math.round(score(e)/16*100):'',e.assessment?.feedback||'',e.assessment?.assessedAt||'']);const csv=[cols,...rows].map(row=>row.map(cell).join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='osdmaverick-class-gradebook.csv';a.click();URL.revokeObjectURL(url);$('import-status').textContent='Gradebook CSV exported.'});
  render();
 })();
-</script></body></html>
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/cloud-sync.js"></script>
+</body></html>
