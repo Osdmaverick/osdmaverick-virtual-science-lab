@@ -140,7 +140,8 @@
     const byCloudId = new Map(entries.map(item => [item.cloudReportId, item]));
     (result.data || []).forEach(row => {
       const prior = byCloudId.get(row.id);
-      const assessment = row.lab_report_assessments?.[0] || null;
+      const assessmentRows = row.lab_report_assessments;
+      const assessment = Array.isArray(assessmentRows) ? (assessmentRows[0] || null) : (assessmentRows || null);
       byCloudId.set(row.id, {
         id: prior?.id || "cloud-" + row.id,
         cloudReportId: row.id,
