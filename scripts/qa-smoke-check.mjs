@@ -212,6 +212,23 @@ try {
   fail("Phase 4 cloud sync validation", error.message);
 }
 
+
+try {
+  new vm.Script(read("assets/quizzes.js"), { filename: "assets/quizzes.js" });
+  const quizSql = read("supabase/migrations/202611060002_quiz_attempts.sql").toLowerCase();
+  for (const required of ["create table if not exists public.quiz_attempts","enable row level security","students submit and read own quiz attempts","class teachers read quiz attempts","public.is_class_student(class_id)","public.is_class_teacher(class_id)"]) {
+    if (!quizSql.includes(required)) fail("quiz migration security feature", "missing " + required);
+  }
+  const quizHtml = read("quizzes.html");
+  for (const required of ['id="quiz-options"','id="question-list"','id="submit-quiz"','id="attempt-history"','src="assets/quizzes.js"']) {
+    if (!quizHtml.includes(required)) fail("quiz workspace integration", "missing " + required);
+  }
+  read("docs/PHASE-5-QUIZZES.md");
+  report("Phase 5 quiz syntax, migration security and workspace integration");
+} catch (error) {
+  fail("Phase 5 quiz validation", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
