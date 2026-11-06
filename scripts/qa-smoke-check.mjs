@@ -318,6 +318,7 @@ try {
   for (const required of ['id="cq-form"','id="cq-bank"','id="cq-take-form"','id="cq-submit"','src="assets/class-quizzes.js"']) {
     if (!quizHtml.includes(required)) fail("class quiz builder integration", "missing " + required);
   }
+  if (!read("assets/progress.js").includes("class_quiz_attempts")) fail("class quiz analytics integration", "progress dashboard does not read secure class quiz attempts");
   read("docs/PHASE-9-CLASS-QUIZZES.md");
   report("Phase 9 quiz builder syntax, server marking and RLS integration");
 } catch (error) {
