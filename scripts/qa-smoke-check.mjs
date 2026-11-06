@@ -268,6 +268,32 @@ try {
   fail("Phase 7 content management validation", error.message);
 }
 
+// Validate Phase 8 student learning experience and progress access controls.
+try {
+  new vm.Script(read("assets/student-learning.js"), { filename: "assets/student-learning.js" });
+  const learningSql = read("supabase/migrations/202611060004_student_learning_progress.sql").toLowerCase();
+  for (const required of [
+    "create table if not exists public.student_content_progress",
+    "enable row level security",
+    "students manage own published content progress",
+    "teachers read progress in their classes",
+    "public.is_class_student(class_id)",
+    "public.is_class_teacher(class_id)",
+    "student_content_progress_student_item_unique",
+    "revoke all on public.student_content_progress from anon, authenticated"
+  ]) {
+    if (!learningSql.includes(required)) fail("student learning migration security feature", "missing " + required);
+  }
+  const learningHtml = read("student-learning.html");
+  for (const required of ['id="learning-workspace"','id="learning-list"','id="learning-detail"','id="learning-complete"','src="assets/student-learning.js"']) {
+    if (!learningHtml.includes(required)) fail("student learning workspace integration", "missing " + required);
+  }
+  read("docs/PHASE-8-STUDENT-LEARNING.md");
+  report("Phase 8 student learning syntax, migration security and workspace integration");
+} catch (error) {
+  fail("Phase 8 student learning validation", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
