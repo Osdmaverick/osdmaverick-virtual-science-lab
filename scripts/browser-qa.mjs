@@ -377,6 +377,25 @@ try {
   }
   checked.assignmentsSetup = 1;
 
+
+  // Verify the formative quiz engine marks answers, explains results and persists history.
+  await page.goto(`${baseUrl}/quizzes.html`, { waitUntil: "domcontentloaded" });
+  await page.evaluate(() => localStorage.clear());
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.locator('[data-quiz="grade7-science-core"]').click();
+  const quizInputs = page.locator("#question-list input[type=radio]");
+  const quizCount = await quizInputs.count();
+  if (quizCount !== 24) failures.push(`Quiz expected 24 answer options, found ${quizCount}`);
+  for (let i = 0; i < 6; i++) await page.locator(`input[name="q-${i}"][value="${[1,2,3,1,1,1][i]}"]`).check();
+  await page.locator("#submit-quiz").click();
+  if (!(await page.locator("#quiz-score").innerText()).includes("6 / 6")) failures.push("Quiz did not calculate the expected 6/6 score");
+  if (!(await page.locator("#question-list").innerText()).includes("Newton’s second law")) failures.push("Quiz did not show explanatory feedback");
+  const quizState = await page.evaluate(() => JSON.parse(localStorage.getItem("osdmaverick-quiz-attempts-v1") || "[]"));
+  if (quizState.length !== 1 || quizState[0].score !== 6) failures.push("Quiz attempt was not persisted to local storage");
+  await page.reload({ waitUntil: "domcontentloaded" });
+  if (!(await page.locator("#attempt-history").innerText()).includes("Grade 7 Science Foundations")) failures.push("Quiz attempt history did not restore after reload");
+  checked.quizEngine = 1;
+
 } catch (error) {
   failures.push(`Browser QA runner error: ${error.stack || error.message}`);
 } finally {
