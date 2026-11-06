@@ -396,6 +396,12 @@ try {
   if (!(await page.locator("#attempt-history").innerText()).includes("Grade 7 Science Foundations")) failures.push("Quiz attempt history did not restore after reload");
   checked.quizEngine = 1;
 
+  // Progress analytics must fail safely when Supabase is not configured.
+  await page.goto(`${baseUrl}/progress.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#progress-status")?.textContent?.includes("Supabase is not configured"), null, { timeout: 5000 });
+  if (await page.locator("#progress-content").isVisible()) failures.push("Progress analytics exposed a dashboard without backend configuration");
+  checked.progressAnalyticsSetup = 1;
+
 } catch (error) {
   failures.push(`Browser QA runner error: ${error.stack || error.message}`);
 } finally {
