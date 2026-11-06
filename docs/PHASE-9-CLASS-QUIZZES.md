@@ -6,7 +6,7 @@
 - Draft, publish, archive and delete controls.
 - Students see only published quizzes in their enrolled classes.
 - Student submissions are marked inside a database function; correct options and explanations remain in a teacher-only answer-key table.
-- Students and owning teachers can read an attempt; other students cannot.
+- Students and owning teachers can read an attempt; other students cannot.\n- The Learning Progress dashboard includes secure class quiz averages and recent attempts for students and teachers.
 
 ## Security
 - Apply migrations 1–9 in order.
