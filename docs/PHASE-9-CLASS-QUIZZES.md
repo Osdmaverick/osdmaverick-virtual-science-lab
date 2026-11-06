@@ -12,7 +12,7 @@
 - Apply migrations 1–9 in order.
 - RLS limits quiz authoring to teachers who own the class and student quiz access to enrolled students.
 - Student browser access to answer keys is not granted.
-- `submit_class_quiz(uuid,jsonb)` checks student role, class membership, publication status, answer count and option ranges before calculating and recording the score.
+- A database trigger prevents publishing a quiz until it has at least one question and a valid answer key for every question.\n- `submit_class_quiz(uuid,jsonb)` checks student role, class membership, publication status, answer count and option ranges before calculating and recording the score.
 - This is stronger than client-side answer keys, but still requires live RLS/RPC testing before any high-stakes use.
 
 ## Setup and verification
