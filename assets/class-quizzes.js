@@ -15,7 +15,7 @@
   const className=id=>classes.find(c=>c.id===id)?.name||"Class";
   async function loadBank(){
     const classId=$("cq-class").value,select=$("cq-bank");
-    select.replaceChildren();
+    select.replaceChildren();select.disabled=true;bank=[];
     if(!classId){select.disabled=true;return;}
     const {data,error}=await client.from("teacher_content_items").select("id,title,topic,content_body,question_options,correct_option,explanation").eq("class_id",classId).eq("content_type","question").order("updated_at",{ascending:false});
     if(error){status("Question bank could not be loaded: "+error.message,true);return;}
