@@ -30,5 +30,4 @@ create policy "Class teachers read quiz attempts" on public.quiz_attempts
   using (public.is_class_teacher(class_id));
 revoke all on public.quiz_attempts from anon, authenticated;
 grant select, insert on public.quiz_attempts to authenticated;
-grant usage, select on sequence public.quiz_attempts_id_seq to authenticated;
 comment on table public.quiz_attempts is 'Student quiz submissions scoped to a class; teachers can read attempts for classes they own.';
