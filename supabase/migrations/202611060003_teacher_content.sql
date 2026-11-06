@@ -28,7 +28,7 @@ create table if not exists public.teacher_content_items (
     (content_type <> 'question')
     or (
       cardinality(question_options) between 2 and 6
-      and correct_option between 1 and cardinality(question_options)
+      and correct_option is not null\n      and correct_option between 1 and cardinality(question_options)
       and char_length(trim(content_body)) between 5 and 3000
     )
   ),
