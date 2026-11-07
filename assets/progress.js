@@ -31,7 +31,9 @@
       const quiz=data.quizzes.filter(x=>x.student_id===e.student_id&&x.class_id===e.class_id);
       const submissions=data.submissions.filter(x=>x.student_id===e.student_id&&data.assignmentMap.get(x.assignment_id)?.class_id===e.class_id);
       const graded=submissions.filter(x=>x.graded_at&&x.score!==null);
-      const reports=data.reports.filter(x=>x.student_id===e.student_id&&x.class_id===e.class_id);\n      const completedLearning=data.learningProgress.filter(x=>x.student_id===e.student_id&&x.class_id===e.class_id&&x.status==="completed").length;\n      const totalLearning=data.publishedContent.filter(x=>x.class_id===e.class_id).length;
+      const reports=data.reports.filter(x=>x.student_id===e.student_id&&x.class_id===e.class_id);
+      const completedLearning=data.learningProgress.filter(x=>x.student_id===e.student_id&&x.class_id===e.class_id&&x.status==="completed").length;
+      const totalLearning=data.publishedContent.filter(x=>x.class_id===e.class_id).length;
       const assessed=reports.filter(x=>relation(x.lab_report_assessments).assessed_at);
       const quizAverage=average(quiz.map(x=>pct(x.score,x.total)).filter(x=>x!==null));
       const assignmentAverage=average(graded.map(x=>pct(x.score,data.assignmentMap.get(x.assignment_id)?.points_possible)));
@@ -106,7 +108,9 @@
           query("quiz_attempts","id,class_id,student_id,quiz_title,score,total,submitted_at",{in:["class_id",ids],order:"submitted_at"}),
           query("assignments","id,class_id,title,points_possible,status,created_at",{in:["class_id",ids]}),
           query("assignment_submissions","id,assignment_id,student_id,status,score,graded_at,submitted_at",{order:"submitted_at"}),
-          query("lab_reports","id,class_id,student_id,payload,updated_at,lab_report_assessments(scores,assessed_at)",{in:["class_id",ids],order:"updated_at"})
+          query("lab_reports","id,class_id,student_id,payload,updated_at,lab_report_assessments(scores,assessed_at)",{in:["class_id",ids],order:"updated_at"}),
+          query("student_content_progress","id,class_id,student_id,content_item_id,status,completed_at",{in:["class_id",ids]}),
+          query("teacher_content_items","id,class_id,title,status,content_type",{in:["class_id",ids],eq:["status","published"]})
         ]);
         const assignmentMap=new Map(assignments.map(a=>[a.id,a]));
         data={enrollments,quizzes,submissions,reports,learningProgress,publishedContent,assignmentMap};
@@ -120,7 +124,8 @@
         query("quiz_attempts","id,class_id,quiz_title,score,total,submitted_at",{eq:["student_id",user.id],order:"submitted_at"}),
         query("assignments","id,class_id,title,points_possible,status,due_at"),
         query("assignment_submissions","id,assignment_id,status,score,graded_at,submitted_at",{eq:["student_id",user.id],order:"submitted_at"}),
-        query("lab_reports","id,class_id,payload,updated_at,lab_report_assessments(scores,feedback,assessed_at)",{eq:["student_id",user.id],order:"updated_at"})
+        query("lab_reports","id,class_id,payload,updated_at,lab_report_assessments(scores,feedback,assessed_at)",{eq:["student_id",user.id],order:"updated_at"}),
+        query("student_content_progress","id,class_id,content_item_id,status,completed_at",{eq:["student_id",user.id]})
       ]);
       classes=studentClasses;
       data={quizzes,submissions,reports,learningProgress,assignmentMap:new Map(assignments.map(a=>[a.id,a]))};
