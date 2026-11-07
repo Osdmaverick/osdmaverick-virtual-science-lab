@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Study published science lessons and practical activities, track completed learning and revisit class resources.">
+<meta name="theme-color" content="#071827"><title>My Learning | OSDMaverick Virtual Science Lab</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.learn-page{max-width:1120px;margin:38px auto 72px;padding:0 5%}.learn-hero{padding:30px;border-radius:18px;background:linear-gradient(120deg,#0b2739,#145064);color:white}.learn-hero p{color:#d4e7eb}.learn-panel{margin-top:20px;padding:22px;border:1px solid #dce5eb;border-radius:15px;background:white}.learn-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.learn-toolbar select{padding:10px;border:1px solid #c9d7df;border-radius:9px;font:inherit}.learn-status{min-height:1.5em;color:#087d73;font-weight:650}.learn-status[data-state=error]{color:#a23b2b}.learn-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}.learn-stat{padding:16px;border-radius:12px;background:#f0f6f7}.learn-stat span,.learn-stat small{display:block;color:#607482}.learn-stat strong{display:block;font-size:1.6rem;color:#123c4a;margin:5px 0}.learn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:15px}.learn-card{padding:18px;border:1px solid #dce5eb;border-radius:13px;background:#fbfcfd;min-width:0}.learn-card h3{margin:8px 0}.learn-card p{white-space:pre-wrap;overflow-wrap:anywhere}.learn-meta{color:#607482;font-size:.88rem}.learn-tag{display:inline-block;padding:4px 8px;border-radius:20px;background:#edf3f5;color:#34515f;font-size:.78rem;font-weight:700}.learn-progress{height:8px;background:#e8eff2;border-radius:99px;overflow:hidden;margin:10px 0}.learn-progress span{display:block;height:100%;background:#087d73}.learn-card button,.learn-detail button{border:0;border-radius:9px;padding:10px 14px;background:#087d73;color:white;font:inherit;font-weight:700;cursor:pointer}.learn-card button.secondary,.learn-detail button.secondary{background:#e8f3f2;color:#0b514e}.learn-card button:focus-visible,.learn-detail button:focus-visible,.learn-toolbar select:focus-visible{outline:3px solid #0c9b8f;outline-offset:2px}.learn-detail{margin-top:12px;padding:15px;border-radius:10px;background:#f0f6f7}.learn-detail h4{margin:14px 0 6px}.learn-detail p{white-space:pre-wrap}.learn-detail a{overflow-wrap:anywhere}.learn-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.learn-empty{padding:22px;border-radius:12px;background:#f3f7f8;color:#607482;text-align:center}.learn-note{color:#607482;font-size:.9rem}[hidden]{display:none!important}@media(max-width:620px){.learn-summary{grid-template-columns:1fr}.learn-panel{padding:16px}}
+</style></head>
+<body>
+<header class="site-header"><a class="brand" href="index.html">OSDMAVERICK <span>VIRTUAL SCIENCE LAB</span></a><button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">☰</button><nav class="nav" id="primary-navigation" aria-label="Main navigation"><a href="index.html">Home</a><a href="classes.html">My classes</a><a href="learning.html">My learning</a><a href="assignments.html">Assignments</a><a href="quizzes.html">Science quizzes</a><a href="student-lab-notebook.html">Lab notebook</a><a href="progress.html">Progress</a><a href="auth.html">Account</a></nav></header>
+<main class="learn-page">
+<a href="index.html">← Back to virtual lab</a>
+<section class="learn-hero"><p class="eyebrow">STUDENT LEARNING SPACE · PHASE 8</p><h1>My science learning</h1><p>Follow your class lessons, work through practical activities and keep track of what you have completed. Your progress is saved to your student account.</p></section>
+<section class="learn-panel">
+<p id="learn-status" class="learn-status" role="status" aria-live="polite">Checking your account…</p>
+<div id="learn-login" hidden><h2>Sign in to continue learning</h2><p>Your class lessons and learning progress are available after you sign in.</p><a href="auth.html">Go to sign in →</a></div>
+<div id="learn-workspace" hidden>
+<div class="learn-toolbar"><div><h2>My learning overview</h2><p class="learn-note">Only published lessons, practicals and resources are shown.</p></div><label for="learn-class-filter">Class <select id="learn-class-filter"><option value="">All my classes</option></select></label><button id="learn-refresh" type="button" class="secondary">Refresh</button></div>
+<div id="learn-summary" class="learn-summary"></div>
+<div id="learn-library" class="learn-grid"><p class="learn-empty">Loading class content…</p></div>
+</div></section>
+<p class="learn-note">Progress records are private to you and visible to the teacher who owns the relevant class. See the <a href="docs/PHASE-8-STUDENT-LEARNING.md">Phase 8 setup guide</a>.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="assets/supabase-config.js"></script><script src="assets/learning.js"></script><script src="assets/main.js"></script>
+</body></html>
