@@ -353,6 +353,35 @@ try {
   fail("Phase 10 class announcements validation", error.message);
 }
 
+
+// Validate Phase 11 in-app notification inbox and recipient-only read state.
+try {
+  new vm.Script(read("assets/notifications.js"), { filename: "assets/notifications.js" });
+  const notificationSql = read("supabase/migrations/202611070003_notifications.sql").toLowerCase();
+  for (const required of [
+    "create table if not exists public.notifications",
+    "enable row level security",
+    "users read their own notifications",
+    "users mark their own notifications read",
+    "recipient_id = auth.uid()",
+    "notify_students_of_announcement",
+    "after insert or update of status",
+    "on conflict (recipient_id, source_type, source_id) do nothing",
+    "revoke all on public.notifications from anon, authenticated",
+    "grant update (read_at) on public.notifications to authenticated"
+  ]) {
+    if (!notificationSql.includes(required)) fail("notifications security feature", "missing " + required);
+  }
+  const notificationHtml = read("notifications.html");
+  for (const required of ['id="notice-workspace"','id="notice-list"','id="notice-read-all"','src="assets/notifications.js"']) {
+    if (!notificationHtml.includes(required)) fail("notifications page integration", "missing " + required);
+  }
+  read("docs/PHASE-11-IN-APP-NOTIFICATIONS.md");
+  report("Phase 11 notification syntax, recipient RLS and inbox integration");
+} catch (error) {
+  fail("Phase 11 notifications validation", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
