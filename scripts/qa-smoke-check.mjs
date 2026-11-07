@@ -382,6 +382,28 @@ try {
   fail("Phase 11 notifications validation", error.message);
 }
 
+
+// Validate Phase 12 assessment notifications and restricted trigger paths.
+try {
+  const assessmentSql = read("supabase/migrations/202611070004_assessment_notifications.sql").toLowerCase();
+  for (const required of [
+    "assignment_graded",
+    "lab_report_assessed",
+    "notify_student_of_assignment_grade",
+    "notify_student_of_lab_assessment",
+    "after update of score, teacher_feedback, graded_at",
+    "after insert or update of scores, feedback, assessed_at",
+    "on conflict (recipient_id, source_type, source_id) do update",
+    "read_at = null"
+  ]) {
+    if (!assessmentSql.includes(required)) fail("assessment notification feature", "missing " + required);
+  }
+  read("docs/PHASE-12-ASSESSMENT-NOTIFICATIONS.md");
+  report("Phase 12 assignment and lab assessment notification triggers");
+} catch (error) {
+  fail("Phase 12 assessment notifications validation", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
