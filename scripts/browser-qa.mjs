@@ -431,6 +431,16 @@ try {
   if (await page.locator("#announce-workspace").isVisible()) failures.push("Class announcements exposed the workspace without backend configuration");
   checked.classAnnouncementsSetup = 1;
 
+
+  // Notifications must fail safely before Supabase is configured.
+  await page.goto(`${baseUrl}/notifications.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#notice-status")?.textContent?.includes("Notifications are not connected yet"), null, { timeout: 5000 });
+  if (!(await page.locator("#notice-status").innerText()).includes("migrations 1–11")) {
+    failures.push("Notifications page did not show safe setup guidance when unconfigured");
+  }
+  if (await page.locator("#notice-workspace").isVisible()) failures.push("Notifications inbox exposed content without backend configuration");
+  checked.notificationsSetup = 1;
+
   // Progress analytics must fail safely when Supabase is not configured.
   await page.goto(`${baseUrl}/progress.html`, { waitUntil: "domcontentloaded" });
   await page.waitForFunction(() => document.querySelector("#progress-status")?.textContent?.includes("Supabase is not configured"), null, { timeout: 5000 });
