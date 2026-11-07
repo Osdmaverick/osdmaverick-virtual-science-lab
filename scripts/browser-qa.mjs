@@ -422,6 +422,15 @@ try {
   }
   checked.classQuizzesSetup = 1;
 
+  // Class announcements must fail safely when Supabase is not configured.
+  await page.goto(`${baseUrl}/class-announcements.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#announce-status")?.textContent?.includes("Class announcements are not connected yet"), null, { timeout: 5000 });
+  if (!(await page.locator("#announce-status").innerText()).includes("migrations 1–10")) {
+    failures.push("Class announcements did not show safe setup guidance when unconfigured");
+  }
+  if (await page.locator("#announce-workspace").isVisible()) failures.push("Class announcements exposed the workspace without backend configuration");
+  checked.classAnnouncementsSetup = 1;
+
   // Progress analytics must fail safely when Supabase is not configured.
   await page.goto(`${baseUrl}/progress.html`, { waitUntil: "domcontentloaded" });
   await page.waitForFunction(() => document.querySelector("#progress-status")?.textContent?.includes("Supabase is not configured"), null, { timeout: 5000 });
