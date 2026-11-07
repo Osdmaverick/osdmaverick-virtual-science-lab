@@ -20,6 +20,7 @@
     ...deadlines.filter(a=>(!selectedClass()||a.class_id===selectedClass())&&inSelectedMonth(a.due_at)).map(a=>({...a,kind:"deadline",sortDate:a.due_at}))
   ].sort((a,b)=>new Date(a.sortDate)-new Date(b.sortDate));
   const dateLabel=value=>new Date(value).toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short"});
+  const localInputValue=value=>{const d=new Date(value);const pad=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())+"T"+pad(d.getHours())+":"+pad(d.getMinutes());};
   function resetForm(){editingId=null;$("calendar-form").reset();$("calendar-class").disabled=false;$("calendar-form-heading").textContent="Add class event";$("calendar-cancel").hidden=true;}
   function summary(){
     const list=rows(),now=Date.now();
@@ -67,8 +68,8 @@
   function edit(item){
     editingId=item.id;$("calendar-class").value=item.class_id;$("calendar-class").disabled=true;
     $("calendar-title").value=item.title;$("calendar-description").value=item.description||"";
-    $("calendar-type").value=item.event_type;$("calendar-start").value=new Date(item.starts_at).toISOString().slice(0,16);
-    $("calendar-end").value=item.ends_at?new Date(item.ends_at).toISOString().slice(0,16):"";
+    $("calendar-type").value=item.event_type;$("calendar-start").value=localInputValue(item.starts_at);
+    $("calendar-end").value=item.ends_at?localInputValue(item.ends_at):"";
     $("calendar-all-day").checked=Boolean(item.all_day);
     $("calendar-form-heading").textContent="Edit class event";$("calendar-cancel").hidden=false;
     $("calendar-form-heading").scrollIntoView({behavior:"smooth",block:"start"});
