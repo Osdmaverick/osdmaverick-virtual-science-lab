@@ -268,6 +268,36 @@ try {
   fail("Phase 7 content management validation", error.message);
 }
 
+// Validate Phase 8 student learning experience and progress RLS.
+try {
+  new vm.Script(read("assets/learning.js"), { filename: "assets/learning.js" });
+  const progressSql = read("supabase/migrations/202611070001_student_content_progress.sql").toLowerCase();
+  for (const required of [
+    "create table if not exists public.student_content_progress",
+    "enable row level security",
+    "students manage own published content progress",
+    "class teachers read learner content progress",
+    "public.is_class_student(class_id)",
+    "public.is_class_teacher(class_id)",
+    "unique (student_id, content_item_id)",
+    "revoke all on public.student_content_progress from anon, authenticated"
+  ]) {
+    if (!progressSql.includes(required)) fail("student learning migration security feature", "missing " + required);
+  }
+  const learningHtml = read("learning.html");
+  for (const required of ['id="learn-workspace"','id="learn-class-filter"','id="learn-library"','id="learn-summary"','src="assets/learning.js"']) {
+    if (!learningHtml.includes(required)) fail("student learning page integration", "missing " + required);
+  }
+  const progressJs = read("assets/progress.js");
+  if (!progressJs.includes('query("student_content_progress"') || !progressJs.includes("completedLearning")) {
+    fail("teacher learning completion analytics", "completion records are not included in progress analytics");
+  }
+  read("docs/PHASE-8-STUDENT-LEARNING.md");
+  report("Phase 8 student learning syntax, progress RLS and dashboard integration");
+} catch (error) {
+  fail("Phase 8 student learning validation", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
