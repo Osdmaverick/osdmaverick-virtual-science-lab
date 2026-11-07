@@ -405,6 +405,15 @@ try {
   if (await page.locator("#content-workspace").isVisible()) failures.push("Content studio exposed the workspace without backend configuration");
   checked.contentStudioSetup = 1;
 
+  // Student learning must explain setup and keep its workspace hidden without Supabase.
+  await page.goto(`${baseUrl}/learning.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#learn-status")?.textContent?.includes("My learning is not connected yet"), null, { timeout: 5000 });
+  if (!(await page.locator("#learn-status").innerText()).includes("migrations 1–8")) {
+    failures.push("Student learning page did not show safe Supabase setup guidance when unconfigured");
+  }
+  if (await page.locator("#learn-workspace").isVisible()) failures.push("Student learning exposed content without backend configuration");
+  checked.studentLearningSetup = 1;
+
   // Progress analytics must fail safely when Supabase is not configured.
   await page.goto(`${baseUrl}/progress.html`, { waitUntil: "domcontentloaded" });
   await page.waitForFunction(() => document.querySelector("#progress-status")?.textContent?.includes("Supabase is not configured"), null, { timeout: 5000 });
