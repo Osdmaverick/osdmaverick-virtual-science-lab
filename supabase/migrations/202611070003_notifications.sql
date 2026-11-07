@@ -47,8 +47,10 @@ security definer
 set search_path = public
 as $$
 begin
-  if new.status = 'published'
-     and (tg_op = 'INSERT' or old.status is distinct from 'published') then
+  if new.status = 'published' and (
+    tg_op = 'INSERT' or
+    (tg_op = 'UPDATE' and old.status is distinct from 'published')
+  ) then
     insert into public.notifications (
       recipient_id, class_id, source_type, source_id, title, message, destination
     )
