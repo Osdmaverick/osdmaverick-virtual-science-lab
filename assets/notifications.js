@@ -4,7 +4,7 @@
   const status=(message,error=false)=>{$("notice-status").textContent=message;$("notice-status").dataset.state=error?"error":"success";};
   const config=window.SUPABASE_CONFIG;
   if(!config?.url||!config?.publishableKey||config.url.includes("YOUR-PROJECT-REF")||config.publishableKey.includes("YOUR-SUPABASE")){
-    status("Notifications are not connected yet. Configure Supabase and apply migrations 1–11.",true);return;
+    status("Notifications are not connected yet. Configure Supabase and apply migrations 1–12.",true);return;
   }
   if(!window.supabase?.createClient){status("The sign-in library could not load. Check your connection and reload.",true);return;}
   const client=window.supabase.createClient(config.url,config.publishableKey);
@@ -17,10 +17,13 @@
     if(!notifications.length){list.append(make("p","notice-empty","You're all caught up. New class announcements will appear here."));return;}
     notifications.forEach(n=>{
       const card=make("article","notice-card"+(n.read_at?"":" unread"));
-      card.append(make("p","notice-meta",(n.read_at?"Read":"Unread")+" · "+new Date(n.created_at).toLocaleString()));
+      const kind={class_announcement:"Class announcement",assignment_graded:"Assignment graded",lab_report_assessed:"Lab report assessed"}[n.source_type]||"Learning update";
+      card.append(make("p","notice-meta",kind+" · "+(n.read_at?"Read":"Unread")+" · "+new Date(n.created_at).toLocaleString()));
       card.append(make("h3","",n.title),make("p","",n.message));
       const actions=make("div","notice-actions");
-      const open=make("a","", "Open class announcements");open.href=n.destination||"class-announcements.html";actions.append(open);
+      const destination=n.destination||"class-announcements.html";
+      const linkLabel=destination==="assignments.html"?"Open assignments":destination==="student-lab-notebook.html"?"Open lab notebook":"Open class announcements";
+      const open=make("a","",linkLabel);open.href=destination;actions.append(open);
       if(!n.read_at){const button=make("button","secondary","Mark as read");button.type="button";button.addEventListener("click",()=>markRead(n));actions.append(button);}
       card.append(actions);list.append(card);
     });
