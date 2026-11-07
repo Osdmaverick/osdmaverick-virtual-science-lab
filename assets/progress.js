@@ -31,12 +31,12 @@
       const quiz=data.quizzes.filter(x=>x.student_id===e.student_id&&x.class_id===e.class_id);
       const submissions=data.submissions.filter(x=>x.student_id===e.student_id&&data.assignmentMap.get(x.assignment_id)?.class_id===e.class_id);
       const graded=submissions.filter(x=>x.graded_at&&x.score!==null);
-      const reports=data.reports.filter(x=>x.student_id===e.student_id&&x.class_id===e.class_id);
+      const reports=data.reports.filter(x=>x.student_id===e.student_id&&x.class_id===e.class_id);\n      const completedLearning=data.learningProgress.filter(x=>x.student_id===e.student_id&&x.class_id===e.class_id&&x.status==="completed").length;\n      const totalLearning=data.publishedContent.filter(x=>x.class_id===e.class_id).length;
       const assessed=reports.filter(x=>relation(x.lab_report_assessments).assessed_at);
       const quizAverage=average(quiz.map(x=>pct(x.score,x.total)).filter(x=>x!==null));
       const assignmentAverage=average(graded.map(x=>pct(x.score,data.assignmentMap.get(x.assignment_id)?.points_possible)));
       const labAverage=average(assessed.map(x=>{const s=relation(x.lab_report_assessments).scores||{};return ["question","method","evidence","conclusion"].reduce((n,k)=>n+Number(s[k]||0),0)/16*100;}));
-      return {name:relation(e.profiles).full_name||"Student",className:classes.find(c=>c.id===e.class_id)?.name||"Class",quizAverage,assignmentAverage,labAverage,quizCount:quiz.length,gradedCount:graded.length,reportCount:reports.length,assessedCount:assessed.length};
+      return {name:relation(e.profiles).full_name||"Student",className:classes.find(c=>c.id===e.class_id)?.name||"Class",quizAverage,assignmentAverage,labAverage,quizCount:quiz.length,gradedCount:graded.length,reportCount:reports.length,assessedCount:assessed.length,completedLearning,totalLearning};
     }).sort((a,b)=>a.className.localeCompare(b.className)||a.name.localeCompare(b.name));
     const uniqueStudents=new Set(students.map(x=>x.student_id));
     $("progress-metrics").innerHTML=[
@@ -45,7 +45,7 @@
       metricCard("Graded assignments",String(data.submissions.filter(x=>data.assignmentMap.get(x.assignment_id)&&classIds.includes(data.assignmentMap.get(x.assignment_id).class_id)&&x.graded_at).length),"Teacher-marked work"),
       metricCard("Assessed lab reports",String(data.reports.filter(x=>classIds.includes(x.class_id)&&relation(x.lab_report_assessments).assessed_at).length),"Rubric reviews")
     ].join("");
-    $("progress-table-wrap").innerHTML=rows.length?'<div class="table-scroll"><table class="progress-table"><thead><tr><th>Student</th><th>Class</th><th>Quiz average</th><th>Assignment average</th><th>Lab rubric</th><th>Activity</th></tr></thead><tbody>'+rows.map(r=>'<tr><th>'+esc(r.name)+'</th><td>'+esc(r.className)+'</td><td>'+esc(fmt(r.quizAverage))+' <small>'+r.quizCount+' attempts</small></td><td>'+esc(fmt(r.assignmentAverage))+' <small>'+r.gradedCount+' graded</small></td><td>'+esc(fmt(r.labAverage))+' <small>'+r.assessedCount+'/'+r.reportCount+' assessed</small></td><td>'+r.quizCount+' quizzes · '+r.gradedCount+' graded · '+r.reportCount+' reports</td></tr>').join("")+'</tbody></table></div>':'<p class="progress-empty">No enrolled learners or learning activity in this class yet.</p>';
+    $("progress-table-wrap").innerHTML=rows.length?'<div class="table-scroll"><table class="progress-table"><thead><tr><th>Student</th><th>Class</th><th>Quiz average</th><th>Assignment average</th><th>Lab rubric</th><th>Lessons completed</th><th>Activity</th></tr></thead><tbody>'+rows.map(r=>'<tr><th>'+esc(r.name)+'</th><td>'+esc(r.className)+'</td><td>'+esc(fmt(r.quizAverage))+' <small>'+r.quizCount+' attempts</small></td><td>'+esc(fmt(r.assignmentAverage))+' <small>'+r.gradedCount+' graded</small></td><td>'+esc(fmt(r.labAverage))+' <small>'+r.assessedCount+'/'+r.reportCount+' assessed</small></td><td>'+r.completedLearning+'/'+r.totalLearning+' <small>published items</small></td><td>'+r.quizCount+' quizzes · '+r.gradedCount+' graded · '+r.reportCount+' reports</td></tr>').join("")+'</tbody></table></div>':'<p class="progress-empty">No enrolled learners or learning activity in this class yet.</p>';
     const allScores=[...rows.map(r=>r.quizAverage),...rows.map(r=>r.assignmentAverage),...rows.map(r=>r.labAverage)].filter(x=>x!==null);
     $("progress-summary").textContent=allScores.length?"Averages are calculated from submitted quiz attempts, graded assignments and rubric-assessed lab reports. Unmarked work is not treated as zero.":"As students submit work and teachers assess it, class performance summaries will appear here.";
     $("activity-list").innerHTML=recentTeacherActivity(classIds);
@@ -68,7 +68,7 @@
       metricCard("Quiz average",fmt(quizAverage),data.quizzes.length+" attempts"),
       metricCard("Assignment average",fmt(assignmentAverage),graded.length+" graded"),
       metricCard("Lab rubric average",fmt(labAverage),assessed.length+" assessed reports"),
-      metricCard("Classes",String(classes.length),"Enrolled classes")
+      metricCard("Lessons completed",String(data.learningProgress.filter(x=>x.status==="completed").length),"Published learning items")
     ].join("");
     const classCards=classes.map(c=>{
       const quizzes=data.quizzes.filter(x=>x.class_id===c.id);
@@ -99,9 +99,9 @@
       const ids=classes.map(c=>c.id);
       $("class-filter-wrap").hidden=false;
       $("class-filter").innerHTML='<option value="">All my classes</option>'+classes.map(c=>'<option value="'+esc(c.id)+'">'+esc(c.name)+'</option>').join("");
-      if(!ids.length){data={enrollments:[],quizzes:[],submissions:[],reports:[],assignmentMap:new Map()};}
+      if(!ids.length){data={enrollments:[],quizzes:[],submissions:[],reports:[],learningProgress:[],publishedContent:[],assignmentMap:new Map()};}
       else {
-        const [enrollments,quizzes,assignments,submissions,reports]=await Promise.all([
+        const [enrollments,quizzes,assignments,submissions,reports,learningProgress,publishedContent]=await Promise.all([
           query("enrollments","class_id,student_id,profiles(full_name)",{in:["class_id",ids]}),
           query("quiz_attempts","id,class_id,student_id,quiz_title,score,total,submitted_at",{in:["class_id",ids],order:"submitted_at"}),
           query("assignments","id,class_id,title,points_possible,status,created_at",{in:["class_id",ids]}),
@@ -109,13 +109,13 @@
           query("lab_reports","id,class_id,student_id,payload,updated_at,lab_report_assessments(scores,assessed_at)",{in:["class_id",ids],order:"updated_at"})
         ]);
         const assignmentMap=new Map(assignments.map(a=>[a.id,a]));
-        data={enrollments,quizzes,submissions,reports,assignmentMap};
+        data={enrollments,quizzes,submissions,reports,learningProgress,publishedContent,assignmentMap};
       }
       $("progress-content").hidden=false;$("progress-login").hidden=true;
       $("class-filter").addEventListener("change",renderTeacher);
       renderTeacher();
     } else if(role==="student"){
-      const [studentClasses,quizzes,assignments,submissions,reports]=await Promise.all([
+      const [studentClasses,quizzes,assignments,submissions,reports,learningProgress]=await Promise.all([
         query("classes","id,name"),
         query("quiz_attempts","id,class_id,quiz_title,score,total,submitted_at",{eq:["student_id",user.id],order:"submitted_at"}),
         query("assignments","id,class_id,title,points_possible,status,due_at"),
@@ -123,7 +123,7 @@
         query("lab_reports","id,class_id,payload,updated_at,lab_report_assessments(scores,feedback,assessed_at)",{eq:["student_id",user.id],order:"updated_at"})
       ]);
       classes=studentClasses;
-      data={quizzes,submissions,reports,assignmentMap:new Map(assignments.map(a=>[a.id,a]))};
+      data={quizzes,submissions,reports,learningProgress,assignmentMap:new Map(assignments.map(a=>[a.id,a]))};
       $("progress-content").hidden=false;$("progress-login").hidden=true;renderStudent();
     } else throw new Error("This account role does not have a progress dashboard.");
     $("progress-refresh").hidden=false;
