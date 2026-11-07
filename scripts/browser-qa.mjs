@@ -435,8 +435,8 @@ try {
   // Notifications must fail safely before Supabase is configured.
   await page.goto(`${baseUrl}/notifications.html`, { waitUntil: "domcontentloaded" });
   await page.waitForFunction(() => document.querySelector("#notice-status")?.textContent?.includes("Notifications are not connected yet"), null, { timeout: 5000 });
-  if (!(await page.locator("#notice-status").innerText()).includes("migrations 1–11")) {
-    failures.push("Notifications page did not show safe setup guidance when unconfigured");
+  if (!(await page.locator("#notice-status").innerText()).includes("migrations 1–12")) {
+    failures.push("Notifications page did not show current safe setup guidance when unconfigured");
   }
   if (await page.locator("#notice-workspace").isVisible()) failures.push("Notifications inbox exposed content without backend configuration");
   checked.notificationsSetup = 1;
