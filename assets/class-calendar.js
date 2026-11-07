@@ -87,9 +87,12 @@
     const payload={class_id:$("calendar-class").value,teacher_id:user.id,title:$("calendar-title").value.trim(),description:$("calendar-description").value.trim(),event_type:$("calendar-type").value,starts_at:start.toISOString(),ends_at:end?end.toISOString():null,all_day:$("calendar-all-day").checked};
     $("calendar-save").disabled=true;
     try{
-      const result=editingId?await client.from("class_events").update(({class_id,teacher_id,...updates})=>updates)(payload):await client.from("class_events").insert(payload);
-      if(result?.error)throw result.error;
-      resetForm();setStatus(editingId?"Class event updated.":"Class event added.");await load();
+      const wasEditing=Boolean(editingId);
+      let result;
+      if(wasEditing){const {class_id,teacher_id,...updates}=payload;result=await client.from("class_events").update(updates).eq("id",editingId);}
+      else result=await client.from("class_events").insert(payload);
+      if(result.error)throw result.error;
+      resetForm();setStatus(wasEditing?"Class event updated.":"Class event added.");await load();
     }catch(err){setStatus(err.message||"Event could not be saved.",true);}
     finally{$("calendar-save").disabled=false;}
   });
