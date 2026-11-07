@@ -6,7 +6,7 @@ create table if not exists public.notifications (
   recipient_id uuid not null references public.profiles(id) on delete cascade,
   class_id uuid not null references public.classes(id) on delete cascade,
   source_type text not null check (source_type in ('class_announcement')),
-  source_id uuid not null,
+  source_id uuid not null references public.class_announcements(id) on delete cascade,
   title text not null check (char_length(trim(title)) between 1 and 180),
   message text not null check (char_length(trim(message)) between 1 and 500),
   destination text not null default 'class-announcements.html',
