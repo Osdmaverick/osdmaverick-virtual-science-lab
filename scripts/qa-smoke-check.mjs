@@ -325,6 +325,34 @@ try {
   fail("Phase 9 class quiz validation", error.message);
 }
 
+// Validate Phase 10 class announcements and student read receipts.
+try {
+  new vm.Script(read("assets/class-announcements.js"), { filename: "assets/class-announcements.js" });
+  const announcementSql = read("supabase/migrations/202611070002_class_announcements.sql").toLowerCase();
+  for (const required of [
+    "create table if not exists public.class_announcements",
+    "create table if not exists public.class_announcement_reads",
+    "enable row level security",
+    "teachers manage their class announcements",
+    "students read published class announcements",
+    "students manage own announcement read receipts",
+    "class teachers read announcement receipts",
+    "public.is_class_teacher(class_id)",
+    "public.is_class_student(class_id)",
+    "revoke all on public.class_announcements, public.class_announcement_reads from anon, authenticated"
+  ]) {
+    if (!announcementSql.includes(required)) fail("class announcements security feature", "missing " + required);
+  }
+  const announcementHtml = read("class-announcements.html");
+  for (const required of ['id="announce-form"','id="announce-class"','id="announce-list"','id="announce-summary"','src="assets/class-announcements.js"']) {
+    if (!announcementHtml.includes(required)) fail("class announcements page integration", "missing " + required);
+  }
+  read("docs/PHASE-10-CLASS-ANNOUNCEMENTS.md");
+  report("Phase 10 announcements syntax, RLS and page integration");
+} catch (error) {
+  fail("Phase 10 class announcements validation", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
