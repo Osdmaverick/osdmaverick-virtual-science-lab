@@ -62,13 +62,12 @@ begin
       'class_announcement',
       new.id,
       new.title,
-      left(regexp_replace(new.body, '\\s+', ' ', 'g'), 500),
+      left(regexp_replace(new.body, '[[:space:]]+', ' ', 'g'), 500),
       'class-announcements.html'
     from public.enrollments e
     join public.profiles p on p.id = e.student_id and p.role = 'student'
     where e.class_id = new.class_id
     on conflict (recipient_id, source_type, source_id) do nothing;
-  end if;
   return new;
 end;
 $$;
