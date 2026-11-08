@@ -34,7 +34,7 @@
     const eventResult=await client.from("class_events").select("id,class_id,teacher_id,title,description,event_type,starts_at,ends_at,all_day,created_at").in("class_id",ids).order("starts_at",{ascending:true});
     if(eventResult.error)throw eventResult.error;
     events=eventResult.data||[];
-    const assignmentResult=await client.from("assignments").select("id,class_id,title,due_at,status,points_possible").in("class_id",ids).not("due_at","is",null).order("due_at",{ascending:true});
+    const assignmentResult=await client.from("assignments").select("id,class_id,title,due_at,status,points_possible").in("class_id",ids).eq("status","published").not("due_at","is",null).order("due_at",{ascending:true});
     if(assignmentResult.error)throw assignmentResult.error;
     deadlines=assignmentResult.data||[];
     render();
