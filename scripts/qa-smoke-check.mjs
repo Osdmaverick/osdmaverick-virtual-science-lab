@@ -186,6 +186,17 @@ try {
 
 // Validate Phase 13 class calendar structure, client syntax and row-level security.
 try {
+  const calendarClient = read("assets/class-calendar.js");
+  if (!calendarClient.includes('.eq("status","published")')) {
+    fail("class calendar deadline visibility", "assignment deadlines must be limited to published assignments");
+  } else {
+    report("class calendar shows only published assignment deadlines");
+  }
+} catch (error) {
+  fail("class calendar deadline visibility", error.message);
+}
+
+try {
   const calendarSql = read("supabase/migrations/202611070005_class_calendar.sql").toLowerCase();
   for (const required of [
     "create table if not exists public.class_events",
