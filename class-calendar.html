@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Plan science lessons, practical activities and assessments with a private class calendar.">
+<meta name="theme-color" content="#071827"><title>Class Calendar | OSDMaverick Virtual Science Lab</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.calendar-wrap{max-width:1120px;margin:38px auto 76px;padding:0 5%}.calendar-hero{padding:30px;border-radius:18px;background:linear-gradient(120deg,#0b2739,#145064);color:#fff}.calendar-hero p{color:#d4e7eb}.calendar-panel{margin-top:20px;padding:22px;border:1px solid #dce5eb;border-radius:15px;background:#fff}.calendar-panel h2{margin-top:0}.calendar-status{min-height:1.5em;color:#087d73;font-weight:650}.calendar-status[data-state=error]{color:#a23b2b}.calendar-toolbar{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap}.calendar-panel label{display:block;margin:10px 0 6px;font-weight:700}.calendar-panel input,.calendar-panel select,.calendar-panel textarea{box-sizing:border-box;width:100%;padding:11px 12px;border:1px solid #c9d7df;border-radius:9px;font:inherit}.calendar-panel textarea{min-height:90px;resize:vertical}.calendar-panel button{border:0;border-radius:9px;padding:10px 14px;background:#087d73;color:#fff;font:inherit;font-weight:700;cursor:pointer}.calendar-panel button.secondary{background:#e8f3f2;color:#0b514e}.calendar-panel button.danger{background:#fff0ed;color:#a23b2b}.calendar-panel button:focus-visible,.calendar-panel input:focus-visible,.calendar-panel select:focus-visible,.calendar-panel textarea:focus-visible{outline:3px solid #0c9b8f;outline-offset:2px}.calendar-panel button:disabled{opacity:.6}.calendar-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.calendar-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}.calendar-stat{padding:14px;border-radius:11px;background:#f0f6f7}.calendar-stat strong{display:block;font-size:1.5rem;color:#123c4a}.calendar-stat span{color:#607482;font-size:.88rem}.calendar-list{display:grid;gap:12px}.calendar-event{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:17px;border:1px solid #dce5eb;border-radius:12px;background:#fbfcfd}.calendar-date{font-weight:750;color:#145064}.calendar-event h3{margin:5px 0}.calendar-event p{margin:5px 0;white-space:pre-wrap;overflow-wrap:anywhere}.calendar-meta{color:#607482;font-size:.88rem}.calendar-tag{display:inline-block;padding:4px 8px;border-radius:20px;background:#edf3f5;color:#34515f;font-size:.78rem;font-weight:700}.calendar-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.calendar-empty{padding:22px;border-radius:12px;background:#f3f7f8;color:#607482;text-align:center}.calendar-check{display:flex!important;align-items:center;gap:8px}.calendar-check input{width:auto!important}.calendar-footnote{color:#607482;font-size:.9rem}
+@media(max-width:620px){.calendar-form-grid,.calendar-summary{grid-template-columns:1fr}.calendar-event{grid-template-columns:1fr;gap:4px}.calendar-panel{padding:16px}}
+</style></head>
+<body>
+<header class="site-header"><a class="brand" href="index.html">OSDMAVERICK <span>VIRTUAL SCIENCE LAB</span></a><button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">☰</button><nav class="nav" id="primary-navigation" aria-label="Main navigation"><a href="index.html">Home</a><a href="classes.html">My classes</a><a href="student-learning.html">My learning</a><a href="class-calendar.html">Class calendar</a><a href="class-quizzes.html">Class quizzes</a><a href="assignments.html">Assignments</a><a href="progress.html">Progress</a><a href="notifications.html">Notifications</a><a href="auth.html">Account</a></nav></header>
+<main class="calendar-wrap">
+<a href="index.html">← Back to virtual lab</a>
+<section class="calendar-hero"><p class="eyebrow">PHASE 13 · CLASS PLANNING</p><h1>Class calendar</h1><p>Keep lessons, practical activities and assessments organised. Students can also see assignment deadlines alongside class events.</p></section>
+<section class="calendar-panel">
+<p id="calendar-account" class="calendar-meta">Checking account…</p>
+<p id="calendar-status" class="calendar-status" role="status" aria-live="polite"></p>
+<div id="calendar-login" hidden><h2>Sign in to view your class calendar</h2><a href="auth.html">Go to sign in →</a></div>
+<div id="calendar-workspace" hidden>
+<section id="calendar-create-panel" class="calendar-panel" hidden>
+<h2 id="calendar-form-heading">Add class event</h2>
+<form id="calendar-form">
+<div class="calendar-form-grid"><div><label for="calendar-class">Class</label><select id="calendar-class" required><option value="">Choose a class</option></select></div><div><label for="calendar-type">Event type</label><select id="calendar-type"><option value="lesson">Lesson</option><option value="practical">Practical activity</option><option value="assessment">Assessment</option><option value="meeting">Meeting</option><option value="other">Other</option></select></div></div>
+<label for="calendar-title">Event title</label><input id="calendar-title" maxlength="160" minlength="3" required placeholder="e.g. Forces and motion practical">
+<label for="calendar-description">Details (optional)</label><textarea id="calendar-description" maxlength="4000" placeholder="Add preparation notes, materials or instructions…"></textarea>
+<div class="calendar-form-grid"><div><label for="calendar-start">Starts</label><input id="calendar-start" type="datetime-local" required></div><div><label for="calendar-end">Ends (optional)</label><input id="calendar-end" type="datetime-local"></div></div>
+<label class="calendar-check"><input id="calendar-all-day" type="checkbox"> All-day event</label>
+<div class="calendar-actions"><button type="submit" id="calendar-save">Save event</button><button type="button" class="secondary" id="calendar-cancel" hidden>Cancel edit</button></div>
+</form></section>
+<div class="calendar-toolbar"><div><h2 id="calendar-list-heading">Upcoming class activity</h2><label for="calendar-month">Month <input id="calendar-month" type="month"></label></div><div><label for="calendar-filter">Class <select id="calendar-filter"><option value="">All classes</option></select></label><button type="button" class="secondary" id="calendar-refresh">Refresh</button></div></div>
+<div id="calendar-summary" class="calendar-summary"></div>
+<div id="calendar-list" class="calendar-list"><p class="calendar-empty">Loading class calendar…</p></div>
+</div></section>
+<p class="calendar-footnote">Calendar events are private to each class. Assignment deadlines are read from published assignments. See the <a href="docs/PHASE-13-CLASS-CALENDAR.md">Phase 13 setup guide</a>.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="assets/supabase-config.js"></script><script src="assets/class-calendar.js"></script><script src="assets/main.js"></script>
+</body></html>

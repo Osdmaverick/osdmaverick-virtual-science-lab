@@ -457,6 +457,15 @@ try {
   if (await page.locator("#progress-content").isVisible()) failures.push("Progress analytics exposed a dashboard without backend configuration");
   checked.progressAnalyticsSetup = 1;
 
+  // Class calendar must fail safely before Supabase is configured.
+  await page.goto(`${baseUrl}/class-calendar.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#calendar-status")?.textContent?.includes("Class calendar is not connected yet"), null, { timeout: 5000 });
+  if (!(await page.locator("#calendar-status").innerText()).includes("migrations 1–13")) {
+    failures.push("Class calendar did not show Phase 13 setup guidance when unconfigured");
+  }
+  if (await page.locator("#calendar-workspace").isVisible()) failures.push("Class calendar exposed event controls without backend configuration");
+  checked.classCalendarSetup = 1;
+
 } catch (error) {
   failures.push(`Browser QA runner error: ${error.stack || error.message}`);
 } finally {

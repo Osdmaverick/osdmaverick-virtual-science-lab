@@ -123,7 +123,7 @@ for (const href of uniqueLinks) {
 
 // Validate the new authentication and class-management entry points without
 // requiring live Supabase credentials or a remote project.
-for (const relativePath of ["assets/auth.js", "assets/classes.js", "assets/assignments.js", "assets/content-studio.js"]) {
+for (const relativePath of ["assets/auth.js", "assets/classes.js", "assets/assignments.js", "assets/content-studio.js", "assets/class-calendar.js"]) {
   try {
     new vm.Script(read(relativePath), { filename: relativePath });
     report(`JavaScript syntax: ${relativePath}`);
@@ -132,7 +132,7 @@ for (const relativePath of ["assets/auth.js", "assets/classes.js", "assets/assig
   }
 }
 
-for (const relativePath of ["auth.html", "classes.html", "assignments.html"]) {
+for (const relativePath of ["auth.html", "classes.html", "assignments.html", "class-calendar.html"]) {
   try {
     const html = read(relativePath);
     if (!/name=["']viewport["']/i.test(html)) fail("viewport metadata", relativePath);
@@ -182,6 +182,37 @@ try {
   report("assignment migration security markers and workspace files");
 } catch (error) {
   fail("assignment migration existence", error.message);
+}
+
+// Validate Phase 13 class calendar structure, client syntax and row-level security.
+try {
+  const calendarClient = read("assets/class-calendar.js");
+  if (!calendarClient.includes('.eq("status","published")')) {
+    fail("class calendar deadline visibility", "assignment deadlines must be limited to published assignments");
+  } else {
+    report("class calendar shows only published assignment deadlines");
+  }
+} catch (error) {
+  fail("class calendar deadline visibility", error.message);
+}
+
+try {
+  const calendarSql = read("supabase/migrations/202611070005_class_calendar.sql").toLowerCase();
+  for (const required of [
+    "create table if not exists public.class_events",
+    "enable row level security",
+    "teachers manage events in their classes",
+    "enrolled students read class events",
+    "public.is_class_teacher(class_id)",
+    "public.is_class_student(class_id)",
+    "grant insert (class_id,teacher_id,title,description,event_type,starts_at,ends_at,all_day)",
+    "grant update (title,description,event_type,starts_at,ends_at,all_day)"
+  ]) {
+    if (!calendarSql.includes(required)) fail("class calendar migration security feature", `missing ${required}`);
+  }
+  report("class calendar migration security markers");
+} catch (error) {
+  fail("class calendar migration existence", error.message);
 }
 
 // Validate Phase 4 cloud sync client and database access controls.
