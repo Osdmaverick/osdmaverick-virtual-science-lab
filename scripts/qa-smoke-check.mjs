@@ -123,7 +123,7 @@ for (const href of uniqueLinks) {
 
 // Validate the new authentication and class-management entry points without
 // requiring live Supabase credentials or a remote project.
-for (const relativePath of ["assets/auth.js", "assets/classes.js", "assets/assignments.js", "assets/content-studio.js", "assets/class-calendar.js"]) {
+for (const relativePath of ["assets/auth.js", "assets/classes.js", "assets/assignments.js", "assets/content-studio.js", "assets/class-calendar.js", "assets/class-attendance.js"]) {
   try {
     new vm.Script(read(relativePath), { filename: relativePath });
     report(`JavaScript syntax: ${relativePath}`);
@@ -132,7 +132,7 @@ for (const relativePath of ["assets/auth.js", "assets/classes.js", "assets/assig
   }
 }
 
-for (const relativePath of ["auth.html", "classes.html", "assignments.html", "class-calendar.html"]) {
+for (const relativePath of ["auth.html", "classes.html", "assignments.html", "class-calendar.html", "class-attendance.html"]) {
   try {
     const html = read(relativePath);
     if (!/name=["']viewport["']/i.test(html)) fail("viewport metadata", relativePath);
@@ -182,6 +182,37 @@ try {
   report("assignment migration security markers and workspace files");
 } catch (error) {
   fail("assignment migration existence", error.message);
+}
+
+// Validate Phase 14 attendance tables, client syntax and row-level security.
+try {
+  const attendanceClient = read("assets/class-attendance.js");
+  new vm.Script(attendanceClient, { filename: "assets/class-attendance.js" });
+  for (const required of ['migrations 1–14','attendance_sessions','attendance_records','student_id===user.id']) {
+    if (!attendanceClient.includes(required)) fail("class attendance client feature", `missing ${required}`);
+  }
+  report("class attendance client syntax and privacy markers");
+} catch (error) {
+  fail("class attendance client", error.message);
+}
+try {
+  const attendanceSql = read("supabase/migrations/202611090001_class_attendance.sql").toLowerCase();
+  for (const required of [
+    "create table if not exists public.attendance_sessions",
+    "create table if not exists public.attendance_records",
+    "enable row level security",
+    "teachers manage attendance sessions",
+    "enrolled students read attendance sessions",
+    "teachers manage enrolled learner attendance",
+    "students read their own attendance",
+    "public.is_class_teacher(class_id)",
+    "public.is_class_student(class_id)"
+  ]) {
+    if (!attendanceSql.includes(required)) fail("class attendance migration security feature", `missing ${required}`);
+  }
+  report("class attendance migration security markers");
+} catch (error) {
+  fail("class attendance migration existence", error.message);
 }
 
 // Validate Phase 13 class calendar structure, client syntax and row-level security.
