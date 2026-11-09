@@ -58,7 +58,6 @@ create policy "Teachers manage enrolled learner attendance"
   on public.attendance_records for all to authenticated
   using (
     public.current_user_is_teacher()
-    and public.current_user_is_teacher()
     and public.is_class_teacher(class_id)
     and exists (
       select 1 from public.attendance_sessions s
@@ -67,7 +66,8 @@ create policy "Teachers manage enrolled learner attendance"
     )
   )
   with check (
-    public.is_class_teacher(class_id)
+    public.current_user_is_teacher()
+    and public.is_class_teacher(class_id)
     and exists (
       select 1 from public.attendance_sessions s
       where s.id = session_id and s.class_id = attendance_records.class_id
