@@ -466,6 +466,34 @@ try {
   fail("Phase 12 assessment notifications validation", error.message);
 }
 
+// Validate Phase 15 student learning goals, append-only teacher feedback and RLS.
+try {
+  new vm.Script(read("assets/learning-goals.js"), { filename: "assets/learning-goals.js" });
+  const goalsSql = read("supabase/migrations/202611090002_learning_goals.sql").toLowerCase();
+  for (const required of [
+    "create table if not exists public.learning_goals",
+    "create table if not exists public.learning_goal_reviews",
+    "enable row level security",
+    "students manage their own class learning goals",
+    "teachers read goals in their classes",
+    "teachers write reviews for goals in their classes",
+    "students read reviews on their own goals",
+    "public.is_class_student(class_id)",
+    "public.is_class_teacher(class_id)",
+    "revoke all on public.learning_goals, public.learning_goal_reviews from anon, authenticated"
+  ]) {
+    if (!goalsSql.includes(required)) fail("learning goals security feature", "missing " + required);
+  }
+  const goalsHtml = read("learning-goals.html");
+  for (const required of ['id="goals-workspace"','id="goals-create-form"','id="goals-list"','src="assets/learning-goals.js"']) {
+    if (!goalsHtml.includes(required)) fail("learning goals page integration", "missing " + required);
+  }
+  read("docs/PHASE-15-LEARNING-GOALS.md");
+  report("Phase 15 learning goals syntax, RLS and page integration");
+} catch (error) {
+  fail("Phase 15 learning goals validation", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
