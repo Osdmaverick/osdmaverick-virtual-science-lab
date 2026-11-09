@@ -120,7 +120,11 @@ create policy "Teachers issue certificates in their classes"
     issued_by = auth.uid()
     and public.current_user_is_teacher()
     and public.is_class_teacher(class_id)
-    and public.is_class_student(class_id)
+    and exists (
+      select 1 from public.enrollments e
+      where e.class_id = achievement_certificates.class_id
+        and e.student_id = achievement_certificates.student_id
+    )
   );
 
 revoke all on public.student_portfolio_entries, public.student_portfolio_reviews, public.achievement_certificates from anon, authenticated;
