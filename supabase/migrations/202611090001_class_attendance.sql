@@ -96,7 +96,8 @@ grant delete on public.attendance_sessions to authenticated;
 grant select on public.attendance_records to authenticated;
 grant insert (session_id,class_id,student_id,status,note)
   on public.attendance_records to authenticated;
-grant update (status,note,marked_at) on public.attendance_records to authenticated;
+grant update (session_id,class_id,student_id,status,note,marked_at)
+  on public.attendance_records to authenticated;
 grant delete on public.attendance_records to authenticated;
 
 comment on table public.attendance_sessions is
