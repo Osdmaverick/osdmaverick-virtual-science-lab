@@ -484,6 +484,15 @@ try {
   if (await page.locator("#goals-workspace").isVisible()) failures.push("Learning goals exposed private workspace without backend configuration");
   checked.learningGoalsSetup = 1;
 
+  // Student portfolio must remain private and explain setup before Supabase is configured.
+  await page.goto(`${baseUrl}/student-portfolio.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#portfolio-status")?.textContent?.includes("Student portfolio is not connected yet"), null, { timeout: 5000 });
+  if (!(await page.locator("#portfolio-status").innerText()).includes("migrations 1–16")) {
+    failures.push("Student portfolio did not show Phase 16 setup guidance when unconfigured");
+  }
+  if (await page.locator("#portfolio-workspace").isVisible()) failures.push("Student portfolio exposed private entries without backend configuration");
+  checked.studentPortfolioSetup = 1;
+
 } catch (error) {
   failures.push(`Browser QA runner error: ${error.stack || error.message}`);
 } finally {
