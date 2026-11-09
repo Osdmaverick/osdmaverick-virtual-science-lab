@@ -41,7 +41,7 @@ alter table public.attendance_records enable row level security;
 drop policy if exists "Teachers manage attendance sessions" on public.attendance_sessions;
 create policy "Teachers manage attendance sessions"
   on public.attendance_sessions for all to authenticated
-  using (teacher_id = auth.uid() and public.is_class_teacher(class_id))
+  using (teacher_id = auth.uid() and public.current_user_is_teacher() and public.is_class_teacher(class_id))
   with check (
     teacher_id = auth.uid()
     and public.current_user_is_teacher()
@@ -57,7 +57,9 @@ drop policy if exists "Teachers manage enrolled learner attendance" on public.at
 create policy "Teachers manage enrolled learner attendance"
   on public.attendance_records for all to authenticated
   using (
-    public.is_class_teacher(class_id)
+    public.current_user_is_teacher()
+    and public.current_user_is_teacher()
+    and public.is_class_teacher(class_id)
     and exists (
       select 1 from public.attendance_sessions s
       where s.id = session_id and s.class_id = attendance_records.class_id
