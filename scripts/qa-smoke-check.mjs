@@ -494,6 +494,41 @@ try {
   fail("Phase 15 learning goals validation", error.message);
 }
 
+// Validate Phase 16 student portfolio, teacher reviews and certificates.
+try {
+  new vm.Script(read("assets/student-portfolio.js"), { filename: "assets/student-portfolio.js" });
+  const portfolioSql = read("supabase/migrations/202611090003_student_portfolios.sql").toLowerCase();
+  for (const required of [
+    "create table if not exists public.student_portfolio_entries",
+    "create table if not exists public.student_portfolio_reviews",
+    "create table if not exists public.achievement_certificates",
+    "enable row level security",
+    "students manage their own class portfolio entries",
+    "teachers read portfolio entries in their classes",
+    "teachers write portfolio reviews in their classes",
+    "students read reviews on their own portfolio entries",
+    "students read their own achievement certificates",
+    "teachers issue certificates in their classes",
+    "public.is_class_teacher(class_id)",
+    "public.is_class_student(class_id)",
+    "e.student_id = achievement_certificates.student_id",
+    "revoke all on public.student_portfolio_entries, public.student_portfolio_reviews, public.achievement_certificates from anon, authenticated"
+  ]) {
+    if (!portfolioSql.includes(required)) fail("student portfolio security feature", "missing " + required);
+  }
+  const portfolioHtml = read("student-portfolio.html");
+  for (const required of ['id="portfolio-workspace"','id="portfolio-form"','id="portfolio-list"','id="certificate-list"','src="assets/student-portfolio.js"']) {
+    if (!portfolioHtml.includes(required)) fail("student portfolio integration", "missing " + required);
+  }
+  read("docs/PHASE-16-STUDENT-PORTFOLIO.md");
+  for (const relativePath of ["index.html","teacher-dashboard.html","student-learning.html","learning-goals.html"]) {
+    if (!read(relativePath).includes("student-portfolio.html")) fail("student portfolio navigation", relativePath);
+  }
+  report("Phase 16 portfolio syntax, RLS, certificate and navigation integration");
+} catch (error) {
+  fail("Phase 16 student portfolio validation", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
