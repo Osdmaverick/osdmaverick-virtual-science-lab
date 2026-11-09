@@ -466,6 +466,15 @@ try {
   if (await page.locator("#calendar-workspace").isVisible()) failures.push("Class calendar exposed event controls without backend configuration");
   checked.classCalendarSetup = 1;
 
+  // Class attendance must fail safely before Supabase is configured.
+  await page.goto(`${baseUrl}/class-attendance.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#attendance-status")?.textContent?.includes("Class attendance is not connected yet"), null, { timeout: 5000 });
+  if (!(await page.locator("#attendance-status").innerText()).includes("migrations 1–14")) {
+    failures.push("Class attendance did not show Phase 14 setup guidance when unconfigured");
+  }
+  if (await page.locator("#attendance-workspace").isVisible()) failures.push("Class attendance exposed registers without backend configuration");
+  checked.classAttendanceSetup = 1;
+
 } catch (error) {
   failures.push(`Browser QA runner error: ${error.stack || error.message}`);
 } finally {
