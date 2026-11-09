@@ -475,6 +475,15 @@ try {
   if (await page.locator("#attendance-workspace").isVisible()) failures.push("Class attendance exposed registers without backend configuration");
   checked.classAttendanceSetup = 1;
 
+  // Learning goals must fail safely before Supabase is configured.
+  await page.goto(`${baseUrl}/learning-goals.html`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#goals-status")?.textContent?.includes("Learning goals are not connected yet"), null, { timeout: 5000 });
+  if (!(await page.locator("#goals-status").innerText()).includes("migrations 1–15")) {
+    failures.push("Learning goals did not show Phase 15 setup guidance when unconfigured");
+  }
+  if (await page.locator("#goals-workspace").isVisible()) failures.push("Learning goals exposed private workspace without backend configuration");
+  checked.learningGoalsSetup = 1;
+
 } catch (error) {
   failures.push(`Browser QA runner error: ${error.stack || error.message}`);
 } finally {
