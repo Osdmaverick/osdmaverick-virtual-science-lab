@@ -48,6 +48,10 @@ try {
     if (!(await page.locator("#primary-navigation").evaluate(node => node.classList.contains("open")))) failures.push(`${href}: mobile navigation panel did not become visible`);
     await toggle.click();
     if (await toggle.getAttribute("aria-expanded") !== "false") failures.push(`${href}: mobile navigation did not close`);
+    await toggle.click();
+    await page.keyboard.press("Escape");
+    if (await toggle.getAttribute("aria-expanded") !== "false") failures.push(`${href}: Escape did not close mobile navigation`);
+    if (!(await toggle.evaluate(node => document.activeElement === node))) failures.push(`${href}: Escape did not return focus to the menu toggle`);
     if (href === "index.html") {
       if (!(await page.locator(".development-strip").count()) || !(await page.locator(".roadmap-preview").count())) failures.push("Homepage development update and roadmap preview missing");
     } else {
