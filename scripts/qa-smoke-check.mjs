@@ -529,6 +529,24 @@ try {
   fail("Phase 16 student portfolio validation", error.message);
 }
 
+
+/* Phase 17 public homepage and development roadmap checks. */
+try {
+  const home = read("index.html");
+  const roadmap = read("roadmap.html");
+  for (const required of ['href="roadmap.html"', 'class="development-strip"', 'class="roadmap-preview"', 'href="#how-it-works"', 'class="nav-cta"']) {
+    if (!home.includes(required)) fail("Phase 17 homepage experience", "missing " + required);
+  }
+  for (const required of ['id="status-heading"', 'id="phases-heading"', 'id="changelog-heading"', 'Available on public site', 'Built in development · not released', 'not yet part of the live release']) {
+    if (!roadmap.includes(required)) fail("Phase 17 roadmap transparency", "missing " + required);
+  }
+  if (!roadmap.includes('datetime="2026-11-12"')) fail("Phase 17 changelog date", "missing latest update date");
+  if (!/href=["']assets\/styles\.css["']/.test(roadmap) || !/src=["']assets\/main\.js["']/.test(roadmap)) fail("Phase 17 shared assets", "roadmap must use shared CSS and navigation script");
+  report("Phase 17 homepage, public roadmap and release-status transparency");
+} catch (error) {
+  fail("Phase 17 public experience validation", error.message);
+}
+
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;
 report("lab-page existence and structure", `${checkedCount}/${uniqueLinks.length} pages`);
 report("inline JavaScript syntax", `${uniqueLinks.length} linked pages scanned`);
