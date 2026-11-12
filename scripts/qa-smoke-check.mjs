@@ -541,6 +541,10 @@ try {
     if (!roadmap.includes(required)) fail("Phase 17 roadmap transparency", "missing " + required);
   }
   if (!roadmap.includes('datetime="2026-11-12"')) fail("Phase 17 changelog date", "missing latest update date");
+  for (const unreleased of ['href="student-learning.html"', 'href="student-portfolio.html"', 'href="teacher-dashboard.html"']) {
+    if (home.includes(unreleased)) fail("Phase 17 public CTA release accuracy", "homepage links directly to unreleased feature " + unreleased);
+  }
+  if (!roadmap.includes('In progress · draft PR')) fail("Phase 17 roadmap status legend", "missing in-progress draft PR status");
   if (!/href=["']assets\/styles\.css["']/.test(roadmap) || !/src=["']assets\/main\.js["']/.test(roadmap)) fail("Phase 17 shared assets", "roadmap must use shared CSS and navigation script");
   report("Phase 17 homepage, public roadmap and release-status transparency");
 } catch (error) {
