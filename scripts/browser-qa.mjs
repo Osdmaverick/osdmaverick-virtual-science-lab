@@ -28,6 +28,36 @@ const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
 
 try {
+
+  // Phase 17 public-facing homepage and roadmap: content, navigation and mobile layout.
+  for (const href of ["index.html", "roadmap.html"]) {
+    const errors = [];
+    const onPageError = (error) => errors.push(error.message);
+    page.on("pageerror", onPageError);
+    const response = await page.goto(`${baseUrl}/${href}`, { waitUntil: "domcontentloaded", timeout: 30000 });
+    if (!response?.ok()) failures.push(`${href}: HTTP ${response?.status() ?? "no response"}`);
+    if (!(await page.locator("main#main-content").count())) failures.push(`${href}: main landmark missing`);
+    if (!(await page.locator("#primary-navigation a[href='roadmap.html'], #primary-navigation a[href='index.html']").count())) failures.push(`${href}: primary navigation missing expected public route`);
+    if (errors.length) failures.push(`${href}: uncaught browser error: ${errors.join(" | ")}`);
+    await page.setViewportSize({ width: 390, height: 844 });
+    const dimensions = await page.evaluate(() => ({ viewport: document.documentElement.clientWidth, content: document.documentElement.scrollWidth }));
+    if (dimensions.content > dimensions.viewport + 1) failures.push(`${href}: mobile horizontal overflow (${dimensions.content}px > ${dimensions.viewport}px)`);
+    const toggle = page.locator(".menu-toggle");
+    await toggle.click();
+    if (await toggle.getAttribute("aria-expanded") !== "true") failures.push(`${href}: mobile navigation did not open`);
+    if (!(await page.locator("#primary-navigation").evaluate(node => node.classList.contains("open")))) failures.push(`${href}: mobile navigation panel did not become visible`);
+    await toggle.click();
+    if (await toggle.getAttribute("aria-expanded") !== "false") failures.push(`${href}: mobile navigation did not close`);
+    if (href === "index.html") {
+      if (!(await page.locator(".development-strip").count()) || !(await page.locator(".roadmap-preview").count())) failures.push("Homepage development update and roadmap preview missing");
+    } else {
+      for (const id of ["status-heading", "phases-heading", "changelog-heading"]) if (!(await page.locator("#" + id).count())) failures.push(`Roadmap section missing: ${id}`);
+      if (!(await page.getByText("Built in development · not released", { exact: true }).count())) failures.push("Roadmap does not distinguish unreleased development work");
+    }
+    page.off("pageerror", onPageError);
+    checked.publicPages = (checked.publicPages || 0) + 1;
+  }
+
   for (const href of pages) {
     const errors = [];
     const onPageError = (error) => errors.push(error.message);
