@@ -162,3 +162,6 @@ main.lab .panel:focus-within{border-color:#75bdb5;box-shadow:0 8px 26px #0e766c1
 @media(max-width:900px){.nav{gap:8px 14px}.roadmap-preview{grid-template-columns:1fr;gap:28px}}
 @media(max-width:680px){.site-header{position:sticky}.nav{align-items:stretch;gap:4px}.nav a{padding:9px 4px}.nav .nav-cta{text-align:center;margin-top:5px}.development-strip{justify-content:flex-start;padding:12px 7%;font-size:.82rem}.roadmap-preview-stats{grid-template-columns:1fr}.roadmap-preview-stats article{min-height:0}.home-hero .actions{align-items:stretch}.home-hero .actions .button{text-align:center}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.subject-card{transition:none}}
+
+/* Keep anchored section headings visible below the sticky site header. */
+main [id]{scroll-margin-top:100px}
