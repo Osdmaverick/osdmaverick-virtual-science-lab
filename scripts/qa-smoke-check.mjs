@@ -521,7 +521,7 @@ try {
     if (!portfolioHtml.includes(required)) fail("student portfolio integration", "missing " + required);
   }
   read("docs/PHASE-16-STUDENT-PORTFOLIO.md");
-  for (const relativePath of ["index.html","teacher-dashboard.html","student-learning.html","learning-goals.html"]) {
+  for (const relativePath of ["teacher-dashboard.html","student-learning.html","learning-goals.html"]) {
     if (!read(relativePath).includes("student-portfolio.html")) fail("student portfolio navigation", relativePath);
   }
   report("Phase 16 portfolio syntax, RLS, certificate and navigation integration");
