@@ -534,7 +534,7 @@ try {
 try {
   const home = read("index.html");
   const roadmap = read("roadmap.html");
-  for (const required of ['href="roadmap.html"', 'class="development-strip"', 'class="roadmap-preview"', 'href="#how-it-works"', 'class="nav-cta"']) {
+  for (const required of ['href="roadmap.html"', 'class="development-strip"', 'class="section roadmap-preview"', 'href="#how-it-works"', 'class="nav-cta"']) {
     if (!home.includes(required)) fail("Phase 17 homepage experience", "missing " + required);
   }
   for (const required of ['id="status-heading"', 'id="phases-heading"', 'id="changelog-heading"', 'Available on public site', 'Built in development · not released', 'not yet part of the live release']) {
