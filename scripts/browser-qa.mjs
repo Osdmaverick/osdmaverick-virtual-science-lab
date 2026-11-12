@@ -58,6 +58,11 @@ try {
       for (const id of ["status-heading", "phases-heading", "changelog-heading"]) if (!(await page.locator("#" + id).count())) failures.push(`Roadmap section missing: ${id}`);
       if (!(await page.getByText("Built in development · not released", { exact: true }).count())) failures.push("Roadmap does not distinguish unreleased development work");
       if (!(await page.getByText("In progress · draft PR", { exact: true }).count())) failures.push("Roadmap status legend omits in-progress draft work");
+      const inProgressStyle = await page.locator(".status-current").first().evaluate(node => getComputedStyle(node).backgroundColor);
+      const availableStyle = await page.locator(".status-available").first().evaluate(node => getComputedStyle(node).backgroundColor);
+      if (inProgressStyle === availableStyle) failures.push("Roadmap in-progress status must be visually distinct from available status");
+      const anchorOffset = await page.locator("#changelog-heading").evaluate(node => parseFloat(getComputedStyle(node).scrollMarginTop));
+      if (anchorOffset < 80) failures.push(`Roadmap anchor offset is too small for the sticky header (${anchorOffset}px)`);
       if (await page.locator("a[href='student-learning.html'], a[href='student-portfolio.html'], a[href='teacher-dashboard.html']").count()) failures.push("Homepage exposes direct links to unreleased student or teacher tools");
     }
     page.off("pageerror", onPageError);
