@@ -57,6 +57,8 @@ try {
     } else {
       for (const id of ["status-heading", "phases-heading", "changelog-heading"]) if (!(await page.locator("#" + id).count())) failures.push(`Roadmap section missing: ${id}`);
       if (!(await page.getByText("Built in development · not released", { exact: true }).count())) failures.push("Roadmap does not distinguish unreleased development work");
+      if (!(await page.getByText("In progress · draft PR", { exact: true }).count())) failures.push("Roadmap status legend omits in-progress draft work");
+      if (await page.locator("a[href='student-learning.html'], a[href='student-portfolio.html'], a[href='teacher-dashboard.html']").count()) failures.push("Homepage exposes direct links to unreleased student or teacher tools");
     }
     page.off("pageerror", onPageError);
     checked.publicPages = (checked.publicPages || 0) + 1;
