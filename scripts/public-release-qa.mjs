@@ -42,7 +42,7 @@ try {
       pageTitle: Boolean(document.title.trim()),
       mainLandmark: document.querySelectorAll("main").length === 1,
       primaryHeading: document.querySelectorAll("h1").length === 1,
-      skipLink: Boolean(document.querySelector('a.skip-link[href="#main-content"]')),
+      skipLink: Boolean(document.querySelector('a.skip-link[href="#main-content"]')) && document.querySelector("#main-content")?.tabIndex === -1,
       labelledNavigation: Boolean(document.querySelector("nav[aria-label]")),
       namedButtons: [...document.querySelectorAll("button")].every(hasName),
       namedLinks: [...document.querySelectorAll("a[href]")].every(hasName),
