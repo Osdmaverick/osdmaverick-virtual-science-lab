@@ -521,12 +521,34 @@ try {
     if (!portfolioHtml.includes(required)) fail("student portfolio integration", "missing " + required);
   }
   read("docs/PHASE-16-STUDENT-PORTFOLIO.md");
-  for (const relativePath of ["index.html","teacher-dashboard.html","student-learning.html","learning-goals.html"]) {
+  for (const relativePath of ["teacher-dashboard.html","student-learning.html","learning-goals.html"]) {
     if (!read(relativePath).includes("student-portfolio.html")) fail("student portfolio navigation", relativePath);
   }
   report("Phase 16 portfolio syntax, RLS, certificate and navigation integration");
 } catch (error) {
   fail("Phase 16 student portfolio validation", error.message);
+}
+
+
+/* Phase 17 public homepage and development roadmap checks. */
+try {
+  const home = read("index.html");
+  const roadmap = read("roadmap.html");
+  for (const required of ['href="roadmap.html"', 'class="development-strip"', 'class="section roadmap-preview"', 'href="#how-it-works"', 'class="nav-cta"']) {
+    if (!home.includes(required)) fail("Phase 17 homepage experience", "missing " + required);
+  }
+  for (const required of ['id="status-heading"', 'id="phases-heading"', 'id="changelog-heading"', 'Available on public site', 'Built in development · not released', 'not yet part of the live release']) {
+    if (!roadmap.includes(required)) fail("Phase 17 roadmap transparency", "missing " + required);
+  }
+  if (!roadmap.includes('datetime="2026-11-12"')) fail("Phase 17 changelog date", "missing latest update date");
+  for (const unreleased of ['href="student-learning.html"', 'href="student-portfolio.html"', 'href="teacher-dashboard.html"']) {
+    if (home.includes(unreleased)) fail("Phase 17 public CTA release accuracy", "homepage links directly to unreleased feature " + unreleased);
+  }
+  if (!roadmap.includes('In progress · draft PR')) fail("Phase 17 roadmap status legend", "missing in-progress draft PR status");
+  if (!/href=["']assets\/styles\.css["']/.test(roadmap) || !/src=["']assets\/main\.js["']/.test(roadmap)) fail("Phase 17 shared assets", "roadmap must use shared CSS and navigation script");
+  report("Phase 17 homepage, public roadmap and release-status transparency");
+} catch (error) {
+  fail("Phase 17 public experience validation", error.message);
 }
 
 const checkedCount = uniqueLinks.filter((href) => fs.existsSync(path.join(root, href))).length;

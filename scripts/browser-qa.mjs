@@ -28,6 +28,47 @@ const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
 
 try {
+
+  // Phase 17 public-facing homepage and roadmap: content, navigation and mobile layout.
+  for (const href of ["index.html", "roadmap.html"]) {
+    const errors = [];
+    const onPageError = (error) => errors.push(error.message);
+    page.on("pageerror", onPageError);
+    const response = await page.goto(`${baseUrl}/${href}`, { waitUntil: "domcontentloaded", timeout: 30000 });
+    if (!response?.ok()) failures.push(`${href}: HTTP ${response?.status() ?? "no response"}`);
+    if (!(await page.locator("main#main-content").count())) failures.push(`${href}: main landmark missing`);
+    if (!(await page.locator("#primary-navigation a[href='roadmap.html'], #primary-navigation a[href='index.html']").count())) failures.push(`${href}: primary navigation missing expected public route`);
+    if (errors.length) failures.push(`${href}: uncaught browser error: ${errors.join(" | ")}`);
+    await page.setViewportSize({ width: 390, height: 844 });
+    const dimensions = await page.evaluate(() => ({ viewport: document.documentElement.clientWidth, content: document.documentElement.scrollWidth }));
+    if (dimensions.content > dimensions.viewport + 1) failures.push(`${href}: mobile horizontal overflow (${dimensions.content}px > ${dimensions.viewport}px)`);
+    const toggle = page.locator(".menu-toggle");
+    await toggle.click();
+    if (await toggle.getAttribute("aria-expanded") !== "true") failures.push(`${href}: mobile navigation did not open`);
+    if (!(await page.locator("#primary-navigation").evaluate(node => node.classList.contains("open")))) failures.push(`${href}: mobile navigation panel did not become visible`);
+    await toggle.click();
+    if (await toggle.getAttribute("aria-expanded") !== "false") failures.push(`${href}: mobile navigation did not close`);
+    await toggle.click();
+    await page.keyboard.press("Escape");
+    if (await toggle.getAttribute("aria-expanded") !== "false") failures.push(`${href}: Escape did not close mobile navigation`);
+    if (!(await toggle.evaluate(node => document.activeElement === node))) failures.push(`${href}: Escape did not return focus to the menu toggle`);
+    if (href === "index.html") {
+      if (!(await page.locator(".development-strip").count()) || !(await page.locator(".roadmap-preview").count())) failures.push("Homepage development update and roadmap preview missing");
+    } else {
+      for (const id of ["status-heading", "phases-heading", "changelog-heading"]) if (!(await page.locator("#" + id).count())) failures.push(`Roadmap section missing: ${id}`);
+      if (!(await page.getByText("Built in development · not released", { exact: true }).count())) failures.push("Roadmap does not distinguish unreleased development work");
+      if (!(await page.getByText("In progress · draft PR", { exact: true }).count())) failures.push("Roadmap status legend omits in-progress draft work");
+      const inProgressStyle = await page.locator(".status-current").first().evaluate(node => getComputedStyle(node).backgroundColor);
+      const availableStyle = await page.locator(".status-available").first().evaluate(node => getComputedStyle(node).backgroundColor);
+      if (inProgressStyle === availableStyle) failures.push("Roadmap in-progress status must be visually distinct from available status");
+      const anchorOffset = await page.locator("#changelog-heading").evaluate(node => parseFloat(getComputedStyle(node).scrollMarginTop));
+      if (anchorOffset < 80) failures.push(`Roadmap anchor offset is too small for the sticky header (${anchorOffset}px)`);
+      if (await page.locator("a[href='student-learning.html'], a[href='student-portfolio.html'], a[href='teacher-dashboard.html']").count()) failures.push("Homepage exposes direct links to unreleased student or teacher tools");
+    }
+    page.off("pageerror", onPageError);
+    checked.publicPages = (checked.publicPages || 0) + 1;
+  }
+
   for (const href of pages) {
     const errors = [];
     const onPageError = (error) => errors.push(error.message);
