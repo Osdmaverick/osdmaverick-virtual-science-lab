@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Follow the OSDMaverick Virtual Science Lab public development roadmap, feature status and product updates.">
+<meta name="theme-color" content="#071827">
+<title>Development Roadmap | OSDMaverick Virtual Science Lab</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.roadmap-page{background:#f5f8f9}.roadmap-hero{padding:76px 8% 70px;background:radial-gradient(circle at 82% 15%,#17465a,#0b2639 48%,#071827 82%);color:#fff}.roadmap-hero-inner{max-width:1080px;margin:auto}.roadmap-hero h1{max-width:760px;font-size:clamp(2.5rem,5vw,4.3rem)}.roadmap-hero p:not(.eyebrow){max-width:690px;color:#c8d9df;font-size:1.08rem}.roadmap-wrap{max-width:1080px;margin:auto;padding:58px 24px 84px}.roadmap-notice{padding:18px 20px;margin-bottom:30px;border:1px solid #e8d7a7;border-radius:12px;background:#fff9e9;color:#65501d}.roadmap-notice strong{display:block;margin-bottom:4px}.roadmap-section{margin:42px 0}.roadmap-section h2{font-size:1.8rem}.roadmap-section-intro{color:#637783;max-width:760px}.status-legend{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.status-chip{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border-radius:999px;font-size:.75rem;font-weight:800}.status-chip:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}.status-available{background:#e4f6ed;color:#18734c}.status-development{background:#e8f0fb;color:#315e9b}.status-planned{background:#f0edf8;color:#6b5297}.status-current{background:#fff2df;color:#8a5712}.status-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.status-card{padding:20px 22px;background:#fff;border:1px solid #e0e9eb;border-radius:14px;box-shadow:0 8px 25px #102b3d08}.status-card h3{margin:10px 0 6px;font-size:1.12rem}.status-card p{margin:0;color:#647984;font-size:.91rem}.status-card .status-chip{margin-bottom:2px}.phase-list{display:grid;gap:0;border-left:2px solid #c9e3df;margin:25px 0 0 9px;padding-left:24px}.phase-item{position:relative;padding:0 0 24px}.phase-item:before{content:"";position:absolute;left:-32px;top:5px;width:12px;height:12px;border-radius:50%;background:#159c8d;border:3px solid #e7f5f2;box-shadow:0 0 0 1px #159c8d}.phase-item h3{font-size:1rem;margin:0 0 5px}.phase-item p{margin:0;color:#667b85;font-size:.9rem}.phase-item small{display:block;margin-top:5px;color:#71838a}.changelog{display:grid;gap:14px}.change-item{display:grid;grid-template-columns:130px 1fr;gap:18px;padding:19px 20px;background:#fff;border:1px solid #e0e9eb;border-radius:12px}.change-date{color:#0b8b80;font-size:.8rem;font-weight:800}.change-item h3{font-size:1rem;margin:0 0 5px}.change-item p{margin:0;color:#687b84;font-size:.9rem}.roadmap-next{padding:27px;background:#0c2b3c;color:#fff;border-radius:16px}.roadmap-next h2{margin-bottom:8px}.roadmap-next p{color:#c4d8de}.roadmap-next a{color:#66e0cb;font-weight:800}.roadmap-footer{display:flex;flex-wrap:wrap;gap:18px}.roadmap-footer a{color:#087d73;font-weight:700;text-decoration:none}
+@media(max-width:680px){.roadmap-hero{padding:58px 7%}.roadmap-wrap{padding:38px 7% 60px}.status-card-grid{grid-template-columns:1fr}.change-item{grid-template-columns:1fr;gap:5px}.roadmap-footer{flex-direction:column}}
+</style>
+</head>
+<body class="roadmap-page">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site-header">
+<a class="brand" href="index.html" aria-label="OSDMaverick Virtual Science Lab home">OSDMAVERICK <span>VIRTUAL SCIENCE LAB</span></a>
+<button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">☰</button>
+<nav class="nav" id="primary-navigation" aria-label="Main navigation">
+<a href="index.html">Home</a><a href="grade-levels.html">Explore labs</a><a href="index.html#teachers">For teachers</a><a href="roadmap.html" aria-current="page">Development</a>
+</nav>
+</header>
+<main id="main-content">
+<section class="roadmap-hero"><div class="roadmap-hero-inner"><p class="eyebrow">OPEN DEVELOPMENT · PRODUCT ROADMAP</p><h1>Science learning is growing. Follow the journey.</h1><p>We are building a connected learning environment for students and teachers. This page shares what is available, what has been implemented but is awaiting release, and what we plan to improve next.</p><div class="actions"><a class="button primary" href="grade-levels.html">Explore available labs →</a><a class="button secondary" href="#changelog">See development updates</a></div></div></section>
+<div class="roadmap-wrap">
+<div class="roadmap-notice" role="note"><strong>Release-status transparency</strong>The public virtual lab directory is available on the current website. Platform features listed as implemented in development are in draft GitHub pull requests and are not yet part of the live release. They should not be treated as available until reviewed, merged and deployed.</div>
+<section class="roadmap-section" aria-labelledby="status-heading"><p class="eyebrow">Where things stand</p><h2 id="status-heading">Feature status</h2><p class="roadmap-section-intro">Status describes the implementation and release state, not a promise of a delivery date.</p><div class="status-legend"><span class="status-chip status-available">Available on public site</span><span class="status-chip status-development">Built in development · not released</span><span class="status-chip status-planned">Planned</span><span class="status-chip status-current">In progress · draft PR</span></div>
+<div class="status-card-grid">
+<article class="status-card"><span class="status-chip status-available">Available on public site</span><h3>Interactive science lab directory</h3><p>Browse investigations across Grades 4–12 and explore Physics, Chemistry, Biology, and Earth &amp; Space Science.</p></article>
+<article class="status-card"><span class="status-chip status-development">Built in development · not released</span><h3>Student and teacher accounts</h3><p>Authentication foundation, profiles and role-aware access are implemented in draft development work. Live Supabase setup and release are still pending.</p></article>
+<article class="status-card"><span class="status-chip status-development">Built in development · not released</span><h3>Connected classroom tools</h3><p>Class management, enrolment, assignments, submissions, announcements, attendance and class calendar are implemented in draft development work.</p></article>
+<article class="status-card"><span class="status-chip status-development">Built in development · not released</span><h3>Assessment and learning insights</h3><p>Quizzes, teacher-built assessments, progress analytics, grading and assessment notifications are implemented in draft development work.</p></article>
+<article class="status-card"><span class="status-chip status-development">Built in development · not released</span><h3>Student growth and recognition</h3><p>Learning goals, student portfolios, teacher feedback and printable achievement certificates are implemented in draft development work.</p></article>
+<article class="status-card"><span class="status-chip status-current">In progress · draft PR</span><h3>Public experience and usability improvements</h3><p>Homepage refinement, simpler visitor navigation, accessibility improvements and visitor-facing product communication are in the Phase 17 draft pull request.</p></article>
+</div></section>
+<section class="roadmap-section" aria-labelledby="phases-heading"><p class="eyebrow">Implementation history</p><h2 id="phases-heading">What has been built so far</h2><p class="roadmap-section-intro">The following capabilities have implementation work in the draft development branch sequence. They remain unreleased until the changes are reviewed and deployed.</p>
+<div class="phase-list">
+<article class="phase-item"><h3>Phases 1–4 · Platform foundations</h3><p>Authentication foundation, class management, assignments and cloud notebook synchronisation.</p><small>Implemented in draft PRs · live backend configuration not yet verified</small></article>
+<article class="phase-item"><h3>Phases 5–8 · Learning and assessment</h3><p>Interactive quizzes, progress analytics, content management and the student learning experience.</p><small>Implemented in draft PRs · not yet released</small></article>
+<article class="phase-item"><h3>Phases 9–12 · Teacher tools and communication</h3><p>Teacher assessment builder, class announcements, in-app notifications and assessment result alerts.</p><small>Implemented in draft PRs · not yet released</small></article>
+<article class="phase-item"><h3>Phases 13–16 · Classroom and learner development</h3><p>Class calendar, attendance, learning goals, student portfolios and achievement certificates.</p><small>Implemented in draft PRs · not yet released</small></article>
+<article class="phase-item"><h3>Phase 17 · Public UI/UX upgrade</h3><p>Homepage refinement, simpler visitor navigation and a public development roadmap.</p><small>This phase is currently being prepared for review.</small></article>
+</div></section>
+<section class="roadmap-section" id="changelog" aria-labelledby="changelog-heading"><p class="eyebrow">Product notes</p><h2 id="changelog-heading">Development changelog</h2><div class="changelog">
+<article class="change-item"><time class="change-date" datetime="2026-11-12">12 November 2026</time><div><h3>Phase 17 · Public experience refresh</h3><p>Draft pull request opened with homepage navigation, visitor-facing progress communication and this public roadmap; static and browser smoke checks passed on 12 November 2026. Manual review remains before release.</p></div></article>
+<article class="change-item"><time class="change-date" datetime="2026-11-12">12 November 2026</time><div><h3>Phase 16 · Student portfolios and certificates</h3><p>Draft implementation completed with static and browser QA passing. Live database setup and release remain pending.</p></div></article>
+<article class="change-item"><time class="change-date" datetime="2026-11-09">9 November 2026</time><div><h3>Phase 15 · Learning goals and teacher feedback</h3><p>Draft implementation completed with automated QA passing. Not yet released.</p></div></article>
+<article class="change-item"><time class="change-date" datetime="2026-11-07">7 November 2026</time><div><h3>Phases 10–13 · Communication and planning</h3><p>Class announcements, in-app notifications, assessment alerts and class calendar implemented in draft branches.</p></div></article>
+</div></section>
+<section class="roadmap-next"><p class="eyebrow">What happens next</p><h2>Build carefully. Release transparently.</h2><p>Next steps include reviewing the draft changes, completing browser and accessibility checks, configuring the live backend safely, and publishing only after the release is approved.</p><p><a href="index.html">Return to the Virtual Science Lab →</a></p></section>
+</div>
+</main>
+<footer class="site-footer"><span>© 2026 OSDMaverick Virtual Science Lab</span><span>Curiosity is the beginning of discovery.</span><div class="roadmap-footer"><a href="index.html">Home</a><a href="grade-levels.html">Explore labs</a><a href="#changelog">Changelog ↑</a></div></footer>
+<script src="assets/main.js"></script>
+</body>
+</html>
