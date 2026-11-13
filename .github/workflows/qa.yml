@@ -47,3 +47,5 @@ jobs:
           exit 1
       - name: Run browser QA across all labs
         run: node scripts/browser-qa.mjs http://127.0.0.1:4173
+      - name: Verify public release experience
+        run: node scripts/public-release-qa.mjs http://127.0.0.1:4173
