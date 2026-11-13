@@ -1,7 +1,7 @@
 # Phase 17 — Public UI/UX upgrade and development roadmap
 
 ## Summary
-- Simplify the public homepage navigation so visitors can quickly find labs, teaching information, development updates and sign-in.
+- Simplify the public homepage navigation so visitors can quickly find labs, teaching information and development updates.
 - Add a visitor-facing development strip and homepage roadmap preview.
 - Add a public roadmap page with explicit release-status distinctions, implementation history and changelog.
 - Improve responsive navigation, focus visibility, reduced-motion handling and public-page layout.
