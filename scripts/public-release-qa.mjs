@@ -75,7 +75,7 @@ try {
   if (!roadmapResponse?.ok()) failures.push("Roadmap did not return a successful response");
   await page.evaluate(() => document.fonts.ready);
   const roadmapText = await page.locator("body").innerText();
-  for (const phrase of ["Available on public site", "Built in development · not released", "In progress · draft PR", "not yet part of the live release"]) {
+  for (const phrase of ["Available on public site", "Built in development · not released", "In progress · draft PR", "not integrated into the live release"]) {
     if (!roadmapText.includes(phrase)) failures.push("Roadmap release-status message is missing: " + phrase);
   }
   await page.screenshot({ path: screenshotDir + "/roadmap-desktop.png", fullPage: true });
