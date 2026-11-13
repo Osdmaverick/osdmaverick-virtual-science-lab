@@ -126,14 +126,6 @@ main.lab .panel:focus-within{border-color:#75bdb5;box-shadow:0 8px 26px #0e766c1
 @media(prefers-reduced-motion:reduce){.subject-card{transition:none!important}}
 
 
-/* Student notebook entry point, available from every virtual investigation. */
-.notebook-prompt{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:16px 0;padding:15px 18px;border:1px solid #b9ddd7;border-radius:12px;background:#edf8f5;color:#173c43}
-.notebook-prompt>span{display:grid;gap:3px}
-.notebook-prompt small{color:#557078;font-size:.86rem}
-.notebook-prompt>a{flex-shrink:0;color:#087d73;font-weight:800;text-decoration:none}
-.notebook-prompt>a:hover{text-decoration:underline}
-@media(max-width:600px){.notebook-prompt{align-items:flex-start;flex-direction:column}.notebook-prompt>a{padding-top:3px}}
-
 /* Phase 17: public-facing experience and development transparency. */
 :root{--focus-ring:0 0 0 3px #42d6c288}
 .site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);box-shadow:0 8px 26px #020d171c}
