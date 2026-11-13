@@ -45,6 +45,8 @@ try {
   if (!(await toggle.evaluate(el => el === document.activeElement))) failures.push("Escape did not restore focus to the menu toggle");
   checked.mobileNavigation = true;
 
+  // Explicitly restore desktop dimensions before capturing the roadmap desktop image.
+  await page.setViewportSize({ width: 1440, height: 900 });
   const roadmapResponse = await page.goto(baseUrl + "/roadmap.html", { waitUntil: "networkidle" });
   if (!roadmapResponse?.ok()) failures.push("Roadmap did not return a successful response");
   await page.evaluate(() => document.fonts.ready);
