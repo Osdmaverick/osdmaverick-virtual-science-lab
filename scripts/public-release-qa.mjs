@@ -30,6 +30,30 @@ try {
   if (!(await page.locator(".roadmap-preview").count())) failures.push("Homepage roadmap preview is missing");
   checked.publicNavigation = true;
 
+  const accessibilitySmoke = await page.evaluate(() => {
+    const hasName = element => Boolean(
+      (element.innerText || "").trim() ||
+      element.getAttribute("aria-label") ||
+      element.getAttribute("title") ||
+      element.querySelector("img[alt]")?.getAttribute("alt")
+    );
+    return {
+      documentLanguage: Boolean(document.documentElement.lang),
+      pageTitle: Boolean(document.title.trim()),
+      mainLandmark: document.querySelectorAll("main").length === 1,
+      primaryHeading: document.querySelectorAll("h1").length === 1,
+      skipLink: Boolean(document.querySelector('a.skip-link[href="#main-content"]')),
+      labelledNavigation: Boolean(document.querySelector("nav[aria-label]")),
+      namedButtons: [...document.querySelectorAll("button")].every(hasName),
+      namedLinks: [...document.querySelectorAll("a[href]")].every(hasName),
+      imageAlternatives: [...document.images].every(img => img.hasAttribute("alt"))
+    };
+  });
+  for (const [check, passed] of Object.entries(accessibilitySmoke)) {
+    if (!passed) failures.push("Accessibility smoke check failed: " + check);
+  }
+  checked.accessibilitySmoke = accessibilitySmoke;
+
   await page.setViewportSize({ width: 390, height: 844 });
   await page.reload({ waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
