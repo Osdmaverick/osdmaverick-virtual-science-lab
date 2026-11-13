@@ -1,4 +1,4 @@
-const toggle=document.querySelector('.menu-toggle');const nav=document.querySelector('.nav');if(toggle&&nav){toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');}));}
+const toggle=document.querySelector('.menu-toggle');const nav=document.querySelector('.nav');if(toggle&&nav){const closeMenu=({restoreFocus=false}={})=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');if(restoreFocus)toggle.focus();};toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>closeMenu()));document.addEventListener('keydown',event=>{if(event.key==='Escape'&&nav.classList.contains('open'))closeMenu({restoreFocus:true});});}
 
 /* Accessible, lightweight science animations shared by every lab page. */
 (()=>{
@@ -59,4 +59,45 @@ const toggle=document.querySelector('.menu-toggle');const nav=document.querySele
   }else if(typeof motionPreference.addListener==='function'){
     motionPreference.addListener(syncMotionPreference);
   }
+})();
+
+
+/* Search and filter the grade directory without hiding its underlying links from no-script users. */
+(()=> {
+  const field=document.querySelector('#lab-search');
+  const status=document.querySelector('#lab-search-status');
+  const directory=document.querySelector('.directory');
+  if(!field||!directory) return;
+  const entries=[...directory.querySelectorAll('.subject li')];
+  const groups=[...directory.querySelectorAll('.grade')];
+  const normalise=value=>value.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+  const filter=()=>{
+    const query=normalise(field.value);
+    let visible=0;
+    entries.forEach(item=>{
+      const match=!query||normalise(item.textContent).includes(query);
+      item.hidden=!match;
+      if(match) visible++;
+    });
+    groups.forEach(group=>{
+      const hasVisible=[...group.querySelectorAll('.subject li')].some(item=>!item.hidden);
+      group.hidden=!!query&&!hasVisible;
+    });
+    if(status) status.textContent=query?visible+' matching lab'+(visible===1?'':'s')+' found.':'Showing all '+entries.length+' lab links.';
+  };
+  field.addEventListener('input',filter);
+  field.addEventListener('search',filter);
+})();
+
+
+/* Give learners a consistent route from every investigation to their report workspace. */
+(()=>{
+  const main=document.querySelector('main.lab');
+  if(!main||main.querySelector('.notebook-prompt')) return;
+  const hero=main.querySelector('.hero');
+  if(!hero) return;
+  const prompt=document.createElement('aside');
+  prompt.className='notebook-prompt';
+  prompt.innerHTML='<span><strong>Ready to record your results?</strong><small>Save your prediction, observations and conclusion in your lab notebook.</small></span><a href="student-lab-notebook.html">Open my lab notebook <span aria-hidden="true">→</span></a>';
+  hero.insertAdjacentElement('afterend',prompt);
 })();
