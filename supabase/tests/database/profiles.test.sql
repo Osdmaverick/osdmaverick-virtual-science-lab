@@ -49,7 +49,7 @@ select is(
   'a student can read only their own profile'
 );
 select lives_ok(
-  $update public.profiles set full_name = 'Updated Student' where id = '10000000-0000-4000-8000-000000000001'$,
+  $$public.profiles set full_name = 'Updated Student' where id = '10000000-0000-4000-8000-000000000001'$$,
   'a student can update their own display name'
 );
 select is(
@@ -58,7 +58,7 @@ select is(
   'the updated display name is persisted'
 );
 select throws_ok(
-  $$update public.profiles set role = 'teacher' where id = '10000000-0000-4000-8000-000000000001'$$,
+  $$$public.profiles set role = 'teacher' where id = '10000000-0000-4000-8000-000000000001'$$$,
   '42501',
   null,
   'a student cannot promote themselves to teacher'
@@ -71,7 +71,7 @@ select throws_ok(
 );
 
 select lives_ok(
-  $update public.profiles set full_name = 'Unauthorized Change' where id = '10000000-0000-4000-8000-000000000002'$,
+  $$public.profiles set full_name = 'Unauthorized Change' where id = '10000000-0000-4000-8000-000000000002'$$,
   'cross-account update request is safely rejected by row-level security'
 );
 
@@ -84,7 +84,7 @@ select is(
 
 set local role anon;
 select throws_ok(
-  $select * from public.profiles$,
+  $$* from public.profiles$$,
   '42501',
   null,
   'anonymous users cannot read profiles'
