@@ -177,7 +177,7 @@ begin
 
   select cic.class_id into matched_class_id
   from public.class_invite_codes cic
-  where cic.join_code = pg_catalog.upper(pg_catalog.trim(p_join_code));
+  where cic.join_code = pg_catalog.upper(pg_catalog.btrim(p_join_code));
 
   if matched_class_id is null then
     raise exception 'That class code was not recognised.';
