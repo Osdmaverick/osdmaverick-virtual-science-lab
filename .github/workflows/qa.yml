@@ -47,3 +47,13 @@ jobs:
           exit 1
       - name: Run browser QA across all labs
         run: node scripts/browser-qa.mjs http://127.0.0.1:4173
+      - name: Verify public release experience and capture visual previews
+        run: node scripts/public-release-qa.mjs http://127.0.0.1:4173
+      - name: Upload public release visual previews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-release-visual-preview
+          path: artifacts/public-release-preview/
+          if-no-files-found: warn
+          retention-days: 14
