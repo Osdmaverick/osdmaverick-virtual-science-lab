@@ -185,7 +185,7 @@ begin
 
   insert into public.enrollments(class_id, student_id)
   values (matched_class_id, auth.uid())
-  on conflict (class_id, student_id) do nothing;
+  on conflict on constraint enrollments_pkey do nothing;
 
   return query
     select c.id, c.name, e.joined_at
