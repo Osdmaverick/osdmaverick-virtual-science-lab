@@ -2,7 +2,7 @@ begin;
 
 create extension if not exists pgtap with schema extensions;
 
-select plan(12);
+select plan(13);
 
 select has_table('public', 'profiles', 'profiles table exists');
 select has_column('public', 'profiles', 'role', 'profiles has a role column');
@@ -70,18 +70,18 @@ select throws_ok(
   'a browser user cannot insert arbitrary profiles'
 );
 
-select is(
-  (with changed as (
-    update public.profiles
-    set full_name = 'Unauthorized Change'
-    where id = '10000000-0000-4000-8000-000000000002'
-    returning id
-  ) select count(*)::integer from changed),
-  0,
-  'a student cannot update another student profile'
+select lives_ok(
+  $update public.profiles set full_name = 'Unauthorized Change' where id = '10000000-0000-4000-8000-000000000002'$,
+  'cross-account update request is safely rejected by row-level security'
 );
 
 reset role;
+select is(
+  (select full_name from public.profiles where id = '10000000-0000-4000-8000-000000000002'),
+  'Student Two',
+  'another student profile remains unchanged'
+);
+
 set local role anon;
 select throws_ok(
   $select * from public.profiles$,
