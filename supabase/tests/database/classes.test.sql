@@ -48,7 +48,7 @@ select is((select count(*)::integer from public.class_invite_codes), 1, 'teacher
 select is((select count(*)::integer from public.enrollments), 1, 'teacher can read their class roster');
 select is((select count(*)::integer from public.profiles where id = '20000000-0000-4000-8000-000000000003'), 1, 'teacher can read enrolled learner basic profile');
 select is((select count(*)::integer from public.profiles where id = '20000000-0000-4000-8000-000000000004'), 0, 'teacher cannot read unrelated learner profile');
-select lives_ok($update public.classes set name = 'Hijacked' where id = '30000000-0000-4000-8000-000000000002'$, 'updating another teacher class does not expose an error');
+select lives_ok('update public.classes set name = ''Hijacked'' where id = ''30000000-0000-4000-8000-000000000002''', 'updating another teacher class does not expose an error');
 
 reset role;
 select is((select name from public.classes where id = '30000000-0000-4000-8000-000000000002'), 'Chemistry 9', 'another teacher class remains unchanged');
