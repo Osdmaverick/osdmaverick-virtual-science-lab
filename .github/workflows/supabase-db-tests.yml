@@ -5,6 +5,9 @@ on:
     paths:
       - "supabase/**"
       - "assets/auth.js"
+      - "assets/classes.js"
+      - "classes.html"
+      - "scripts/class-ui-smoke-check.mjs"
       - "assets/supabase-config.example.js"
       - "auth.html"
       - "scripts/auth-ui-smoke-check.mjs"
@@ -15,6 +18,9 @@ on:
     paths:
       - "supabase/**"
       - "assets/auth.js"
+      - "assets/classes.js"
+      - "classes.html"
+      - "scripts/class-ui-smoke-check.mjs"
       - "assets/supabase-config.example.js"
       - "auth.html"
       - "scripts/auth-ui-smoke-check.mjs"
@@ -37,6 +43,12 @@ jobs:
 
       - name: Run authentication page smoke checks
         run: node scripts/auth-ui-smoke-check.mjs
+
+      - name: Check class management JavaScript syntax
+        run: node --check assets/classes.js
+
+      - name: Run class management page smoke checks
+        run: node scripts/class-ui-smoke-check.mjs
 
       - name: Set up Supabase CLI
         uses: supabase/setup-cli@v1
