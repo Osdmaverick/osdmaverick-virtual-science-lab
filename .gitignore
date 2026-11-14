@@ -1,0 +1,12 @@
+# Local secrets and Supabase browser configuration
+.env
+.env.*
+!.env.example
+assets/supabase-config.js
+
+# Local tooling and generated test output
+node_modules/
+supabase/.temp/
+playwright-report/
+test-results/
+artifacts/
