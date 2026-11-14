@@ -2,7 +2,7 @@ begin;
 
 create extension if not exists pgtap with schema extensions;
 
-select plan(11);
+select plan(12);
 
 select has_table('public', 'profiles', 'profiles table exists');
 select has_column('public', 'profiles', 'role', 'profiles has a role column');
@@ -49,8 +49,13 @@ select is(
   'a student can read only their own profile'
 );
 select lives_ok(
-  $$update public.profiles set full_name = 'Updated Student' where id = '10000000-0000-4000-8000-000000000001'$$,
+  $update public.profiles set full_name = 'Updated Student' where id = '10000000-0000-4000-8000-000000000001'$,
   'a student can update their own display name'
+);
+select is(
+  (select full_name from public.profiles where id = '10000000-0000-4000-8000-000000000001'),
+  'Updated Student',
+  'the updated display name is persisted'
 );
 select throws_ok(
   $$update public.profiles set role = 'teacher' where id = '10000000-0000-4000-8000-000000000001'$$,
