@@ -18,6 +18,19 @@ The public website remains a static GitHub Pages site published from `main`. No 
 6. Roll out one feature phase at a time through a reviewed pull request.
 7. Do not merge, deploy, or connect production credentials without the owner's explicit approval.
 
+## Current implementation status
+
+The isolated branch now contains:
+
+- Local Supabase CLI configuration with no hosted project credentials.
+- A timestamped Phase 1 profiles migration with student-default registration, a restricted profile update grant, and owner-only profile RLS.
+- pgTAP coverage for signup role enforcement, self-promotion prevention, profile isolation, anonymous access denial, and permitted display-name updates.
+- A rebuilt account page for sign-in, student registration, password reset/recovery, profile display, and sign-out.
+- A browser configuration example that uses only a publishable key; the real config file is ignored by Git.
+- GitHub Actions checks for JavaScript syntax, account-page smoke tests, migration application, and database permission tests.
+
+The local CI workflow starts only the database container needed for SQL migration and pgTAP testing. It does not link to or mutate any hosted Supabase project.
+
 ## Local setup
 
 Install the Supabase CLI using the official installation instructions, then run:
