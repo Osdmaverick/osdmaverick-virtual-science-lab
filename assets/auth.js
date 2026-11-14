@@ -40,9 +40,15 @@
 
   const client = window.supabase.createClient(config.url, config.publishableKey);
   let renderVersion = 0;
+  let passwordRecoveryActive = false;
 
   async function renderSession(session) {
     const version = ++renderVersion;
+    if (passwordRecoveryActive) {
+      showAccount(false);
+      byId('auth-forms').hidden = false;
+      return;
+    }
     showAccount(Boolean(session));
     if (!session) {
       byId('account-name').textContent = '';
@@ -106,7 +112,7 @@
     button.disabled = false;
     if (error) return setStatus(error.message, true);
     if (data.session) {
-      await renderSession(data.session);
+      setStatus('Your account has been created and you are signed in.');
     } else {
       showForm('signin-form');
       setStatus('Registration received. Check your email to confirm your account, then sign in.');
@@ -133,9 +139,10 @@
     button.disabled = false;
     if (error) return setStatus(error.message, true);
     byId('new-password').value = '';
-    setStatus('Your password has been updated.');
-    showForm('signin-form');
+    passwordRecoveryActive = false;
+    setStatus('Your password has been updated. Please sign in with your new password.');
     await client.auth.signOut();
+    showForm('signin-form');
   });
 
   byId('signout-button').addEventListener('click', async () => {
@@ -149,6 +156,7 @@
   // after the callback returns to avoid holding the client's auth lock.
   client.auth.onAuthStateChange((event, session) => {
     if (event === 'PASSWORD_RECOVERY') {
+      passwordRecoveryActive = true;
       showAccount(false);
       showForm('password-update-form');
       setStatus('Choose a new password for your account.');
