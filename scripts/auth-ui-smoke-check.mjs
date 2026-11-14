@@ -17,7 +17,7 @@ for (const id of [
   'signup-password', 'reset-email', 'new-password', 'auth-status',
   'signed-in-panel', 'signout-button'
 ]) {
-  assert.ok(ids.includes(id), \`auth page is missing #\${id}\`);
+  assert.ok(ids.includes(id), 'auth page is missing #' + id);
 }
 
 for (const behavior of [
@@ -25,7 +25,7 @@ for (const behavior of [
   'updateUser', 'PASSWORD_RECOVERY', 'onAuthStateChange',
   'publishableKey'
 ]) {
-  assert.ok(js.includes(behavior), \`auth client is missing \${behavior}\`);
+  assert.ok(js.includes(behavior), 'auth client is missing ' + behavior);
 }
 
 assert.ok(!/role\s*:\s*['"]teacher['"]/.test(js), 'browser signup must not assign teacher role');
