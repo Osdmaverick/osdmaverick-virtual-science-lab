@@ -45,7 +45,7 @@ jobs:
 
       - name: Start local Supabase stack
         id: supabase-start
-        run: supabase start
+        run: supabase start -x gotrue,realtime,storage-api,imgproxy,kong,mailpit,postgrest,postgres-meta,studio,edge-runtime,logflare,vector,supavisor
 
       - name: Apply migrations to a clean database
         run: supabase db reset
