@@ -44,6 +44,7 @@ jobs:
           version: latest
 
       - name: Start local Supabase stack
+        id: supabase-start
         run: supabase start
 
       - name: Apply migrations to a clean database
@@ -53,5 +54,5 @@ jobs:
         run: supabase test db
 
       - name: Stop local Supabase stack
-        if: always()
+        if: always() && steps.supabase-start.outcome == 'success'
         run: supabase stop --no-backup
