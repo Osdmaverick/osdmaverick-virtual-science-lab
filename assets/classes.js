@@ -29,7 +29,10 @@
       .order('created_at', { ascending: false });
     if (error) return setStatus('Could not load classes: ' + error.message, true);
     if (!classes?.length) {
-      list.innerHTML = '<p class="empty-state">No classes yet. Create a class or join one with an invite code.</p>';
+      const empty = document.createElement('p');
+      empty.className = 'empty-state';
+      empty.textContent = 'No classes yet. Create a class or join one with an invite code.';
+      list.append(empty);
       return;
     }
 
