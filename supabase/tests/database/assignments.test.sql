@@ -45,36 +45,36 @@ select is((select count(*)::integer from public.assignments), 1, 'student sees o
 select is((select count(*)::integer from public.assignments where id = '60000000-0000-4000-8000-000000000001'), 0, 'student cannot see a draft assignment');
 select is((select count(*)::integer from public.assignments where id = '60000000-0000-4000-8000-000000000003'), 0, 'student cannot see another class assignment');
 select throws_ok(
-  $$insert into public.assignment_submissions (assignment_id, student_id, response) values ('60000000-0000-4000-8000-000000000001', auth.uid(), 'draft leak')$$,
+  $$insert into public.assignment_submissions (assignment_id, student_id, response) values ('60000000-0000-4000-8000-000000000001', auth.uid(), 'draft leak')$$$,
   '42501', null, 'student cannot submit to a draft assignment'
 );
 select lives_ok(
-  $$insert into public.assignment_submissions (assignment_id, student_id, response, status) values ('60000000-0000-4000-8000-000000000002', auth.uid(), 'My answer', 'draft')$,
+  $$insert into public.assignment_submissions (assignment_id, student_id, response, status) values ('60000000-0000-4000-8000-000000000002', auth.uid(), 'My answer', 'draft')$$,
   'student can save a draft for published work'
 );
 select is((select status from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 'draft', 'draft status is stored');
 select is((select submitted_at from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), null, 'draft has no submission timestamp');
 select lives_ok(
-  $$update public.assignment_submissions set response = 'My answer', status = 'submitted' where assignment_id = '60000000-0000-4000-8000-000000000002'$,
+  $$update public.assignment_submissions set response = 'My answer', status = 'submitted' where assignment_id = '60000000-0000-4000-8000-000000000002'$$,
   'student can submit a saved draft'
 );
 select is((select status from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 'submitted', 'submitted status is stored');
 select ok((select submitted_at is not null from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 'submission timestamp is assigned by the database');
 select is((select count(*)::integer from public.assignment_submissions), 1, 'student can read only their own submissions');
 select throws_ok(
-  $$insert into public.assignment_submissions (assignment_id, student_id, response) values ('60000000-0000-4000-8000-000000000002', '40000000-0000-4000-8000-000000000004', 'forged')$$,
+  $$insert into public.assignment_submissions (assignment_id, student_id, response) values ('60000000-0000-4000-8000-000000000002', '40000000-0000-4000-8000-000000000004', 'forged')$$$,
   '42501', null, 'student cannot create a submission for another student'
 );
 select throws_ok(
-  $$update public.assignment_submissions set score = 20 where assignment_id = '60000000-0000-4000-8000-000000000002'$$,
+  $$update public.assignment_submissions set score = 20 where assignment_id = '60000000-0000-4000-8000-000000000002'$$$,
   '42501', null, 'student cannot write grading fields'
 );
 select throws_ok(
-  $$insert into public.assignment_submissions (assignment_id, student_id, response, score) values ('60000000-0000-4000-8000-000000000002', auth.uid(), 'forged grade', 20)$$,
+  $$insert into public.assignment_submissions (assignment_id, student_id, response, score) values ('60000000-0000-4000-8000-000000000002', auth.uid(), 'forged grade', 20)$$$,
   '42501', null, 'student cannot supply a score during submission'
 );
 select lives_ok(
-  $$update public.assignment_submissions set response = 'Revised answer' where assignment_id = '60000000-0000-4000-8000-000000000002'$$,
+  $$update public.assignment_submissions set response = 'Revised answer' where assignment_id = '60000000-0000-4000-8000-000000000002'$$$,
   'student can update their own ungraded response'
 );
 select is(
@@ -82,7 +82,7 @@ select is(
   'Revised answer', 'student response update is saved'
 );
 select throws_ok(
-  $$insert into public.assignment_submissions (assignment_id, student_id, response) values ('60000000-0000-4000-8000-000000000003', auth.uid(), 'not enrolled')$$,
+  $$insert into public.assignment_submissions (assignment_id, student_id, response) values ('60000000-0000-4000-8000-000000000003', auth.uid(), 'not enrolled')$$$,
   '42501', null, 'student cannot submit to a class they have not joined'
 );
 
@@ -107,7 +107,7 @@ select throws_ok(
   'P0001', 'You are not authorised to grade this submission.', 'teacher cannot grade another teacher class'
 );
 select throws_ok(
-  $$update public.assignments set points_possible = 10 where id = '60000000-0000-4000-8000-000000000002'$$,
+  $$update public.assignments set points_possible = 10 where id = '60000000-0000-4000-8000-000000000002'$$$,
   'P0001', 'Points available cannot be lower than an existing submission score.', 'points cannot be reduced below a recorded score'
 );
 
@@ -115,7 +115,7 @@ reset role;
 set local role authenticated;
 select set_config('request.jwt.claim.sub', '40000000-0000-4000-8000-000000000003', true);
 select lives_ok(
-  $$update public.assignment_submissions set response = 'Changed after grading' where assignment_id = '60000000-0000-4000-8000-000000000002'$$,
+  $$update public.assignment_submissions set response = 'Changed after grading' where assignment_id = '60000000-0000-4000-8000-000000000002'$$$,
   'student update request against graded work is safely filtered by row-level security'
 );
 select is((select response from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 'Revised answer', 'graded submission remains unchanged after student update attempt');
