@@ -235,6 +235,7 @@ as $$
 declare
   target_class_id uuid;
   target_points integer;
+  target_submission_status text;
 begin
   if auth.uid() is null or not public.current_user_is_teacher() then
     raise exception 'Only verified teachers can grade submissions.';
@@ -243,14 +244,17 @@ begin
     raise exception 'Feedback must be 10000 characters or fewer.';
   end if;
 
-  select a.class_id, a.points_possible
-    into target_class_id, target_points
+  select a.class_id, a.points_possible, s.status
+    into target_class_id, target_points, target_submission_status
     from public.assignment_submissions s
     join public.assignments a on a.id = s.assignment_id
     where s.id = p_submission_id;
 
   if target_class_id is null or not public.is_class_teacher(target_class_id) then
     raise exception 'You are not authorised to grade this submission.';
+  end if;
+  if target_submission_status <> 'submitted' then
+    raise exception 'Only submitted student work can be graded.';
   end if;
   if p_score is null or p_score < 0 or p_score > target_points then
     raise exception 'The score must be between zero and the assignment points available.';
