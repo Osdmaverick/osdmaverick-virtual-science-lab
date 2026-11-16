@@ -55,14 +55,14 @@
 <div id="assignments-login-prompt" hidden><p>Sign in to access your assignments.</p><a href="auth.html">Go to account sign in</a></div>
 <div id="assignments-content" hidden>
 <section id="teacher-assignment-panel" hidden>
-<h2>Create an assignment</h2>
+<h2 id="assignment-form-heading">Create an assignment</h2>
 <form id="create-assignment-form" class="assignment-form">
 <div class="full"><label for="assignment-class">Class</label><select id="assignment-class" required><option value="">Choose a class</option></select></div>
 <div class="full"><label for="assignment-title">Assignment title</label><input id="assignment-title" maxlength="160" required placeholder="e.g. Cell structure investigation"></div>
 <div class="full"><label for="assignment-instructions">Instructions</label><textarea id="assignment-instructions" maxlength="10000" rows="4" placeholder="Explain what students should do."></textarea></div>
 <div><label for="assignment-due">Due date (optional)</label><input id="assignment-due" type="datetime-local"></div>
 <div><label for="assignment-points">Points available</label><input id="assignment-points" type="number" min="1" max="10000" value="100" required></div>
-<div class="full"><button id="save-assignment-button" type="submit">Save as draft</button></div>
+<div class="full"><button id="save-assignment-button" type="submit">Save as draft</button><button id="cancel-assignment-edit" class="secondary" type="button" hidden>Cancel edit</button></div>
 </form>
 </section>
 <section class="assignments-panel">
