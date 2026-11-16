@@ -8,12 +8,15 @@ const migration = fs.readFileSync('supabase/migrations/202611150001_assignments.
 for (const id of [
   'assignments-status', 'assignments-login-prompt', 'assignments-content',
   'teacher-assignment-panel', 'create-assignment-form', 'assignment-class',
-  'assignment-title', 'assignment-instructions', 'assignment-points',
+  'assignment-title', 'assignment-instructions', 'assignment-points', 'cancel-assignment-edit',
   'assignment-list', 'assignments-signout'
 ]) assert.match(html, new RegExp('id="' + id + '"'), 'page contains ' + id);
 
 assert.match(html, /assets\/assignments\.js/);
 assert.match(js, /grade_assignment_submission/);
+assert.match(js, /function beginEdit/);
+assert.match(js, /Save changes/);
+assert.match(js, /cancel-assignment-edit/);
 assert.match(js, /\.textContent/);
 assert.match(js, /createElement/);
 assert.doesNotMatch(js, /\.innerHTML\s*=/, 'user-facing data is not injected with innerHTML');
