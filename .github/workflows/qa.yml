@@ -55,7 +55,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: public-release-visual-preview
-          path: artifacts/public-release-preview/
+          name: phase3-visual-previews
+          path: artifacts/
           if-no-files-found: warn
           retention-days: 14
