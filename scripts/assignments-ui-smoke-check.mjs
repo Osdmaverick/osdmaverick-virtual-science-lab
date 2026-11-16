@@ -6,7 +6,7 @@ const js = fs.readFileSync('assets/assignments.js', 'utf8');
 const migration = fs.readFileSync('supabase/migrations/202611150001_assignments.sql', 'utf8');
 
 for (const id of [
-  'assignments-status', 'assignments-login-prompt', 'assignments-content',
+  'assignments-status', 'assignments-login-prompt', 'assignments-account-toolbar', 'assignments-content',
   'teacher-assignment-panel', 'create-assignment-form', 'assignment-class',
   'assignment-title', 'assignment-instructions', 'assignment-points', 'cancel-assignment-edit',
   'assignment-list', 'assignments-signout'
