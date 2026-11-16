@@ -57,6 +57,12 @@ jobs:
       - name: Run class management page smoke checks
         run: node scripts/class-ui-smoke-check.mjs
 
+      - name: Check assignments JavaScript syntax
+        run: node --check assets/assignments.js
+
+      - name: Run assignments page smoke checks
+        run: node scripts/assignments-ui-smoke-check.mjs
+
       - name: Set up Supabase CLI
         uses: supabase/setup-cli@v1
         with:
