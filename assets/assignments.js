@@ -210,6 +210,7 @@
     currentRole = profile.role;
     $('assignments-account').textContent = (profile.full_name || currentUser.email) + ' · ' + (currentRole === 'teacher' ? 'Teacher' : 'Student');
     $('assignments-login-prompt').hidden = true;
+    $('assignments-account-toolbar').hidden = false;
     $('assignments-content').hidden = false;
     $('teacher-assignment-panel').hidden = currentRole !== 'teacher';
     $('assignment-list-heading').textContent = currentRole === 'teacher' ? 'Assignments in your classes' : 'Published class assignments';
