@@ -22,6 +22,7 @@
   const client = window.supabase.createClient(config.url, config.publishableKey);
   let currentUser = null;
   let currentRole = 'student';
+  let editingAssignmentId = null;
   const element = (tag, className, content) => {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -57,6 +58,7 @@
       card.append(state);
       if (assignment.due_at) card.append(element('p', 'assignment-meta', 'Due: ' + new Date(assignment.due_at).toLocaleString()));
       if (assignment.instructions) card.append(element('p', '', assignment.instructions));
+      card.append(button('Edit', () => beginEdit(assignment), 'secondary'));
       if (assignment.status === 'draft') card.append(button('Publish', () => changeStatus(assignment.id, 'published')));
       if (assignment.status === 'published') card.append(button('Archive', () => changeStatus(assignment.id, 'archived')));
       if (assignment.status === 'archived') card.append(button('Republish', () => changeStatus(assignment.id, 'published')));
@@ -80,10 +82,12 @@
           const gradeForm = element('form', '');
           const scoreLabel = element('label', '', 'Score');
           const score = element('input');
+          score.id = 'score-' + submission.id; scoreLabel.htmlFor = score.id;
           score.type = 'number'; score.min = '0'; score.max = String(assignment.points_possible);
           score.required = true; score.value = submission.score === null ? '' : String(submission.score);
           const feedbackLabel = element('label', '', 'Feedback');
           const feedback = element('textarea');
+          feedback.id = 'feedback-' + submission.id; feedbackLabel.htmlFor = feedback.id;
           feedback.maxLength = 10000; feedback.rows = 2; feedback.value = submission.feedback || '';
           const submit = element('button', '', 'Save grade and feedback'); submit.type = 'submit';
           gradeForm.append(scoreLabel, score, feedbackLabel, feedback, submit);
@@ -224,23 +228,58 @@
     setStatus('Your assignment list is up to date.');
   }
 
+  function resetAssignmentForm() {
+    editingAssignmentId = null;
+    $('create-assignment-form').reset();
+    $('assignment-points').value = '100';
+    $('assignment-class').disabled = false;
+    $('assignment-class').required = true;
+    $('assignment-class').closest('div').hidden = false;
+    $('assignment-form-heading').textContent = 'Create an assignment';
+    $('save-assignment-button').textContent = 'Save as draft';
+    $('cancel-assignment-edit').hidden = true;
+  }
+
+  function beginEdit(assignment) {
+    editingAssignmentId = assignment.id;
+    $('assignment-class').value = assignment.class_id;
+    $('assignment-class').disabled = true;
+    $('assignment-class').required = false;
+    $('assignment-class').closest('div').hidden = true;
+    $('assignment-title').value = assignment.title;
+    $('assignment-instructions').value = assignment.instructions || '';
+    $('assignment-due').value = assignment.due_at ? new Date(assignment.due_at).toISOString().slice(0,16) : '';
+    $('assignment-points').value = String(assignment.points_possible);
+    $('assignment-form-heading').textContent = 'Edit assignment';
+    $('save-assignment-button').textContent = 'Save changes';
+    $('cancel-assignment-edit').hidden = false;
+    $('assignment-form-heading').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  $('cancel-assignment-edit').addEventListener('click', resetAssignmentForm);
+
   $('create-assignment-form').addEventListener('submit', async event => {
     event.preventDefault();
     const submit = $('save-assignment-button'); submit.disabled = true;
     const dueValue = $('assignment-due').value;
-    const { error } = await client.from('assignments').insert({
-      class_id: $('assignment-class').value,
+    const payload = {
       title: $('assignment-title').value.trim(),
       instructions: $('assignment-instructions').value.trim(),
       due_at: dueValue ? new Date(dueValue).toISOString() : null,
-      points_possible: Number($('assignment-points').value),
-      status: 'draft'
-    });
+      points_possible: Number($('assignment-points').value)
+    };
+    const result = editingAssignmentId
+      ? await client.from('assignments').update(payload).eq('id', editingAssignmentId)
+      : await client.from('assignments').insert({
+          ...payload,
+          class_id: $('assignment-class').value,
+          status: 'draft'
+        });
     submit.disabled = false;
-    if (error) return setStatus('Assignment could not be saved: ' + error.message, true);
-    $('create-assignment-form').reset();
-    $('assignment-points').value = '100';
-    setStatus('Assignment saved as a draft.');
+    if (result.error) return setStatus('Assignment could not be saved: ' + result.error.message, true);
+    const wasEditing = Boolean(editingAssignmentId);
+    resetAssignmentForm();
+    setStatus(wasEditing ? 'Assignment changes saved.' : 'Assignment saved as a draft.');
     await loadTeacherAssignments();
   });
 
