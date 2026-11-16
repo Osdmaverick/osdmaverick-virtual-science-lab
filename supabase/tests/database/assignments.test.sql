@@ -49,13 +49,13 @@ select throws_ok(
   '42501', null, 'student cannot submit to a draft assignment'
 );
 select lives_ok(
-  $insert into public.assignment_submissions (assignment_id, student_id, response, status) values ('60000000-0000-4000-8000-000000000002', auth.uid(), 'My answer', 'draft')$,
+  $$insert into public.assignment_submissions (assignment_id, student_id, response, status) values ('60000000-0000-4000-8000-000000000002', auth.uid(), 'My answer', 'draft')$,
   'student can save a draft for published work'
 );
 select is((select status from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 'draft', 'draft status is stored');
 select is((select submitted_at from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), null, 'draft has no submission timestamp');
 select lives_ok(
-  $update public.assignment_submissions set response = 'My answer', status = 'submitted' where assignment_id = '60000000-0000-4000-8000-000000000002'$,
+  $$update public.assignment_submissions set response = 'My answer', status = 'submitted' where assignment_id = '60000000-0000-4000-8000-000000000002'$,
   'student can submit a saved draft'
 );
 select is((select status from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 'submitted', 'submitted status is stored');
