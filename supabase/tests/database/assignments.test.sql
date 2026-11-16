@@ -1,7 +1,7 @@
 begin;
 
 create extension if not exists pgtap with schema extensions;
-select plan(31);
+select plan(33);
 
 select has_table('public', 'assignments', 'assignments table exists');
 select has_table('public', 'assignment_submissions', 'assignment submissions table exists');
@@ -49,10 +49,16 @@ select throws_ok(
   '42501', null, 'student cannot submit to a draft assignment'
 );
 select lives_ok(
-  $$insert into public.assignment_submissions (assignment_id, student_id, response, status) values ('60000000-0000-4000-8000-000000000002', auth.uid(), 'My answer', 'submitted')$$,
-  'student can submit published work'
+  $insert into public.assignment_submissions (assignment_id, student_id, response, status) values ('60000000-0000-4000-8000-000000000002', auth.uid(), 'My answer', 'draft')$,
+  'student can save a draft for published work'
 );
-select is((select status from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 'submitted', 'submission status is stored');
+select is((select status from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 'draft', 'draft status is stored');
+select is((select submitted_at from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), null, 'draft has no submission timestamp');
+select lives_ok(
+  $update public.assignment_submissions set response = 'My answer', status = 'submitted' where assignment_id = '60000000-0000-4000-8000-000000000002'$,
+  'student can submit a saved draft'
+);
+select is((select status from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 'submitted', 'submitted status is stored');
 select ok((select submitted_at is not null from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 'submission timestamp is assigned by the database');
 select is((select count(*)::integer from public.assignment_submissions), 1, 'student can read only their own submissions');
 select throws_ok(
