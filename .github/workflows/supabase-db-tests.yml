@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - "supabase/**"
+      - "assets/assignments.js"
+      - "assignments.html"
+      - "scripts/assignments-ui-smoke-check.mjs"
       - "assets/auth.js"
       - "assets/assignments.js"
       - "assignments.html"
@@ -18,6 +21,7 @@ on:
   push:
     branches:
       - feature/phase-2-supabase-foundation
+      - feature/phase-3-assignments-foundation
     paths:
       - "supabase/**"
       - "assets/auth.js"
