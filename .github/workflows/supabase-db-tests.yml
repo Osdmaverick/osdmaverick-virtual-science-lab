@@ -5,6 +5,9 @@ on:
     paths:
       - "supabase/**"
       - "assets/auth.js"
+      - "assets/assignments.js"
+      - "assignments.html"
+      - "scripts/assignments-ui-smoke-check.mjs"
       - "assets/classes.js"
       - "classes.html"
       - "scripts/class-ui-smoke-check.mjs"
