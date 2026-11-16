@@ -36,6 +36,12 @@ values
 ('60000000-0000-4000-8000-000000000003','50000000-0000-4000-8000-000000000002','Chemical changes','Describe a reaction.',10,'published');
 
 set local role authenticated;
+select set_config('request.jwt.claim.sub', '40000000-0000-4000-8000-000000000004', true);
+insert into public.assignment_submissions (assignment_id, student_id, response, status)
+values ('60000000-0000-4000-8000-000000000003', auth.uid(), 'A chemical reaction answer', 'submitted');
+reset role;
+
+set local role authenticated;
 select set_config('request.jwt.claim.sub', '40000000-0000-4000-8000-000000000003', true);
 
 select is((select count(*)::integer from public.assignments), 1, 'student sees only published assignments in enrolled classes');
@@ -57,7 +63,7 @@ select throws_ok(
   '42501', null, 'student cannot create a submission for another student'
 );
 select throws_ok(
-  $$update public.assignment_submissions set score = 20 where assignment_id = '60000000-0000-4000-8000-000000000002'$$,
+  $update public.assignment_submissions set score = 20 where assignment_id = '60000000-0000-4000-8000-000000000002'$,
   '42501', null, 'student cannot write grading fields'
 );
 select throws_ok(
@@ -83,19 +89,19 @@ select set_config('request.jwt.claim.sub', '40000000-0000-4000-8000-000000000001
 select is((select count(*)::integer from public.assignments), 2, 'teacher sees assignments in their own class only');
 select is((select count(*)::integer from public.assignment_submissions), 1, 'teacher can view submissions for their class');
 select lives_ok(
-  $$update public.assignment_submissions set score = 18, feedback = 'Well done.' where assignment_id = '60000000-0000-4000-8000-000000000002'$$,
-  'owning teacher can grade a submission'
+  $select public.grade_assignment_submission((select id from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 18, 'Well done.')$,
+  'owning teacher can grade a submission through the protected grading function'
 );
 select is((select score from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 18, 'teacher score is saved');
 select is((select graded_by from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), auth.uid(), 'grader identity is set by the database');
 select ok((select graded_at is not null from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 'grading timestamp is set by the database');
 select throws_ok(
-  $$update public.assignment_submissions set score = 21 where assignment_id = '60000000-0000-4000-8000-000000000002'$$,
+  $select public.grade_assignment_submission((select id from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 21, 'Too high')$,
   'P0001', 'The score must be between zero and the assignment points available.', 'teacher cannot award more than the points available'
 );
 select throws_ok(
-  $$update public.assignment_submissions set score = 5 where assignment_id = '60000000-0000-4000-8000-000000000003'$$,
-  '42501', null, 'teacher cannot grade another teacher class'
+  $select public.grade_assignment_submission((select id from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000003'), 5, 'Wrong class')$,
+  'P0001', 'You are not authorised to grade this submission.', 'teacher cannot grade another teacher class'
 );
 select throws_ok(
   $$update public.assignments set points_possible = 10 where id = '60000000-0000-4000-8000-000000000002'$$,
