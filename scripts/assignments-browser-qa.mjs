@@ -1,10 +1,13 @@
 import assert from 'node:assert/strict';
+import { mkdirSync } from 'node:fs';
 import { chromium } from 'playwright';
 
 const baseUrl = process.argv[2] || 'http://127.0.0.1:4173';
 const browser = await chromium.launch({ headless: true });
 const failures = [];
 const results = {};
+const screenshotDir = 'artifacts/assignments-preview';
+mkdirSync(screenshotDir, { recursive: true });
 
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
@@ -24,6 +27,7 @@ try {
   }
   assert.equal(await page.locator('header nav[aria-label="Main navigation"]').count(), 1);
   results.desktopStructure = true;
+  await page.screenshot({ path: screenshotDir + '/assignments-desktop.png', fullPage: true });
 
   const desktopOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   assert.equal(desktopOverflow, false, 'desktop layout must not overflow horizontally');
@@ -33,6 +37,7 @@ try {
   const mobileOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   assert.equal(mobileOverflow, false, 'mobile layout must not overflow horizontally');
   results.mobileLayout = true;
+  await page.screenshot({ path: screenshotDir + '/assignments-mobile.png', fullPage: true });
 
   const menuToggle = page.locator('.menu-toggle');
   if (await menuToggle.count()) {
