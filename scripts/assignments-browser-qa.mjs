@@ -21,6 +21,7 @@ try {
   assert.equal(await page.locator('a.skip-link[href="#main-content"]').count(), 1, 'page should include a skip link');
   assert.equal(await page.locator('#assignments-status').getAttribute('role'), 'status');
   assert.equal(await page.locator('#assignments-content').isHidden(), true, 'unconfigured backend must not expose authenticated controls');
+  assert.equal(await page.locator('#assignments-account-toolbar').isHidden(), true, 'account actions must stay hidden until a session is confirmed');
   assert.match(await page.locator('#assignments-status').innerText(), /not connected yet/i);
   for (const id of ['assignment-class','assignment-title','assignment-instructions','assignment-points','assignment-due']) {
     assert.equal(await page.locator('label[for="' + id + '"]').count(), 1, 'form control ' + id + ' has a label');
