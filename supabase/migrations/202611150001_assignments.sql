@@ -103,25 +103,6 @@ create policy "Students update their own ungraded submissions"
     )
   );
 
-create policy "Class teachers grade submissions"
-  on public.assignment_submissions for update to authenticated
-  using (
-    exists (
-      select 1 from public.assignments a
-      where a.id = assignment_id
-        and public.is_class_teacher(a.class_id)
-        and public.current_user_is_teacher()
-    )
-  )
-  with check (
-    exists (
-      select 1 from public.assignments a
-      where a.id = assignment_id
-        and public.is_class_teacher(a.class_id)
-        and public.current_user_is_teacher()
-    )
-  );
-
 revoke all on public.assignments, public.assignment_submissions from anon, authenticated;
 grant select, delete on public.assignments to authenticated;
 grant insert (class_id, title, instructions, due_at, points_possible, status)
@@ -134,9 +115,6 @@ grant insert (assignment_id, student_id, response, status)
   on public.assignment_submissions to authenticated;
 grant update (response, status)
   on public.assignment_submissions to authenticated;
-grant update (score, feedback)
-  on public.assignment_submissions to authenticated;
-
 create or replace function public.set_assignment_updated_at()
 returns trigger language plpgsql
 set search_path = ''
@@ -241,3 +219,51 @@ create trigger assignments_preserve_existing_scores
 
 comment on table public.assignments is 'Teacher-managed assignments; student visibility is limited to published work in enrolled classes.';
 comment on table public.assignment_submissions is 'One student submission per assignment; grading fields are writable only by the owning class teacher.';
+
+-- Grading is exposed through a narrowly scoped SECURITY DEFINER function.
+-- Authenticated users do not receive direct UPDATE privileges on grading columns.
+create or replace function public.grade_assignment_submission(
+  p_submission_id uuid,
+  p_score integer,
+  p_feedback text default ''
+)
+returns void
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  target_class_id uuid;
+  target_points integer;
+begin
+  if auth.uid() is null or not public.current_user_is_teacher() then
+    raise exception 'Only verified teachers can grade submissions.';
+  end if;
+  if p_feedback is null or char_length(p_feedback) > 10000 then
+    raise exception 'Feedback must be 10000 characters or fewer.';
+  end if;
+
+  select a.class_id, a.points_possible
+    into target_class_id, target_points
+    from public.assignment_submissions s
+    join public.assignments a on a.id = s.assignment_id
+    where s.id = p_submission_id;
+
+  if target_class_id is null or not public.is_class_teacher(target_class_id) then
+    raise exception 'You are not authorised to grade this submission.';
+  end if;
+  if p_score is null or p_score < 0 or p_score > target_points then
+    raise exception 'The score must be between zero and the assignment points available.';
+  end if;
+
+  update public.assignment_submissions
+    set score = p_score, feedback = p_feedback
+    where id = p_submission_id;
+end;
+$$;
+
+revoke all on function public.grade_assignment_submission(uuid, integer, text) from public, anon;
+grant execute on function public.grade_assignment_submission(uuid, integer, text) to authenticated;
+
+comment on function public.grade_assignment_submission(uuid, integer, text) is
+  'Grades one submission only when the caller is a verified teacher who owns its class.';
