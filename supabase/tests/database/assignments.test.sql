@@ -35,11 +35,8 @@ values
 ('60000000-0000-4000-8000-000000000002','50000000-0000-4000-8000-000000000001','Food chains','Explain a food chain.',20,'published'),
 ('60000000-0000-4000-8000-000000000003','50000000-0000-4000-8000-000000000002','Chemical changes','Describe a reaction.',10,'published');
 
-set local role authenticated;
-select set_config('request.jwt.claim.sub', '40000000-0000-4000-8000-000000000004', true);
 insert into public.assignment_submissions (id, assignment_id, student_id, response, status)
-values ('70000000-0000-4000-8000-000000000001', '60000000-0000-4000-8000-000000000003', auth.uid(), 'A chemical reaction answer', 'submitted');
-reset role;
+values ('70000000-0000-4000-8000-000000000001', '60000000-0000-4000-8000-000000000003', '40000000-0000-4000-8000-000000000004', 'A chemical reaction answer', 'submitted');
 
 set local role authenticated;
 select set_config('request.jwt.claim.sub', '40000000-0000-4000-8000-000000000003', true);
