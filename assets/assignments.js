@@ -141,6 +141,7 @@
         const form = element('form', 'submission');
         const label = element('label', '', 'Your response');
         const response = element('textarea');
+        response.id = 'response-' + assignment.id; label.htmlFor = response.id;
         response.maxLength = 50000; response.rows = 5; response.required = true;
         response.value = existing?.response || '';
         const saveDraft = element('button', 'secondary', 'Save draft');
@@ -240,6 +241,14 @@
     $('cancel-assignment-edit').hidden = true;
   }
 
+  function toLocalDateTime(value) {
+    if (!value) return '';
+    const date = new Date(value);
+    const pad = number => String(number).padStart(2, '0');
+    return date.getFullYear() + '-' + pad(date.getMonth() + 1) + '-' + pad(date.getDate()) +
+      'T' + pad(date.getHours()) + ':' + pad(date.getMinutes());
+  }
+
   function beginEdit(assignment) {
     editingAssignmentId = assignment.id;
     $('assignment-class').value = assignment.class_id;
@@ -248,7 +257,7 @@
     $('assignment-class').closest('div').hidden = true;
     $('assignment-title').value = assignment.title;
     $('assignment-instructions').value = assignment.instructions || '';
-    $('assignment-due').value = assignment.due_at ? new Date(assignment.due_at).toISOString().slice(0,16) : '';
+    $('assignment-due').value = toLocalDateTime(assignment.due_at);
     $('assignment-points').value = String(assignment.points_possible);
     $('assignment-form-heading').textContent = 'Edit assignment';
     $('save-assignment-button').textContent = 'Save changes';
