@@ -109,7 +109,7 @@ reset role;
 set local role authenticated;
 select set_config('request.jwt.claim.sub', '40000000-0000-4000-8000-000000000003', true);
 select lives_ok(
-  $update public.assignment_submissions set response = 'Changed after grading' where assignment_id = '60000000-0000-4000-8000-000000000002'$,
+  $$update public.assignment_submissions set response = 'Changed after grading' where assignment_id = '60000000-0000-4000-8000-000000000002'$$,
   'student update request against graded work is safely filtered by row-level security'
 );
 select is((select response from public.assignment_submissions where assignment_id = '60000000-0000-4000-8000-000000000002'), 'Revised answer', 'graded submission remains unchanged after student update attempt');
