@@ -37,8 +37,8 @@ values
 
 set local role authenticated;
 select set_config('request.jwt.claim.sub', '40000000-0000-4000-8000-000000000004', true);
-insert into public.assignment_submissions (assignment_id, student_id, response, status)
-values ('60000000-0000-4000-8000-000000000003', auth.uid(), 'A chemical reaction answer', 'submitted');
+insert into public.assignment_submissions (id, assignment_id, student_id, response, status)
+values ('70000000-0000-4000-8000-000000000001', '60000000-0000-4000-8000-000000000003', auth.uid(), 'A chemical reaction answer', 'submitted');
 reset role;
 
 set local role authenticated;
