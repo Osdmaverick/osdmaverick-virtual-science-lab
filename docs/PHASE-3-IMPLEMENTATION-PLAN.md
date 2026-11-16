@@ -44,16 +44,24 @@ Enforce one submission per student per assignment. Use foreign keys and cascadin
 - Non-enrolled students cannot read or submit work for the class.
 - Do not rely on hidden UI controls for authorization; enforce all rules in PostgreSQL.
 
-## Implementation order
+## Implementation status
 
-1. Review and adapt the existing assignments prototype to the Phase 1/2 migration names and APIs.
-2. Write a new timestamped Phase 3 migration on this branch.
-3. Add pgTAP tests using separate synthetic teacher and student accounts, including two teachers and two students.
-4. Test draft visibility, publication, enrolment boundaries, submission ownership, grading-field restrictions, score limits and graded-work behavior.
-5. Add browser smoke tests and validate safe DOM rendering.
-6. Add the assignments page and teacher/student workflows.
-7. Run the full clean-database workflow from migrations 1–3.
-8. Review desktop/mobile behavior and accessibility before requesting a release review.
+- [x] Reconciled the schema with the current Phase 1 and Phase 2 migrations.
+- [x] Added the Phase 3 assignments and submissions migration.
+- [x] Added pgTAP coverage for two teachers and two students, including draft visibility, enrolment boundaries, submission ownership, grading permissions, score limits and post-grade locking.
+- [x] Added the assignments page and teacher/student browser workflows.
+- [x] Added safe DOM rendering and UI smoke checks.
+- [ ] Complete a passing clean-database CI run for migrations 1–3 and all security tests.
+- [ ] Complete final desktop/mobile and accessibility review.
+- [ ] Prepare an isolated development review; no production merge or deployment is authorized.
+
+## Implementation details
+
+- Grading uses a narrowly scoped SECURITY DEFINER function named grade_assignment_submission. Browser users do not receive direct UPDATE permission on score or feedback columns; the function verifies teacher role, class ownership, submission status and score limits.
+- Student assignment visibility is limited to published assignments in enrolled classes. Student submission rows are restricted to their own account.
+- Database triggers set submission timestamps and grader metadata, preserve grading fields against student writes, lock graded work and prevent reducing points below an existing score.
+- The browser UI supports teacher draft creation, publish/archive/delete, class-scoped submission review and grading; students can save drafts, submit work and view their own feedback.
+- This branch remains isolated from main and the live GitHub Pages site.
 
 ## Release boundary
 
