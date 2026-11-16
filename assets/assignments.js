@@ -139,28 +139,35 @@
         const response = element('textarea');
         response.maxLength = 50000; response.rows = 5; response.required = true;
         response.value = existing?.response || '';
+        const saveDraft = element('button', 'secondary', 'Save draft');
+        saveDraft.type = 'button';
         const submit = element('button', '', existing ? 'Update and submit work' : 'Submit work');
         submit.type = 'submit';
-        form.append(label, response, submit);
-        form.addEventListener('submit', async event => {
-          event.preventDefault(); submit.disabled = true;
+        form.append(label, response, saveDraft, submit);
+        async function saveStudentResponse(nextStatus) {
+          saveDraft.disabled = true; submit.disabled = true;
           let result;
           if (existing) {
             result = await client.from('assignment_submissions')
-              .update({ response: response.value.trim(), status: 'submitted' })
+              .update({ response: response.value.trim(), status: nextStatus })
               .eq('id', existing.id);
           } else {
             result = await client.from('assignment_submissions').insert({
               assignment_id: assignment.id,
               student_id: currentUser.id,
               response: response.value.trim(),
-              status: 'submitted'
+              status: nextStatus
             });
           }
-          submit.disabled = false;
-          if (result.error) return setStatus('Your work could not be submitted: ' + result.error.message, true);
-          setStatus('Your work has been submitted.');
+          saveDraft.disabled = false; submit.disabled = false;
+          if (result.error) return setStatus('Your work could not be saved: ' + result.error.message, true);
+          setStatus(nextStatus === 'draft' ? 'Your draft has been saved.' : 'Your work has been submitted.');
           await loadStudentAssignments();
+        }
+        saveDraft.addEventListener('click', () => saveStudentResponse('draft'));
+        form.addEventListener('submit', async event => {
+          event.preventDefault();
+          await saveStudentResponse('submitted');
         });
         card.append(form);
         if (existing?.status === 'submitted') card.append(element('p', 'assignment-meta', 'Submitted. You may update your work until it is graded.'));
