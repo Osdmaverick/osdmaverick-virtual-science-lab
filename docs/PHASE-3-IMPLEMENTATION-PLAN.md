@@ -51,8 +51,8 @@ Enforce one submission per student per assignment. Use foreign keys and cascadin
 - [x] Added pgTAP coverage for two teachers and two students, including draft visibility, enrolment boundaries, submission ownership, grading permissions, score limits and post-grade locking.
 - [x] Added the assignments page and teacher/student browser workflows.
 - [x] Added safe DOM rendering and UI smoke checks.
-- [ ] Complete a passing clean-database CI run for migrations 1–3 and all security tests.
-- [ ] Complete final desktop/mobile and accessibility review.
+- [x] Complete a passing clean-database CI run for migrations 1–3 and all security tests (34 pgTAP assertions; [run #43838321594](https://github.com/Osdmaverick/osdmaverick-virtual-science-lab/actions/runs/43838321594)).
+- [x] Complete desktop/mobile browser smoke and accessibility-oriented checks for landmarks, labels, navigation, responsive layout and horizontal overflow ([run #43838321498](https://github.com/Osdmaverick/osdmaverick-virtual-science-lab/actions/runs/43838321498)).
 - [ ] Prepare an isolated development review; no production merge or deployment is authorized.
 
 ## Implementation details
@@ -62,6 +62,8 @@ Enforce one submission per student per assignment. Use foreign keys and cascadin
 - Database triggers set submission timestamps and grader metadata, preserve grading fields against student writes, lock graded work and prevent reducing points below an existing score.
 - The browser UI supports teacher draft creation, publish/archive/delete, class-scoped submission review and grading; students can save drafts, submit work and view their own feedback.
 - This branch remains isolated from main and the live GitHub Pages site.
+- The latest clean CI run applied the Phase 1–3 migrations to a fresh local Supabase database and passed the assignment pgTAP suite. The browser workflow passed desktop and mobile checks and uploaded visual previews (`phase3-visual-previews`, artifact ID `14211348510`).
+- Manual preview review confirmed the assignments page keeps its responsive layout at desktop and mobile widths. The prominent “not connected” message is expected while hosted Supabase configuration is intentionally absent; authenticated assignment workflows are not live yet.
 
 ## Release boundary
 
