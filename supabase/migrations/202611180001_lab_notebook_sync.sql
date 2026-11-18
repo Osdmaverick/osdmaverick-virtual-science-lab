@@ -38,14 +38,6 @@ create policy "Owning teachers read class reports"
   on public.lab_reports for select to authenticated
   using (public.is_class_teacher(class_id) and public.current_user_is_teacher());
 
-create policy "Students delete their own enrolled-class reports"
-  on public.lab_reports for delete to authenticated
-  using (
-    student_id = auth.uid()
-    and public.is_class_student(class_id)
-    and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'student')
-  );
-
 create policy "Students read assessments on their own reports"
   on public.lab_report_assessments for select to authenticated
   using (
@@ -66,7 +58,7 @@ create policy "Owning teachers read report assessments"
   );
 
 revoke all on public.lab_reports, public.lab_report_assessments from anon, authenticated;
-grant select, delete on public.lab_reports to authenticated;
+grant select on public.lab_reports to authenticated;
 grant select on public.lab_report_assessments to authenticated;
 
 create or replace function public.sync_lab_report(
@@ -105,6 +97,8 @@ begin
   if p_expected_revision is null or p_expected_revision < 0 then
     raise exception 'Expected revision must be zero or greater.';
   end if;
+
+  perform pg_advisory_xact_lock(hashtextextended(p_class_id::text || ':' || v_student_id::text || ':' || p_client_report_id, 0));
 
   select * into v_report
   from public.lab_reports r
