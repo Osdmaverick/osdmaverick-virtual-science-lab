@@ -191,22 +191,25 @@
       .select('id,class_id,client_report_id,payload,revision,updated_at,lab_report_assessments(scores,feedback,assessed_at)')
       .order('updated_at',{ascending:false});
     if (error) return setStatus('Could not restore reports: '+error.message,true);
-    let added=0, refreshed=0;
+    let added=0, refreshed=0, preserved=0;
     for (const cloud of data || []) {
-      const local = reports.find(item => item.id === cloud.client_report_id);
+      const local = reports.find(item => item.id === cloud.client_report_id && item.classId === cloud.class_id);
       const assessment = Array.isArray(cloud.lab_report_assessments) ? cloud.lab_report_assessments[0] : cloud.lab_report_assessments;
       if (local) {
-        if (local.syncState !== 'local' && local.revision < cloud.revision) {
-          local.payload=cloud.payload; local.revision=cloud.revision; local.updatedAt=cloud.updated_at; local.syncState='synced';
-          refreshed++;
+        if (local.revision < cloud.revision) {
+          const replace = window.confirm('A newer cloud version of "' + safeText(cloud.payload.title,'this report') + '" exists. Replace the copy on this device? Choose Cancel to keep your local work.');
+          if (replace) {
+            local.payload=cloud.payload; local.revision=cloud.revision; local.updatedAt=cloud.updated_at; local.syncState='synced';
+            refreshed++;
+          } else preserved++;
         }
+        if (assessment) local.assessment={scores:assessment.scores,feedback:assessment.feedback};
       } else {
         reports.push({id:cloud.client_report_id,classId:cloud.class_id,payload:cloud.payload,revision:cloud.revision,updatedAt:cloud.updated_at,syncState:'synced',assessment:assessment?{scores:assessment.scores,feedback:assessment.feedback}:null});
         added++;
       }
-      if (local && assessment) local.assessment={scores:assessment.scores,feedback:assessment.feedback};
     }
-    writeLocal(); renderReports(); setStatus('Cloud restore complete: '+added+' added, '+refreshed+' updated. Local-only reports were preserved.');
+    writeLocal(); renderReports(); setStatus('Cloud restore complete: '+added+' added, '+refreshed+' updated, '+preserved+' newer cloud versions left untouched on this device.');
   }
   $('restore-cloud').addEventListener('click',restoreCloud);
 
