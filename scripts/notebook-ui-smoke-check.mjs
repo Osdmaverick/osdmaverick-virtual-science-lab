@@ -27,6 +27,6 @@ assert.match(migration,/pg_column_size\(p_payload\) > 100000/);
 assert.match(migration,/is_class_student/);
 assert.match(migration,/is_class_teacher/);
 assert.match(migration,/revoke all on function public\.sync_lab_report/);
-assert.match(tests,/select plan\(21\)/);
+assert.match(tests,/select plan\(22\)/);
 assert.doesNotMatch(migration,/sb_secret_|service_role/i);
 console.log('Notebook UI and migration smoke checks passed.');
