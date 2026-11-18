@@ -49,7 +49,7 @@ Prefer a structured, size-limited report payload. Validate required fields, stri
 ## Security requirements
 
 - Enable RLS on every new table.
-- Students can read, insert, update and delete only their own reports, and only while enrolled in the selected class.
+- Students can read only their own reports in enrolled classes; report writes go through a revision-checked RPC, and direct delete is denied so an assessed report cannot be erased with its feedback.
 - Teachers can read reports only for classes they own.
 - Only the owning class teacher can create or update an assessment for a report in that class.
 - Students can read assessments only for their own reports; they cannot insert, update or delete assessments.
@@ -63,7 +63,7 @@ Prefer a structured, size-limited report payload. Validate required fields, stri
 - Local browser storage remains the offline source of unsynced work.
 - Each report has a stable client ID and an updated timestamp.
 - Sync is an explicit user action initially; report which items succeeded or failed.
-- Use upsert on the stable owner/class/report key to make retries idempotent.
+- Use a stable owner/class/client-report key with a transaction-scoped advisory lock and optimistic revision checks to make retries safe and detect concurrent writes.
 - Do not silently overwrite newer cloud work. Compare revision or updated-at metadata and present a clear conflict choice (keep local, keep cloud, or inspect both) before replacing either copy.
 - Restore merges by stable report ID and never deletes local-only reports.
 - A failed request leaves the local copy intact and displays an actionable error.
@@ -83,7 +83,7 @@ Prefer a structured, size-limited report payload. Validate required fields, stri
 ## Acceptance criteria
 
 - Existing notebook functionality works with Supabase unconfigured.
-- Student A cannot read, modify or delete Student B's reports.
+- Student A cannot read or modify Student B's reports; students cannot directly delete cloud reports.
 - A student cannot sync into a class they have not joined.
 - Teacher A cannot load reports or assessments from Teacher B's classes.
 - Students cannot create or change rubric scores or feedback.
@@ -92,6 +92,16 @@ Prefer a structured, size-limited report payload. Validate required fields, stri
 - Conflicting local/cloud edits are detected and not silently discarded.
 - Desktop and mobile layouts pass browser QA without horizontal overflow.
 - All Phase 1–4 migrations pass from a clean local database.
+
+## Implementation and verification status
+
+- [x] Student notebook page supports local create/edit, browser persistence, JSON export/import and explicit cloud sync/restore.
+- [x] Teacher review interface supports four-part rubric scoring and written feedback for reports in teacher-owned classes.
+- [x] Cloud migration validates the five-field report schema, caps payload size, enforces class enrolment, uses revision checks and serializes concurrent sync attempts.
+- [x] Assessment writes are restricted to the owning class teacher; students can read feedback only on their own reports.
+- [x] Database security suite passed on a clean local Supabase database with 23 pgTAP assertions ([run #44385686504](https://github.com/Osdmaverick/osdmaverick-virtual-science-lab/actions/runs/44385686504)).
+- [x] Static checks and desktop/mobile browser QA passed, including local create/edit/export, reload persistence, responsive layout and navigation ([run #44385686374](https://github.com/Osdmaverick/osdmaverick-virtual-science-lab/actions/runs/44385686374)).
+- [ ] Manually inspect the uploaded desktop/mobile preview artifact and complete a final source review before proposing a development review.
 
 ## Release boundary
 
