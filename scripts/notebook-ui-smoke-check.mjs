@@ -18,6 +18,8 @@ assert.match(js,/save_lab_report_assessment/);
 assert.match(js,/localStorage/);
 assert.match(js,/createObjectURL/);
 assert.match(js,/conflict detected/i);
+assert.match(js,/A newer cloud version of/,'cloud restore asks before replacing local work');
+assert.match(js,/Choose Cancel to keep your local work/,'cloud restore offers a keep-local choice');
 assert.match(js,/textContent/);
 assert.doesNotMatch(js,/\.innerHTML\s*=/,'user data is not inserted with innerHTML');
 assert.match(migration,/enable row level security/);
