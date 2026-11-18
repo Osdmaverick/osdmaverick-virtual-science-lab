@@ -18,6 +18,8 @@ assert.match(js,/save_lab_report_assessment/);
 assert.match(js,/localStorage/);
 assert.match(js,/const validPayload = payload/,'local and imported reports use the database field schema');
 assert.match(js,/const validReport = item/,'imported report IDs and payloads are validated');
+assert.match(js,/const validAssessment = assessment/,'persisted teacher assessments are validated before rendering');
+assert.match(js,/assessment:validAssessment\(item\.assessment\)/,'local storage reads rebuild reports with sanitised assessment data');
 assert.match(js,/invalid report\(s\) were skipped/,'invalid backup entries are reported to the student');
 assert.match(js,/createObjectURL/);
 assert.match(js,/conflict detected/i);
