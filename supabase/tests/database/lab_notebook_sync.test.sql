@@ -1,7 +1,7 @@
 begin;
 
 create extension if not exists pgtap with schema extensions;
-select plan(22);
+select plan(23);
 
 select has_table('public', 'lab_reports', 'cloud lab reports table exists');
 select has_table('public', 'lab_report_assessments', 'lab report assessments table exists');
@@ -60,6 +60,17 @@ select throws_ok(
 select throws_ok(
   $$delete from public.lab_reports where client_report_id = 'local-report-001'$$,
   '42501', null, 'students cannot delete cloud reports and erase attached teacher assessments'
+);
+select throws_ok(
+  $$select * from public.sync_lab_report(
+    '51000000-0000-4000-8000-000000000001',
+    'malformed-report',
+    '{"title":"Missing report fields"}'::jsonb,
+    0,
+    now()
+  )$$,
+  'P0001', 'A report must contain title, question, method, evidence and conclusion only.',
+  'sync rejects incomplete report payloads'
 );
 select throws_ok(
   $$select * from public.sync_lab_report(
