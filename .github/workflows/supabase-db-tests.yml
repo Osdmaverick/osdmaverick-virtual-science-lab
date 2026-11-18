@@ -19,6 +19,7 @@ on:
     branches:
       - feature/phase-2-supabase-foundation
       - feature/phase-3-assignments-foundation
+      - feature/phase-4-cloud-notebook-sync-v2
     paths:
       - "supabase/**"
       - "assets/auth.js"
