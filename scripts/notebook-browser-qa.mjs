@@ -31,6 +31,15 @@ try {
  await page.locator('#report-title').fill('Plant growth investigation revised');
  await page.locator('#save-report').click();
  assert.match(await page.locator('#report-list').innerText(),/revised/);
+ await page.evaluate(()=>{
+  const key='osdmaverick.lab-notebook.v1';
+  const reports=JSON.parse(localStorage.getItem(key)||'[]');
+  reports[0].assessment={scores:null,feedback:[]};
+  localStorage.setItem(key,JSON.stringify(reports));
+ });
+ await page.reload({waitUntil:'networkidle'});
+ assert.match(await page.locator('#report-list').innerText(),/Plant growth investigation revised/,'malformed legacy assessment does not break local report rendering');
+ assert.deepEqual(errors,[],'malformed persisted assessment causes no uncaught browser error');
  const downloadPromise=page.waitForEvent('download');
  await page.locator('#export-all').click();
  const download=await downloadPromise;
