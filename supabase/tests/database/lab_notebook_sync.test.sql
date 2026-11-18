@@ -53,12 +53,12 @@ select is(
   'student can read their own cloud report'
 );
 select throws_ok(
-  $insert into public.lab_reports (class_id, student_id, client_report_id, payload)
-    values ('51000000-0000-4000-8000-000000000001', auth.uid(), 'direct-write', '{"title":"No"}'::jsonb)$,
+  $$insert into public.lab_reports (class_id, student_id, client_report_id, payload)
+    values ('51000000-0000-4000-8000-000000000001', auth.uid(), 'direct-write', '{"title":"No"}'::jsonb)$$,
   '42501', null, 'students cannot bypass the revision-checked sync function'
 );
 select throws_ok(
-  $delete from public.lab_reports where client_report_id = 'local-report-001'$,
+  $$delete from public.lab_reports where client_report_id = 'local-report-001'$$,
   '42501', null, 'students cannot delete cloud reports and erase attached teacher assessments'
 );
 select throws_ok(
