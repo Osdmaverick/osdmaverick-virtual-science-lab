@@ -245,9 +245,9 @@
             refreshed++;
           } else preserved++;
         }
-        if (assessment) local.assessment={scores:assessment.scores,feedback:assessment.feedback};
+        if (assessment) local.assessment=validAssessment(assessment);
       } else {
-        reports.push({id:cloud.client_report_id,classId:cloud.class_id,payload:cloud.payload,revision:cloud.revision,updatedAt:cloud.updated_at,syncState:'synced',assessment:assessment?{scores:assessment.scores,feedback:assessment.feedback}:null});
+        reports.push({id:cloud.client_report_id,classId:cloud.class_id,payload:cloud.payload,revision:cloud.revision,updatedAt:cloud.updated_at,syncState:'synced',assessment:validAssessment(assessment)});
         added++;
       }
     }
