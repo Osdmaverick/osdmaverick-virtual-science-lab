@@ -101,7 +101,8 @@ Prefer a structured, size-limited report payload. Validate required fields, stri
 - [x] Assessment writes are restricted to the owning class teacher; students can read feedback only on their own reports.
 - [x] Database security suite passed on a clean local Supabase database with 23 pgTAP assertions ([run #44385686504](https://github.com/Osdmaverick/osdmaverick-virtual-science-lab/actions/runs/44385686504)).
 - [x] Static checks and desktop/mobile browser QA passed, including local create/edit/export, reload persistence, responsive layout and navigation ([run #44385686374](https://github.com/Osdmaverick/osdmaverick-virtual-science-lab/actions/runs/44385686374)).
-- [ ] Manually inspect the uploaded desktop/mobile preview artifact and complete a final source review before proposing a development review.
+- [x] Inspect the uploaded desktop/mobile previews; the notebook form and report cards remain readable at both widths. Adjusted screenshot capture to start at the top of the page.
+- [ ] Complete the final source review before proposing an isolated development review.
 
 ## Release boundary
 
