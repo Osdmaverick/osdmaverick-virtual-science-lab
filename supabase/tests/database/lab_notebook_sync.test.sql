@@ -36,7 +36,7 @@ select lives_ok(
   $$select * from public.sync_lab_report(
     '51000000-0000-4000-8000-000000000001',
     'local-report-001',
-    '{"title":"Plant growth","observations":"Seedling grew 2 cm"}'::jsonb,
+    '{"title":"Plant growth","question":"How does light affect growth?","method":"Observe seedlings.","evidence":"Seedling grew 2 cm.","conclusion":"Light supports growth."}'::jsonb,
     0,
     now()
   )$$,
@@ -86,7 +86,7 @@ select lives_ok(
   $$select * from public.sync_lab_report(
     '51000000-0000-4000-8000-000000000001',
     'local-report-001',
-    '{"title":"Plant growth","observations":"Seedling grew 3 cm"}'::jsonb,
+    '{"title":"Plant growth","question":"How does light affect growth?","method":"Observe seedlings.","evidence":"Seedling grew 3 cm.","conclusion":"Light supports growth."}'::jsonb,
     1,
     now()
   )$$,
@@ -101,7 +101,7 @@ select is(
   (select conflict from public.sync_lab_report(
     '51000000-0000-4000-8000-000000000001',
     'local-report-001',
-    '{"title":"Stale copy"}'::jsonb,
+    '{"title":"Stale copy","question":"How does light affect growth?","method":"Observe seedlings.","evidence":"Old evidence.","conclusion":"Old conclusion."}'::jsonb,
     1,
     now()
   )),
