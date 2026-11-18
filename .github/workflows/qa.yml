@@ -21,6 +21,10 @@ jobs:
           node-version: 20
       - name: Check every directory-linked lab page
         run: node scripts/qa-smoke-check.mjs
+      - name: Check notebook JavaScript syntax
+        run: node --check assets/cloud-notebook.js
+      - name: Run notebook UI smoke checks
+        run: node scripts/notebook-ui-smoke-check.mjs
 
   browser-smoke-check:
     needs: static-smoke-check
@@ -51,7 +55,9 @@ jobs:
         run: node scripts/public-release-qa.mjs http://127.0.0.1:4173
       - name: Verify assignments desktop and mobile experience
         run: node scripts/assignments-browser-qa.mjs http://127.0.0.1:4173
-      - name: Upload public release visual previews
+      - name: Verify notebook desktop and mobile experience
+        run: node scripts/notebook-browser-qa.mjs http://127.0.0.1:4173
+      - name: Upload Phase 4 visual previews
         if: always()
         uses: actions/upload-artifact@v4
         with:
