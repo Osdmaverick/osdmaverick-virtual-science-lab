@@ -94,6 +94,22 @@ begin
   if p_payload is null or jsonb_typeof(p_payload) <> 'object' or pg_column_size(p_payload) > 100000 then
     raise exception 'Report data must be a JSON object no larger than 100 KB.';
   end if;
+  if not (p_payload ?& array['title','question','method','evidence','conclusion'])
+     or (select count(*) from jsonb_object_keys(p_payload)) <> 5 then
+    raise exception 'A report must contain title, question, method, evidence and conclusion only.';
+  end if;
+  if jsonb_typeof(p_payload->'title') <> 'string'
+     or jsonb_typeof(p_payload->'question') <> 'string'
+     or jsonb_typeof(p_payload->'method') <> 'string'
+     or jsonb_typeof(p_payload->'evidence') <> 'string'
+     or jsonb_typeof(p_payload->'conclusion') <> 'string'
+     or char_length(p_payload->>'title') not between 1 and 160
+     or char_length(p_payload->>'question') > 4000
+     or char_length(p_payload->>'method') > 6000
+     or char_length(p_payload->>'evidence') > 8000
+     or char_length(p_payload->>'conclusion') > 4000 then
+    raise exception 'Report fields must be text within their individual size limits.';
+  end if;
   if p_expected_revision is null or p_expected_revision < 0 then
     raise exception 'Expected revision must be zero or greater.';
   end if;
