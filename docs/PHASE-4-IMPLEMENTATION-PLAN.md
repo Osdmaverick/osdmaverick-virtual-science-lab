@@ -104,7 +104,11 @@ Prefer a structured, size-limited report payload. Validate required fields, stri
 - [x] Cloud restore now asks before replacing a newer local report; cancel preserves local work and local-only reports remain untouched.
 - [x] Imported and persisted local reports are checked against the exact five-field database schema and field length limits; invalid backup entries are skipped and counted.
 - [x] Inspect the uploaded desktop/mobile previews; the notebook form and report cards remain readable at both widths. Adjusted screenshot capture to start at the top of the page.
-- [ ] Complete final CI after backup-import validation, then finish the isolated development review.
+- [x] Harden persisted and restored teacher assessments: validate the four rubric scores and feedback before rendering, and safely discard malformed legacy assessment metadata.
+- [x] Add regression coverage for malformed locally stored assessments; static checks and desktop/mobile notebook browser QA passed.
+- [x] Final clean-database migration and database permission/RLS suite passed ([run #44401478956](https://github.com/Osdmaverick/osdmaverick-virtual-science-lab/actions/runs/44401478956)).
+- [x] Final repository-wide, public-release, assignments and notebook desktop/mobile QA passed ([run #44401478829](https://github.com/Osdmaverick/osdmaverick-virtual-science-lab/actions/runs/44401478829)).
+- [x] Final source review completed: 10 expected changed files only; no Supabase secret/service-role key patterns found; local and cloud restore paths validate assessment data.
 
 ## Release boundary
 
