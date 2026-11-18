@@ -17,10 +17,27 @@
   };
   const makeId = () => window.crypto?.randomUUID?.() ||
     'report-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+  const validPayload = payload => {
+    if (!payload || typeof payload !== 'object' || Array.isArray(payload)) return false;
+    const fields = ['title','question','method','evidence','conclusion'];
+    if (Object.keys(payload).length !== fields.length || fields.some(key => typeof payload[key] !== 'string')) return false;
+    return payload.title.trim().length > 0 && payload.title.length <= 160 &&
+      payload.question.length <= 4000 && payload.method.length <= 6000 &&
+      payload.evidence.length <= 8000 && payload.conclusion.length <= 4000;
+  };
+  const validReport = item => item && typeof item === 'object' && !Array.isArray(item) &&
+    typeof item.id === 'string' && item.id.length > 0 && item.id.length <= 160 &&
+    validPayload(item.payload);
   const readLocal = () => {
     try {
       const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      return Array.isArray(value) ? value.filter(item => item && typeof item === 'object' && item.id && item.payload) : [];
+      if (!Array.isArray(value)) return [];
+      const seen = new Set();
+      return value.filter(item => {
+        if (!validReport(item) || seen.has(item.id)) return false;
+        seen.add(item.id);
+        return true;
+      });
     } catch { return []; }
   };
   const writeLocal = () => {
@@ -131,16 +148,22 @@
     try {
       if (file.size > 2000000) throw new Error('Backup file is larger than 2 MB.');
       const parsed = JSON.parse(await file.text());
-      const incoming = Array.isArray(parsed) ? parsed : parsed.reports;
+      const incoming = Array.isArray(parsed) ? parsed : parsed?.reports;
       if (!Array.isArray(incoming) || incoming.length > 500) throw new Error('This is not a supported notebook backup.');
       const merged = new Map(reports.map(item => [item.id,item]));
+      let skipped = 0;
       for (const item of incoming) {
-        if (!item?.id || !item?.payload || typeof item.payload !== 'object') continue;
-        if (!merged.has(item.id)) merged.set(item.id,{...item,syncState:'local'});
+        if (!validReport(item)) { skipped++; continue; }
+        if (!merged.has(item.id)) merged.set(item.id,{
+          id:item.id,classId:typeof item.classId === 'string' ? item.classId : null,
+          payload:{...item.payload},revision:Number.isInteger(item.revision) && item.revision >= 0 ? item.revision : 0,
+          syncState:'local',updatedAt:typeof item.updatedAt === 'string' ? item.updatedAt : new Date().toISOString(),
+          assessment:null
+        });
       }
       reports = [...merged.values()];
       if (!writeLocal()) return;
-      renderReports(); setStatus('Backup imported. Existing reports were preserved; duplicate IDs were not replaced.');
+      renderReports(); setStatus('Backup imported. Existing reports and duplicate IDs were preserved; '+skipped+' invalid report(s) were skipped.');
     } catch(error) { setStatus(error.message || 'Could not import this backup.',true); }
     finally { event.target.value = ''; }
   });
