@@ -100,9 +100,11 @@ Prefer a structured, size-limited report payload. Validate required fields, stri
 - [x] Cloud migration validates the five-field report schema, caps payload size, enforces class enrolment, uses revision checks and serializes concurrent sync attempts.
 - [x] Assessment writes are restricted to the owning class teacher; students can read feedback only on their own reports.
 - [x] Database security suite passed on a clean local Supabase database with 23 pgTAP assertions ([run #44385686504](https://github.com/Osdmaverick/osdmaverick-virtual-science-lab/actions/runs/44385686504)).
-- [x] Static checks and desktop/mobile browser QA passed, including local create/edit/export, reload persistence, responsive layout and navigation ([run #44385686374](https://github.com/Osdmaverick/osdmaverick-virtual-science-lab/actions/runs/44385686374)).
+- [x] Static checks and desktop/mobile browser QA passed, including local create/edit/export, reload persistence, responsive layout and navigation ([run #44396304795](https://github.com/Osdmaverick/osdmaverick-virtual-science-lab/actions/runs/44396304795)).
+- [x] Cloud restore now asks before replacing a newer local report; cancel preserves local work and local-only reports remain untouched.
+- [x] Imported and persisted local reports are checked against the exact five-field database schema and field length limits; invalid backup entries are skipped and counted.
 - [x] Inspect the uploaded desktop/mobile previews; the notebook form and report cards remain readable at both widths. Adjusted screenshot capture to start at the top of the page.
-- [ ] Complete the final source review before proposing an isolated development review.
+- [ ] Complete final CI after backup-import validation, then finish the isolated development review.
 
 ## Release boundary
 
