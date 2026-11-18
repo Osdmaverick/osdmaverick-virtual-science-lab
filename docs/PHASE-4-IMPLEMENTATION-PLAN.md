@@ -1,0 +1,100 @@
+# Phase 4 — Cloud lab notebook synchronisation
+
+## Starting point
+
+This phase is developed on `feature/phase-4-cloud-notebook-sync-v2`, branched directly from the verified Phase 3 assignments foundation. It must not inherit the older prototype branch `feature/phase-4-cloud-notebook-sync`, whose schema and client implementation predate the reconciled Phase 1–3 migrations.
+
+Dependencies:
+- Phase 1: authenticated profiles and trusted teacher provisioning.
+- Phase 2: teacher-owned classes, invite codes and student enrolments.
+- Phase 3: assignments, submissions and database-enforced teacher/student boundaries.
+
+## User outcomes
+
+### Students
+- Continue creating and editing notebook reports when signed out or offline.
+- Back up reports to a class in which they are enrolled.
+- Restore their own reports on another signed-in device.
+- See teacher rubric feedback attached to their own reports.
+- Export a portable JSON backup at any time.
+
+### Teachers
+- Load notebook reports only from classes they own.
+- Review reports and publish rubric scores and written feedback.
+- Reopen the dashboard and see previously saved assessments.
+
+### Non-goals
+- No real-time collaborative editing in this phase.
+- No public sharing links.
+- No remote code execution or arbitrary file uploads.
+- No automatic deletion of local work after a cloud operation.
+- No hosted Supabase connection or remote migration until explicitly approved.
+
+## Data model proposal
+
+1. `lab_reports`
+   - UUID primary key.
+   - Student owner and enrolled class foreign keys.
+   - Stable client-generated report identifier, unique per student and class.
+   - Validated JSONB report payload and created/updated timestamps.
+   - Optional revision/version metadata for conflict detection.
+
+2. `lab_report_assessments`
+   - One current assessment per report for the initial release.
+   - Teacher identity, rubric scores, written feedback and timestamps.
+   - Teacher identity and class ownership validated in the database, not trusted from the browser.
+
+Prefer a structured, size-limited report payload. Validate required fields, string lengths and JSON object shape at the database boundary. Do not store authentication secrets or unnecessary personal data in reports.
+
+## Security requirements
+
+- Enable RLS on every new table.
+- Students can read, insert, update and delete only their own reports, and only while enrolled in the selected class.
+- Teachers can read reports only for classes they own.
+- Only the owning class teacher can create or update an assessment for a report in that class.
+- Students can read assessments only for their own reports; they cannot insert, update or delete assessments.
+- Browser-supplied student IDs, teacher IDs, role values and grading identities are never trusted.
+- Use explicit column grants and narrowly scoped database functions where needed; avoid broad table grants that let clients set ownership or grading metadata.
+- Add database tests for cross-class access, forged identities, non-enrolled students, other teachers, assessment tampering and class membership changes.
+- Keep the Supabase secret/service-role key out of all browser assets and repository files.
+
+## Synchronisation behaviour
+
+- Local browser storage remains the offline source of unsynced work.
+- Each report has a stable client ID and an updated timestamp.
+- Sync is an explicit user action initially; report which items succeeded or failed.
+- Use upsert on the stable owner/class/report key to make retries idempotent.
+- Do not silently overwrite newer cloud work. Compare revision or updated-at metadata and present a clear conflict choice (keep local, keep cloud, or inspect both) before replacing either copy.
+- Restore merges by stable report ID and never deletes local-only reports.
+- A failed request leaves the local copy intact and displays an actionable error.
+- Show last successful sync time and per-report sync state.
+
+## Implementation sequence
+
+1. Inspect and adapt the existing local notebook report schema and teacher rubric workflow without breaking local save, print or JSON export.
+2. Add the cloud tables, constraints, indexes, RLS policies, grants and any narrowly scoped RPCs as a new migration after Phase 3.
+3. Add pgTAP tests for all ownership, enrolment, class-teacher and assessment boundaries.
+4. Add an isolated sync module with safe DOM rendering, idempotent writes, restore/merge and conflict handling.
+5. Add student and teacher sync UI with explicit status, retry and local-backup messaging.
+6. Add static smoke tests and desktop/mobile browser QA, including unconfigured Supabase mode.
+7. Run a clean local Supabase migration reset and all Phase 1–4 database tests.
+8. Manually inspect screenshots and review the complete diff before proposing an isolated development review.
+
+## Acceptance criteria
+
+- Existing notebook functionality works with Supabase unconfigured.
+- Student A cannot read, modify or delete Student B's reports.
+- A student cannot sync into a class they have not joined.
+- Teacher A cannot load reports or assessments from Teacher B's classes.
+- Students cannot create or change rubric scores or feedback.
+- A student can restore their own report and teacher feedback on a second browser context.
+- Repeated syncs do not create duplicate reports.
+- Conflicting local/cloud edits are detected and not silently discarded.
+- Desktop and mobile layouts pass browser QA without horizontal overflow.
+- All Phase 1–4 migrations pass from a clean local database.
+
+## Release boundary
+
+This branch is isolated from `main` and the production GitHub Pages site. Use local CI only. Do not merge, deploy, connect the hosted Supabase project, or apply remote migrations without explicit user approval.
+
+Before any hosted connection, the previously exposed Supabase secret key must be revoked and replaced. Only the browser-safe publishable key may be used by the client.
