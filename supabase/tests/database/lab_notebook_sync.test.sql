@@ -1,7 +1,7 @@
 begin;
 
 create extension if not exists pgtap with schema extensions;
-select plan(22);
+select plan(21);
 
 select has_table('public', 'lab_reports', 'cloud lab reports table exists');
 select has_table('public', 'lab_report_assessments', 'lab report assessments table exists');
