@@ -8,7 +8,7 @@ on:
       - "assets/classes.js"
       - "classes.html"
       - "scripts/class-ui-smoke-check.mjs"
-      - "assets/assignments.js"
+      - "assets/cloud-notebook.js"\n      - "student-lab-notebook.html"\n      - "scripts/notebook-ui-smoke-check.mjs"\n      - "scripts/notebook-browser-qa.mjs"\n      - "assets/assignments.js"
       - "assignments.html"
       - "scripts/assignments-ui-smoke-check.mjs"
       - "assets/supabase-config.example.js"
@@ -64,7 +64,7 @@ jobs:
       - name: Run assignments page smoke checks
         run: node scripts/assignments-ui-smoke-check.mjs
 
-      - name: Set up Supabase CLI
+      - name: Check notebook JavaScript syntax\n        run: node --check assets/cloud-notebook.js\n\n      - name: Run notebook page smoke checks\n        run: node scripts/notebook-ui-smoke-check.mjs\n\n      - name: Set up Supabase CLI
         uses: supabase/setup-cli@v1
         with:
           version: latest
