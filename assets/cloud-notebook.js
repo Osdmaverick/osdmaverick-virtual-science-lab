@@ -28,6 +28,16 @@
   const validReport = item => item && typeof item === 'object' && !Array.isArray(item) &&
     typeof item.id === 'string' && item.id.length > 0 && item.id.length <= 160 &&
     validPayload(item.payload);
+  const validAssessment = assessment => {
+    if (!assessment || typeof assessment !== 'object' || Array.isArray(assessment)) return null;
+    const scores = assessment.scores;
+    const keys = ['question','method','evidence','conclusion'];
+    if (!scores || typeof scores !== 'object' || Array.isArray(scores) ||
+        Object.keys(scores).length !== keys.length ||
+        keys.some(key => !Number.isInteger(scores[key]) || scores[key] < 0 || scores[key] > 4)) return null;
+    if (typeof assessment.feedback !== 'string' || assessment.feedback.length > 3000) return null;
+    return {scores:Object.fromEntries(keys.map(key => [key,scores[key]])),feedback:assessment.feedback};
+  };
   const readLocal = () => {
     try {
       const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
@@ -37,7 +47,16 @@
         if (!validReport(item) || seen.has(item.id)) return false;
         seen.add(item.id);
         return true;
-      });
+      }).map(item => ({
+        id:item.id,
+        classId:typeof item.classId === 'string' ? item.classId : null,
+        payload:{...item.payload},
+        revision:Number.isInteger(item.revision) && item.revision >= 0 ? item.revision : 0,
+        syncState:['local','synced','conflict'].includes(item.syncState) ? item.syncState : 'local',
+        updatedAt:typeof item.updatedAt === 'string' ? item.updatedAt : new Date().toISOString(),
+        ...(typeof item.cloudUpdatedAt === 'string' ? {cloudUpdatedAt:item.cloudUpdatedAt} : {}),
+        assessment:validAssessment(item.assessment)
+      }));
     } catch { return []; }
   };
   const writeLocal = () => {
