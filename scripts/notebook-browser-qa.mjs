@@ -35,7 +35,8 @@ try {
  await page.locator('#export-all').click();
  const download=await downloadPromise;
  assert.match(download.suggestedFilename(),/lab-notebook-backup\.json/);
- await page.evaluate(()=>window.scrollTo(0,0));\n await page.screenshot({path:'artifacts/notebook-preview/notebook-desktop.png',fullPage:true});
+ await page.evaluate(()=>window.scrollTo(0,0));
+ await page.screenshot({path:'artifacts/notebook-preview/notebook-desktop.png',fullPage:true});
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>document.documentElement.clientWidth);
  assert.equal(overflow,false,'desktop layout has no horizontal overflow');
  results.localCreateEditExport=true;
