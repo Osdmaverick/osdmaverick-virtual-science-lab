@@ -2,7 +2,7 @@ name: Virtual Science Lab QA
 
 on:
   push:
-    branches: [main, feature/phase-3-assignments-foundation]
+    branches: [main, feature/phase-3-assignments-foundation, feature/phase-4-cloud-notebook-sync-v2]
   pull_request:
   workflow_dispatch:
 
