@@ -35,8 +35,10 @@
     if (!scores || typeof scores !== 'object' || Array.isArray(scores) ||
         Object.keys(scores).length !== keys.length ||
         keys.some(key => !Number.isInteger(scores[key]) || scores[key] < 0 || scores[key] > 4)) return null;
+    const reportRevision = assessment.report_revision ?? assessment.reportRevision;
+    if (!Number.isInteger(reportRevision) || reportRevision < 1) return null;
     if (typeof assessment.feedback !== 'string' || assessment.feedback.length > 3000) return null;
-    return {scores:Object.fromEntries(keys.map(key => [key,scores[key]])),feedback:assessment.feedback};
+    return {scores:Object.fromEntries(keys.map(key => [key,scores[key]])),feedback:assessment.feedback,reportRevision};
   };
   const readLocal = () => {
     try {
@@ -147,7 +149,7 @@
       revision: existing?.revision || 0,
       syncState: existing?.syncState === 'conflict' ? 'conflict' : 'local',
       updatedAt: new Date().toISOString(),
-      assessment: existing?.assessment || null
+      assessment: null
     };
     if (existing) reports = reports.map(item => item.id === editingId ? record : item);
     else reports.push(record);
@@ -237,6 +239,8 @@
     for (const cloud of data || []) {
       const local = reports.find(item => item.id === cloud.client_report_id && item.classId === cloud.class_id);
       const assessment = Array.isArray(cloud.lab_report_assessments) ? cloud.lab_report_assessments[0] : cloud.lab_report_assessments;
+      const checkedAssessment = validAssessment(assessment);
+      const currentAssessment = checkedAssessment?.reportRevision === cloud.revision ? checkedAssessment : null;
       if (local) {
         if (local.revision < cloud.revision) {
           const replace = window.confirm('A newer cloud version of "' + safeText(cloud.payload.title,'this report') + '" exists. Replace the copy on this device? Choose Cancel to keep your local work.');
@@ -245,9 +249,9 @@
             refreshed++;
           } else preserved++;
         }
-        if (assessment) local.assessment=validAssessment(assessment);
+        local.assessment=currentAssessment;
       } else {
-        reports.push({id:cloud.client_report_id,classId:cloud.class_id,payload:cloud.payload,revision:cloud.revision,updatedAt:cloud.updated_at,syncState:'synced',assessment:validAssessment(assessment)});
+        reports.push({id:cloud.client_report_id,classId:cloud.class_id,payload:cloud.payload,revision:cloud.revision,updatedAt:cloud.updated_at,syncState:'synced',assessment:currentAssessment});
         added++;
       }
     }
@@ -261,7 +265,7 @@
     if (!own.length) { const p=document.createElement('p');p.textContent='No classes are available for review.';list.append(p);return; }
     for (const klass of own) {
       const {data,error}=await client.from('lab_reports')
-        .select('id,client_report_id,student_id,payload,updated_at,lab_report_assessments(scores,feedback)')
+        .select('id,client_report_id,student_id,payload,revision,updated_at,lab_report_assessments(scores,feedback,report_revision)')
         .eq('class_id',klass.id).order('updated_at',{ascending:false});
       if(error){const p=document.createElement('p');p.textContent='Could not load '+klass.name+': '+error.message;list.append(p);continue;}
       const heading=document.createElement('h3');heading.textContent=klass.name;list.append(heading);
@@ -270,15 +274,19 @@
         const title=document.createElement('h3');title.textContent=safeText(report.payload.title,'Untitled report');
         const question=document.createElement('p');question.textContent='Question: '+safeText(report.payload.question);
         const evidence=document.createElement('p');evidence.textContent='Evidence: '+safeText(report.payload.evidence,'Not provided');
+        const currentAssessment=report.lab_report_assessments?.[0];
+        if(currentAssessment && currentAssessment.report_revision!==report.revision){
+          const stale=document.createElement('p');stale.className='report-meta';stale.textContent='Previous assessment is for an earlier report version. Please review and re-grade.';card.append(stale);
+        }
         const feedbackLabel=document.createElement('label');feedbackLabel.textContent='Teacher feedback';feedbackLabel.htmlFor='feedback-'+report.id;
-        const feedback=document.createElement('textarea');feedback.id='feedback-'+report.id;feedback.maxLength=3000;feedback.value=report.lab_report_assessments?.[0]?.feedback||'';
+        const feedback=document.createElement('textarea');feedback.id='feedback-'+report.id;feedback.maxLength=3000;feedback.value=currentAssessment?.report_revision===report.revision?currentAssessment.feedback:'';
         const rubric=document.createElement('div');rubric.className='rubric';
         const scores={};
         for(const key of ['question','method','evidence','conclusion']){
           const wrap=document.createElement('label');wrap.textContent=key[0].toUpperCase()+key.slice(1);
           const select=document.createElement('select');select.setAttribute('aria-label',key+' rubric score');
           for(let n=0;n<=4;n++){const option=document.createElement('option');option.value=String(n);option.textContent=n+' / 4';select.append(option);}
-          const prior=report.lab_report_assessments?.[0]?.scores?.[key];if(prior!==undefined)select.value=String(prior);
+          const prior=currentAssessment?.report_revision===report.revision?currentAssessment.scores?.[key]:undefined;if(prior!==undefined)select.value=String(prior);
           scores[key]=select;wrap.append(select);rubric.append(wrap);
         }
         const save=makeButton('Save rubric assessment',async()=>{
