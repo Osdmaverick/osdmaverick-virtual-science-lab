@@ -11,6 +11,10 @@ on:
       - "assets/assignments.js"
       - "assignments.html"
       - "scripts/assignments-ui-smoke-check.mjs"
+      - "assets/cloud-notebook.js"
+      - "student-lab-notebook.html"
+      - "scripts/notebook-ui-smoke-check.mjs"
+      - "scripts/notebook-browser-qa.mjs"
       - "assets/supabase-config.example.js"
       - "auth.html"
       - "scripts/auth-ui-smoke-check.mjs"
@@ -19,6 +23,7 @@ on:
     branches:
       - feature/phase-2-supabase-foundation
       - feature/phase-3-assignments-foundation
+      - feature/phase-4-cloud-notebook-sync-v2
     paths:
       - "supabase/**"
       - "assets/auth.js"
@@ -28,6 +33,10 @@ on:
       - "assets/assignments.js"
       - "assignments.html"
       - "scripts/assignments-ui-smoke-check.mjs"
+      - "assets/cloud-notebook.js"
+      - "student-lab-notebook.html"
+      - "scripts/notebook-ui-smoke-check.mjs"
+      - "scripts/notebook-browser-qa.mjs"
       - "assets/supabase-config.example.js"
       - "auth.html"
       - "scripts/auth-ui-smoke-check.mjs"
@@ -62,6 +71,12 @@ jobs:
 
       - name: Run assignments page smoke checks
         run: node scripts/assignments-ui-smoke-check.mjs
+
+      - name: Check notebook JavaScript syntax
+        run: node --check assets/cloud-notebook.js
+
+      - name: Run notebook page smoke checks
+        run: node scripts/notebook-ui-smoke-check.mjs
 
       - name: Set up Supabase CLI
         uses: supabase/setup-cli@v1
