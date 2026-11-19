@@ -20,6 +20,7 @@ create table public.lab_report_assessments (
   teacher_id uuid not null references public.profiles(id) on delete cascade,
   scores jsonb not null check (jsonb_typeof(scores) = 'object'),
   feedback text not null default '' check (char_length(feedback) <= 3000),
+  report_revision integer not null check (report_revision > 0),
   assessed_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -171,6 +172,7 @@ as $$
 declare
   v_teacher_id uuid := auth.uid();
   v_class_id uuid;
+  v_report_revision integer;
   v_assessment_id uuid;
   v_key text;
   v_value jsonb;
@@ -195,18 +197,19 @@ begin
     end if;
   end loop;
 
-  select r.class_id into v_class_id
+  select r.class_id, r.revision into v_class_id, v_report_revision
   from public.lab_reports r where r.id = p_lab_report_id;
   if v_class_id is null or not public.is_class_teacher(v_class_id) then
     raise exception 'You are not authorised to assess this report.';
   end if;
 
-  insert into public.lab_report_assessments(lab_report_id, teacher_id, scores, feedback)
-    values (p_lab_report_id, v_teacher_id, p_scores, p_feedback)
+  insert into public.lab_report_assessments(lab_report_id, teacher_id, scores, feedback, report_revision)
+    values (p_lab_report_id, v_teacher_id, p_scores, p_feedback, v_report_revision)
   on conflict (lab_report_id) do update
     set teacher_id = excluded.teacher_id,
         scores = excluded.scores,
         feedback = excluded.feedback,
+        report_revision = excluded.report_revision,
         assessed_at = now(),
         updated_at = now()
   returning id into v_assessment_id;
