@@ -1,7 +1,7 @@
 begin;
 
 create extension if not exists pgtap with schema extensions;
-select plan(23);
+select plan(24);
 
 select has_table('public', 'lab_reports', 'cloud lab reports table exists');
 select has_table('public', 'lab_report_assessments', 'lab report assessments table exists');
@@ -127,6 +127,11 @@ select lives_ok(
   'owning teacher can save a rubric assessment'
 );
 select is((select count(*)::integer from public.lab_report_assessments), 1, 'assessment is stored once per report');
+select is(
+  (select report_revision from public.lab_report_assessments),
+  2,
+  'assessment records the exact report revision it grades'
+);
 
 reset role;
 set local role authenticated;
