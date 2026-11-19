@@ -145,7 +145,7 @@
       classId: $('report-class').value || existing?.classId || null,
       payload,
       revision: existing?.revision || 0,
-      syncState: existing?.syncState || 'local',
+      syncState: existing?.syncState === 'conflict' ? 'conflict' : 'local',
       updatedAt: new Date().toISOString(),
       assessment: existing?.assessment || null
     };
