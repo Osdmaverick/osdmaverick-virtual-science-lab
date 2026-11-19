@@ -232,7 +232,7 @@
     if (!client || !user || profile?.role !== 'student') return setStatus('Sign in with a student account to restore cloud reports.',true);
     setStatus('Loading your cloud reports…');
     const {data,error} = await client.from('lab_reports')
-      .select('id,class_id,client_report_id,payload,revision,updated_at,lab_report_assessments(scores,feedback,assessed_at)')
+      .select('id,class_id,client_report_id,payload,revision,updated_at,lab_report_assessments(scores,feedback,assessed_at,report_revision)')
       .order('updated_at',{ascending:false});
     if (error) return setStatus('Could not restore reports: '+error.message,true);
     let added=0, refreshed=0, preserved=0;
