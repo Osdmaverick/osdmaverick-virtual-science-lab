@@ -26,11 +26,20 @@ try {
  await page.locator('#save-report').click();
  assert.equal(await page.locator('#report-list .report-card').count(),1,'report saves locally');
  assert.match(await page.locator('#report-list').innerText(),/Plant growth investigation/);
+ await page.evaluate(()=>{
+  const key='osdmaverick.lab-notebook.v1';
+  const reports=JSON.parse(localStorage.getItem(key)||'[]');
+  reports[0].syncState='synced';
+  localStorage.setItem(key,JSON.stringify(reports));
+ });
+ await page.reload({waitUntil:'networkidle'});
+ assert.match(await page.locator('#report-list').innerText(),/Cloud backed up/,'a previously synced report is labelled as backed up');
  await page.locator('#report-list').getByRole('button',{name:'Edit'}).click();
  assert.equal(await page.locator('#report-title').inputValue(),'Plant growth investigation');
  await page.locator('#report-title').fill('Plant growth investigation revised');
  await page.locator('#save-report').click();
  assert.match(await page.locator('#report-list').innerText(),/revised/);
+ assert.match(await page.locator('#report-list').innerText(),/Device only/,'editing a synced report marks its latest local changes as awaiting sync');
  await page.evaluate(()=>{
   const key='osdmaverick.lab-notebook.v1';
   const reports=JSON.parse(localStorage.getItem(key)||'[]');
