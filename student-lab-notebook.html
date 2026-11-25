@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Create, save and synchronise science investigation reports in your student lab notebook.">
+<meta name="theme-color" content="#071827"><title>Student Lab Notebook | OSDMaverick Virtual Science Lab</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.notebook-wrap{max-width:1120px;margin:42px auto 76px;padding:0 5%}.notebook-hero{padding:30px;border-radius:18px;background:linear-gradient(120deg,#0b2739,#145064);color:#fff}.notebook-hero p{color:#d4e7eb}.notebook-panel{margin-top:22px;padding:24px;border:1px solid #dce5eb;border-radius:16px;background:#fff;box-shadow:0 10px 28px #102b3d0a}.notebook-panel label{display:block;margin:12px 0 6px;font-weight:700}.notebook-panel input,.notebook-panel textarea,.notebook-panel select{box-sizing:border-box;width:100%;padding:12px;border:1px solid #c9d7df;border-radius:9px;font:inherit}.notebook-panel textarea{min-height:110px;resize:vertical}.notebook-panel button,.notebook-panel .action{border:0;border-radius:9px;padding:11px 15px;background:#087d73;color:#fff;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}.notebook-panel button.secondary{background:#e8f1f4;color:#17384a}.notebook-panel button.danger{background:#9d3b30}.notebook-panel button:disabled{opacity:.6;cursor:wait}.notebook-toolbar{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}.notebook-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.notebook-status{min-height:1.5em;color:#087d73;font-weight:650}.notebook-status[data-state=error]{color:#a23b2b}.report-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.report-card{border:1px solid #dce5eb;border-radius:12px;padding:18px;min-width:0;background:#f9fbfc}.report-card h3{margin-top:0;overflow-wrap:anywhere}.report-meta{color:#617786;font-size:.9rem}.report-card p{overflow-wrap:anywhere}.rubric{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.rubric label{margin:0}.rubric select{margin-top:6px}@media(max-width:600px){.notebook-panel{padding:18px}.rubric{grid-template-columns:1fr}}
+</style></head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header"><a class="brand" href="index.html">OSDMAVERICK <span>VIRTUAL SCIENCE LAB</span></a><button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">☰</button><nav class="nav" id="primary-navigation" aria-label="Main navigation"><a href="index.html">Home</a><a href="grade-levels.html">Explore labs</a><a href="classes.html">My classes</a><a href="auth.html">Account</a></nav></header>
+<main class="notebook-wrap" id="main-content">
+<section class="notebook-hero"><p class="eyebrow">INVESTIGATE · RECORD · REFLECT</p><h1>Student lab notebook</h1><p>Keep your scientific questions, methods, observations and conclusions together. Your work is saved on this device and can be backed up to an enrolled class when cloud access is configured.</p></section>
+<section class="notebook-panel"><div class="notebook-toolbar"><p id="notebook-account">Checking account…</p><p id="notebook-cloud-state" class="report-meta">Cloud status: checking</p></div><p id="notebook-status" class="notebook-status" role="status" aria-live="polite"></p><div id="notebook-setup" hidden><p>Cloud synchronisation is not configured. You can still create, edit and export reports on this device.</p><a class="action" href="auth.html">Open account access</a></div></section>
+<section class="notebook-panel" id="editor-panel"><h2 id="editor-heading">Create an investigation report</h2><form id="report-form">
+<label for="report-title">Investigation title</label><input id="report-title" maxlength="160" required placeholder="e.g. How does light affect plant growth?">
+<label for="report-class">Class (for cloud backup)</label><select id="report-class"><option value="">Choose a class when syncing</option></select>
+<label for="report-question">Scientific question</label><textarea id="report-question" maxlength="4000" required placeholder="What are you trying to find out?"></textarea>
+<label for="report-method">Method</label><textarea id="report-method" maxlength="6000" placeholder="Describe the steps you followed and variables you changed."></textarea>
+<label for="report-evidence">Observations and evidence</label><textarea id="report-evidence" maxlength="8000" placeholder="Record measurements, patterns and observations."></textarea>
+<label for="report-conclusion">Conclusion</label><textarea id="report-conclusion" maxlength="4000" placeholder="What did you discover? Use evidence to explain."></textarea>
+<div class="notebook-actions"><button id="save-report" type="submit">Save report on this device</button><button class="secondary" id="cancel-edit" type="button" hidden>Cancel editing</button></div>
+</form><div class="notebook-actions"><button class="secondary" id="export-all" type="button">Export notebook backup</button><label class="action" for="import-backup" style="margin:0;cursor:pointer">Import backup</label><input id="import-backup" type="file" accept="application/json,.json" hidden></div></section>
+<section class="notebook-panel"><div class="notebook-toolbar"><h2>My investigation reports</h2><button class="secondary" id="restore-cloud" type="button">Restore from cloud</button></div><div id="report-list" class="report-grid"><p>No reports saved yet.</p></div></section>
+<section class="notebook-panel" id="teacher-panel" hidden><h2>Class report review</h2><p>As a teacher, select one of your classes to review reports and provide rubric feedback.</p><div id="teacher-report-list" class="report-grid"><p>Choose a class above.</p></div></section>
+</main>
+<footer class="site-footer"><span>OSDMaverick Virtual Science Lab</span><a href="roadmap.html">Development roadmap</a></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="assets/supabase-config.js"></script><script src="assets/cloud-notebook.js"></script><script src="assets/main.js"></script>
+</body></html>
