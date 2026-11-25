@@ -2,7 +2,7 @@ name: Virtual Science Lab QA
 
 on:
   push:
-    branches: [main]
+    branches: [main, feature/phase-3-assignments-foundation]
   pull_request:
   workflow_dispatch:
 
@@ -49,11 +49,13 @@ jobs:
         run: node scripts/browser-qa.mjs http://127.0.0.1:4173
       - name: Verify public release experience and capture visual previews
         run: node scripts/public-release-qa.mjs http://127.0.0.1:4173
+      - name: Verify assignments desktop and mobile experience
+        run: node scripts/assignments-browser-qa.mjs http://127.0.0.1:4173
       - name: Upload public release visual previews
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: public-release-visual-preview
-          path: artifacts/public-release-preview/
+          name: phase3-visual-previews
+          path: artifacts/
           if-no-files-found: warn
           retention-days: 14

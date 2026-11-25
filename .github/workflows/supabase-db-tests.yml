@@ -8,6 +8,9 @@ on:
       - "assets/classes.js"
       - "classes.html"
       - "scripts/class-ui-smoke-check.mjs"
+      - "assets/assignments.js"
+      - "assignments.html"
+      - "scripts/assignments-ui-smoke-check.mjs"
       - "assets/supabase-config.example.js"
       - "auth.html"
       - "scripts/auth-ui-smoke-check.mjs"
@@ -15,12 +18,16 @@ on:
   push:
     branches:
       - feature/phase-2-supabase-foundation
+      - feature/phase-3-assignments-foundation
     paths:
       - "supabase/**"
       - "assets/auth.js"
       - "assets/classes.js"
       - "classes.html"
       - "scripts/class-ui-smoke-check.mjs"
+      - "assets/assignments.js"
+      - "assignments.html"
+      - "scripts/assignments-ui-smoke-check.mjs"
       - "assets/supabase-config.example.js"
       - "auth.html"
       - "scripts/auth-ui-smoke-check.mjs"
@@ -49,6 +56,12 @@ jobs:
 
       - name: Run class management page smoke checks
         run: node scripts/class-ui-smoke-check.mjs
+
+      - name: Check assignments JavaScript syntax
+        run: node --check assets/assignments.js
+
+      - name: Run assignments page smoke checks
+        run: node scripts/assignments-ui-smoke-check.mjs
 
       - name: Set up Supabase CLI
         uses: supabase/setup-cli@v1
